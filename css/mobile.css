@@ -1,37 +1,38 @@
 /* ============================================
-   MOBILE.CSS — v3, компактная шапка
+   MOBILE.CSS — чистая версия
    ============================================ */
 
 @media (max-width: 768px) {
 
   html { font-size: 16px; }
-  body {
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-text-size-adjust: 100%;
-  }
+  body { line-height: 1.6; overflow-x: hidden; }
   .container { width: 94%; }
 
-  /* ============ ШАПКА — ВСЁ В ОДНУ СТРОКУ ============ */
-  .site-header { padding: 0; }
+  /* ===== ШАПКА ===== */
   .header-inner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     padding: 0.5rem 0;
     gap: 0.4rem;
-    min-height: auto;
   }
 
-  /* Логотип — компактный */
   .logo {
     font-size: 0.95rem;
-    flex: 0 0 auto;
     order: 1;
   }
   .logo::after { display: none; }
 
-  /* Гамбургер — маленький, справа */
+  /* СКРЫВАЕМ ВСЁ ЛИШНЕЕ */
+  .theme-switcher { display: none !important; }
+  .font-ctrl { display: none !important; }
+
+  /* Скрываем кнопку контраста (вторая menu-toggle) */
+  .header-inner > button.menu-toggle ~ button.menu-toggle {
+    display: none !important;
+  }
+
+  /* Гамбургер — единственная кнопка */
   .menu-toggle {
     display: inline-flex !important;
     align-items: center;
@@ -41,85 +42,53 @@
     background: transparent;
     border: 1px solid var(--accent-dim);
     color: var(--accent);
-    font-size: 1rem;
-    padding: 0.3rem 0.6rem;
+    font-size: 1.1rem;
+    padding: 0;
+    width: 40px;
+    height: 36px;
     cursor: pointer;
-    width: 38px;
-    height: 34px;
     border-radius: 4px;
   }
   .menu-toggle:active { background: var(--accent); color: var(--bg); }
 
-  /* Кнопка контраста (◐) — тоже маленькая */
-  .header-inner > .menu-toggle:not(:first-of-type) {
-    order: 3;
-    margin-left: 0.3rem;
-    font-size: 0.9rem;
-  }
-
-  /* Тема — компактный селект, 2-я строка */
-  .theme-switcher {
-    order: 4;
-    margin: 0.3rem 0 0 0 !important;
-    flex: 1 1 45%;
-    max-width: 45%;
-  }
-  .theme-switcher select {
-    width: 100%;
-    padding: 0.3rem 0.4rem;
-    font-size: 0.75rem;
-    font-family: inherit;
-    height: 30px;
-    min-height: 30px;
-    background: var(--panel);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-  }
-
-  /* Поиск — рядом с темой */
+  /* Поиск на всю ширину */
   .search-box {
-    order: 5;
-    margin: 0.3rem 0 0 0 !important;
-    flex: 1 1 45%;
-    max-width: 45%;
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin: 0.4rem 0 0 0 !important;
   }
   .search-box input {
     width: 100% !important;
-    padding: 0.3rem 0.5rem;
-    font-size: 0.75rem;
-    height: 30px;
-    min-height: 30px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.9rem;
+    height: 38px;
     background: var(--panel);
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: 4px;
   }
-  .search-box input:focus { width: 100% !important; }
   .search-results {
-    min-width: 100%;
-    right: auto;
-    left: 0;
     width: 100%;
+    left: 0;
+    right: auto;
+    min-width: 100%;
   }
 
-  /* Шрифт (font-ctrl) — скрыть на мобиле */
-  .font-ctrl { display: none !important; }
-
-  /* Меню — раскрывается по клику */
+  /* Меню — по клику */
   .nav {
     display: none;
     order: 20;
     width: 100%;
     flex-direction: column;
     gap: 0;
-    margin-top: 0.4rem;
-    padding-top: 0.4rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
     border-top: 1px solid var(--border);
   }
   .nav.open { display: flex; }
   .nav a {
-    padding: 0.7rem 0.4rem;
+    padding: 0.75rem 0.3rem;
     font-size: 0.95rem;
     border-bottom: 1px solid var(--border);
     min-height: 44px;
@@ -129,128 +98,81 @@
   .nav a:last-child { border-bottom: none; }
   .nav a::before, .nav a::after { content: ""; }
 
-  /* ============ HERO ============ */
-  .hero {
-    padding: 1.2rem 0 0.8rem;
-    text-align: left;
-  }
-  .hero h1 {
-    font-size: 1.4rem;
-    line-height: 1.3;
-    margin-bottom: 0.6rem;
-  }
+  /* ===== HERO ===== */
+  .hero { padding: 1.2rem 0 0.8rem; text-align: left; }
+  .hero h1 { font-size: 1.4rem; line-height: 1.3; }
   .hero h1::before { content: ""; }
-  .hero p {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
+  .hero p { font-size: 0.95rem; }
   .btn {
     display: block;
     width: 100%;
-    padding: 0.8rem 1rem;
-    font-size: 0.95rem;
+    padding: 0.8rem;
     text-align: center;
     min-height: 46px;
     box-sizing: border-box;
   }
   .btn::before, .btn::after { content: ""; }
 
-  /* ============ КАРТОЧКИ ============ */
+  /* ===== КАРТОЧКИ ===== */
   .cards {
     grid-template-columns: 1fr;
     gap: 0.7rem;
-    padding-bottom: 1.5rem;
   }
-  .card {
-    padding: 0.9rem;
-    border-radius: 6px;
-  }
-  .card:active { transform: scale(0.98); }
-  .card h2, .card h3 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
-  }
-  .card p {
-    font-size: 0.88rem;
-    line-height: 1.45;
-    margin: 0.3rem 0;
-  }
-  .card a { font-size: 0.9rem; }
-  .distro-icon {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 0.4rem;
-  }
+  .card { padding: 0.9rem; }
+  .card h2, .card h3 { font-size: 1rem; }
+  .card p { font-size: 0.88rem; }
+  .distro-icon { width: 32px; height: 32px; }
 
-  /* ============ СТРАНИЦЫ ============ */
+  /* ===== СТРАНИЦЫ ===== */
   .page { padding: 1.2rem 0 2.5rem; }
-  .page h1 {
-    font-size: 1.4rem;
-    line-height: 1.3;
-  }
+  .page h1 { font-size: 1.4rem; }
   .page h1::before { content: ""; }
-  .page h2 {
-    font-size: 1.1rem;
-    margin-top: 1.5rem;
-  }
+  .page h2 { font-size: 1.1rem; margin-top: 1.5rem; }
   .page h2::before { content: ""; }
   .lead { font-size: 0.95rem; }
   .lead::before { content: ""; }
 
-  section { margin-bottom: 1.3rem; }
   ul, ol { padding-left: 1.2rem; }
   li { margin: 0.3rem 0; }
 
-  /* ============ КОД / ТАБЛИЦЫ ============ */
+  /* ===== КОД И ТАБЛИЦЫ ===== */
   pre {
     padding: 0.7rem;
     font-size: 0.82rem;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border-radius: 4px;
   }
   code { font-size: 0.85rem; }
-  .table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   table.data { font-size: 0.82rem; }
   table.data th, table.data td { padding: 0.45rem; }
 
-  /* ============ СОВЕТ ДНЯ — ФИКС ============ */
+  /* ===== СОВЕТ ДНЯ ===== */
   .daily-tip {
     padding: 0.8rem;
-    margin: 1rem 0;
     font-size: 0.88rem;
     line-height: 1.5;
-    border-left-width: 3px;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
-  .daily-tip .label {
-    display: block;
-    margin-bottom: 0.3rem;
-  }
+  .daily-tip .label { display: block; margin-bottom: 0.3rem; }
   .daily-tip .copy-btn {
     display: block;
     width: 100%;
-    margin-top: 0.6rem;
+    margin-top: 0.5rem;
     padding: 0.5rem;
     font-size: 0.85rem;
     text-align: center;
   }
-  /* Code внутри совета — переносится */
-  .daily-tip code {
-    font-size: 0.78rem;
-    word-break: break-all;
-  }
+  .daily-tip code { font-size: 0.78rem; word-break: break-all; }
 
-  /* Tux — убрать полностью на мобиле */
+  /* ===== УБИРАЕМ ЛИШНЕЕ ===== */
   .tux { display: none !important; }
-
-  /* ============ ПРОЧЕЕ ============ */
-  .screenshot-section { display: none; }
   .page-toc { display: none !important; }
+  .breadcrumbs { display: none; }
+  .screenshot-section { display: none; }
+
+  /* ===== ПРОЧЕЕ ===== */
   .rec-card { padding: 0.9rem; }
   .rec-card .rec-icon { width: 36px; height: 36px; }
   .rec-card .rec-links a {
@@ -259,11 +181,7 @@
     padding: 0.6rem;
     min-height: 42px;
   }
-  .faq-item summary {
-    padding: 0.7rem 0;
-    font-size: 0.95rem;
-    min-height: 44px;
-  }
+  .faq-item summary { padding: 0.7rem 0; font-size: 0.95rem; }
   .to-top {
     bottom: 1rem;
     right: 1rem;
@@ -271,16 +189,14 @@
     height: 44px;
     padding: 0;
     border-radius: 50%;
-    font-size: 1rem;
   }
   .mini-term { font-size: 0.78rem; padding: 0.7rem; }
   .author-card { flex-direction: column; padding: 1rem; }
   .sys-grid { grid-template-columns: 1fr; }
-  .theme-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .ach-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .theme-grid { grid-template-columns: repeat(2, 1fr); }
+  .ach-grid { grid-template-columns: repeat(2, 1fr); }
   .compare-grid { grid-template-columns: 1fr; }
-  .breadcrumbs { font-size: 0.78rem; padding: 0.4rem 0; }
-  .site-footer { font-size: 0.82rem; padding: 1rem 0; text-align: center; }
+  .site-footer { font-size: 0.82rem; text-align: center; }
   .site-footer .footer-links {
     display: flex;
     flex-wrap: wrap;
@@ -288,46 +204,9 @@
     justify-content: center;
   }
 
-  /* Скрыть хлебные крошки на мобиле */
-  .breadcrumbs { display: none; }
-}
-
-/* ============================================
-   ФИНАЛЬНЫЙ ФИКС ДЛЯ МОБИЛЫ
-   Убираем переключатель темы и контраста
-   ============================================ */
-
-@media (max-width: 768px) {
-
-  /* Скрыть селект темы полностью */
-  .theme-switcher {
-    display: none !important;
-  }
-
-  /* Скрыть кнопку контраста (◐) */
-  .header-inner > .menu-toggle:nth-of-type(n+2),
-  .header-inner > button.menu-toggle:not(:first-of-type) {
-    display: none !important;
-  }
-
-  /* Поиск — на всю ширину, раз тема скрыта */
-  .search-box {
-    order: 4 !important;
-    max-width: 100% !important;
-    flex: 1 1 100% !important;
-    margin: 0.4rem 0 0 0 !important;
-  }
-  .search-box input {
-    font-size: 0.85rem !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    padding: 0.4rem 0.7rem !important;
-  }
-
-  /* Гамбургер — единственная кнопка справа */
-  .menu-toggle {
-    width: 40px !important;
-    height: 36px !important;
-    font-size: 1.1rem !important;
-  }
+  /* ===== КАТАЛОГ ДИСТРИБУТИВОВ ===== */
+  .catalog-controls { padding: 0.8rem; }
+  .filter-btn { font-size: 0.78rem; padding: 0.35rem 0.7rem; }
+  .quick-links a { font-size: 0.8rem; padding: 0.4rem 0.7rem; }
+  .distros-grid { grid-template-columns: 1fr; gap: 0.7rem; }
 }

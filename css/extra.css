@@ -857,3 +857,105 @@ h1 img.page-icon {
     margin: 0.8rem 0;
   }
 }
+
+/* ============================================
+   МОБИЛЬНАЯ ШАПКА — фикс
+   Убираем тему, шрифт, контраст. Только поиск.
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Скрыть переключатель темы */
+  .theme-switcher,
+  .theme-switcher select,
+  body .theme-switcher {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Скрыть кнопки A- / A+ */
+  .font-ctrl,
+  body .font-ctrl {
+    display: none !important;
+  }
+
+  /* Скрыть кнопку контраста ◐ */
+  .header-inner > button:not(.menu-toggle),
+  body .header-inner > button:nth-of-type(n+2) {
+    display: none !important;
+  }
+
+  /* Оставить только гамбургер */
+  .menu-toggle {
+    display: inline-flex !important;
+  }
+
+  /* Поиск — на всю ширину */
+  .search-box {
+    order: 10 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    margin: 0.4rem 0 0 0 !important;
+  }
+  .search-box input {
+    width: 100% !important;
+    font-size: 0.85rem !important;
+    height: 36px !important;
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  /* Меню по клику */
+  .nav {
+    display: none !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    order: 20 !important;
+    margin-top: 0.5rem !important;
+    padding-top: 0.5rem !important;
+    border-top: 1px solid var(--border) !important;
+  }
+  .nav.open {
+    display: flex !important;
+  }
+  .nav a {
+    padding: 0.7rem 0.3rem !important;
+    font-size: 0.95rem !important;
+    border-bottom: 1px solid var(--border) !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .nav a::before, .nav a::after { content: "" !important; }
+
+  /* Гамбургер компактный */
+  .menu-toggle {
+    width: 40px !important;
+    height: 36px !important;
+    font-size: 1.1rem !important;
+    padding: 0 !important;
+    min-width: 40px !important;
+  }
+
+  /* Убрать Tux */
+  .tux { display: none !important; }
+
+  /* Совет дня — переносится */
+  .daily-tip {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    font-size: 0.88rem !important;
+    padding: 0.8rem !important;
+  }
+  .daily-tip .copy-btn {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 0.5rem !important;
+  }
+  .daily-tip code {
+    word-break: break-all !important;
+    font-size: 0.78rem !important;
+  }
+}
