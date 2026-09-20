@@ -1,90 +1,739 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta property="og:title" content="История Linux — Linux Guide">
-<meta property="og:description" content="Руководство по Linux от Monadei">
-<meta property="og:type" content="website">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
-<meta name="yandex-verification" content="b41091ced16d0116" />
-<script>
-(function() {
-  function getFromUrl() {
-    try {
-      var m = window.location.search.match(/[?&]theme=([^&]+)/);
-      if (m) return decodeURIComponent(m[1]);
-      var h = window.location.hash.match(/theme=([^&]+)/);
-      if (h) return decodeURIComponent(h[1]);
-    } catch(e) {}
-    return null;
-  }
-  function getFromStorage() {
-    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
-    try {
-      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
-      if (m) return decodeURIComponent(m[1]);
-    } catch(e) {}
-    return null;
-  }
-  var theme = getFromUrl() || getFromStorage() || 'default';
-  if (theme && theme !== 'default') {
-    document.documentElement.setAttribute('data-site-theme', theme);
-  }
-  // Сохраняем для следующих страниц
-  try { localStorage.setItem('site-theme', theme); } catch(e) {}
-  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
-  window.__INITIAL_THEME = theme;
-})();
-</script>
-
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>История Linux — Linux Guide</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/extra.css">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ffb000">
-<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-<meta property="og:image" content="icons/og.svg">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
 </head>
 <body>
-<header class="site-header">
-<div class="container header-inner">
+<header class="site-header"><div class="container header-inner">
 <a href="index.html" class="logo">Linux Guide</a>
 <nav class="nav">
-<a href="index.html">Главная</a>
-<a href="download.html">Как скачать</a>
-<a href="install.html">Как установить</a>
-<a href="history.html" class="active">История</a>
-<a href="distros/index.html">Дистрибутивы</a>
-<a href="about.html">Обо мне</a>
-<a href="my-recommendations.html">Рекомендую</a>
-<a href="faq.html">FAQ</a>
-<a href="sitemap.html">Карта сайта</a>
-</nav>
-</div>
-</header>
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html" class="active">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+
 <main class="container page">
+
+<style>
+/* Hero секция истории */
+.hist-hero {
+  background: linear-gradient(135deg, var(--panel) 0%, var(--bg) 100%);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 2rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+}
+.hist-hero h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+.hist-hero h1::before { content: ""; }
+.hist-hero .subtitle {
+  color: var(--accent);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+.hist-hero p { color: var(--muted); margin: 0.5rem 0; }
+.hist-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.hist-stat {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.hist-stat .num {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+}
+.hist-stat .lbl {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Большой таймлайн */
+.big-timeline {
+  position: relative;
+  padding: 2rem 0;
+  margin: 2rem 0;
+}
+.big-timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--accent-dim) 10%, var(--accent-dim) 90%, transparent);
+  transform: translateX(-50%);
+}
+.tl-event {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  position: relative;
+  width: 50%;
+}
+.tl-event:nth-child(odd) {
+  padding-right: 2.5rem;
+  justify-content: flex-end;
+  text-align: right;
+}
+.tl-event:nth-child(even) {
+  margin-left: 50%;
+  padding-left: 2.5rem;
+}
+.tl-event::after {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--accent);
+  z-index: 2;
+}
+.tl-event:nth-child(odd)::after { right: -7px; }
+.tl-event:nth-child(even)::after { left: -7px; }
+.tl-event .tl-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  border-radius: 4px;
+  transition: 0.2s;
+  max-width: 100%;
+}
+.tl-event:nth-child(odd) .tl-card {
+  border-left: none;
+  border-right: 3px solid var(--accent);
+}
+.tl-event .tl-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.tl-event .tl-year {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.tl-event .tl-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0.3rem 0;
+  color: var(--text);
+}
+.tl-event .tl-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+  line-height: 1.5;
+}
+
+/* Секции истории */
+.hist-section {
+  margin: 3rem 0;
+  padding: 1.5rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.hist-section h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.hist-section h2::before { content: ""; }
+.hist-section .section-num {
+  font-size: 0.75rem;
+  color: var(--accent-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.hist-section h3 {
+  color: var(--accent);
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+.hist-section h3::before {
+  content: "» ";
+  color: var(--accent-dim);
+}
+
+/* Фигуры */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.person {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: 1.2rem;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.person:hover { transform: translateY(-3px); }
+.person .p-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.person h4 {
+  margin: 0 0 0.3rem;
+  color: var(--accent);
+  font-size: 1rem;
+}
+.person .p-role {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: 0.6rem;
+}
+.person p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.3rem 0 0;
+  line-height: 1.5;
+}
+
+/* Цитаты */
+.quote-block {
+  background: var(--panel-2);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  position: relative;
+  border-radius: 0 4px 4px 0;
+}
+.quote-block::before {
+  content: "«";
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  font-size: 3rem;
+  color: var(--accent-dim);
+  line-height: 1;
+  font-style: normal;
+}
+.quote-block .author {
+  display: block;
+  margin-top: 0.8rem;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+/* Цифры влияния */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.impact {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 4px;
+}
+.impact .num {
+  display: block;
+  font-size: 2rem;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1;
+}
+.impact .lbl {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Происхождение дистрибутивов */
+.lineage {
+  background: var(--bg);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.lineage pre {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0;
+  white-space: pre;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .hist-hero { padding: 1.2rem; }
+  .hist-hero h1 { font-size: 1.4rem; }
+  .hist-stats { grid-template-columns: repeat(2, 1fr); }
+  .hist-stat .num { font-size: 1.4rem; }
+  
+  /* Таймлайн на мобиле — в одну колонку */
+  .big-timeline::before { left: 12px; }
+  .tl-event { width: 100%; margin-left: 0 !important; padding-left: 2.2rem !important; padding-right: 0 !important; text-align: left !important; justify-content: flex-start !important; }
+  .tl-event::after { left: 5px !important; right: auto !important; }
+  .tl-event .tl-card { border-left: 3px solid var(--accent) !important; border-right: none !important; }
+  
+  .people-grid { grid-template-columns: 1fr; }
+  .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact .num { font-size: 1.5rem; }
+  .hist-section { padding: 1rem; }
+  .lineage pre { font-size: 0.65rem; }
+}
+</style>
+
+<!-- HERO -->
+<div class="hist-hero">
 <h1>История Linux</h1>
-<p class="lead">Коротко: как из хобби-проекта одного человека выросла экосистема из сотен дистрибутивов.</p>
-<section><h2>1991 — ядро</h2><p>Линус Торвальдс публикует первую версию ядра Linux (0.01).</p></section>
-<section><h2>1992–1993 — первые дистрибутивы</h2><p>Появляются <strong>Slackware</strong> (1993) и <strong>Debian</strong> (1993). Оба живы до сих пор.</p></section>
-<section><h2>1994 — Red Hat</h2><p>Марк Юинг выпускает Red Hat Linux. Позже разделится на RHEL и Fedora.</p></section>
-<section><h2>2002 — Arch Linux</h2><p>Джадд Винет основывает Arch. Rolling release, pacman, легендарная вики.</p></section>
-<section><h2>2004 — Ubuntu</h2><p>Марк Шаттлворт выпускает Ubuntu на базе Debian. Linux становится массовым.</p></section>
-<section><h2>2006 — Linux Mint</h2><p>Клеман Лефевр делает форк Ubuntu с классическим десктопом.</p></section>
-<section><h2>2010-е — расцвет</h2><p>Manjaro, Pop!_OS, elementary, Zorin OS. Формируются крупные семейства.</p></section>
-<section><h2>2020-е</h2><p>Wayland, Flatpak, Steam Deck на Arch. Linux в серверах, Android и облаках.</p></section>
+<p class="subtitle">От хобби студента из Хельсинки до основы современного интернета</p>
+<p>Linux не появился в один день. За ним — 35 лет эволюции, тысячи разработчиков, десятки философий и сотни дистрибутивов. Эта страница — попытка рассказать всю историю целиком: от Unix 1969 года до сегодняшнего дня.</p>
+
+<div class="hist-stats">
+<div class="hist-stat"><span class="num">1969</span><span class="lbl">год рождения Unix</span></div>
+<div class="hist-stat"><span class="num">1991</span><span class="lbl">первая версия Linux</span></div>
+<div class="hist-stat"><span class="num">35</span><span class="lbl">лет развития</span></div>
+<div class="hist-stat"><span class="num">96%</span><span class="lbl">серверов в мире</span></div>
+</div>
+</div>
+
+<!-- ЧАСТЬ 1 — ДО LINUX -->
+<div class="hist-section">
+<span class="section-num">Часть 1 · 1969–1990</span>
+<h2>До Linux: эра Unix</h2>
+<p>Чтобы понять Linux, надо начать с Unix. В 1969 году в Bell Labs (AT&T) Кен Томпсон и Деннис Ритчи создали операционную систему Unix. Она была простой, гибкой и — главное — переносимой на разные машины.</p>
+
+<h3>Война Unix</h3>
+<p>В 1970-х AT&T начала лицензировать Unix, и он разошёлся по всему миру. Каждый университет и компания создавали свои версии: BSD в Беркли, System V от AT&T, Xenix от Microsoft. К 1990-м Unix-систем были десятки — и все они были либо проприетарными, либо запутанными в лицензиях.</p>
+
+<h3>Проект GNU (1983)</h3>
+<p>Ричард Столлман, программист из MIT, устал от закрытых систем и основал проект GNU — «GNU's Not Unix». Цель: создать полностью свободную операционную систему. GNU дал миру:</p>
+<ul>
+<li><strong>Emacs</strong> — текстовый редактор, которым пользуются до сих пор</li>
+<li><strong>GCC</strong> — компилятор, на котором собирается почти весь Linux</li>
+<li><strong>Bash</strong> — оболочка, которая работает в каждом терминале</li>
+<li><strong>GPL</strong> — лицензия, защищающая свободу кода</li>
+</ul>
+<p>Но у GNU не было одного — <strong>ядра</strong>. Это ключевой компонент системы, который управляет железом. Проект годами не мог его закончить.</p>
+</div>
+
+<!-- ЦИТАТА -->
+<div class="quote-block">
+Свободное программное обеспечение — это вопрос свободы, а не цены. Чтобы понять концепцию, нужно думать о «свободе слова», а не о «бесплатном пиве».
+<span class="author">— Ричард Столлман</span>
+</div>
+
+<!-- ЧАСТЬ 2 — РОЖДЕНИЕ LINUX -->
+<div class="hist-section">
+<span class="section-num">Часть 2 · 1991</span>
+<h2>Рождение Linux</h2>
+
+<h3>Студент из Хельсинки</h3>
+<p>В 1991 году 21-летний студент по имени <strong>Линус Торвальдс</strong> купил компьютер с процессором Intel 386. Ему не хватало денег на Unix, а MINIX (учебная ОС) его не устраивала. И он начал писать своё ядро — просто как хобби.</p>
+
+<h3>«Просто хобби, не будет большим и профессиональным»</h3>
+<p>25 августа 1991 года Линус опубликовал в новостной группе comp.os.minix знаменитое сообщение:</p>
+<div class="quote-block">
+Я делаю (бесплатную) операционную систему (это просто хобби, не будет большой и профессиональной, как GNU, чтобы упомянуть пару вещей) для клонов 386 (486) AT.
+<span class="author">— Линус Торвальдс, 25 августа 1991</span>
+</div>
+
+<h3>Свободная лицензия</h3>
+<p>Изначально Линус запрещал коммерческое распространение. Но в 1992 году, под влиянием Ричарда Столлмана, он перелицензировал Linux под <strong>GPL</strong>. Это стало поворотным моментом — Linux стал частью проекта GNU, и тысячи разработчиков начали помогать.</p>
+
+<h3>GNU/Linux</h3>
+<p>Строго говоря, то, что мы называем Linux — это <strong>GNU/Linux</strong>: ядро Linux + утилиты GNU. Именно поэтому Столлман настаивает на полном названии, хотя большинство говорит просто «Linux».</p>
+</div>
+
+<!-- ЧАСТЬ 3 — ПЕРВЫЕ ДИСТРИБУТИВЫ -->
+<div class="hist-section">
+<span class="section-num">Часть 3 · 1992–2000</span>
+<h2>Первые дистрибутивы</h2>
+<p>Ядро — это только основа. Чтобы система была полезной, нужны утилиты, пакетный менеджер, документация. Так появились дистрибутивы — сборки, которые можно установить одной командой или с диска.</p>
+
+<h3>Slackware (1993)</h3>
+<p>Патрик Фолькердинг создал Slackware — первый популярный дистрибутив. Минимализм, ручная настройка, никакого автоматического разрешения зависимостей. Жив до сих пор — старейший из существующих.</p>
+
+<h3>Debian (1993)</h3>
+<p>Иан Мёрдок основал Debian — названный в честь него и его жены Дебры. С самого начала — общественный проект с социальным контрактом. Debian стал базой для Ubuntu, Mint, Kali и десятков других.</p>
+
+<h3>Red Hat (1994)</h3>
+<p>Марк Юинг выпустил Red Hat Linux — первый коммерчески успешный дистрибутив. Позже компания разделилась на RHEL (для бизнеса) и Fedora (для сообщества).</p>
+
+<h3>SUSE (1992)</h3>
+<p>Немецкая компания SUSE начала с перевода Slackware на немецкий. Потом создала свой дистрибутив — один из столпов европейского Linux.</p>
+</div>
+
+<!-- БОЛЬШОЙ ТАЙМЛАЙН -->
+<h2>Ключевые события</h2>
+<div class="big-timeline">
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1969</span>
+<p class="tl-title">Unix</p>
+<p class="tl-desc">Кен Томпсон и Деннис Ритчи создают Unix в Bell Labs.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1983</span>
+<p class="tl-title">Проект GNU</p>
+<p class="tl-desc">Ричард Столлман запускает GNU. Цель — свободная Unix-подобная система.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1991</span>
+<p class="tl-title">Ядро Linux</p>
+<p class="tl-desc">Линус Торвальдс публикует Linux 0.01. «Просто хобби».</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1992</span>
+<p class="tl-title">GPL</p>
+<p class="tl-desc">Linux перелицензирован под GPL. Начало массового вклада разработчиков.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1993</span>
+<p class="tl-title">Debian и Slackware</p>
+<p class="tl-desc">Два старейших из живых дистрибутивов. Оба существуют до сих пор.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1994</span>
+<p class="tl-title">Red Hat</p>
+<p class="tl-desc">Первый коммерчески успешный Linux-дистрибутив.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1996</span>
+<p class="tl-title">Tux</p>
+<p class="tl-desc">Ларри Юинг создаёт пингвина Tux — талисман Linux.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">1999</span>
+<p class="tl-title">GNOME и KDE</p>
+<p class="tl-desc">Два главных рабочих стола Linux. Начало эры дружелюбного интерфейса.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2000</span>
+<p class="tl-title">RHEL и Gentoo</p>
+<p class="tl-desc">Red Hat разделяется. Gentoo выходит с идеей сборки из исходников.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2002</span>
+<p class="tl-title">Arch Linux</p>
+<p class="tl-desc">Джадд Винет основывает Arch. Rolling release и легендарная вики.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2004</span>
+<p class="tl-title">Ubuntu</p>
+<p class="tl-desc">Марк Шаттлворт выпускает Ubuntu. Linux становится массовым.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2005</span>
+<p class="tl-title">openSUSE и Git</p>
+<p class="tl-desc">SUSE открывает код. Линус создаёт Git для управления ядром.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2006</span>
+<p class="tl-title">Linux Mint</p>
+<p class="tl-desc">Клеман Лефевр создаёт Mint. Скоро станет самым популярным десктопным Linux.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2007</span>
+<p class="tl-title">Android</p>
+<p class="tl-desc">Google выпускает Android на ядре Linux. Через 10 лет — 2 млрд устройств.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2010</span>
+<p class="tl-title">Расцвет облаков</p>
+<p class="tl-desc">AWS, Google Cloud, Azure — все на Linux. Начало доминирования в серверах.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2013</span>
+<p class="tl-title">Kali и SteamOS</p>
+<p class="tl-desc">Kali для пентеста. SteamOS — первая попытка Valve в игровой Linux.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2017</span>
+<p class="tl-title">Pop!_OS и WSL</p>
+<p class="tl-desc">System76 выпускает Pop!_OS. Microsoft включает WSL — Linux внутри Windows.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2020</span>
+<p class="tl-title">Конец CentOS</p>
+<p class="tl-desc">Red Hat закрывает CentOS Linux. Появляются AlmaLinux и Rocky.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2022</span>
+<p class="tl-title">Steam Deck</p>
+<p class="tl-desc">Valve выпускает Steam Deck на Arch. Linux-гейминг становится мейнстримом.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2024</span>
+<p class="tl-title">Wayland везде</p>
+<p class="tl-desc">Fedora, Ubuntu, KDE переходят на Wayland по умолчанию.</p>
+</div>
+</div>
+
+<div class="tl-event">
+<div class="tl-card">
+<span class="tl-year">2026</span>
+<p class="tl-title">Новое поколение</p>
+<p class="tl-desc">Omarchy, matrixOS, KDE Linux, AerynOS. Linux на 5%+ десктопов мира.</p>
+</div>
+</div>
+
+</div>
+
+<!-- ЧАСТЬ 4 — ЛЮДИ -->
+<div class="hist-section">
+<span class="section-num">Часть 4</span>
+<h2>Ключевые фигуры</h2>
+<p>Linux — это не только код. Это люди, которые его создавали и продолжают развивать.</p>
+
+<div class="people-grid">
+<div class="person">
+<div class="p-icon">🐧</div>
+<h4>Линус Торвальдс</h4>
+<p class="p-role">Создатель ядра Linux</p>
+<p>Финский программист. В 1991 году написал ядро как хобби. До сих пор руководит разработкой ядра. Также создал Git.</p>
+</div>
+
+<div class="person">
+<div class="p-icon">⚡</div>
+<h4>Ричард Столлман</h4>
+<p class="p-role">Основатель GNU и FSF</p>
+<p>Программист из MIT. Запустил проект GNU в 1983, написал GPL, создал Emacs, GCC, Bash. Главный идеолог свободного ПО.</p>
+</div>
+
+<div class="person">
+<div class="p-icon">🇿🇦</div>
+<h4>Марк Шаттлворт</h4>
+<p class="p-role">Основатель Canonical и Ubuntu</p>
+<p>Южноафриканский предприниматель. В 2004 году выпустил Ubuntu. Сделал Linux массовым на десктопе.</p>
+</div>
+
+<div class="person">
+<div class="p-icon">🎩</div>
+<h4>Марк Юинг</h4>
+<p class="p-role">Основатель Red Hat</p>
+<p>Создал Red Hat Linux в 1994. Показал, что на Linux можно делать бизнес. Один из первых миллиардеров опенсорса.</p>
+</div>
+
+<div class="person">
+<div class="p-icon">📦</div>
+<h4>Иан Мёрдок</h4>
+<p class="p-role">Основатель Debian</p>
+<p>В 1993 создал Debian. Заложил основы социального контракта, которые позже скопировали десятки проектов.</p>
+</div>
+
+<div class="person">
+<div class="p-icon">🌿</div>
+<h4>Клеман Лефевр</h4>
+<p class="p-role">Создатель Linux Mint</p>
+<p>В 2006 сделал форк Ubuntu. Mint годами возглавлял рейтинг DistroWatch. Самый популярный десктопный Linux.</p>
+</div>
+
+<div class="person">
+<div class="p-icon">💎</div>
+<h4>Дэвид Хайнемайер Ханссон</h4>
+<p class="p-role">Создатель Ruby on Rails и Omarchy</p>
+<p>Датский программист. Создал Rails, привёл к успеху Basecamp и HEY. В 2024 выпустил Omarchy — готовую сборку Arch + Hyprland.</p>
+</div>
+
+<div class="person">
+<div class="p-icon">🔧</div>
+<h4>Патрик Фолькердинг</h4>
+<p class="p-role">Создатель Slackware</p>
+<p>В 1993 создал Slackware — старейший живой дистрибутив. До сих пор поддерживает его в одиночку.</p>
+</div>
+</div>
+</div>
+
+<!-- ЧАСТЬ 5 — ВЛИЯНИЕ -->
+<div class="hist-section">
+<span class="section-num">Часть 5</span>
+<h2>Влияние на мир</h2>
+<p>Linux не просто существует — на нём работает современная цивилизация.</p>
+
+<div class="impact-grid">
+<div class="impact">
+<span class="num">96%</span>
+<span class="lbl">топ-1 млн серверов работают на Linux</span>
+</div>
+<div class="impact">
+<span class="num">75%</span>
+<span class="lbl">смартфонов в мире — на ядре Linux (Android)</span>
+</div>
+<div class="impact">
+<span class="num">90%</span>
+<span class="lbl">облачных нагрузок в мире — на Linux</span>
+</div>
+<div class="impact">
+<span class="num">100%</span>
+<span class="lbl">из топ-500 суперкомпьютеров работают на Linux</span>
+</div>
+<div class="impact">
+<span class="num">5%</span>
+<span class="lbl">доля Linux на десктопах в 2026 году</span>
+</div>
+<div class="impact">
+<span class="num">2 млрд</span>
+<span class="lbl">устройств на Android (ядро Linux)</span>
+</div>
+</div>
+
+<h3>Где Linux работает прямо сейчас</h3>
+<ul>
+<li><strong>Интернет</strong> — почти все сайты, которые ты открываешь, лежат на Linux-серверах</li>
+<li><strong>Android</strong> — твой телефон работает на ядре Linux</li>
+<li><strong>Умные телевизоры</strong> — большинство на Linux</li>
+<li><strong>Банкоматы</strong> — большинство на Linux</li>
+<li><strong>Самолёты</strong> — системы развлечения на Linux</li>
+<li><strong>Суперкомпьютеры</strong> — все 500 самых мощных в мире</li>
+<li><strong>Облака</strong> — AWS, Google Cloud, Azure — всё на Linux</li>
+<li><strong>Космос</strong> — SpaceX, МКС используют Linux</li>
+</ul>
+</div>
+
+<!-- ЧАСТЬ 6 — ФИЛОСОФИЯ -->
+<div class="hist-section">
+<span class="section-num">Часть 6</span>
+<h2>Философия</h2>
+<p>Linux — это не просто код. Это набор идей, которые противостоят корпоративной логике проприетарного ПО.</p>
+
+<h3>Свобода важнее удобства</h3>
+<p>Ты можешь посмотреть, как работает любая программа. Изменить её. Раздать другим. Продать. Никто не может запретить. Это основа GPL и всей культуры Linux.</p>
+
+<h3>Сообщество важнее компании</h3>
+<p>Ubuntu, Debian, Arch, Mint — все они управляются сообществом. Даже коммерческие проекты (Red Hat, SUSE, Canonical) зависят от вклада тысяч добровольцев.</p>
+
+<h3>Разнообразие важнее единства</h3>
+<p>Не существует «одного правильного Linux». Есть 130+ дистрибутивов, каждый под свою задачу. Каждый может собрать свой. Это не баг — это фича.</p>
+
+<h3>Открытость важнее секретности</h3>
+<p>Код открыт. Ошибки видны. Уязвимости находятся быстро. Система улучшается благодаря критике, а не вопреки ей.</p>
+</div>
+
+<!-- ЗАКЛЮЧЕНИЕ -->
+<div class="hist-section">
+<span class="section-num">Итог</span>
+<h2>Что дальше</h2>
+<p>Linux прошёл путь от «просто хобби» до основы современного интернета. Но это не конец истории — это её продолжение.</p>
+
+<p>Каждый год появляются новые дистрибутивы, новые идеи, новые подходы. Wayland вытесняет X11. Flatpak и Snap меняют способ установки приложений. Иммутабельные системы (Fedora Silverblue, NixOS, Vanilla OS) меняют представление о том, как вообще должна работать ОС.</p>
+
+<p>И самое главное — <strong>ты можешь стать частью этой истории</strong>. Не обязательно писать код ядра. Достаточно установить Linux, разобраться, рассказать другу. Или, как я, сделать сайт вроде этого.</p>
+
+<div class="quote-block">
+Given enough eyeballs, all bugs are shallow. — Закон Линуса
+<span class="author">— Эрик Реймонд, «Собор и Базар», 1999</span>
+</div>
+
+<p style="color: var(--muted); margin-top: 2rem;">— Артём (Monadei), Ubuntu 26.04, сентябрь 2026</p>
+</div>
+
 </main>
+
 <footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
-<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
-<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/site-theme.js"></script>
 <script src="js/search.js"></script>
 <script src="js/extras.js"></script>
-<script src="js/toc.js"></script>
-<script src="js/copy-code.js"></script>
 <script src="js/fun.js"></script>
-<script src="js/site-theme.js"></script>
 </body>
 </html>

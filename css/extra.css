@@ -959,3 +959,22 @@ h1 img.page-icon {
     font-size: 0.78rem !important;
   }
 }
+
+body.theme-omarchy        { --accent: #7aa2f7; --accent-dim: #4a6db5; }
+body.theme-nitrux         { --accent: #00b4d8; --accent-dim: #007a94; }
+body.theme-matrixos       { --accent: #00ff41; --accent-dim: #00a02a; }
+body.theme-guideos        { --accent: #7c6f64; --accent-dim: #4e463f; }
+body.theme-zenwalk        { --accent: #0072b5; --accent-dim: #004d7a; }
+body.theme-talos          { --accent: #5b8def; --accent-dim: #3a5e9e; }
+body.theme-grml           { --accent: #b58900; --accent-dim: #7a5c00; }
+body.theme-tuxedo         { --accent: #e95420; --accent-dim: #a03514; }
+body.theme-bunsenlabs     { --accent: #4578a8; --accent-dim: #2e5070; }
+body.theme-peppermint     { --accent: #4caf50; --accent-dim: #327a35; }
+body.theme-q4os           { --accent: #3a7ca5; --accent-dim: #265270; }
+body.theme-redcore        { --accent: #c62828; --accent-dim: #821a1a; }
+body.theme-soplos         { --accent: #6a1b9a; --accent-dim: #451260; }
+body.theme-desert         { --accent: #d4a373; --accent-dim: #9e784a; }
+body.theme-securityonion  { --accent: #d32f2f; --accent-dim: #8a1e1e; }
+body.theme-mocaccino      { --accent: #795548; --accent-dim: #4e352c; }
+body.theme-linuxconsole   { --accent: #607d8b; --accent-dim: #3e525c; }
+body.theme-stormos        { --accent: #37474f; --accent-dim: #1f2a30; }
