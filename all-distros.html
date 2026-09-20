@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Все дистрибутивы — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Все дистрибутивы — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav>
+</div></header>
+<main class="container page">
+<h1>Все дистрибутивы</h1>
+<p class="lead">89 дистрибутивов в одной таблице. Клик по имени — переход на страницу.</p>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Дистрибутив</th><th>Семейство</th><th>Основа</th><th>DE / WM</th><th>Релизы</th><th>Сложность</th><th>Для кого</th></tr></thead>
+<tbody>
+<tr><td><a href="distros/debian.html">Debian</a></td><td>Debian</td><td>—</td><td>любой</td><td>фикс.</td><td>средне</td><td>сервер/десктоп</td></tr>
+<tr><td><a href="distros/ubuntu.html">Ubuntu</a></td><td>Debian</td><td>Debian</td><td>GNOME</td><td>6 мес / LTS</td><td>легко</td><td>новичок</td></tr>
+<tr><td><a href="distros/mint.html">Linux Mint</a></td><td>Debian</td><td>Ubuntu</td><td>Cinnamon</td><td>фикс.</td><td>легко</td><td>мигрант с Windows</td></tr>
+<tr><td><a href="distros/lmde.html">LMDE</a></td><td>Debian</td><td>Debian</td><td>Cinnamon</td><td>фикс.</td><td>легко</td><td>фанат Mint</td></tr>
+<tr><td><a href="distros/pop-os.html">Pop!_OS</a></td><td>Debian</td><td>Ubuntu</td><td>COSMIC</td><td>6 мес</td><td>легко</td><td>разработчик</td></tr>
+<tr><td><a href="distros/zorin.html">Zorin OS</a></td><td>Debian</td><td>Ubuntu LTS</td><td>GNOME</td><td>фикс.</td><td>легко</td><td>мигрант</td></tr>
+<tr><td><a href="distros/elementary.html">elementary OS</a></td><td>Debian</td><td>Ubuntu LTS</td><td>Pantheon</td><td>фикс.</td><td>легко</td><td>дизайнер</td></tr>
+<tr><td><a href="distros/kde-neon.html">KDE Neon</a></td><td>Debian</td><td>Ubuntu LTS</td><td>KDE</td><td>rolling</td><td>легко</td><td>фанат KDE</td></tr>
+<tr><td><a href="distros/kali.html">Kali Linux</a></td><td>Debian</td><td>Debian testing</td><td>Xfce</td><td>rolling</td><td>средне</td><td>пентест</td></tr>
+<tr><td><a href="distros/parrot.html">Parrot OS</a></td><td>Debian</td><td>Debian</td><td>MATE</td><td>rolling</td><td>средне</td><td>пентест</td></tr>
+<tr><td><a href="distros/mxlinux.html">MX Linux</a></td><td>Debian</td><td>Debian</td><td>Xfce/KDE</td><td>фикс.</td><td>легко</td><td>старое железо</td></tr>
+<tr><td><a href="distros/antix.html">antiX</a></td><td>Debian</td><td>Debian</td><td>IceWM</td><td>фикс.</td><td>средне</td><td>древнее железо</td></tr>
+<tr><td><a href="distros/puppy.html">Puppy Linux</a></td><td>Debian</td><td>—</td><td>JWM</td><td>—</td><td>средне</td><td>Live USB</td></tr>
+<tr><td><a href="distros/lubuntu.html">Lubuntu</a></td><td>Debian</td><td>Ubuntu</td><td>LXQt</td><td>LTS 3г</td><td>легко</td><td>слабое железо</td></tr>
+<tr><td><a href="distros/xubuntu.html">Xubuntu</a></td><td>Debian</td><td>Ubuntu</td><td>Xfce</td><td>LTS 3г</td><td>легко</td><td>классика</td></tr>
+<tr><td><a href="distros/kubuntu.html">Kubuntu</a></td><td>Debian</td><td>Ubuntu</td><td>KDE</td><td>LTS 3г</td><td>легко</td><td>гибкий интерфейс</td></tr>
+<tr><td><a href="distros/deepin.html">Deepin</a></td><td>Debian</td><td>Debian</td><td>DDE</td><td>фикс.</td><td>легко</td><td>дизайн</td></tr>
+<tr><td><a href="distros/raspberry-pi-os.html">Raspberry Pi OS</a></td><td>Debian</td><td>Debian</td><td>LXDE</td><td>фикс.</td><td>легко</td><td>Raspberry Pi</td></tr>
+<tr><td><a href="distros/fedora.html">Fedora</a></td><td>Red Hat</td><td>—</td><td>GNOME</td><td>6 мес</td><td>средне</td><td>разработчик</td></tr>
+<tr><td><a href="distros/almalinux.html">AlmaLinux</a></td><td>Red Hat</td><td>RHEL</td><td>GNOME</td><td>фикс.</td><td>средне</td><td>сервер</td></tr>
+<tr><td><a href="distros/rocky.html">Rocky Linux</a></td><td>Red Hat</td><td>RHEL</td><td>GNOME</td><td>фикс.</td><td>средне</td><td>сервер</td></tr>
+<tr><td><a href="distros/centos-stream.html">CentOS Stream</a></td><td>Red Hat</td><td>RHEL</td><td>GNOME</td><td>rolling</td><td>средне</td><td>разработчик RHEL</td></tr>
+<tr><td><a href="distros/oracle-linux.html">Oracle Linux</a></td><td>Red Hat</td><td>RHEL</td><td>GNOME</td><td>фикс.</td><td>средне</td><td>Oracle Cloud</td></tr>
+<tr><td><a href="distros/arch.html">Arch Linux</a></td><td>Arch</td><td>—</td><td>любой</td><td>rolling</td><td>сложно</td><td>энтузиаст</td></tr>
+<tr><td><a href="distros/manjaro.html">Manjaro</a></td><td>Arch</td><td>Arch</td><td>Xfce/KDE/GNOME</td><td>rolling</td><td>легко</td><td>мост к Arch</td></tr>
+<tr><td><a href="distros/endeavouros.html">EndeavourOS</a></td><td>Arch</td><td>Arch</td><td>любой</td><td>rolling</td><td>средне</td><td>почти Arch</td></tr>
+<tr><td><a href="distros/cachyos.html">CachyOS</a></td><td>Arch</td><td>Arch</td><td>любой</td><td>rolling</td><td>средне</td><td>геймер</td></tr>
+<tr><td><a href="distros/garuda.html">Garuda</a></td><td>Arch</td><td>Arch</td><td>KDE Dr460nized</td><td>rolling</td><td>средне</td><td>геймер</td></tr>
+<tr><td><a href="distros/steamos.html">SteamOS</a></td><td>Arch</td><td>Arch</td><td>KDE + Gamescope</td><td>rolling</td><td>средне</td><td>Steam Deck</td></tr>
+<tr><td><a href="distros/blackarch.html">BlackArch</a></td><td>Arch</td><td>Arch</td><td>любой</td><td>rolling</td><td>сложно</td><td>пентест</td></tr>
+<tr><td><a href="distros/opensuse.html">openSUSE</a></td><td>SUSE</td><td>—</td><td>KDE/GNOME</td><td>Leap/Tumbleweed</td><td>средне</td><td>сервер/десктоп</td></tr>
+<tr><td><a href="distros/gentoo.html">Gentoo</a></td><td>независимый</td><td>—</td><td>любой</td><td>rolling</td><td>очень сложно</td><td>профи</td></tr>
+<tr><td><a href="distros/slackware.html">Slackware</a></td><td>независимый</td><td>—</td><td>любой</td><td>фикс.</td><td>сложно</td><td>классика</td></tr>
+<tr><td><a href="distros/void.html">Void Linux</a></td><td>независимый</td><td>—</td><td>любой</td><td>rolling</td><td>средне</td><td>без systemd</td></tr>
+<tr><td><a href="distros/nixos.html">NixOS</a></td><td>независимый</td><td>—</td><td>любой</td><td>фикс.</td><td>сложно</td><td>DevOps</td></tr>
+<tr><td><a href="distros/alpine.html">Alpine</a></td><td>независимый</td><td>—</td><td>—</td><td>фикс.</td><td>средне</td><td>контейнеры</td></tr>
+<tr><td><a href="distros/solus.html">Solus</a></td><td>независимый</td><td>—</td><td>Budgie</td><td>rolling</td><td>легко</td><td>десктоп</td></tr>
+<tr><td><a href="distros/clear.html">Clear Linux</a></td><td>независимый</td><td>—</td><td>GNOME</td><td>rolling</td><td>средне</td><td>Intel</td></tr>
+<tr><td><a href="distros/pclinuxos.html">PCLinuxOS</a></td><td>независимый</td><td>Mandriva</td><td>KDE/MATE</td><td>rolling</td><td>легко</td><td>новичок</td></tr>
+<tr><td><a href="distros/tails.html">Tails</a></td><td>Debian</td><td>Debian</td><td>GNOME</td><td>фикс.</td><td>средне</td><td>анонимность</td></tr>
+<tr><td><a href="distros/qubes.html">Qubes OS</a></td><td>независимый</td><td>Xen</td><td>Xfce</td><td>фикс.</td><td>сложно</td><td>максимум защиты</td></tr>
+<tr><td><a href="distros/nobara.html">Nobara</a></td><td>Red Hat</td><td>Fedora</td><td>KDE/GNOME</td><td>6 мес</td><td>легко</td><td>геймер</td></tr>
+<tr><td><a href="distros/bazzite.html">Bazzite</a></td><td>Red Hat</td><td>Fedora Atomic</td><td>KDE/GNOME</td><td>атомарн.</td><td>легко</td><td>геймер/консоль</td></tr>
+<tr><td><a href="distros/chimeraos.html">ChimeraOS</a></td><td>Arch</td><td>Arch</td><td>Steam Big Picture</td><td>атомарн.</td><td>средне</td><td>своя консоль</td></tr>
+<tr><td><a href="distros/batocera.html">Batocera</a></td><td>независимый</td><td>Buildroot</td><td>EmulationStation</td><td>фикс.</td><td>легко</td><td>ретро-игры</td></tr>
+<tr><td><a href="distros/libreelec.html">LibreELEC</a></td><td>независимый</td><td>—</td><td>Kodi</td><td>фикс.</td><td>легко</td><td>медиацентр</td></tr>
+<tr><td><a href="distros/truenas-scale.html">TrueNAS SCALE</a></td><td>Debian</td><td>Debian</td><td>web</td><td>фикс.</td><td>средне</td><td>NAS</td></tr>
+<tr><td><a href="distros/openmediavault.html">OpenMediaVault</a></td><td>Debian</td><td>Debian</td><td>web</td><td>фикс.</td><td>средне</td><td>NAS</td></tr>
+<tr><td><a href="distros/proxmox.html">Proxmox VE</a></td><td>Debian</td><td>Debian</td><td>web</td><td>фикс.</td><td>средне</td><td>виртуализация</td></tr>
+<tr><td><a href="distros/openwrt.html">OpenWrt</a></td><td>независимый</td><td>—</td><td>LuCI</td><td>фикс.</td><td>средне</td><td>роутер</td></tr>
+<tr><td><a href="distros/opnsense.html">OPNsense</a></td><td>FreeBSD</td><td>—</td><td>web</td><td>фикс.</td><td>средне</td><td>firewall</td></tr>
+<tr><td><a href="distros/pfsense.html">pfSense</a></td><td>FreeBSD</td><td>—</td><td>web</td><td>фикс.</td><td>средне</td><td>firewall</td></tr>
+<tr><td><a href="distros/fedora-coreos.html">Fedora CoreOS</a></td><td>Red Hat</td><td>Fedora</td><td>—</td><td>атомарн.</td><td>сложно</td><td>Kubernetes</td></tr>
+<tr><td><a href="distros/photon.html">Photon OS</a></td><td>независимый</td><td>—</td><td>—</td><td>фикс.</td><td>средне</td><td>VMware</td></tr>
+<tr><td><a href="distros/ubuntu-core.html">Ubuntu Core</a></td><td>Debian</td><td>Ubuntu</td><td>—</td><td>атомарн.</td><td>средне</td><td>IoT</td></tr>
+<tr><td><a href="distros/postmarketos.html">postmarketOS</a></td><td>независимый</td><td>Alpine</td><td>Plasma Mobile</td><td>rolling</td><td>сложно</td><td>смартфон</td></tr>
+<tr><td><a href="distros/ubuntu-touch.html">Ubuntu Touch</a></td><td>Debian</td><td>Ubuntu</td><td>Lomiri</td><td>фикс.</td><td>средне</td><td>смартфон</td></tr>
+<tr><td><a href="distros/tinycore.html">Tiny Core</a></td><td>независимый</td><td>—</td><td>Fluxbox</td><td>rolling</td><td>сложно</td><td>16 МБ</td></tr>
+<tr><td><a href="distros/slitaz.html">SliTaz</a></td><td>независимый</td><td>—</td><td>Openbox</td><td>rolling</td><td>средне</td><td>минимализм</td></tr>
+<tr><td><a href="distros/parabola.html">Parabola</a></td><td>Arch</td><td>Arch</td><td>любой</td><td>rolling</td><td>сложно</td><td>FOSS-only</td></tr>
+<tr><td><a href="distros/trisquel.html">Trisquel</a></td><td>Debian</td><td>Ubuntu</td><td>GNOME</td><td>LTS</td><td>легко</td><td>FOSS-only</td></tr>
+<tr><td><a href="distros/pureos.html">PureOS</a></td><td>Debian</td><td>Debian</td><td>GNOME</td><td>rolling</td><td>легко</td><td>FOSS-only</td></tr>
+<tr><td><a href="distros/rosa.html">ROSA Linux</a></td><td>Mandriva</td><td>Mandriva</td><td>KDE</td><td>фикс.</td><td>легко</td><td>RU</td></tr>
+<tr><td><a href="distros/alt.html">ALT Linux</a></td><td>независимый</td><td>Mandriva</td><td>KDE/GNOME</td><td>фикс.</td><td>средне</td><td>RU госсектор</td></tr>
+<tr><td><a href="distros/astra.html">Astra Linux</a></td><td>Debian</td><td>Debian</td><td>Fly</td><td>фикс.</td><td>средне</td><td>RU гостайна</td></tr>
+<tr><td><a href="distros/calculate.html">Calculate Linux</a></td><td>Gentoo</td><td>Gentoo</td><td>любой</td><td>rolling</td><td>сложно</td><td>RU</td></tr>
+<tr><td><a href="distros/nebios.html">NebiOS</a></td><td>Debian</td><td>Ubuntu</td><td>NebiDE</td><td>фикс.</td><td>легко</td><td>новичок</td></tr>
+<tr><td><a href="distros/aerynos.html">AerynOS</a></td><td>независимый</td><td>—</td><td>GNOME</td><td>rolling</td><td>средне</td><td>энтузиаст</td></tr>
+<tr><td><a href="distros/kde-linux.html">KDE Linux</a></td><td>независимый</td><td>Arch</td><td>KDE</td><td>rolling</td><td>средне</td><td>фанат KDE</td></tr>
+<tr><td><a href="distros/anduinos.html">AnduinOS</a></td><td>Debian</td><td>Ubuntu</td><td>GNOME (Win11)</td><td>LTS</td><td>легко</td><td>мигрант с Win11</td></tr>
+<tr><td><a href="distros/makulu-lindoz.html">Makulu LinDoz</a></td><td>Debian</td><td>Debian</td><td>Cinnamon</td><td>фикс.</td><td>легко</td><td>мигрант</td></tr>
+<tr><td><a href="distros/mx-moksha.html">MX Moksha</a></td><td>Debian</td><td>MX</td><td>Moksha</td><td>фикс.</td><td>средне</td><td>старое железо</td></tr>
+<tr><td><a href="distros/avlinux.html">AV Linux</a></td><td>Debian</td><td>MX</td><td>Moksha</td><td>фикс.</td><td>средне</td><td>аудио/видео</td></tr>
+<tr><td><a href="distros/kaisen.html">Kaisen Linux</a></td><td>Debian</td><td>Debian</td><td>Xfce</td><td>rolling</td><td>средне</td><td>сисадмин</td></tr>
+<tr><td><a href="distros/nitrux.html">Nitrux</a></td><td>Debian</td><td>Debian</td><td>NX Desktop</td><td>rolling</td><td>средне</td><td>дизайнер</td></tr>
+<tr><td><a href="distros/rhino.html">Rhino Linux</a></td><td>Debian</td><td>Ubuntu</td><td>Xfce</td><td>rolling</td><td>средне</td><td>энтузиаст</td></tr>
+<tr><td><a href="distros/vanilla.html">Vanilla OS</a></td><td>Debian</td><td>Ubuntu</td><td>GNOME</td><td>атомарн.</td><td>легко</td><td>иммутабельность</td></tr>
+<tr><td><a href="distros/blendos.html">blendOS</a></td><td>Arch</td><td>Arch</td><td>любой</td><td>атомарн.</td><td>средне</td><td>гибрид</td></tr>
+<tr><td><a href="distros/archcraft.html">Archcraft</a></td><td>Arch</td><td>Arch</td><td>Openbox/bspwm</td><td>rolling</td><td>средне</td><td>ricing</td></tr>
+<tr><td><a href="distros/rebornos.html">RebornOS</a></td><td>Arch</td><td>Arch</td><td>любой</td><td>rolling</td><td>средне</td><td>фанат Arch</td></tr>
+<tr><td><a href="distros/artix.html">Artix</a></td><td>Arch</td><td>Arch</td><td>любой</td><td>rolling</td><td>сложно</td><td>без systemd</td></tr>
+<tr><td><a href="distros/microos.html">openSUSE MicroOS</a></td><td>SUSE</td><td>openSUSE</td><td>—</td><td>атомарн.</td><td>средне</td><td>сервер/edge</td></tr>
+<tr><td><a href="distros/fedora-silverblue.html">Fedora Silverblue</a></td><td>Red Hat</td><td>Fedora</td><td>GNOME</td><td>атомарн.</td><td>средне</td><td>контейнеры</td></tr>
+<tr><td><a href="distros/fedora-kinoite.html">Fedora Kinoite</a></td><td>Red Hat</td><td>Fedora</td><td>KDE</td><td>атомарн.</td><td>средне</td><td>KDE + атомарн.</td></tr>
+<tr><td><a href="distros/regolith.html">Regolith</a></td><td>Debian</td><td>Ubuntu</td><td>i3 + GNOME</td><td>фикс.</td><td>средне</td><td>тайлинг</td></tr>
+<tr><td><a href="distros/bodhi.html">Bodhi</a></td><td>Debian</td><td>Ubuntu</td><td>Moksha</td><td>фикс.</td><td>легко</td><td>старое железо</td></tr>
+<tr><td><a href="distros/ubuntu-budgie.html">Ubuntu Budgie</a></td><td>Debian</td><td>Ubuntu</td><td>Budgie</td><td>LTS 3г</td><td>легко</td><td>новичок</td></tr>
+<tr><td><a href="distros/ubuntu-mate.html">Ubuntu MATE</a></td><td>Debian</td><td>Ubuntu</td><td>MATE</td><td>LTS 3г</td><td>легко</td><td>классика</td></tr>
+<tr><td><a href="distros/ubuntu-studio.html">Ubuntu Studio</a></td><td>Debian</td><td>Ubuntu</td><td>KDE</td><td>LTS</td><td>средне</td><td>мультимедиа</td></tr>
+</tbody>
+</table></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

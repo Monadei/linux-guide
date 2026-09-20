@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Сравнить дистрибутивы — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Сравнить два дистрибутива</h1>
+<p class="lead">Выбери два — увидишь таблицу различий.</p>
+
+<div class="compare-grid">
+<select id="a"></select>
+<select id="b"></select>
+</div>
+<button class="btn" onclick="compare()" style="margin-top:1rem;">Сравнить</button>
+
+<div id="result"></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+var DATA = {
+  debian:    { family:'Debian', base:'—', de:'любой', release:'фикс.', difficulty:'средне', for:'сервер/десктоп', package:'apt', init:'systemd' },
+  ubuntu:    { family:'Debian', base:'Debian', de:'GNOME', release:'6мес/LTS', difficulty:'легко', for:'новичок', package:'apt', init:'systemd' },
+  mint:      { family:'Debian', base:'Ubuntu', de:'Cinnamon', release:'фикс.', difficulty:'легко', for:'мигрант', package:'apt', init:'systemd' },
+  lmde:      { family:'Debian', base:'Debian', de:'Cinnamon', release:'фикс.', difficulty:'легко', for:'фанат Mint', package:'apt', init:'systemd' },
+  'pop-os':  { family:'Debian', base:'Ubuntu', de:'COSMIC', release:'6мес', difficulty:'легко', for:'разработчик', package:'apt', init:'systemd' },
+  zorin:     { family:'Debian', base:'Ubuntu LTS', de:'GNOME', release:'фикс.', difficulty:'легко', for:'мигрант', package:'apt', init:'systemd' },
+  elementary:{ family:'Debian', base:'Ubuntu LTS', de:'Pantheon', release:'фикс.', difficulty:'легко', for:'дизайнер', package:'apt', init:'systemd' },
+  kali:      { family:'Debian', base:'Debian testing', de:'Xfce', release:'rolling', difficulty:'средне', for:'пентест', package:'apt', init:'systemd' },
+  parrot:    { family:'Debian', base:'Debian', de:'MATE', release:'rolling', difficulty:'средне', for:'пентест', package:'apt', init:'systemd' },
+  mxlinux:   { family:'Debian', base:'Debian', de:'Xfce', release:'фикс.', difficulty:'легко', for:'старое железо', package:'apt', init:'systemd' },
+  antix:     { family:'Debian', base:'Debian', de:'IceWM', release:'фикс.', difficulty:'средне', for:'древнее железо', package:'apt', init:'sysvinit' },
+  deepin:    { family:'Debian', base:'Debian', de:'DDE', release:'фикс.', difficulty:'легко', for:'дизайн', package:'apt', init:'systemd' },
+  fedora:    { family:'Red Hat', base:'—', de:'GNOME', release:'6мес', difficulty:'средне', for:'разработчик', package:'dnf', init:'systemd' },
+  almalinux: { family:'Red Hat', base:'RHEL', de:'GNOME', release:'фикс.', difficulty:'средне', for:'сервер', package:'dnf', init:'systemd' },
+  rocky:     { family:'Red Hat', base:'RHEL', de:'GNOME', release:'фикс.', difficulty:'средне', for:'сервер', package:'dnf', init:'systemd' },
+  arch:      { family:'Arch', base:'—', de:'любой', release:'rolling', difficulty:'сложно', for:'энтузиаст', package:'pacman', init:'systemd' },
+  manjaro:   { family:'Arch', base:'Arch', de:'Xfce/KDE', release:'rolling', difficulty:'легко', for:'мост', package:'pacman', init:'systemd' },
+  endeavouros:{ family:'Arch', base:'Arch', de:'любой', release:'rolling', difficulty:'средне', for:'Arch', package:'pacman', init:'systemd' },
+  cachyos:   { family:'Arch', base:'Arch', de:'любой', release:'rolling', difficulty:'средне', for:'геймер', package:'pacman', init:'systemd' },
+  garuda:    { family:'Arch', base:'Arch', de:'KDE Dr460n', release:'rolling', difficulty:'средне', for:'геймер', package:'pacman', init:'systemd' },
+  steamos:   { family:'Arch', base:'Arch', de:'KDE+Gamescope', release:'rolling', difficulty:'средне', for:'Steam Deck', package:'pacman', init:'systemd' },
+  artix:     { family:'Arch', base:'Arch', de:'любой', release:'rolling', difficulty:'сложно', for:'без systemd', package:'pacman', init:'OpenRC/runit' },
+  opensuse:  { family:'SUSE', base:'—', de:'KDE/GNOME', release:'Leap/Tumble', difficulty:'средне', for:'сервер/десктоп', package:'zypper', init:'systemd' },
+  gentoo:    { family:'независимый', base:'—', de:'любой', release:'rolling', difficulty:'очень сложно', for:'профи', package:'portage', init:'OpenRC' },
+  slackware: { family:'независимый', base:'—', de:'любой', release:'фикс.', difficulty:'сложно', for:'классика', package:'slackpkg', init:'sysvinit' },
+  void:      { family:'независимый', base:'—', de:'любой', release:'rolling', difficulty:'средне', for:'без systemd', package:'xbps', init:'runit' },
+  nixos:     { family:'независимый', base:'—', de:'любой', release:'фикс.', difficulty:'сложно', for:'DevOps', package:'nix', init:'systemd' },
+  alpine:    { family:'независимый', base:'—', de:'—', release:'фикс.', difficulty:'средне', for:'контейнеры', package:'apk', init:'OpenRC' },
+  tails:     { family:'Debian', base:'Debian', de:'GNOME', release:'фикс.', difficulty:'средне', for:'анонимность', package:'apt', init:'systemd' },
+  qubes:     { family:'независимый', base:'Xen', de:'Xfce', release:'фикс.', difficulty:'сложно', for:'макс. защита', package:'apt', init:'systemd' },
+  nobara:    { family:'Red Hat', base:'Fedora', de:'KDE/GNOME', release:'6мес', difficulty:'легко', for:'геймер', package:'dnf', init:'systemd' },
+  bazzite:   { family:'Red Hat', base:'Fedora Atomic', de:'KDE/GNOME', release:'атомарн.', difficulty:'легко', for:'геймер', package:'rpm-ostree', init:'systemd' }
+};
+var NAMES = { debian:'Debian', ubuntu:'Ubuntu', mint:'Linux Mint', lmde:'LMDE', 'pop-os':'Pop!_OS', zorin:'Zorin OS', elementary:'elementary OS', kali:'Kali Linux', parrot:'Parrot OS', mxlinux:'MX Linux', antix:'antiX', deepin:'Deepin', fedora:'Fedora', almalinux:'AlmaLinux', rocky:'Rocky Linux', arch:'Arch Linux', manjaro:'Manjaro', endeavouros:'EndeavourOS', cachyos:'CachyOS', garuda:'Garuda', steamos:'SteamOS', artix:'Artix', opensuse:'openSUSE', gentoo:'Gentoo', slackware:'Slackware', void:'Void Linux', nixos:'NixOS', alpine:'Alpine', tails:'Tails', qubes:'Qubes OS', nobara:'Nobara', bazzite:'Bazzite' };
+
+var aSel = document.getElementById('a'), bSel = document.getElementById('b');
+Object.keys(DATA).forEach(function(k){
+  [aSel, bSel].forEach(function(s){
+    var o = document.createElement('option');
+    o.value = k; o.textContent = NAMES[k] || k;
+    s.appendChild(o);
+  });
+});
+aSel.value = 'ubuntu'; bSel.value = 'fedora';
+
+function compare() {
+  var a = DATA[aSel.value], b = DATA[bSel.value];
+  var rows = [
+    ['Семейство', a.family, b.family],
+    ['Основа', a.base, b.base],
+    ['Рабочий стол', a.de, b.de],
+    ['Релизы', a.release, b.release],
+    ['Сложность', a.difficulty, b.difficulty],
+    ['Для кого', a.for, b.for],
+    ['Пакеты', a.package, b.package],
+    ['Init', a.init, b.init]
+  ];
+  var html = '<div class="compare-result"><table><thead><tr><th></th><th>' + NAMES[aSel.value] + '</th><th>' + NAMES[bSel.value] + '</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    var diff = r[1] !== r[2] ? ' style="color:var(--accent);"' : '';
+    html += '<tr><td>' + r[0] + '</td><td' + diff + '>' + r[1] + '</td><td' + diff + '>' + r[2] + '</td></tr>';
+  });
+  html += '</tbody></table><p style="margin-top:1rem;"><a href="distros/' + aSel.value + '.html" class="btn">Открыть ' + NAMES[aSel.value] + '</a> <a href="distros/' + bSel.value + '.html" class="btn">Открыть ' + NAMES[bSel.value] + '</a></p></div>';
+  document.getElementById('result').innerHTML = html;
+}
+compare();
+</script>
+<script src="js/site-theme.js"></script>
+</body></html>

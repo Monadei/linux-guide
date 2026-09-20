@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Бэкапы — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Бэкапы — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Бэкапы в Linux</h1>
+<p class="lead">Что, чем и как часто сохранять, чтобы не потерять данные.</p>
+
+<section><h2>Правило 3-2-1</h2>
+<ul>
+<li><strong>3</strong> копии данных</li>
+<li><strong>2</strong> разных носителя</li>
+<li><strong>1</strong> копия вне дома</li>
+</ul></section>
+
+<section><h2>Timeshift — для системы</h2>
+<p>Снапшоты системы. Если что-то сломалось — откат в один клик.</p>
+<pre><code>sudo apt install timeshift</code></pre>
+<p>Настройка: выбери диск, расписание (ежедневно), хранить 5–10 снапшотов. Работает на ext4 и Btrfs.</p>
+<p>Создать вручную:</p>
+<pre><code>sudo timeshift --create --comments "перед обновлением"</code></pre></section>
+
+<section><h2>rsync — для данных</h2>
+<p>Универсальный инструмент. Копирует файлы в любую точку.</p>
+<pre><code>rsync -avh --progress ~/Documents /mnt/backup/</code></pre>
+<p>С удалением файлов, которых больше нет в источнике:</p>
+<pre><code>rsync -avh --delete ~/Documents /mnt/backup/</code></pre>
+<p>На удалённый сервер по SSH:</p>
+<pre><code>rsync -avh -e ssh ~/Documents user@server:/backup/</code></pre></section>
+
+<section><h2>Borg — умные бэкапы</h2>
+<p>Дедупликация, шифрование, снапшоты.</p>
+<pre><code>sudo apt install borgbackup</code></pre>
+<pre><code>borg init --encryption=repokey /mnt/backup/borg
+borg create /mnt/backup/borg::first ~/Documents
+borg list /mnt/backup/borg</code></pre></section>
+
+<section><h2>Restic — современная альтернатива</h2>
+<pre><code>sudo apt install restic</code></pre>
+<pre><code>restic init --repo /mnt/backup/restic
+restic -r /mnt/backup/restic backup ~/Documents
+restic -r /mnt/backup/restic snapshots</code></pre></section>
+
+<section><h2>Что бэкапить</h2>
+<ul>
+<li><strong>Обязательно:</strong> <code>~/Documents</code>, <code>~/Pictures</code>, <code>~/Projects</code>, <code>~/.ssh</code>, <code>~/.gnupg</code></li>
+<li><strong>Полезно:</strong> список установленных пакетов: <code>dpkg --get-selections &gt; packages.txt</code></li>
+<li><strong>Не нужно:</strong> система (для неё Timeshift), кеши, <code>~/.cache</code></li>
+</ul></section>
+
+<section><h2>Что не делать</h2>
+<ul>
+<li>Не хранить единственный бэкап на том же диске, что и данные</li>
+<li>Не бэкапить на NTFS-раздел, если это система (проблемы с правами)</li>
+<li>Не забывать проверять бэкапы — попробуй восстановить хоть раз</li>
+</ul></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

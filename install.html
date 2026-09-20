@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Как установить Linux — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Как установить Linux — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html" class="active">Как установить</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav>
+</div></header>
+<main class="container page">
+<h1>Как установить Linux</h1>
+<p class="lead">Пошаговое руководство. От загрузки ISO до первой настройки системы.</p>
+
+<section><h2>0. Что понадобится</h2>
+<ul>
+<li>Флешка 8+ ГБ (все данные будут уничтожены)</li>
+<li>Скачанный ISO-образ</li>
+<li>30–60 минут времени</li>
+<li>Резервная копия важных данных (обязательно!)</li>
+</ul></section>
+
+<section><h2>1. Запись ISO на флешку</h2>
+<p>На Ubuntu/Debian/Mint:</p>
+<pre><code>sudo dd if=~/Downloads/ubuntu.iso of=/dev/sdX bs=4M status=progress oflag=sync</code></pre>
+<p>Где <code>/dev/sdX</code> — твоя флешка (проверь через <code>lsblk</code>!). <span class="warn">Не перепутай с жёстким диском.</span></p>
+<p>На Windows: Rufus или balenaEtcher. На macOS: balenaEtcher.</p></section>
+
+<section><h2>2. UEFI или BIOS — что выбрать</h2>
+<p>Современные ПК (после 2012) — <strong>UEFI</strong>. Старые — <strong>BIOS</strong>. Обычно UEFI включён по умолчанию.</p>
+<ul>
+<li><strong>Secure Boot</strong> — выключи, если установщик не грузится. Ubuntu и Fedora поддерживают его, некоторые другие — нет.</li>
+<li><strong>Fast Boot</strong> — выключи, чтобы флешка была видна.</li>
+<li><strong>RAID/RST</strong> — если стоит Intel RST, переключи на AHCI, иначе Linux не увидит диск.</li>
+</ul></section>
+
+<section><h2>3. Загрузка с флешки</h2>
+<p>Перезагрузи ПК. Во время POST нажми клавишу Boot Menu:</p>
+<ul>
+<li>ASUS: <code>F8</code> или <code>Esc</code></li>
+<li>Gigabyte: <code>F12</code></li>
+<li>MSI: <code>F11</code></li>
+<li>Lenovo: <code>F12</code></li>
+<li>HP: <code>F9</code></li>
+<li>Dell: <code>F12</code></li>
+<li>Apple: зажми <code>Option</code></li>
+</ul>
+<p>Выбери USB-накопитель. Загрузится Live-система или установщик.</p></section>
+
+<section><h2>4. Разметка диска</h2>
+<p>Это самый ответственный момент. Варианты:</p>
+<ul>
+<li><strong>Стереть весь диск</strong> — установщик сам разобьёт. Простой вариант, если Linux будет единственной ОС.</li>
+<li><strong>Рядом с Windows</strong> — установщик уменьшит раздел Windows и создаст свои. Безопасно при наличии свободного места.</li>
+<li><strong>Вручную</strong> — для опытных. Нужны минимум: <code>/boot/efi</code> (512 МБ, FAT32), <code>/</code> (30+ ГБ), <code>/home</code> (по вкусу), <code>swap</code> (по RAM).</li>
+</ul>
+<p><span class="warn">Внимание:</span> «Стереть диск» уничтожит ВСЁ. Сделай бэкап заранее.</p></section>
+
+<section><h2>5. Dual-boot с Windows</h2>
+<ol>
+<li>В Windows: <code>Управление дисками</code> → сжать том → освободи 40+ ГБ</li>
+<li>Отключи Fast Startup: <code>Панель управления → Электропитание → Действия кнопок питания → Отключить быстрый запуск</code></li>
+<li>Загрузись с флешки, выбери «Установить рядом с Windows»</li>
+<li>GRUB автоматически найдёт Windows и добавит в меню</li>
+</ol></section>
+
+<section><h2>6. Шифрование LUKS</h2>
+<p>Рекомендуется для ноутбуков. Установщик Ubuntu и Fedora предлагают галочку «Зашифровать диск» — просто включи. Пароль придётся вводить при каждой загрузке.</p>
+<p>Минус: если забудешь пароль — данные не восстановить.</p></section>
+
+<section><h2>7. Первый запуск</h2>
+<ul>
+<li>Обнови систему: <code>sudo apt update && sudo apt upgrade</code> (Ubuntu/Debian)</li>
+<li>Установи драйверы: <code>sudo ubuntu-drivers autoinstall</code> (для NVIDIA)</li>
+<li>Настрой тачпад, яркость, звук через «Параметры»</li>
+<li>Установи браузер, мессенджеры, кодеки из центра приложений</li>
+</ul></section>
+
+<section><h2>8. Что дальше</h2>
+<ul>
+<li>Изучи горячие клавиши своего DE</li>
+<li>Настрой бэкапы: Timeshift для системы, rsync/Borg для данных</li>
+<li>Установи <code>timeshift</code>, <code>gparted</code>, <code>htop</code>, <code>neofetch</code></li>
+<li>Почитай <a href="glossary.html">словарь терминов</a>, если что-то непонятно</li>
+</ul></section>
+
+<section><h2>9. Если что-то пошло не так</h2>
+<ul>
+<li><strong>Не грузится система</strong> — загрузись с флешки в Live-режиме и восстанови GRUB</li>
+<li><strong>Чёрный экран после установки</strong> — попробуй <code>nomodeset</code> в параметрах ядра</li>
+<li><strong>Не работает Wi-Fi</strong> — подключи по кабелю, установи драйверы</li>
+<li><strong>Пропала Windows</strong> — GRUB её найдёт: <code>sudo update-grub</code></li>
+<li><strong>Не хватает места</strong> — перераспредели разделы через GParted с Live USB</li>
+</ul></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

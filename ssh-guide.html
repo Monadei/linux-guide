@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>SSH и ключи — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>SSH и ключи</h1>
+<p class="lead">Как подключиться к удалённому серверу и не париться.</p>
+
+<h2>Что такое SSH</h2>
+<p><strong>S</strong>ecure <strong>Sh</strong>ell — протокол для подключения к удалённым машинам. Весь трафик шифруется. Используется для:</p>
+<ul>
+<li>Подключения к серверам</li>
+<li>GitHub/GitLab (для git push/pull)</li>
+<li>Передачи файлов через scp/rsync</li>
+<li>Туннелирования портов</li>
+</ul>
+
+<h2>Подключение по паролю</h2>
+<pre><code>ssh user@server.com
+ssh user@192.168.1.10
+ssh user@server.com -p 2222</code></pre>
+
+<h2>SSH-ключи — безопаснее пароля</h2>
+<p>Идея: есть <strong>приватный ключ</strong> (секрет) и <strong>публичный ключ</strong> (можно показывать). Сервер знает твой публичный, ты доказываешь владение приватным — без пароля.</p>
+
+<h2>Генерация ключа</h2>
+<pre><code>ssh-keygen -t ed25519 -C "monadei@ubuntu"</code></pre>
+<ul>
+<li><code>-t ed25519</code> — современный алгоритм, короче и быстрее RSA</li>
+<li><code>-C</code> — комментарий (обычно email или имя хоста)</li>
+<li>Ключ сохранится в <code>~/.ssh/id_ed25519</code> и <code>~/.ssh/id_ed25519.pub</code></li>
+<li><strong>Passphrase</strong> — необязательна, но если диск украдут — файл под паролем</li>
+</ul>
+
+<h2>Копирование ключа на сервер</h2>
+<pre><code>ssh-copy-id user@server.com</code></pre>
+<p>Публичный ключ добавится в <code>~/.ssh/authorized_keys</code> на сервере. Всё, теперь можно без пароля.</p>
+
+<h2>Для GitHub</h2>
+<pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+<p>Скопируй вывод, зайди на GitHub → Settings → SSH and GPG keys → New SSH key.</p>
+<p>Проверка:</p>
+<pre><code>ssh -T git@github.com</code></pre>
+
+<h2>~/.ssh/config</h2>
+<p>Чтобы не вводить длинные команды, создай файл:</p>
+<pre><code>Host myserver
+    HostName 192.168.1.10
+    User monadei
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519</code></pre>
+<p>Теперь вместо <code>ssh user@192.168.1.10 -p 2222</code>:</p>
+<pre><code>ssh myserver</code></pre>
+
+<h2>Права на файлы</h2>
+<p>SSH строго следит за правами:</p>
+<pre><code>chmod 700 ~/.ssh
+chmod 600 ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
+chmod 600 ~/.ssh/config
+chmod 600 ~/.ssh/authorized_keys</code></pre>
+<p>Если права неверные — SSH откажется работать.</p>
+
+<h2>Агент SSH</h2>
+<p>Чтобы не вводить passphrase каждый раз:</p>
+<pre><code>eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519</code></pre>
+<p>Добавить в <code>~/.bashrc</code> или <code>~/.zshrc</code>, чтобы запускался автоматически.</p>
+
+<h2>Передача файлов</h2>
+<pre><code>scp file.txt user@server:/path/
+scp user@server:/path/file.txt .
+rsync -avh --progress ~/Documents/ user@server:/backup/</code></pre>
+
+<h2>Туннелирование</h2>
+<p>Пробросить порт:</p>
+<pre><code>ssh -L 8080:localhost:80 user@server</code></pre>
+<p>Теперь <code>localhost:8080</code> на твоей машине — это порт 80 на сервере.</p>
+
+<h2>Управление сервером SSH</h2>
+<pre><code>sudo systemctl status ssh
+sudo systemctl restart ssh
+sudo systemctl stop ssh</code></pre>
+<p>Конфиг: <code>/etc/ssh/sshd_config</code>. После правок:</p>
+<pre><code>sudo systemctl reload ssh</code></pre>
+
+<h2>Безопасность</h2>
+<ul>
+<li>Отключи вход по паролю: <code>PasswordAuthentication no</code></li>
+<li>Отключи root: <code>PermitRootLogin no</code></li>
+<li>Смени порт: <code>Port 2222</code> (не панацея, но меньше ботов</li>
+<li>Установи <code>fail2ban</code> — блокирует перебор паролей</li>
+<li>Используй только ключи ed25519 или RSA 4096</li>
+<li>Храни приватный ключ с passphrase</li>
+</ul>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

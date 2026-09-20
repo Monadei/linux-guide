@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Шрифты для Linux — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Шрифты для Linux</h1>
+<p class="lead">Что ставить, откуда брать, как настраивать.</p>
+
+<h2>Моноширинные (для кода и терминала)</h2>
+<ul>
+<li><strong>JetBrains Mono</strong> — лигатуры, отличная читаемость. <code>sudo apt install fonts-jetbrains-mono</code></li>
+<li><strong>Fira Code</strong> — классика с лигатурами. <code>sudo apt install fonts-firacode</code></li>
+<li><strong>Cascadia Code</strong> — от Microsoft, лигатуры. <code>sudo apt install fonts-cascadia-code</code></li>
+<li><strong>Hack</strong> — минимализм без лигатур. <code>sudo apt install fonts-hack</code></li>
+<li><strong>IBM Plex Mono</strong> — строгий корпоративный. <code>sudo apt install fonts-ibm-plex</code></li>
+<li><strong>Iosevka</strong> — узкий, экономит место. Установка вручную</li>
+<li><strong>Ubuntu Mono</strong> — встроенный, нейтральный</li>
+<li><strong>Source Code Pro</strong> — от Adobe, открытый</li>
+</ul>
+
+<h2>Системные (для интерфейса)</h2>
+<ul>
+<li><strong>Inter</strong> — современный, читаемый. <code>sudo apt install fonts-inter</code></li>
+<li><strong>Roboto</strong> — от Google. <code>sudo apt install fonts-roboto</code></li>
+<li><strong>Noto Sans</strong> — поддержка всех языков. <code>sudo apt install fonts-noto</code></li>
+<li><strong>Cantarell</strong> — для GNOME</li>
+<li><strong>Ubuntu</strong> — для Ubuntu. <code>sudo apt install fonts-ubuntu</code></li>
+<li><strong>San Francisco</strong> — копия Apple SF. Нет в репозиториях</li>
+<li><strong>Open Sans</strong> — универсальный. <code>sudo apt install fonts-open-sans</code></li>
+</ul>
+
+<h2>Установка вручную</h2>
+<p>Скачал <code>.ttf</code> или <code>.otf</code> — положи в <code>~/.local/share/fonts/</code>:</p>
+<pre><code>mkdir -p ~/.local/share/fonts
+cp ~/Downloads/шрифт.ttf ~/.local/share/fonts/
+fc-cache -fv</code></pre>
+<p>Системно (для всех пользователей):</p>
+<pre><code>sudo cp шрифт.ttf /usr/share/fonts/truetype/
+sudo fc-cache -fv</code></pre>
+
+<h2>Настройка в системе</h2>
+<p>GNOME: <code>gnome-tweaks</code> → Fonts.</p>
+<p>Вручную через <code>~/.config/fontconfig/fonts.conf</code>:</p>
+<pre><code>&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;
+&lt;fontconfig&gt;
+  &lt;match target="pattern"&gt;
+    &lt;test qual="any" name="family"&gt;&lt;string&gt;sans-serif&lt;/string&gt;&lt;/test&gt;
+    &lt;edit name="family" mode="assign" binding="strong"&gt;
+      &lt;string&gt;Inter&lt;/string&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;
+&lt;/fontconfig&gt;</code></pre>
+<p>Перезагрузить кеш:</p>
+<pre><code>fc-cache -fv</code></pre>
+
+<h2>Проверка</h2>
+<pre><code>fc-list | grep -i jetbrains
+fc-match sans-serif
+fc-match monospace</code></pre>
+
+<h2>Настройка сглаживания</h2>
+<p>GNOME Tweaks → Fonts → Antialiasing. Обычно:</p>
+<ul>
+<li>Antialiasing: <em>Standard (grayscale)</em></li>
+<li>Hinting: <em>Slight</em></li>
+<li>Subpixel: для LCD-мониторов включить RGBA</li>
+</ul>
+
+<h2>Emoji</h2>
+<pre><code>sudo apt install fonts-noto-color-emoji</code></pre>
+<p>Проверка: <code>fc-list | grep -i emoji</code></p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

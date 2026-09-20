@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>GRUB — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>GRUB — загрузчик Linux</h1>
+<p class="lead">Что это, где живёт, как настроить и восстановить.</p>
+
+<h2>Что такое GRUB</h2>
+<p>GRUB (GRand Unified Bootloader) — программа, которая запускается после UEFI/BIOS и загружает ядро. Показывает меню выбора ОС, если их несколько.</p>
+
+<h2>Где лежит</h2>
+<ul>
+<li><strong>UEFI:</strong> <code>/boot/efi/EFI/ubuntu/grubx64.efi</code></li>
+<li><strong>BIOS:</strong> в MBR диска</li>
+<li><strong>Конфиг:</strong> <code>/boot/grub/grub.cfg</code> — генерируется автоматически, вручную править нельзя</li>
+<li><strong>Настройки:</strong> <code>/etc/default/grub</code> и <code>/etc/grub.d/</code></li>
+</ul>
+
+<h2>Основные настройки</h2>
+<pre><code>sudo nano /etc/default/grub</code></pre>
+<pre><code>GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+GRUB_TIMEOUT_STYLE=menu
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_CMDLINE_LINUX=""</code></pre>
+<ul>
+<li><code>GRUB_DEFAULT</code> — пункт по умолчанию (0 = первый, "1>2" = подменю)</li>
+<li><code>GRUB_TIMEOUT</code> — сколько секунд показывать меню</li>
+<li><code>GRUB_TIMEOUT_STYLE</code> — <code>menu</code>, <code>hidden</code>, <code>countdown</code></li>
+<li><code>GRUB_CMDLINE_LINUX_DEFAULT</code> — параметры ядра (nomodeset, quiet и т.д.)</li>
+</ul>
+<p>После правок:</p>
+<pre><code>sudo update-grub</code></pre>
+
+<h2>Параметры ядра</h2>
+<p>Полезные в <code>GRUB_CMDLINE_LINUX_DEFAULT</code>:</p>
+<ul>
+<li><code>quiet</code> — тихая загрузка</li>
+<li><code>splash</code> — графическая заставка</li>
+<li><code>nomodeset</code> — если чёрный экран с NVIDIA/AMD</li>
+<li><code>nvidia-drm.modeset=1</code> — для Wayland с NVIDIA</li>
+<li><code>acpi=off</code> — если проблемы с питанием</li>
+<li><code>noapic</code>, <code>nolapic</code> — редко, для очень старого железа</li>
+<li><code>mem_sleep_default=deep</code> — фикс сна на некоторых ноутбуках</li>
+</ul>
+
+<h2>Темы GRUB</h2>
+<p>Скачай тему с <a href="https://www.gnome-look.org/browse?cat=109" target="_blank" rel="noopener">gnome-look.org</a>, распакуй в <code>/boot/grub/themes/</code>:</p>
+<pre><code>sudo mkdir -p /boot/grub/themes
+sudo tar -xzf тема.tar.gz -C /boot/grub/themes/</code></pre>
+<p>В <code>/etc/default/grub</code>:</p>
+<pre><code>GRUB_THEME="/boot/grub/themes/имя/theme.txt"</code></pre>
+<pre><code>sudo update-grub</code></pre>
+
+<h2>Найти Windows</h2>
+<pre><code>sudo os-prober
+sudo update-grub</code></pre>
+<p>Если Windows не находится: убедись, что она выключена полностью (не гибернация), и что <code>/boot/efi</code> смонтирован.</p>
+
+<h2>Скрыть меню</h2>
+<pre><code>GRUB_TIMEOUT=0
+GRUB_TIMEOUT_STYLE=hidden</code></pre>
+<p>Меню можно вызвать, удерживая <code>Shift</code> при загрузке.</p>
+
+<h2>Восстановление GRUB</h2>
+<p>Если система не грузится — загрузись с Live USB, открой терминал:</p>
+<pre><code># Найти корневой раздел
+sudo fdisk -l
+
+# Смонтировать (замени на свои)
+sudo mount /dev/sda2 /mnt
+sudo mount /dev/sda1 /mnt/boot/efi   # только для UEFI
+
+# Смонтировать системные папки
+for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+
+# Chroot
+sudo chroot /mnt
+
+# Восстановить GRUB (для UEFI)
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ubuntu
+update-grub
+
+# Для BIOS
+grub-install /dev/sda
+update-grub
+
+# Выйти и перезагрузиться
+exit
+sudo umount -R /mnt
+sudo reboot</code></pre>
+
+<h2>Команды в меню GRUB</h2>
+<p>В меню нажми <code>e</code> — редактировать параметры выбранной загрузки. Полезно, чтобы добавить <code>nomodeset</code> на один раз. Изменения не сохраняются.</p>
+<p>Нажми <code>c</code> — командная строка GRUB. Можно вручную загрузить систему:</p>
+<pre><code>ls
+set root=(hd0,gpt2)
+linux /boot/vmlinuz root=/dev/sda2
+initrd /boot/initrd.img
+boot</code></pre>
+
+<h2>Скрыть recovery mode</h2>
+<p>В <code>/etc/default/grub</code>:</p>
+<pre><code>GRUB_DISABLE_RECOVERY=true</code></pre>
+<pre><code>sudo update-grub</code></pre>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

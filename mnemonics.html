@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Мнемоники — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Мнемоники — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Как запомнить команды</h1>
+<p class="lead">Расшифровки, которые помогают не путаться.</p>
+
+<h2>Базовые команды</h2>
+<dl>
+<div class="origin"><dt>ls</dt><dd><strong>l</strong>i<strong>s</strong>t — список файлов</dd></div>
+<div class="origin"><dt>cd</dt><dd><strong>c</strong>hange <strong>d</strong>irectory — сменить папку</dd></div>
+<div class="origin"><dt>pwd</dt><dd><strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory — где я</dd></div>
+<div class="origin"><dt>cp</dt><dd><strong>c</strong>o<strong>p</strong>y — копировать</dd></div>
+<div class="origin"><dt>mv</dt><dd><strong>m</strong>o<strong>v</strong>e — переместить</dd></div>
+<div class="origin"><dt>rm</dt><dd><strong>r</strong>e<strong>m</strong>ove — удалить</dd></div>
+<div class="origin"><dt>mkdir</dt><dd><strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory — создать папку</dd></div>
+<div class="origin"><dt>rmdir</dt><dd><strong>r</strong>e<strong>m</strong>ove <strong>dir</strong>ectory — удалить папку</dd></div>
+<div class="origin"><dt>man</dt><dd><strong>man</strong>ual — инструкция</dd></div>
+</dl>
+
+<h2>С параметрами</h2>
+<dl>
+<div class="origin"><dt>ls -la</dt><dd><strong>l</strong>ong (подробно) + <strong>a</strong>ll (включая скрытые)</dd></div>
+<div class="origin"><dt>rm -rf</dt><dd><strong>r</strong>ecursive (рекурсивно) + <strong>f</strong>orce (без вопросов) — <span style="color:var(--danger);">ОПАСНО</span></dd></div>
+<div class="origin"><dt>cp -r</dt><dd>recursive — копировать папку целиком</dd></div>
+<div class="origin"><dt>df -h</dt><dd><strong>d</strong>isk <strong>f</strong>ree + <strong>h</strong>uman-readable (в ГБ, МБ)</dd></div>
+<div class="origin"><dt>free -h</dt><dd>память + человекочитаемо</dd></div>
+<div class="origin"><dt>ps aux</dt><dd><strong>p</strong>rocess <strong>s</strong>tatus + <strong>a</strong>ll users + <strong>u</strong>ser + no-terminal (всё)</dd></div>
+<div class="origin"><dt>du -sh</dt><dd><strong>d</strong>isk <strong>u</strong>sage + <strong>s</strong>ummary + <strong>h</strong>uman</dd></div>
+</dl>
+
+<h2>Пакетные менеджеры</h2>
+<dl>
+<div class="origin"><dt>apt</dt><dd><strong>A</strong>dvanced <strong>P</strong>ackage <strong>T</strong>ool</dd></div>
+<div class="origin"><dt>dnf</dt><dd><strong>D</strong>andified <strong>Y</strong>um — наследник yum</dd></div>
+<div class="origin"><dt>pacman</dt><dd>от «package manager» — почти как в игре</dd></div>
+<div class="origin"><dt>zypper</dt><dd>от «zip» — так называли установщики в SUSE</dd></div>
+</dl>
+
+<h2>Прочее</h2>
+<dl>
+<div class="origin"><dt>sudo</dt><dd><strong>s</strong>uper<strong>u</strong>ser <strong>do</strong> — сделать от root</dd></div>
+<div class="origin"><dt>grep</dt><dd>от команды <code>g/re/p</code> в редакторе ed: global / regular expression / print</dd></div>
+<div class="origin"><dt>awk</dt><dd>по фамилиям создателей: <strong>A</strong>хо, <strong>W</strong>айнбергер, <strong>K</strong>ерниган</dd></div>
+<div class="origin"><dt>bash</dt><dd><strong>B</strong>ourne <strong>A</strong>gain <strong>SH</strong>ell</dd></div>
+<div class="origin"><dt>GNU</dt><dd><strong>G</strong>NU is <strong>N</strong>ot <strong>U</strong>nix (рекурсивная расшифровка)</dd></div>
+</dl>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

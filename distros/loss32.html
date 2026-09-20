@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Loss32 — Linux Guide</title>
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/extra.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta property="og:image" content="../icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="../index.html">Главная</a><a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a><a href="../history.html">История</a>
+<a href="index.html" class="active">Дистрибутивы</a><a href="../about.html">Обо мне</a>
+<a href="../my-recommendations.html">Рекомендую</a><a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Loss32</h1>
+<p class="lead">Лёгкая ОС на ядре Linux, имитирующая Windows и работающая на старом железе.</p>
+<section><h2>История</h2><p>Loss32 — это экспериментальный проект, который использует ядро Linux и Wine для создания среды, похожей на Windows. Он предназначен для работы на старых и маломощных компьютерах, которые не тянут Windows 10/11.</p></section>
+<section><h2>Особенности</h2><ul>Использует ядро Linux и Wine.,Графический интерфейс, имитирующий Windows.,Возможность запуска .exe файлов.,Требования: от 512 МБ RAM и 4 ГБ диска.</ul></section>
+<section><h2>Кому подходит</h2><p>Энтузиастам, владельцам старого железа и тем, кто хочет запускать Windows-приложения в лёгкой среде.</p></section>
+<section><h2>Как скачать</h2><p>Официальный сайт: <a href="https://loss32.org" target="_blank" rel="noopener">https://loss32.org</a>.</p></section>
+
+<section class="screenshot-section">
+<h2>Скриншот</h2>
+<div class="screenshot-slot" id="screenshot-loss32" data-slug="loss32">
+<div class="ss-icon">📷</div>
+<p><strong>Место для скриншота Loss32</strong></p>
+<p class="ss-hint">Положи PNG в <code>img/loss32.png</code> и замени этот блок на:</p>
+<pre class="ss-code">&lt;img src="../img/loss32.png" alt="Loss32"&gt;</pre>
+</div>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a>
+<a href="../my-recommendations.html">Рекомендую</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/extras.js"></script><script src="../js/fun.js"></script>
+<script src="../js/site-theme.js"></script>
+</body>
+</html>

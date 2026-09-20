@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Генератор .bashrc — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Генератор .bashrc</h1>
+<p class="lead">Отметь опции — получи свой .bashrc.</p>
+
+<label><input type="checkbox" id="aliases" checked> Полезные алиасы (ll, la, .., ...)</label><br>
+<label><input type="checkbox" id="colors" checked> Цветной ls и grep</label><br>
+<label><input type="checkbox" id="history" checked> Расширенная история команд</label><br>
+<label><input type="checkbox" id="prompt" checked> Цветной prompt с git-веткой</label><br>
+<label><input type="checkbox" id="extract"> Функция extract для архивов</label><br>
+<label><input type="checkbox" id="mkcd"> mkcd — создать папку и перейти в неё</label><br>
+<label><input type="checkbox" id="up"> up — подняться на N папок</label><br>
+<label><input type="checkbox" id="weather"> Погода в терминале (wttr.in)</label><br>
+
+<button class="btn" onclick="generate()" style="margin-top:1rem;">Сгенерировать</button>
+<button class="btn" onclick="download()">Скачать .bashrc</button>
+
+<pre id="out" style="margin-top:1.5rem; background:var(--panel); padding:1rem; border-left:3px solid var(--accent); overflow-x:auto; min-height:100px;"></pre>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+function generate() {
+  var lines = ['# ~/.bashrc — сгенерировано на Linux Guide', '# Monadei, 2026', ''];
+  if (document.getElementById('aliases').checked) {
+    lines.push('# Алиасы');
+    lines.push("alias ll='ls -alF'");
+    lines.push("alias la='ls -A'");
+    lines.push("alias l='ls -CF'");
+    lines.push("alias ..='cd ..'");
+    lines.push("alias ...='cd ../..'");
+    lines.push("alias ....='cd ../../..'");
+    lines.push("alias grep='grep --color=auto'");
+    lines.push("alias df='df -h'");
+    lines.push("alias free='free -h'");
+    lines.push("alias update='sudo apt update && sudo apt upgrade'");
+    lines.push('');
+  }
+  if (document.getElementById('colors').checked) {
+    lines.push('# Цвета');
+    lines.push("export LS_COLORS='di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33'");
+    lines.push("export GREP_COLOR='1;32'");
+    lines.push("export CLICOLOR=1");
+    lines.push('');
+  }
+  if (document.getElementById('history').checked) {
+    lines.push('# История');
+    lines.push('export HISTSIZE=10000');
+    lines.push('export HISTFILESIZE=20000');
+    lines.push("export HISTCONTROL=ignoreboth:erasedups");
+    lines.push("export HISTIGNORE='ls:cd:cd -:pwd:exit:history'");
+    lines.push("shopt -s histappend");
+    lines.push("shopt -s cmdhist");
+    lines.push("PROMPT_COMMAND='history -a'");
+    lines.push('');
+  }
+  if (document.getElementById('prompt').checked) {
+    lines.push('# Prompt с git-веткой');
+    lines.push('parse_git_branch() {');
+    lines.push("  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/ (\\1)/'");
+    lines.push('}');
+    lines.push("export PS1='\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[33m\\]$(parse_git_branch)\\[\\033[00m\\]\\$ '");
+    lines.push('');
+  }
+  if (document.getElementById('extract').checked) {
+    lines.push('# Универсальная распаковка');
+    lines.push('extract() {');
+    lines.push('  if [ -f "$1" ]; then');
+    lines.push('    case "$1" in');
+    lines.push("      *.tar.bz2) tar xjf \"$1\" ;;");
+    lines.push("      *.tar.gz)  tar xzf \"$1\" ;;");
+    lines.push("      *.tar.xz)  tar xJf \"$1\" ;;");
+    lines.push("      *.bz2)     bunzip2 \"$1\" ;;");
+    lines.push("      *.rar)     unrar x \"$1\" ;;");
+    lines.push("      *.gz)      gunzip \"$1\" ;;");
+    lines.push("      *.tar)     tar xf \"$1\" ;;");
+    lines.push("      *.tbz2)    tar xjf \"$1\" ;;");
+    lines.push("      *.tgz)     tar xzf \"$1\" ;;");
+    lines.push("      *.zip)     unzip \"$1\" ;;");
+    lines.push("      *.Z)       uncompress \"$1\" ;;");
+    lines.push("      *.7z)      7z x \"$1\" ;;");
+    lines.push("      *)         echo \"Не умею распаковывать $1\" ;;");
+    lines.push('    esac');
+    lines.push('  else');
+    lines.push("    echo \"'$1' — не файл\"");
+    lines.push('  fi');
+    lines.push('}');
+    lines.push('');
+  }
+  if (document.getElementById('mkcd').checked) {
+    lines.push('# Создать папку и перейти');
+    lines.push('mkcd() { mkdir -p "$1" && cd "$1"; }');
+    lines.push('');
+  }
+  if (document.getElementById('up').checked) {
+    lines.push('# Подняться на N папок');
+    lines.push('up() {');
+    lines.push('  local n=${1:-1}');
+    lines.push('  for ((i=0; i<n; i++)); do cd ..; done');
+    lines.push('}');
+    lines.push('');
+  }
+  if (document.getElementById('weather').checked) {
+    lines.push('# Погода');
+    lines.push("alias weather='curl wttr.in'");
+    lines.push("alias moon='curl wttr.in/Moon'");
+    lines.push('');
+  }
+  document.getElementById('out').textContent = lines.join('\n');
+}
+
+function download() {
+  generate();
+  var text = document.getElementById('out').textContent;
+  var blob = new Blob([text], { type: 'text/plain' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'bashrc';
+  a.click();
+}
+generate();
+</script>
+<script src="js/site-theme.js"></script>
+</body></html>

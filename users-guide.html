@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Пользователи и группы — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Пользователи и группы</h1>
+<p class="lead">Кто есть кто и как ими управлять.</p>
+
+<h2>Пользователи в системе</h2>
+<pre><code>cat /etc/passwd   # все пользователи
+cat /etc/shadow   # хеши паролей (только root)
+w                 # кто сейчас в системе
+who               # то же
+last              # история входов
+id                # мой UID, GID, группы</code></pre>
+
+<h2>Формат /etc/passwd</h2>
+<pre><code>monadei:x:1000:1000:Артём:/home/monadei:/bin/bash</code></pre>
+<ul>
+<li><code>monadei</code> — имя</li>
+<li><code>x</code> — пароль в /etc/shadow</li>
+<li><code>1000</code> — UID</li>
+<li><code>1000</code> — GID основной группы</li>
+<li><code>Артём</code> — комментарий (имя)</li>
+<li><code>/home/monadei</code> — домашняя папка</li>
+<li><code>/bin/bash</code> — оболочка</li>
+</ul>
+
+<h2>UID</h2>
+<ul>
+<li>0 — root</li>
+<li>1–999 — системные пользователи (демоны)</li>
+<li>1000+ — обычные пользователи</li>
+</ul>
+
+<h2>Создание пользователя</h2>
+<pre><code>sudo useradd -m -s /bin/bash -c "Артём" monadei
+sudo passwd monadei
+sudo usermod -aG sudo monadei</code></pre>
+<p>Проще:</p>
+<pre><code>sudo adduser monadei</code></pre>
+<p>Интерактивно спросит пароль, имя, подтверждение.</p>
+
+<h2>Удаление</h2>
+<pre><code>sudo userdel monadei
+sudo userdel -r monadei   # с домашней папкой</code></pre>
+
+<h2>Изменение</h2>
+<pre><code>sudo usermod -c "Новое имя" monadei
+sudo usermod -s /bin/zsh monadei
+sudo usermod -d /home/newhome -m monadei  # сменить домашнюю
+sudo usermod -L monadei  # заблокировать
+sudo usermod -U monadei  # разблокировать</code></pre>
+
+<h2>Группы</h2>
+<pre><code>cat /etc/group   # все группы
+groups monadei   # группы пользователя</code></pre>
+<p>Создать:</p>
+<pre><code>sudo groupadd developers</code></pre>
+<p>Добавить в группу:</p>
+<pre><code>sudo usermod -aG developers monadei</code></pre>
+<p><strong>Важно:</strong> <code>-aG</code>, а не <code>-G</code>. Без <code>-a</code> пользователь будет удалён из всех остальных групп.</p>
+<p>Удалить из группы — вручную через <code>/etc/group</code> или:</p>
+<pre><code>sudo deluser monadei developers</code></pre>
+
+<h2>Важные группы</h2>
+<ul>
+<li><strong>sudo</strong> / <strong>wheel</strong> — права root через sudo</li>
+<li><strong>docker</strong> — использовать Docker без sudo</li>
+<li><strong>libvirt</strong> — управлять виртуалками</li>
+<li><strong>vboxusers</strong> — USB в VirtualBox</li>
+<li><strong>video</strong> — доступ к видеокарте</li>
+<li><strong>audio</strong> — доступ к звуку</li>
+<li><strong>plugdev</strong> — USB-устройства</li>
+<li><strong>sudo</strong> (Debian) / <strong>wheel</strong> (RHEL) — админы</li>
+</ul>
+
+<h2>Смена пароля</h2>
+<pre><code>passwd              # свой
+sudo passwd monadei # чужой
+sudo passwd -l monadei  # заблокировать
+sudo passwd -u monadei  # разблокировать</code></pre>
+
+<h2>Переключение пользователя</h2>
+<pre><code>su monadei          # переключиться
+su - monadei        # с полной средой
+sudo -u monadei команда  # выполнить от имени
+sudo -i             # root-shell</code></pre>
+
+<h2>Sudo без пароля</h2>
+<pre><code>sudo visudo</code></pre>
+<p>Добавить в конец:</p>
+<pre><code>monadei ALL=(ALL) NOPASSWD: ALL</code></pre>
+<p>Не рекомендуется, но удобно на личном ПК.</p>
+
+<h2>Автологин</h2>
+<p>GNOME: Настройки → Пользователи → Вход без пароля.</p>
+<p>Вручную в GDM: <code>/etc/gdm3/custom.conf</code>:</p>
+<pre><code>[daemon]
+AutomaticLoginEnable=true
+AutomaticLogin=monadei</code></pre>
+
+<h2>Скрытые пользователи</h2>
+<p>Системные пользователи есть почти у каждой программы: <code>www-data</code> для веб-сервера, <code>mysql</code>, <code>systemd-network</code> и т. д. Они без пароля, с оболочкой <code>/usr/sbin/nologin</code> или <code>/bin/false</code>.</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

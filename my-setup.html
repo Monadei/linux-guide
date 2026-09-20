@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Мои настройки — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Мои настройки — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Мои настройки</h1>
+<p class="lead">Что у меня стоит на Ubuntu 26.04. Полный список — чтобы было откуда начать.</p>
+
+<section><h2>Оформление</h2>
+<ul>
+<li><strong>Тема:</strong> Aura-Glass (GTK2/3/4)</li>
+<li><strong>Иконки:</strong> Reversal-purple-dark</li>
+<li><strong>Курсор:</strong> aosp 20px</li>
+<li><strong>Шрифт:</strong> Ubuntu Sans 11pt</li>
+<li><strong>Окружение:</strong> GNOME 50.1</li>
+<li><strong>WM:</strong> Mutter (Wayland)</li>
+</ul></section>
+
+<section><h2>Железо</h2>
+<ul>
+<li><strong>Процессор:</strong> Intel Core i5-12400F</li>
+<li><strong>Видеокарта:</strong> NVIDIA RTX 3050 8 GB</li>
+<li><strong>Память:</strong> 16 GB</li>
+<li><strong>Диск:</strong> SSD 456 GB (ext4) + 239 GB (NTFS)</li>
+<li><strong>Мониторы:</strong> 27" 240 Гц + 24" портрет 75 Гц</li>
+</ul></section>
+
+<section><h2>Что ставлю сразу после установки</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>flatpak</code><span class="desc">Универсальные приложения</span></div>
+<div class="cmd-row"><code>timeshift</code><span class="desc">Снапшоты системы</span></div>
+<div class="cmd-row"><code>gparted</code><span class="desc">Разделы диска</span></div>
+<div class="cmd-row"><code>htop</code><span class="desc">Процессы в терминале</span></div>
+<div class="cmd-row"><code>neofetch / fastfetch</code><span class="desc">Инфо о системе</span></div>
+<div class="cmd-row"><code>inxi</code><span class="desc">Железо одним экраном</span></div>
+<div class="cmd-row"><code>git curl wget</code><span class="desc">Базовые инструменты</span></div>
+<div class="cmd-row"><code>gnome-tweaks</code><span class="desc">Тонкая настройка GNOME</span></div>
+</div></section>
+
+<section><h2>Приложения</h2>
+<ul>
+<li><strong>Браузер:</strong> Firefox (встроен) + Chrome</li>
+<li><strong>Терминал:</strong> GNOME Terminal + ZSH с Oh-My-Zsh</li>
+<li><strong>Редактор:</strong> VS Code + Neovim</li>
+<li><strong>Медиа:</strong> VLC, mpv</li>
+<li><strong>Графика:</strong> GIMP, Inkscape</li>
+<li><strong>Игры:</strong> Steam + Proton, Lutris, Heroic</li>
+<li><strong>Разработка:</strong> Docker, Python, Node.js</li>
+</ul></section>
+
+<section><h2>Полезные расширения GNOME</h2>
+<ul>
+<li>AppIndicator (иконки в трее)</li>
+<li>Dash to Dock (док)</li>
+<li>Blur My Shell (размытие)</li>
+<li>Just Perfection (тонкая настройка)</li>
+<li>Clipboard Indicator (история буфера)</li>
+</ul></section>
+
+<section><h2>Мой рабочий процесс</h2>
+<ol>
+<li>Утром — <code>sudo apt update && sudo apt upgrade</code></li>
+<li>Работа в VS Code + Firefox с кучей вкладок</li>
+<li>Сайт делаю в свободное время — правлю HTML/CSS/JS</li>
+<li>Игры — вечером, обычно Steam + Proton</li>
+<li>Раз в неделю — Timeshift-снапшот</li>
+<li>Раз в месяц — <code>rsync</code> важных данных на внешний диск</li>
+</ol></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

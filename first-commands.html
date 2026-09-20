@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Первые команды после установки — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Первые команды после установки — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Первые 10 команд после установки</h1>
+<p class="lead">Что сделать сразу, чтобы система была готовой к работе.</p>
+
+<section><h2>1. Обновить всё</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo apt update</code><span class="desc">Debian / Ubuntu / Mint</span></div>
+<div class="cmd-row"><code>sudo apt upgrade -y</code><span class="desc">Установить обновления</span></div>
+<div class="cmd-row"><code>sudo dnf upgrade --refresh</code><span class="desc">Fedora / AlmaLinux / Rocky</span></div>
+<div class="cmd-row"><code>sudo pacman -Syu</code><span class="desc">Arch / Manjaro / EndeavourOS</span></div>
+<div class="cmd-row"><code>sudo zypper dup</code><span class="desc">openSUSE Tumbleweed</span></div>
+</div></section>
+
+<section><h2>2. Драйверы NVIDIA (если есть)</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>ubuntu-drivers devices</code><span class="desc">Посмотреть доступные драйверы</span></div>
+<div class="cmd-row"><code>sudo ubuntu-drivers autoinstall</code><span class="desc">Установить автоматически</span></div>
+<div class="cmd-row"><code>sudo reboot</code><span class="desc">Перезагрузиться</span></div>
+<div class="cmd-row"><code>nvidia-smi</code><span class="desc">Проверить, что работает</span></div>
+</div></section>
+
+<section><h2>3. Мультимедиа-кодеки</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo apt install ubuntu-restricted-extras</code><span class="desc">Ubuntu — кодеки, шрифты, Flash</span></div>
+<div class="cmd-row"><code>sudo apt install mint-meta-codecs</code><span class="desc">Linux Mint</span></div>
+<div class="cmd-row"><code>sudo dnf install gstreamer1-plugins-{bad,good,ugly}</code><span class="desc">Fedora</span></div>
+</div></section>
+
+<section><h2>4. Базовый софт</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo apt install git curl wget htop neofetch inxi</code><span class="desc">Инструменты разработчика</span></div>
+<div class="cmd-row"><code>sudo apt install gparted timeshift</code><span class="desc">Разделы + бэкапы</span></div>
+<div class="cmd-row"><code>sudo apt install vlc gimp kdenlive</code><span class="desc">Медиа</span></div>
+</div></section>
+
+<section><h2>5. Flatpak</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo apt install flatpak</code><span class="desc">Установить Flatpak</span></div>
+<div class="cmd-row"><code>flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</code><span class="desc">Добавить Flathub</span></div>
+</div></section>
+
+<section><h2>6. Шрифты</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo apt install fonts-firacode fonts-jetbrains-mono</code><span class="desc">Шрифты для кода</span></div>
+</div></section>
+
+<section><h2>7. Настроить swap</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>swapon --show</code><span class="desc">Проверить swap</span></div>
+<div class="cmd-row"><code>free -h</code><span class="desc">Проверить RAM</span></div>
+</div></section>
+
+<section><h2>8. Firewall</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo ufw enable</code><span class="desc">Включить (Ubuntu)</span></div>
+<div class="cmd-row"><code>sudo systemctl enable firewalld</code><span class="desc">Fedora / RHEL</span></div>
+</div></section>
+
+<section><h2>9. Timeshift — бэкапы</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo timeshift --create --comments "first"</code><span class="desc">Первый снапшот</span></div>
+<div class="cmd-row"><code>sudo timeshift-launcher</code><span class="desc">Графическая настройка</span></div>
+</div></section>
+
+<section><h2>10. Проверить систему</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>inxi -F</code><span class="desc">Полная сводка о железе</span></div>
+<div class="cmd-row"><code>neofetch</code><span class="desc">Красивая краткая сводка</span></div>
+<div class="cmd-row"><code>journalctl -p 3 -xb</code><span class="desc">Ошибки с последней загрузки</span></div>
+</div></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

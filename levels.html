@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Уровни пользователя — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Уровни пользователя — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Уровни пользователя Linux</h1>
+<p class="lead">От новичка до Arch-гуру. Где ты сейчас?</p>
+
+<div class="level"><span class="badge">Уровень 0</span><h3>Чайник</h3>
+<p>Только слышал про Linux. Не знает, что такое терминал, ядро, дистрибутив. Думает, что Linux — это для программистов.</p></div>
+
+<div class="level"><span class="badge">Уровень 1</span><h3>Новичок</h3>
+<p>Поставил Ubuntu или Mint. Пользуется графическим интерфейсом. Иногда копирует команды с форумов. Знает <code>sudo apt install</code> и <code>sudo apt update</code>.</p></div>
+
+<div class="level"><span class="badge">Уровень 2</span><h3>Пользователь</h3>
+<p>Различает GNOME и KDE. Знает <code>ls</code>, <code>cd</code>, <code>grep</code>, <code>systemctl</code>. Может поставить драйвер NVIDIA. Пробовал Live USB. Понимает, что такое DE и WM.</p></div>
+
+<div class="level"><span class="badge">Уровень 3</span><h3>Продвинутый</h3>
+<p>Ставил Arch или Fedora. Разбирается в разделах диска, LUKS, GRUB. Пишет простые bash-скрипты. Читает man-страницы. Настраивал dotfiles.</p></div>
+
+<div class="level"><span class="badge">Уровень 4</span><h3>Эксперт</h3>
+<p>Понимает, как работает systemd. Может собрать ядро. Знает iptables и nftables. Настраивает серверы. Разбирается в SELinux. Собирал пакеты из исходников.</p></div>
+
+<div class="level"><span class="badge">Уровень 5</span><h3>Arch-гуру</h3>
+<p>Ставит Gentoo ради удовольствия. Ведёт свой репозиторий. Патчит ядро. Терминал — основной интерфейс. Конфиги в git. Помнит флаги USE наизусть.</p></div>
+
+<p style="margin-top:2rem;"><strong>Я сам где-то между 2 и 3.</strong> Ubuntu на ПК, Mint на MacBook, учусь каждый день. Идея сайта — помочь пройти эти уровни быстрее, чем я.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

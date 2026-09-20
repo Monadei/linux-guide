@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Что делать, если — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Что делать, если — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Что делать, если...</h1>
+<p class="lead">Типичные проблемы и как их решить.</p>
+
+<h2>Не грузится система</h2>
+<p>Загрузись с Live USB, открой терминал и восстанови GRUB:</p>
+<pre><code>sudo mount /dev/sdaX /mnt
+sudo mount /dev/sdaY /mnt/boot/efi
+for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+sudo chroot /mnt
+grub-install /dev/sda
+update-grub
+exit</code></pre>
+
+<h2>Чёрный экран после установки</h2>
+<p>В меню GRUB нажми <code>e</code>, найди строку с <code>linux</code>, добавь <code>nomodeset</code> в конце. Загрузишься в базовом режиме. Дальше — установи драйвер NVIDIA.</p>
+
+<h2>Нет звука</h2>
+<pre><code>sudo apt install pulseaudio pavucontrol
+pavucontrol</code></pre>
+<p>Проверь, что нужное устройство выбрано в Output Devices.</p>
+
+<h2>Не работает Wi-Fi</h2>
+<pre><code>lspci | grep -i network
+sudo apt install linux-firmware
+sudo apt install bcmwl-kernel-source</code></pre>
+
+<h2>Не монтируется диск Windows (NTFS)</h2>
+<pre><code>sudo apt install ntfs-3g</code></pre>
+<p>Если Windows не выключена полностью — загрузись в Windows и выключи Fast Startup.</p>
+
+<h2>Клавиатура или мышь не работают</h2>
+<p>Перезагрузись с <code>i8042.nomux=1</code> в параметрах ядра. Или проверь USB-порты.</p>
+
+<h2>Не хватает места на /</h2>
+<pre><code>sudo apt autoremove
+sudo apt clean
+sudo journalctl --vacuum-size=100M</code></pre>
+
+<h2>Забыл пароль root</h2>
+<p>В меню GRUB нажми <code>e</code>, в конце строки <code>linux</code> добавь <code>init=/bin/bash</code>, загрузись. Потом:</p>
+<pre><code>mount -o remount,rw /
+passwd ваш_логин
+reboot -f</code></pre>
+
+<h2>Система тормозит</h2>
+<pre><code>htop
+systemd-analyze blame
+sudo systemctl disable ненужный_сервис</code></pre>
+
+<h2>Не открывается сайт</h2>
+<pre><code>ping ya.ru
+nslookup ya.ru
+cat /etc/resolv.conf</code></pre>
+<p>Проверь DNS: <code>nameserver 8.8.8.8</code> в <code>/etc/resolv.conf</code>.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

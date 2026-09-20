@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Карта сайта — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html" class="active">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Карта сайта</h1>
+<p class="lead">Все страницы сайта.</p>
+
+<section><h2>Основное</h2>
+<ul>
+<li><a href="index.html">Главная</a></li>
+<li><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a></li>
+<li><a href="profile.html">Мой профиль</a></li>
+<li><a href="blog.html">Блог</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="quiz.html">Викторина «Какой дистрибутив мой?»</a></li>
+<li><a href="communities.html">Сообщества</a></li>
+<li><a href="screenshots.html">Скриншоты</a></li>
+</ul></section>
+
+<section><h2>Установка и настройка</h2>
+<ul>
+<li><a href="download.html">Как скачать Linux</a></li>
+<li><a href="write-iso.html">Как записать ISO</a></li>
+<li><a href="install.html">Как установить Linux</a></li>
+<li><a href="first-commands.html">Первые 10 команд</a></li>
+<li><a href="hardware.html">Как узнать комплектующие</a></li>
+<li><a href="nvidia.html">Драйверы NVIDIA</a></li>
+<li><a href="gaming.html">Игры в Linux</a></li>
+<li><a href="docker.html">Docker и Podman</a></li>
+<li><a href="virtualization.html">Виртуализация</a></li>
+<li><a href="backups.html">Бэкапы</a></li>
+<li><a href="what-if.html">Что делать, если...</a></li>
+</ul></section>
+
+<section><h2>Справочники</h2>
+<ul>
+<li><a href="terminal-cheatsheet.html">Шпаргалка по терминалу</a></li>
+<li><a href="bash-basics.html">Основы Bash</a></li>
+<li><a href="man-pages.html">Как читать man</a></li>
+<li><a href="network.html">Сетевые команды</a></li>
+<li><a href="ssh-guide.html">SSH и ключи</a></li>
+<li><a href="users-guide.html">Пользователи и группы</a></li>
+<li><a href="cron.html">Cron и таймеры</a></li>
+<li><a href="logs.html">Логи и journalctl</a></li>
+<li><a href="grub.html">GRUB</a></li>
+<li><a href="kernel.html">Ядро Linux</a></li>
+<li><a href="filesystem.html">Файловая система</a></li>
+<li><a href="filesystems-deep.html">Обзор файловых систем</a></li>
+<li><a href="all-distros.html">Все дистрибутивы (таблица)</a></li>
+<li><a href="glossary.html">Словарь терминов</a></li>
+<li><a href="compare-packages.html">Сравнение пакетных менеджеров</a></li>
+<li><a href="compare-des.html">Сравнение рабочих столов</a></li>
+<li><a href="de-overview.html">Обзор каждого DE</a></li>
+<li><a href="releases.html">Календарь релизов</a></li>
+<li><a href="countdown.html">Отсчёт до релизов</a></li>
+<li><a href="mnemonics.html">Мнемоники</a></li>
+<li><a href="name-origins.html">Почему так названы</a></li>
+<li><a href="levels.html">Уровни пользователя</a></li>
+<li><a href="mistakes.html">Ошибки новичков</a></li>
+<li><a href="apps.html">50 приложений</a></li>
+</ul></section>
+
+<section><h2>Оформление</h2>
+<ul>
+<li><a href="themes.html">Все темы (30 штук)</a></li>
+<li><a href="wallpapers.html">Обои</a></li>
+<li><a href="fonts.html">Шрифты</a></li>
+<li><a href="icons-themes.html">Иконки и курсоры</a></li>
+</ul></section>
+
+<section><h2>Истории</h2>
+<ul>
+<li><a href="history.html">История Linux</a></li>
+<li><a href="history-sudo.html">История sudo</a></li>
+<li><a href="timeline.html">Таймлайн</a></li>
+<li><a href="tree.html">Генеалогическое древо</a></li>
+<li><a href="my-linux-path.html">Мой путь в Linux</a></li>
+<li><a href="my-ubuntu-install.html">Как я ставил Ubuntu</a></li>
+<li><a href="my-windows-story.html">Как я ушёл с Windows</a></li>
+<li><a href="my-macbook.html">MacBook 2014 под Linux</a></li>
+<li><a href="my-setup.html">Мои настройки</a></li>
+</ul></section>
+
+<section><h2>Инструменты</h2>
+<ul>
+<li><a href="bashrc-gen.html">Генератор .bashrc</a></li>
+<li><a href="zshrc-gen.html">Генератор .zshrc</a></li>
+<li><a href="vimrc-gen.html">Генератор .vimrc</a></li>
+<li><a href="gitconfig-gen.html">Генератор .gitconfig</a></li>
+<li><a href="disk-calc.html">Калькулятор разметки диска</a></li>
+<li><a href="swap-calc.html">Калькулятор swap</a></li>
+<li><a href="hardware-picker.html">Подбор по железу</a></li>
+<li><a href="compare-two.html">Сравнить 2 дистрибутива</a></li>
+</ul></section>
+
+<section><h2>Игры и интерактив</h2>
+<ul>
+<li><a href="test.html">Тест знаний</a></li>
+<li><a href="commands-quiz.html">Викторина по командам</a></li>
+<li><a href="guess-distro.html">Угадай дистрибутив</a></li>
+<li><a href="build-distro.html">Собери свой дистрибутив</a></li>
+<li><a href="achievements.html">Ачивки</a></li>
+<li><a href="memes.html">Мемы</a></li>
+</ul></section>
+
+<section><h2>Визуализации</h2>
+<ul>
+<li><a href="map.html">Карта мира</a></li>
+<li><a href="de-gallery.html">Галерея DE</a></li>
+</ul></section>
+
+<section><h2>Каталог дистрибутивов</h2>
+<p><a href="distros/index.html">Открыть каталог (130+ страниц) →</a></p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

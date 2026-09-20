@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 32">
+<rect x="0" y="0" width="32" height="32" fill="#0a0a0a" rx="4"/>
+<text x="16" y="23" font-family="monospace" font-size="20" font-weight="bold" fill="#ffb000" text-anchor="middle">&gt;_</text>
+<text x="42" y="21" font-family="monospace" font-size="14" fill="#d6d6d6">Linux Guide</text>
+</svg>

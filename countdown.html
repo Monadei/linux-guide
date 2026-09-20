@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Отсчёт релизов — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Отсчёт до релизов</h1>
+<p class="lead">Когда выйдут новые версии популярных дистрибутивов.</p>
+
+<style>
+.cd-card { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 1rem 1.3rem; margin: 1rem 0; }
+.cd-card h3 { margin: 0 0 0.3rem; color: var(--accent); }
+.cd-card .days { font-size: 2rem; color: var(--accent); font-weight: 700; }
+.cd-card .date { color: var(--muted); font-size: 0.9rem; }
+</style>
+
+<div id="cards"></div>
+<p style="color:var(--muted);margin-top:2rem;">Даты — примерные, основаны на официальных циклах релизов. Точные даты смотри на официальных сайтах.</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+var RELEASES = [
+  { name: 'Ubuntu 26.10', date: '2026-10-15', note: 'Обычный релиз (9 мес поддержки)' },
+  { name: 'Fedora 44', date: '2026-10-28', note: 'Осенний релиз' },
+  { name: 'Ubuntu 28.04 LTS', date: '2028-04-26', note: 'Следующий LTS' },
+  { name: 'Linux Mint 23', date: '2026-12-15', note: 'На базе Ubuntu 26.04 LTS' },
+  { name: 'Debian 14 Forky', date: '2027-06-01', note: 'Ожидаемый релиз' },
+  { name: 'Fedora 45', date: '2027-04-20', note: 'Весенний релиз' },
+  { name: 'openSUSE Leap 16', date: '2026-11-15', note: 'Фиксированный релиз' }
+];
+
+function render() {
+  var now = new Date();
+  var cards = document.getElementById('cards');
+  cards.innerHTML = '';
+  RELEASES.map(function(r){
+    r.days = Math.ceil((new Date(r.date) - now) / (1000*60*60*24));
+    return r;
+  }).filter(function(r){ return r.days > 0; }).sort(function(a,b){ return a.days - b.days; }).forEach(function(r){
+    var d = document.createElement('div');
+    d.className = 'cd-card';
+    d.innerHTML = '<h3>' + r.name + '</h3>' +
+      '<div class="days">' + r.days + ' дней</div>' +
+      '<div class="date">' + r.date + ' · ' + r.note + '</div>';
+    cards.appendChild(d);
+  });
+}
+render();
+</script>
+<script src="js/site-theme.js"></script>
+</body></html>

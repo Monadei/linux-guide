@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta property="og:title" content="История Linux — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>История Linux — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a>
+<a href="history.html" class="active">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav>
+</div>
+</header>
+<main class="container page">
+<h1>История Linux</h1>
+<p class="lead">Коротко: как из хобби-проекта одного человека выросла экосистема из сотен дистрибутивов.</p>
+<section><h2>1991 — ядро</h2><p>Линус Торвальдс публикует первую версию ядра Linux (0.01).</p></section>
+<section><h2>1992–1993 — первые дистрибутивы</h2><p>Появляются <strong>Slackware</strong> (1993) и <strong>Debian</strong> (1993). Оба живы до сих пор.</p></section>
+<section><h2>1994 — Red Hat</h2><p>Марк Юинг выпускает Red Hat Linux. Позже разделится на RHEL и Fedora.</p></section>
+<section><h2>2002 — Arch Linux</h2><p>Джадд Винет основывает Arch. Rolling release, pacman, легендарная вики.</p></section>
+<section><h2>2004 — Ubuntu</h2><p>Марк Шаттлворт выпускает Ubuntu на базе Debian. Linux становится массовым.</p></section>
+<section><h2>2006 — Linux Mint</h2><p>Клеман Лефевр делает форк Ubuntu с классическим десктопом.</p></section>
+<section><h2>2010-е — расцвет</h2><p>Manjaro, Pop!_OS, elementary, Zorin OS. Формируются крупные семейства.</p></section>
+<section><h2>2020-е</h2><p>Wayland, Flatpak, Steam Deck на Arch. Linux в серверах, Android и облаках.</p></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body>
+</html>

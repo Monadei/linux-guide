@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Словарь терминов — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Словарь терминов — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav>
+</div></header>
+<main class="container page">
+<h1>Словарь терминов</h1>
+<p class="lead">Всё, что нужно знать, чтобы понимать статьи про Linux.</p>
+
+<section><h2>Основы</h2>
+<dl>
+<dt><strong>Ядро (kernel)</strong></dt><dd>Сердце системы. Управляет железом, памятью, процессами. У Linux — ядро Linux, у macOS — XNU, у Windows — NT.</dd>
+<dt><strong>Дистрибутив</strong></dt><dd>Ядро + утилиты + пакетный менеджер + окружение. То, что ты ставишь на компьютер.</dd>
+<dt><strong>Live USB</strong></dt><dd>Система, работающая прямо с флешки без установки. Полезна для знакомства и восстановления.</dd>
+</dl></section>
+
+<section><h2>Интерфейс</h2>
+<dl>
+<dt><strong>DE (Desktop Environment)</strong></dt><dd>Полноценное окружение: GNOME, KDE Plasma, Xfce, Cinnamon, MATE, Budgie, LXQt, Pantheon, DDE.</dd>
+<dt><strong>WM (Window Manager)</strong></dt><dd>Управляет окнами. Может быть частью DE, а может быть самостоятельным: i3, Sway, Openbox, bspwm, dwm, Hyprland.</dd>
+<dt><strong>Тайловый WM</strong></dt><dd>Окна не перекрываются, а делят экран. Популярен у разработчиков.</dd>
+<dt><strong>Wayland</strong></dt><dd>Современный протокол графики. Заменяет X11. По умолчанию в Fedora, Ubuntu, KDE.</dd>
+<dt><strong>X11 / Xorg</strong></dt><dd>Старый протокол графики. Всё ещё используется в некоторых дистрибутивах.</dd>
+</dl></section>
+
+<section><h2>Пакеты</h2>
+<dl>
+<dt><strong>Пакет</strong></dt><dd>Архив с программой и метаданными. Форматы: .deb (Debian/Ubuntu), .rpm (Fedora/RHEL/SUSE), .pkg.tar.zst (Arch).</dd>
+<dt><strong>Пакетный менеджер</strong></dt><dd>Ставит и обновляет пакеты: apt (Debian), dnf (Fedora), pacman (Arch), zypper (SUSE), xbps (Void), apk (Alpine).</dd>
+<dt><strong>Репозиторий</strong></dt><dd>Сервер с пакетами. Официальные и сторонние (PPA, COPR, AUR).</dd>
+<dt><strong>AUR</strong></dt><dd>Arch User Repository. Пользовательские рецепты сборки пакетов для Arch.</dd>
+<dt><strong>Flatpak / Snap / AppImage</strong></dt><dd>Универсальные форматы приложений, работающие во всех дистрибутивах.</dd>
+</dl></section>
+
+<section><h2>Система</h2>
+<dl>
+<dt><strong>init</strong></dt><dd>Первая программа, запускаемая ядром. Запускает всё остальное. Бывает systemd, OpenRC, runit, s6.</dd>
+<dt><strong>systemd</strong></dt><dd>Самый популярный init. Управляет сервисами, логами (journald), таймерами. Спорный, но стандарт.</dd>
+<dt><strong>GRUB</strong></dt><dd>Загрузчик. Показывает меню выбора ОС. Позволяет грузить Linux и Windows.</dd>
+<dt><strong>UEFI</strong></dt><dd>Современный BIOS. Обязателен для Windows 11. Требует раздел EFI (FAT32).</dd>
+<dt><strong>Secure Boot</strong></dt><dd>Защита UEFI от подмены загрузчика. Ubuntu, Fedora, RHEL её поддерживают. Остальные — нет.</dd>
+<dt><strong>root</strong></dt><dd>Суперпользователь. Имеет полный доступ ко всему. Используется через sudo.</dd>
+<dt><strong>sudo</strong></dt><dd>Выполнить команду от имени root. Требует пароль.</dd>
+</dl></section>
+
+<section><h2>Диски</h2>
+<dl>
+<dt><strong>Раздел (partition)</strong></dt><dd>Часть диска. Linux обычно ставится в отдельный раздел.</dd>
+<dt><strong>Файловая система</strong></dt><dd>Как хранятся данные. ext4, Btrfs, XFS, ZFS, FAT32, NTFS.</dd>
+<dt><strong>Монтирование</strong></dt><dd>Подключение раздела к папке. В Linux всё — файл, включая диски.</dd>
+<dt><strong>swap</strong></dt><dd>Раздел или файл подкачки. Используется, когда не хватает RAM.</dd>
+<dt><strong>LUKS</strong></dt><dd>Шифрование диска в Linux. Пароль спрашивают при каждой загрузке.</dd>
+<dt><strong>LVM</strong></dt><dd>Менеджер логических томов. Позволяет менять размер разделов на лету.</dd>
+<dt><strong>Btrfs / ZFS</strong></dt><dd>Современные ФС со снапшотами, контролем целостности, сжатием.</dd>
+</dl></section>
+
+<section><h2>Безопасность</h2>
+<dl>
+<dt><strong>SELinux / AppArmor</strong></dt><dd>Мандатный доступ. Ограничивает, что может делать программа. SELinux — в Fedora/RHEL, AppArmor — в Ubuntu/SUSE.</dd>
+<dt><strong>Firewall</strong></dt><dd>Фильтр сетевого трафика. В Linux: iptables, nftables, ufw, firewalld.</dd>
+<dt><strong>VPN</strong></dt><dd>Шифрованный туннель. WireGuard, OpenVPN.</dd>
+<dt><strong>Tor</strong></dt><dd>Сеть анонимности. Используется в Tails, Whonix, Qubes.</dd>
+</dl></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Обои для Linux — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Обои для Linux</h1>
+<p class="lead">Где брать, какие ставить, чем управлять.</p>
+
+<h2>Лучшие источники</h2>
+<ul>
+<li><a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a> — бесплатные фото, огромная база</li>
+<li><a href="https://wallhaven.cc" target="_blank" rel="noopener">Wallhaven</a> — лучший сайт для обоев, теги, разрешения</li>
+<li><a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a> — качественные фото</li>
+<li><a href="https://github.com/D3Ext/aesthetic-wallpapers" target="_blank" rel="noopener">aesthetic-wallpapers</a> — красивые минималистичные обои в GitHub</li>
+<li><a href="https://gitlab.com/dwt1/wallpapers" target="_blank" rel="noopener">dwt1/wallpapers</a> — коллекция от DistroTube</li>
+</ul>
+
+<h2>Встроенные обои</h2>
+<p>Все дистрибутивы идут с набором обоев в <code>/usr/share/backgrounds/</code>. Посмотреть:</p>
+<pre><code>ls /usr/share/backgrounds/</code></pre>
+<p>Скопировать понравившиеся:</p>
+<pre><code>cp /usr/share/backgrounds/понравилось.jpg ~/Pictures/</code></pre>
+
+<h2>Сменщики обоев</h2>
+<ul>
+<li><strong>Variety</strong> — автоматическая смена обоев из разных источников</li>
+<li><strong>HydraPaper</strong> — разные обои для каждого монитора</li>
+<li><strong>plasma-wallpaper</strong> — для KDE</li>
+<li><strong>Wallpaper Engine</strong> — через kde-plasma-wallpaper-engine</li>
+</ul>
+<p>Установка Variety:</p>
+<pre><code>sudo apt install variety</code></pre>
+<p>Умеет: менять обои по расписанию, скачивать с Wallhaven / Unsplash / Bing, эффекты (размытие, оттенки).</p>
+
+<h2>Живые обои</h2>
+<ul>
+<li><strong>Plasma</strong> — встроенная поддержка видео и веб-страниц как обоев</li>
+<li><strong>mpvpaper</strong> — видео на фоне рабочего стола (Wayland/X11)</li>
+<li><strong>Hyprpaper</strong> — для Hyprland</li>
+<li><strong>swaybg</strong> — для Sway</li>
+<li><strong>komorebi</strong> — анимированные обои с эффектами</li>
+</ul>
+
+<h2>Разрешение экрана</h2>
+<p>Проверь своё:</p>
+<pre><code>xrandr | grep '*'</code></pre>
+<p>На Wayland:</p>
+<pre><code>wlr-randr</code></pre>
+<p>Ищи обои в этом разрешении или больше (браузер/DE сам масштабирует).</p>
+
+<h2>Генераторы обоев</h2>
+<ul>
+<li><a href="https://pattern.monster" target="_blank" rel="noopener">pattern.monster</a> — паттерны</li>
+<li><a href="https://www.toptal.com/designers/subtlepatterns/" target="_blank" rel="noopener">Subtle Patterns</a> — фоны</li>
+<li><a href="https://www.svgbackgrounds.com" target="_blank" rel="noopener">SVG Backgrounds</a> — векторные</li>
+</ul>
+<p>Или сгенерируй свои:</p>
+<pre><code>sudo apt install inkscape
+# Или используй GIMP</code></pre>
+
+<h2>Оптимизация</h2>
+<ul>
+<li>PNG для минималистичных обоев (лучше сжимается без потерь)</li>
+<li>JPG для фото (меньше размер)</li>
+<li>WebP — современный, поддерживается большинством DE</li>
+<li>Не ставь обои больше 4K — лишняя нагрузка на GPU</li>
+</ul>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

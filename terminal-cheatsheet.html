@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Шпаргалка по терминалу — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Шпаргалка по терминалу — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Шпаргалка по терминалу</h1>
+<p class="lead">50 команд, которые надо знать. Без воды.</p>
+
+<section><h2>Навигация</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>pwd</code><span class="desc">Где я</span></div>
+<div class="cmd-row"><code>ls -la</code><span class="desc">Файлы со скрытыми</span></div>
+<div class="cmd-row"><code>cd ~/Documents</code><span class="desc">Перейти в папку</span></div>
+<div class="cmd-row"><code>cd ..</code><span class="desc">На уровень выше</span></div>
+<div class="cmd-row"><code>cd -</code><span class="desc">Вернуться назад</span></div>
+</div></section>
+
+<section><h2>Файлы</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>cp файл копия</code><span class="desc">Копировать</span></div>
+<div class="cmd-row"><code>mv файл папка/</code><span class="desc">Переместить</span></div>
+<div class="cmd-row"><code>rm файл</code><span class="desc">Удалить</span></div>
+<div class="cmd-row"><code>rm -rf папка</code><span class="desc">Удалить папку (осторожно!)</span></div>
+<div class="cmd-row"><code>mkdir папка</code><span class="desc">Создать папку</span></div>
+<div class="cmd-row"><code>touch файл</code><span class="desc">Создать файл</span></div>
+<div class="cmd-row"><code>cat файл</code><span class="desc">Показать содержимое</span></div>
+<div class="cmd-row"><code>less файл</code><span class="desc">Смотреть постранично</span></div>
+<div class="cmd-row"><code>nano файл</code><span class="desc">Редактор в терминале</span></div>
+</div></section>
+
+<section><h2>Поиск</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>find . -name "*.txt"</code><span class="desc">Найти файлы по имени</span></div>
+<div class="cmd-row"><code>grep "текст" файл</code><span class="desc">Найти текст в файле</span></div>
+<div class="cmd-row"><code>grep -r "текст" .</code><span class="desc">Рекурсивно</span></div>
+<div class="cmd-row"><code>which команда</code><span class="desc">Где находится программа</span></div>
+</div></section>
+
+<section><h2>Система</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>uname -a</code><span class="desc">Информация о ядре</span></div>
+<div class="cmd-row"><code>uptime</code><span class="desc">Сколько система работает</span></div>
+<div class="cmd-row"><code>whoami</code><span class="desc">Кто я</span></div>
+<div class="cmd-row"><code>df -h</code><span class="desc">Свободное место</span></div>
+<div class="cmd-row"><code>du -sh папка</code><span class="desc">Размер папки</span></div>
+<div class="cmd-row"><code>free -h</code><span class="desc">Память</span></div>
+<div class="cmd-row"><code>top</code><span class="desc">Процессы в реальном времени</span></div>
+<div class="cmd-row"><code>htop</code><span class="desc">Красивее top</span></div>
+<div class="cmd-row"><code>ps aux</code><span class="desc">Все процессы</span></div>
+<div class="cmd-row"><code>kill -9 PID</code><span class="desc">Убить процесс</span></div>
+</div></section>
+
+<section><h2>Сеть</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>ip a</code><span class="desc">Сетевые интерфейсы</span></div>
+<div class="cmd-row"><code>ping ya.ru</code><span class="desc">Проверить связь</span></div>
+<div class="cmd-row"><code>curl ifconfig.me</code><span class="desc">Свой внешний IP</span></div>
+<div class="cmd-row"><code>wget URL</code><span class="desc">Скачать файл</span></div>
+<div class="cmd-row"><code>ssh user@host</code><span class="desc">Подключиться по SSH</span></div>
+<div class="cmd-row"><code>scp файл user@host:/path</code><span class="desc">Копировать по SSH</span></div>
+</div></section>
+
+<section><h2>Права и сервисы</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>sudo команда</code><span class="desc">От имени root</span></div>
+<div class="cmd-row"><code>chmod +x файл</code><span class="desc">Сделать исполняемым</span></div>
+<div class="cmd-row"><code>chown user:group файл</code><span class="desc">Сменить владельца</span></div>
+<div class="cmd-row"><code>systemctl status сервис</code><span class="desc">Статус</span></div>
+<div class="cmd-row"><code>systemctl start сервис</code><span class="desc">Запустить</span></div>
+<div class="cmd-row"><code>systemctl enable сервис</code><span class="desc">Автозапуск</span></div>
+<div class="cmd-row"><code>journalctl -xe</code><span class="desc">Логи системы</span></div>
+</div></section>
+
+<section><h2>Архивы</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>tar -czf архив.tar.gz папка</code><span class="desc">Запаковать</span></div>
+<div class="cmd-row"><code>tar -xzf архив.tar.gz</code><span class="desc">Распаковать</span></div>
+<div class="cmd-row"><code>zip -r архив.zip папка</code><span class="desc">В zip</span></div>
+<div class="cmd-row"><code>unzip архив.zip</code><span class="desc">Из zip</span></div>
+</div></section>
+
+<section><h2>Полезные мелочи</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>Ctrl+C</code><span class="desc">Прервать команду</span></div>
+<div class="cmd-row"><code>Ctrl+Z</code><span class="desc">Приостановить</span></div>
+<div class="cmd-row"><code>Ctrl+D</code><span class="desc">Выйти из оболочки</span></div>
+<div class="cmd-row"><code>Ctrl+R</code><span class="desc">Поиск по истории команд</span></div>
+<div class="cmd-row"><code>Tab</code><span class="desc">Автодополнение</span></div>
+<div class="cmd-row"><code>!!</code><span class="desc">Повторить последнюю команду</span></div>
+<div class="cmd-row"><code>history</code><span class="desc">История команд</span></div>
+<div class="cmd-row"><code>man команда</code><span class="desc">Справка</span></div>
+</div></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

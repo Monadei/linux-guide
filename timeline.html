@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Таймлайн Linux — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Таймлайн Linux — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Таймлайн Linux</h1>
+<p class="lead">35 лет истории — от хобби-проекта студента до основы интернета.</p>
+
+<div class="timeline">
+<div class="tl-item"><span class="year">1991</span> — Линус Торвальдс публикует ядро Linux 0.01</div>
+<div class="tl-item"><span class="year">1992</span> — Linux становится свободным по лицензии GPL</div>
+<div class="tl-item"><span class="year">1993</span> — Появляются Debian и Slackware — два старейших дистрибутива</div>
+<div class="tl-item"><span class="year">1994</span> — Red Hat Linux. Первый коммерческий успех</div>
+<div class="tl-item"><span class="year">1996</span> — Tux становится талисманом Linux</div>
+<div class="tl-item"><span class="year">1999</span> — GNOME и KDE — начало эры десктопных окружений</div>
+<div class="tl-item"><span class="year">2000</span> — Gentoo. Red Hat разделяется на RHEL и Fedora</div>
+<div class="tl-item"><span class="year">2002</span> — Arch Linux</div>
+<div class="tl-item"><span class="year">2003</span> — Fedora. CentOS</div>
+<div class="tl-item"><span class="year">2004</span> — Ubuntu. Первый релиз — 4.10 Warty Warthog</div>
+<div class="tl-item"><span class="year">2005</span> — openSUSE. Git создан Линусом</div>
+<div class="tl-item"><span class="year">2006</span> — Linux Mint. Oracle Linux</div>
+<div class="tl-item"><span class="year">2007</span> — Android на базе ядра Linux</div>
+<div class="tl-item"><span class="year">2008</span> — Первый Android-телефон. Зорин OS</div>
+<div class="tl-item"><span class="year">2010</span> — Qubes OS. Расцвет облаков на Linux</div>
+<div class="tl-item"><span class="year">2011</span> — Manjaro. elementary OS. 76% серверов — Linux</div>
+<div class="tl-item"><span class="year">2013</span> — Kali Linux. NixOS. SteamOS 1.0</div>
+<div class="tl-item"><span class="year">2014</span> — MX Linux. Red Hat покупает CentOS</div>
+<div class="tl-item"><span class="year">2015</span> — Solus. Clear Linux. Windows 10 включает WSL</div>
+<div class="tl-item"><span class="year">2017</span> — Pop!_OS. PureOS. postmarketOS</div>
+<div class="tl-item"><span class="year">2019</span> — EndeavourOS. Fedora CoreOS</div>
+<div class="tl-item"><span class="year">2020</span> — Garuda. Red Hat закрывает CentOS Linux</div>
+<div class="tl-item"><span class="year">2021</span> — AlmaLinux. Rocky Linux. CachyOS</div>
+<div class="tl-item"><span class="year">2022</span> — Steam Deck. SteamOS 3.0 на Arch</div>
+<div class="tl-item"><span class="year">2023</span> — blendOS. Rhino Linux</div>
+<div class="tl-item"><span class="year">2024</span> — Wayland доминирует в Fedora, Ubuntu, KDE</div>
+<div class="tl-item"><span class="year">2025</span> — NebiOS. KDE Linux. AerynOS. MacBook 2014 жив благодаря Mint</div>
+<div class="tl-item"><span class="year">2026</span> — Ubuntu 26.04 LTS. Linux на 5%+ десктопов мира</div>
+</div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

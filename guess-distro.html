@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Угадай дистрибутив — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Угадай дистрибутив — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Угадай дистрибутив</h1>
+<p class="lead">По цвету и описанию. 10 раундов.</p>
+<div id="game"></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+var ALL = [
+  { n:'Ubuntu', c:'#e95420' }, { n:'Debian', c:'#d70a53' },
+  { n:'Linux Mint', c:'#87cf3e' }, { n:'Arch Linux', c:'#1793d1' },
+  { n:'Fedora', c:'#51a2da' }, { n:'openSUSE', c:'#73ba25' },
+  { n:'Kali Linux', c:'#2777ff' }, { n:'Gentoo', c:'#a78bfa' },
+  { n:'Manjaro', c:'#35bfa6' }, { n:'Pop!_OS', c:'#48b9c7' },
+  { n:'elementary OS', c:'#64bae2' }, { n:'Zorin OS', c:'#15a6f0' },
+  { n:'Garuda', c:'#c92a2a' }, { n:'NixOS', c:'#5277c3' },
+  { n:'Alpine', c:'#0d597f' }, { n:'SteamOS', c:'#1a9fff' },
+  { n:'Tails', c:'#8b5cf6' }, { n:'Qubes OS', c:'#3874d8' },
+  { n:'MX Linux', c:'#00a2e8' }, { n:'ROSA', c:'#c8102e' }
+];
+var round = 0, score = 0, current, options;
+var container = document.getElementById('game');
+
+function next() {
+  if (round >= 10) return finish();
+  round++;
+  current = ALL[Math.floor(Math.random() * ALL.length)];
+  var others = ALL.filter(function(x){ return x.n !== current.n; }).sort(function(){ return Math.random() - 0.5; }).slice(0, 3);
+  options = [current].concat(others).sort(function(){ return Math.random() - 0.5; });
+  var html = '<div class="test-q"><h3>Раунд ' + round + '/10 — чей это цвет?</h3>' +
+    '<div style="width:100%;height:60px;background:' + current.c + ';margin:0.8rem 0;border:1px solid var(--border);"></div>';
+  options.forEach(function(o, i){
+    html += '<label><input type="radio" name="guess" value="' + o.n + '">' + o.n + '</label>';
+  });
+  html += '<button class="btn" onclick="answer()" style="margin-top:0.8rem;">Ответить</button>';
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function answer() {
+  var sel = document.querySelector('input[name="guess"]:checked');
+  if (!sel) { alert('Выбери вариант'); return; }
+  if (sel.value === current.n) score++;
+  var was = sel.value === current.n ? '✅ Верно!' : '❌ Неверно. Это ' + current.n;
+  container.innerHTML = '<div class="test-result"><h3>' + was + '</h3><p>Очки: ' + score + ' / ' + round + '</p><button class="btn" onclick="next()">Дальше →</button></div>';
+}
+
+function finish() {
+  var lvl = score >= 9 ? 'Впечатляюще!' : score >= 6 ? 'Хорошо!' : score >= 3 ? 'Неплохо.' : 'Читай сайт дальше.';
+  container.innerHTML = '<div class="test-result"><h2>Финал: ' + score + ' / 10</h2><p>' + lvl + '</p><button class="btn" onclick="round=0;score=0;next()">Ещё раз</button></div>';
+}
+next();
+</script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Мемы — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Мемы — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Linux-мемы</h1>
+<p class="lead">Шутки, которые поймут только линуксоиды.</p>
+
+<h2>Классика</h2>
+<blockquote><p>— Как выйти из Vim?<br>— <code>:q</code><br>— Спасибо!<br>— Через год:<br>— Как выйти из Vim?</p></blockquote>
+
+<blockquote><p>sudo make me a sandwich<br>Okay. 🥪</p></blockquote>
+
+<blockquote><p>Есть 10 типов людей: те, кто понимает двоичную систему, и те, кто нет.</p></blockquote>
+
+<blockquote><p>— Почему ты не пользуешься Windows?<br>— Я не мазохист.</p></blockquote>
+
+<h2>Про Arch</h2>
+<blockquote><p>— Я использую Arch, кстати.<br>— Ты уже говорил.<br>— Знаю, просто напоминаю.</p></blockquote>
+
+<blockquote><p>Как узнать, что человек использует Arch?<br>Он сам скажет в первые 5 минут разговора.</p></blockquote>
+
+<h2>Про Ubuntu</h2>
+<blockquote><p>Что общего у Ubuntu и Windows?<br>Оба перезагружаются, когда обновляются.</p></blockquote>
+
+<h2>Про Gentoo</h2>
+<blockquote><p>— Сколько времени ты компилировал Firefox?<br>— Я начал в прошлом году. Ещё не закончил.</p></blockquote>
+
+<h2>Про sudo</h2>
+<blockquote><p>sudo apt install happiness<br>E: Unable to locate package happiness<br>E: Package not available in this universe</p></blockquote>
+
+<h2>Настоящие</h2>
+<pre><code>:(){ :|:&amp; };:</code></pre>
+<p>Эта «команда» — fork-бомба. <strong>Не запускай.</strong> Просто знай, что она существует.</p>
+
+<h2>Философское</h2>
+<blockquote><p>Linux — это не Windows. Вот и всё.</p></blockquote>
+
+<blockquote><p>Если что-то работает — не трогай. Если не работает — гугли. Если гугл не помог — Stack Overflow. Если и там нет — Arch Wiki.</p></blockquote>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

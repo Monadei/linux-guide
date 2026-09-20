@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Виртуализация — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Виртуализация в Linux</h1>
+<p class="lead">Запускать другие ОС внутри своей.</p>
+
+<h2>KVM + QEMU — встроено в ядро</h2>
+<p>Самый быстрый вариант, работает на уровне ядра. Проверить поддержку:</p>
+<pre><code>egrep -c '(vmx|svm)' /proc/cpuinfo</code></pre>
+<p>Если число больше 0 — можно использовать.</p>
+<p>Установка:</p>
+<pre><code>sudo apt install qemu-kvm libvirt-daemon-system virt-manager
+sudo usermod -aG libvirt,kvm $USER</code></pre>
+<p>Перелогинься. Дальше — <code>virt-manager</code> для графического интерфейса.</p>
+
+<h2>GNOME Boxes</h2>
+<p>Простой GUI для KVM. Идеален для быстрого тестирования:</p>
+<pre><code>sudo apt install gnome-boxes</code></pre>
+<p>Создать виртуалку — три клика. Работает быстрее VirtualBox.</p>
+
+<h2>VirtualBox</h2>
+<p>Кроссплатформенный, много документации.</p>
+<pre><code>sudo apt install virtualbox virtualbox-ext-pack</code></pre>
+<p>Для USB 2.0/3.0 нужен Extension Pack. Добавить себя в группу:</p>
+<pre><code>sudo usermod -aG vboxusers $USER</code></pre>
+
+<h2>VMware Workstation Player</h2>
+<p>Бесплатен для личного использования. Скачивается с сайта Broadcom.</p>
+<pre><code>sudo apt install build-essential
+# скачал .bundle, потом:
+sudo sh VMware-Player-*.bundle</code></pre>
+<p>Плюсы: лучшая производительность 3D, снимки. Минусы: проприетарный.</p>
+
+<h2>QEMU без KVM</h2>
+<p>Только программная эмуляция, медленно. Нужно для ARM на x86 или наоборот:</p>
+<pre><code>qemu-system-aarch64 -M virt -cpu cortex-a72 -m 2G ...</code></pre>
+
+<h2>Контейнеры vs виртуалки</h2>
+<ul>
+<li><strong>Виртуалка</strong> — своё ядро, полная изоляция, тяжело</li>
+<li><strong>Контейнер</strong> — общее ядро, легче, быстрее, но менее изолирован</li>
+</ul>
+<p>Контейнеры: Docker, Podman, LXC/LXD.</p>
+
+<h2>Что выбрать</h2>
+<ul>
+<li>Быстро потестить дистрибутив — <strong>GNOME Boxes</strong></li>
+<li>Полноценная виртуалка на каждый день — <strong>virt-manager + KVM</strong></li>
+<li>Windows-программы — <strong>VirtualBox</strong> или <strong>Wine/Bottles</strong></li>
+<li>Серверная виртуализация — <strong>Proxmox VE</strong></li>
+</ul>
+
+<h2>Проброс GPU</h2>
+<p>Возможно, но сложно. Требует:</p>
+<ul>
+<li>Две GPU (одна для хоста, одна для гостя)</li>
+<li>Поддержка IOMMU (включить в BIOS/UEFI)</li>
+<li>Правильная настройка VFIO</li>
+</ul>
+<p>Многие делают так для игровых виртуалок с Windows.</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

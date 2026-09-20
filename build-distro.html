@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Собери свой дистрибутив — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Собери свой дистрибутив</h1>
+<p class="lead">Шуточный генератор. Выбери компоненты — получи название и описание.</p>
+
+<label style="display:block;margin:0.5rem 0;">Основа:
+<select id="base" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="Debian">Debian</option>
+<option value="Arch">Arch</option>
+<option value="Fedora">Fedora</option>
+<option value="Gentoo">Gentoo</option>
+<option value="Slackware">Slackware</option>
+<option value="NixOS">NixOS</option>
+</select></label>
+
+<label style="display:block;margin:0.5rem 0;">DE / WM:
+<select id="de" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="GNOME">GNOME</option>
+<option value="KDE Plasma">KDE Plasma</option>
+<option value="Xfce">Xfce</option>
+<option value="Cinnamon">Cinnamon</option>
+<option value="Hyprland">Hyprland</option>
+<option value="i3">i3</option>
+<option value="Moksha">Moksha</option>
+</select></label>
+
+<label style="display:block;margin:0.5rem 0;">Init:
+<select id="init" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="systemd">systemd</option>
+<option value="OpenRC">OpenRC</option>
+<option value="runit">runit</option>
+<option value="s6">s6</option>
+<option value="без init (шутка)">без init</option>
+</select></label>
+
+<label style="display:block;margin:0.5rem 0;">Пакетный менеджер:
+<select id="pm" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="apt">apt</option>
+<option value="pacman">pacman</option>
+<option value="dnf">dnf</option>
+<option value="portage">portage</option>
+<option value="nix">nix</option>
+<option value="свой на Rust">свой на Rust</option>
+</select></label>
+
+<label style="display:block;margin:0.5rem 0;">Фишка:
+<select id="feature" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="иммутабельность">иммутабельность</option>
+<option value="rolling release">rolling release</option>
+<option value="минимализм">минимализм</option>
+<option value="красота из коробки">красота из коробки</option>
+<option value="максимальная безопасность">максимальная безопасность</option>
+<option value="для геймеров">для геймеров</option>
+<option value="для AI">для AI</option>
+</select></label>
+
+<button class="btn" onclick="build()" style="margin-top:1rem;">Собрать дистрибутив</button>
+
+<div id="result"></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+function build() {
+  var base = document.getElementById('base').value;
+  var de = document.getElementById('de').value;
+  var init = document.getElementById('init').value;
+  var pm = document.getElementById('pm').value;
+  var f = document.getElementById('feature').value;
+  var names = ['Nova','Vertex','Pulse','Orion','Lumen','Cascade','Aurora','Vector','Nexus','Zenith'];
+  var suffixes = ['OS','Linux','Project','Distro','System'];
+  var name = names[Math.floor(Math.random() * names.length)] + ' ' + suffixes[Math.floor(Math.random() * suffixes.length)];
+  var tagline = base + ' + ' + de + ' + ' + init + ' + ' + pm + '. Фишка: ' + f + '.';
+  var descr = 'Новый дистрибутив ' + name + ' сочетает надёжность ' + base + ' с современным ' + de + ', использует ' + init + ' и ' + pm + '. Его главная особенность — ' + f + '. Целевая аудитория — все, кто устал от обычных дистрибутивов.';
+  document.getElementById('result').innerHTML =
+    '<div class="test-result"><h2>' + name + '</h2><p style="color:var(--accent);">' + tagline + '</p><p>' + descr + '</p><p style="color:var(--muted);font-size:0.9rem;">Это шутка. Не пытайся такое собрать. Или попробуй — Linux From Scratch ждёт.</p></div>';
+}
+</script>
+<script src="js/site-theme.js"></script>
+</body></html>

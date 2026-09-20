@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Cron и таймеры — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Cron и systemd timers</h1>
+<p class="lead">Запускать задачи по расписанию.</p>
+
+<h2>Cron</h2>
+<p>Классика. Работает везде. Управляется через <code>crontab</code>.</p>
+<pre><code>crontab -e   # редактировать свой
+crontab -l   # показать
+crontab -r   # удалить всё</code></pre>
+
+<h2>Синтаксис</h2>
+<pre><code>минута час день_месяца месяц день_недели команда</code></pre>
+<ul>
+<li>минута: 0–59</li>
+<li>час: 0–23</li>
+<li>день месяца: 1–31</li>
+<li>месяц: 1–12</li>
+<li>день недели: 0–7 (0 и 7 = воскресенье)</li>
+</ul>
+
+<h2>Примеры</h2>
+<pre><code># Каждый день в 3 утра
+0 3 * * * /home/user/backup.sh
+
+# Каждые 15 минут
+*/15 * * * * /home/user/check.sh
+
+# Каждый понедельник в 9 утра
+0 9 * * 1 /home/user/report.sh
+
+# Первое число каждого месяца
+0 0 1 * * /home/user/monthly.sh
+
+# Каждые 5 минут с 9 до 18 по будням
+*/5 9-18 * * 1-5 /home/user/sync.sh
+
+# Одновременно несколько значений
+0 0 * * 1,3,5 /home/user/odd.sh</code></pre>
+
+<h2>Специальные строки</h2>
+<pre><code>@reboot  — при загрузке
+@daily   — раз в день в полночь
+@weekly  — раз в неделю
+@monthly — раз в месяц
+@yearly  — раз в год</code></pre>
+
+<h2>Логи и переменные</h2>
+<pre><code>SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+MAILTO=monadei@example.com
+
+0 3 * * * /home/user/backup.sh >> /home/user/backup.log 2>&1</code></pre>
+<p>Важно: cron использует **минимальное** окружение, не твоё из .bashrc. Всегда указывай полные пути и PATH.</p>
+
+<h2>systemd timers</h2>
+<p>Современный подход. Работает через юниты.</p>
+<p>Пример: бэкап каждую ночь в 3:00.</p>
+<p><code>~/.config/systemd/user/backup.service</code>:</p>
+<pre><code>[Unit]
+Description=Backup
+
+[Service]
+Type=oneshot
+ExecStart=/home/user/backup.sh</code></pre>
+<p><code>~/.config/systemd/user/backup.timer</code>:</p>
+<pre><code>[Unit]
+Description=Daily backup
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target</code></pre>
+<p>Активировать:</p>
+<pre><code>systemctl --user daemon-reload
+systemctl --user enable --now backup.timer
+systemctl --user list-timers</code></pre>
+
+<h2>Синтаксис OnCalendar</h2>
+<pre><code>daily              # каждый день в 00:00
+hourly             # каждый час
+weekly             # раз в неделю
+Mon..Fri 09:00     # по будням в 9 утра
+*-*-1 03:00        # 1-го числа каждого месяца
+*:0/15             # каждые 15 минут</code></pre>
+<p>Проверить:</p>
+<pre><code>systemd-analyze calendar "Mon..Fri 09:00"</code></pre>
+
+<h2>Cron vs systemd timers</h2>
+<ul>
+<li><strong>Cron</strong> — проще, работает везде, старая школа</li>
+<li><strong>systemd timers</strong> — логи через journalctl, зависимости, точнее работает после сна/выключения</li>
+</ul>
+<p>Для простых задач — cron. Для сложных с зависимостями — systemd.</p>
+
+<h2>Мониторинг</h2>
+<pre><code>journalctl -u backup.timer
+journalctl -u backup.service
+grep CRON /var/log/syslog</code></pre>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

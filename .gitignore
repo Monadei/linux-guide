@@ -1,0 +1,157 @@
+# ============================================
+# GITIGNORE для Linux Guide
+# ============================================
+
+# ---------- Системные файлы ----------
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ---------- Временные файлы ----------
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+.#*
+\#*#
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ---------- Node.js ----------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+
+# ---------- Редакторы ----------
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# JetBrains (PyCharm, WebStorm, IDEA)
+.idea/
+*.iml
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+tags
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ---------- Личные скриншоты ----------
+# Если НЕ хочешь выкладывать свои скриншоты на GitHub — раскомментируй:
+# img/
+# Но если хочешь показывать — оставь закомментированным
+
+# Если хочешь выкладывать только некоторые картинки — можно так:
+# img/*.png
+# !img/ubuntu.png
+# !img/arch.png
+
+# ---------- Генераторы и утилиты ----------
+# Если НЕ хочешь выкладывать свои вспомогательные скрипты — раскомментируй:
+# tools/
+# fix.py
+# replace-screenshots.py
+# HOW-TO-SCREENSHOTS.md
+
+# Или оставь их — они полезны другим
+
+# ---------- Прочее ----------
+# Файлы окружения
+.env
+.env.local
+.env.*.local
+
+# Логи
+logs/
+*.log
+
+# Кеш
+.cache/
+tmp/
+temp/
+
+# Архивы
+*.zip
+*.tar.gz
+*.tar.xz
+*.7z
+*.rar
+
+# Но НЕ игнорировать архивы, которые нужны сайту:
+!feed.xml
+
+# Бэкапы сайта
+*.old
+*.orig
+*.rej
+backup/
+backups/
+*.backup
+
+# Тестовые файлы
+test-*.html
+test-*.py
+*-test.html
+temp-*.html
+
+# Файлы ОС
+lost+found/
+
+# Специфичное для проекта
+# Если какие-то файлы не хочешь публиковать — добавь их сюда:
+# secret-notes.md
+# private/

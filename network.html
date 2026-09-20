@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Сетевые команды — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Сетевые команды Linux</h1>
+<p class="lead">Смотреть, диагностировать, настраивать.</p>
+
+<h2>Интерфейсы и IP</h2>
+<pre><code>ip a              # все интерфейсы и адреса
+ip -c a           # цветной вывод
+ip link           # только линки
+ip route          # таблица маршрутов
+ip neigh          # ARP-таблица</code></pre>
+<p>Старое, но работает:</p>
+<pre><code>ifconfig
+route -n</code></pre>
+
+<h2>Пинг и проверка связи</h2>
+<pre><code>ping ya.ru
+ping -c 4 8.8.8.8
+ping -i 0.5 ya.ru  # интервал 0.5 сек
+ping6 ya.ru        # IPv6</code></pre>
+
+<h2>DNS</h2>
+<pre><code>nslookup ya.ru
+dig ya.ru
+dig ya.ru +short
+host ya.ru
+resolvectl status  # systemd-resolved</code></pre>
+
+<h2>Порты и соединения</h2>
+<pre><code>ss -tulpn        # все слушающие порты
+ss -tunap        # активные соединения
+ss -s            # статистика
+lsof -i :80      # что занимает порт 80
+netstat -tulpn   # старое</code></pre>
+<p>Расшифровка флагов <code>ss</code>:</p>
+<ul>
+<li><code>-t</code> TCP, <code>-u</code> UDP</li>
+<li><code>-l</code> listening, <code>-a</code> all</li>
+<li><code>-p</code> показать процессы</li>
+<li><code>-n</code> не резолвить имена</li>
+</ul>
+
+<h2>Скачивание</h2>
+<pre><code>curl -O https://example.com/file.zip
+curl -L -o file.zip URL  # с редиректами
+wget https://example.com/file.zip
+wget -c URL              # продолжить загрузку
+curl ifconfig.me         # свой внешний IP
+curl wttr.in             # погода</code></pre>
+
+<h2>SSH и передача файлов</h2>
+<pre><code>ssh user@server
+scp file user@server:/path/
+scp user@server:/path/file .
+rsync -avh --progress source/ user@server:/dest/</code></pre>
+
+<h2>Трассировка</h2>
+<pre><code>traceroute ya.ru
+tracepath ya.ru       # без root
+mtr ya.ru             # постоянная трассировка</code></pre>
+
+<h2>Wi-Fi</h2>
+<pre><code>nmcli device wifi list
+nmcli device wifi connect "SSID" password "пароль"
+nmcli connection show
+nmcli connection up "имя"</code></pre>
+<p>Старое:</p>
+<pre><code>iwconfig
+iw dev</code></pre>
+
+<h2>Firewall</h2>
+<pre><code>sudo ufw status
+sudo ufw enable
+sudo ufw allow 22
+sudo ufw deny 23
+sudo ufw delete allow 22</code></pre>
+<p>Firewalld (Fedora, RHEL):</p>
+<pre><code>sudo firewall-cmd --state
+sudo firewall-cmd --list-all
+sudo firewall-cmd --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload</code></pre>
+
+<h2>Диагностика</h2>
+<pre><code># Проверить, работает ли сайт
+curl -I https://ya.ru
+
+# Проверить, отвечает ли порт
+nc -zv ya.ru 443
+
+# Проверить DNS
+dig +trace ya.ru
+
+# Показать трафик
+sudo iftop
+sudo nethogs
+
+# Захват пакетов
+sudo tcpdump -i any port 80</code></pre>
+
+<h2>Настройка сети вручную</h2>
+<p>Через <code>netplan</code> (Ubuntu):</p>
+<pre><code>sudo nano /etc/netplan/01-network-manager-all.yaml</code></pre>
+<pre><code>network:
+  version: 2
+  ethernets:
+    enp3s0:
+      dhcp4: true</code></pre>
+<p>Применить:</p>
+<pre><code>sudo netplan apply</code></pre>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="FAQ — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>FAQ — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Частые вопросы</h1>
+<p class="lead">То, что спрашивают все, кто первый раз ставит Linux.</p>
+
+<details class="faq-item"><summary>Как поставить Linux рядом с Windows?</summary>
+<p>Сожми раздел Windows через «Управление дисками», отключи Fast Startup, загрузись с флешки и выбери «Установить рядом с Windows». GRUB найдёт Windows автоматически. Подробнее — в <a href="install.html">гайде по установке</a>.</p></details>
+
+<details class="faq-item"><summary>Почему чёрный экран после установки?</summary>
+<p>Чаще всего — проблема с драйвером видеокарты. В меню GRUB нажми <code>e</code>, найди строку с <code>linux</code>, добавь <code>nomodeset</code> в конце. Система загрузится в базовом режиме, дальше ставь драйверы.</p></details>
+
+<details class="faq-item"><summary>Как поставить драйвер NVIDIA?</summary>
+<p>На Ubuntu: <code>sudo ubuntu-drivers autoinstall</code>. На Fedora: <code>sudo dnf install akmod-nvidia</code> + RPM Fusion. На Arch: <code>sudo pacman -S nvidia</code>. Полный гайд — <a href="nvidia.html">здесь</a>.</p></details>
+
+<details class="faq-item"><summary>Как запускать Windows-игры?</summary>
+<p>Steam + Proton — самый простой путь. Включи Proton в настройках Steam. Для не-Steam игр — Lutris или Heroic. Гайд — <a href="gaming.html">здесь</a>.</p></details>
+
+<details class="faq-item"><summary>Что такое Wayland и X11?</summary>
+<p>Это протоколы графики. Wayland — современный, X11 — старый. Fedora и Ubuntu уже на Wayland по умолчанию. Если что-то не работает — переключись на X11 через меню входа.</p></details>
+
+<details class="faq-item"><summary>Как обновлять систему?</summary>
+<p>Ubuntu: <code>sudo apt update && sudo apt upgrade</code>. Fedora: <code>sudo dnf upgrade</code>. Arch: <code>sudo pacman -Syu</code>. Или просто через графический центр обновлений.</p></details>
+
+<details class="faq-item"><summary>Где взять программы, которых нет в репозитории?</summary>
+<p>Flatpak, Snap, AppImage. Или добавь PPA (Ubuntu), COPR (Fedora), AUR (Arch). Всё есть в <a href="compare-packages.html">сравнении пакетных менеджеров</a>.</p></details>
+
+<details class="faq-item"><summary>Что делать, если не работает Wi-Fi?</summary>
+<p>Подключись по кабелю, установи драйверы: <code>sudo apt install linux-firmware</code>. Проверь, что не стоит проприетарный Broadcom: <code>sudo apt install bcmwl-kernel-source</code>.</p></details>
+
+<details class="faq-item"><summary>Пропала Windows после установки Linux</summary>
+<p>Ничего не пропало — просто GRUB не видит её. Выполни <code>sudo update-grub</code>. Если не помогло — <code>sudo os-prober</code> и снова <code>sudo update-grub</code>.</p></details>
+
+<details class="faq-item"><summary>Сколько RAM нужно для Linux?</summary>
+<p>Минимум: 512 МБ (antiX, Puppy). Комфортно: 2 ГБ (Xfce, LXQt). Современно: 4+ ГБ (GNOME, KDE). Для игр: 8+ ГБ.</p></details>
+
+<details class="faq-item"><summary>Как узнать комплектующие?</summary>
+<p>Команда <code>inxi -F</code> покажет всё сразу. Или по отдельности: <code>lscpu</code>, <code>free -h</code>, <code>lsblk</code>, <code>lspci</code>. Подробнее — <a href="hardware.html">здесь</a>.</p></details>
+
+<details class="faq-item"><summary>Что выбрать — GNOME или KDE?</summary>
+<p>GNOME — минимализм, как macOS. KDE — гибкость, как Windows. Оба хороши. Попробуй оба на Live USB. Сравнение — <a href="compare-des.html">здесь</a>.</p></details>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

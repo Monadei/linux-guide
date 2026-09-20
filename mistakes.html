@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Ошибки новичков — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Ошибки новичков — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Ошибки новичков</h1>
+<p class="lead">Что не надо делать в Linux. Серьёзно.</p>
+
+<h2>1. rm -rf /</h2>
+<p>Удаляет всю систему. Не запускай никогда, даже в шутку. Одна опечатка в <code>rm -rf /home/user</code> → <code>rm -rf / home/user</code> = катастрофа.</p>
+
+<h2>2. chmod 777 везде</h2>
+<p>«Чтобы точно работало» — не работает. 777 = даёт всем полный доступ. Правильно: 644 для файлов, 755 для папок, 600 для приватных.</p>
+
+<h2>3. Работать от root постоянно</h2>
+<p>Одна ошибка — и система убита. Используй <code>sudo</code> только когда нужно.</p>
+
+<h2>4. Ставить .deb / .rpm с непроверенных сайтов</h2>
+<p>Только официальные сайты и репозитории. .deb — это не просто архив, он может исполнить произвольный код при установке.</p>
+
+<h2>5. Добавлять случайные PPA</h2>
+<p>PPA — это репозиторий от сторонних разработчиков. Один плохой PPA может сломать обновления. Проверяй, кому доверяешь.</p>
+
+<h2>6. Копировать команды из интернета не читая</h2>
+<p>Особенно с sudo. Особенно длинные. Особенно с <code>| bash</code> в конце.</p>
+
+<h2>7. Игнорировать обновления</h2>
+<p>Особенно безопасности. Раз в неделю хотя бы: <code>sudo apt update && sudo apt upgrade</code>.</p>
+
+<h2>8. Не делать бэкапы</h2>
+<p>Диск умрёт. Всегда. Не «если», а «когда». Timeshift + rsync — минимум.</p>
+
+<h2>9. Удалять пакеты «на глаз»</h2>
+<p><code>sudo apt autoremove</code> может снести нужное. Читай, что удаляется, перед подтверждением.</p>
+
+<h2>10. Устанавливать Wayland-несовместимые драйверы</h2>
+<p>Если у тебя GNOME на Wayland и NVIDIA — проверь, что драйвер 495+. Старые не работают.</p>
+
+<h2>11. Ставить всё из Snap</h2>
+<p>Snap-пакеты запускаются дольше, занимают больше места, зависят от Canonical. Используй apt или Flatpak для большинства задач.</p>
+
+<h2>12. Паниковать при чёрном экране</h2>
+<p>Не паникуй. Live USB + chroot + восстановление GRUB — работает в 95% случаев.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

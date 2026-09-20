@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="50 приложений — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>50 приложений — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>50 приложений для Linux</h1>
+<p class="lead">Что стоит поставить после установки системы.</p>
+
+<h2>Браузеры и интернет</h2>
+<ul>
+<li>Firefox (есть везде)</li>
+<li>Chromium — открытый Chrome</li>
+<li>Brave — блокировка рекламы</li>
+<li>qBittorrent — торренты</li>
+<li>Transmission — лёгкий торрент-клиент</li>
+<li>Thunderbird — почта</li>
+<li>Telegram Desktop</li>
+<li>Discord (или Ripcord, WebCord)</li>
+</ul>
+
+<h2>Офис</h2>
+<ul>
+<li>LibreOffice — полный пакет</li>
+<li>OnlyOffice — совместимость с MS Office</li>
+<li>Obsidian — заметки</li>
+<li>Joplin — заметки с шифрованием</li>
+<li>Okular — PDF</li>
+<li>Calibre — электронные книги</li>
+</ul>
+
+<h2>Медиа</h2>
+<ul>
+<li>VLC — видео всего форматов</li>
+<li>mpv — минималистичный плеер</li>
+<li>Audacious — музыка</li>
+<li>Strawberry — музыка с библиотекой</li>
+<li>OBS Studio — запись и стрим</li>
+<li>Kdenlive — видеомонтаж</li>
+<li>DaVinci Resolve — профессиональный видеомонтаж</li>
+<li>HandBrake — конвертер видео</li>
+</ul>
+
+<h2>Графика</h2>
+<ul>
+<li>GIMP — растровая графика</li>
+<li>Krita — рисование</li>
+<li>Inkscape — вектор</li>
+<li>Blender — 3D</li>
+<li>Darktable — RAW-фото</li>
+<li>Shotcut — простое видео</li>
+</ul>
+
+<h2>Разработка</h2>
+<ul>
+<li>VS Code — редактор</li>
+<li>Neovim — редактор в терминале</li>
+<li>Git + gitg или GitKraken</li>
+<li>Docker / Podman</li>
+<li>Postman / Insomnia — API</li>
+<li>DBeaver — базы данных</li>
+</ul>
+
+<h2>Системные</h2>
+<ul>
+<li>Timeshift — бэкапы</li>
+<li>GParted — разделы</li>
+<li>htop / btop — процессы</li>
+<li>BleachBit — очистка</li>
+<li>Stacer — мониторинг</li>
+<li>Timeshift — снапшоты</li>
+</ul>
+
+<h2>Игры</h2>
+<ul>
+<li>Steam</li>
+<li>Lutris</li>
+<li>Heroic Games Launcher</li>
+<li>Bottles</li>
+<li>MangoHud — FPS-оверлей</li>
+</ul>
+
+<h2>Утилиты</h2>
+<ul>
+<li>KeePassXC — пароли</li>
+<li>Syncthing — синхронизация</li>
+<li>Flameshot — скриншоты</li>
+<li>CopyQ — буфер обмена</li>
+<li>Albert / Ulauncher — лаунчер</li>
+<li>Variety — обои</li>
+</ul>
+
+<h2>Коммуникация</h2>
+<ul>
+<li>Signal Desktop</li>
+<li>Element — Matrix</li>
+<li>Zoom</li>
+<li>Slack</li>
+</ul>
+
+<h2>Установка всего сразу</h2>
+<pre><code>sudo apt install firefox vlc gimp libreoffice htop git curl \
+  timeshift gparted flameshot keepassxc qbittorrent transmission \
+  obs-studio kdenlive okular calibre</code></pre>
+<p>Остальное — через Flatpak или официальные сайты.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

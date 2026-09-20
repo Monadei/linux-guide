@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Тест знаний — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Тест знаний — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Тест знаний Linux</h1>
+<p class="lead">20 вопросов. 3 уровня: новичок, пользователь, эксперт. Проверь себя.</p>
+<form id="test">
+<div id="questions"></div>
+<button type="button" class="btn" onclick="checkTest()">Показать результат</button>
+</form>
+<div id="result"></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+var Q = [
+  { q:'Что такое ядро Linux?', a:['Сердце системы','Оболочка','Текстовый редактор'], c:0, lvl:'новичок' },
+  { q:'Какая команда показывает содержимое папки?', a:['ls','cd','cat'], c:0, lvl:'новичок' },
+  { q:'Что делает sudo?', a:['Даёт полный доступ','Очищает экран','Перезагружает ПК'], c:0, lvl:'новичок' },
+  { q:'Какой формат пакетов в Ubuntu?', a:['.deb','.rpm','.apk'], c:0, lvl:'новичок' },
+  { q:'Что такое GNOME?', a:['Рабочее окружение','Пакетный менеджер','Файловая система'], c:0, lvl:'новичок' },
+  { q:'Какая команда обновляет пакеты в Debian?', a:['apt update','dnf update','pacman -Syu'], c:0, lvl:'пользователь' },
+  { q:'Что делает команда chmod +x файл?', a:['Делает исполняемым','Удаляет файл','Копирует файл'], c:0, lvl:'пользователь' },
+  { q:'Что такое systemd?', a:['Система инициализации','Редактор','Компилятор'], c:0, lvl:'пользователь' },
+  { q:'Какой файловый менеджер в терминале?', a:['mc','vim','nano'], c:0, lvl:'пользователь' },
+  { q:'Что такое AUR?', a:['Репозиторий Arch','Протокол','Дистрибутив'], c:0, lvl:'пользователь' },
+  { q:'Какая команда показывает процессы в реальном времени?', a:['htop','cat','ls'], c:0, lvl:'пользователь' },
+  { q:'Что делает rsync?', a:['Синхронизирует файлы','Удаляет','Редактирует'], c:0, lvl:'пользователь' },
+  { q:'Что такое Flatpak?', a:['Универсальный формат приложений','Файловая система','Ядро'], c:0, lvl:'пользователь' },
+  { q:'Какой протокол графики в Fedora по умолчанию?', a:['Wayland','X11','VNC'], c:0, lvl:'эксперт' },
+  { q:'Что такое SELinux?', a:['Мандатный доступ','Файл','Утилита'], c:0, lvl:'эксперт' },
+  { q:'Что делает nftables?', a:['Управляет firewall','Монтирует диск','Собирает ядро'], c:0, lvl:'эксперт' },
+  { q:'Какой init используется в Alpine?', a:['OpenRC','systemd','runit'], c:0, lvl:'эксперт' },
+  { q:'Что такое Btrfs?', a:['Файловая система','Пакетный менеджер','Демон'], c:0, lvl:'эксперт' },
+  { q:'Какой демoн используется в NixOS?', a:['Нет демона','systemd','OpenRC'], c:0, lvl:'эксперт' },
+  { q:'Что делает kernel?', a:['Управляет железом','Запускает браузер','Хранит файлы'], c:0, lvl:'эксперт' }
+];
+
+var cont = document.getElementById('questions');
+Q.forEach(function(item, i){
+  var d = document.createElement('div');
+  d.className = 'test-q';
+  var html = '<h3>' + (i+1) + '. ' + item.q + ' <span style="font-size:0.7rem;color:var(--muted);">[' + item.lvl + ']</span></h3>';
+  // Перемешиваем варианты
+  var opts = item.a.map(function(a, idx){ return { text: a, correct: idx === item.c }; });
+  opts.sort(function(){ return Math.random() - 0.5; });
+  opts.forEach(function(o, idx){
+    html += '<label><input type="radio" name="q' + i + '" value="' + (o.correct ? '1' : '0') + '">' + o.text + '</label>';
+  });
+  d.innerHTML = html;
+  cont.appendChild(d);
+});
+
+function checkTest() {
+  var score = 0, total = Q.length;
+  for (var i = 0; i < total; i++) {
+    var sel = document.querySelector('input[name="q' + i + '"]:checked');
+    if (sel && sel.value === '1') score++;
+  }
+  var percent = Math.round(score / total * 100);
+  var lvl = '';
+  if (percent >= 90) lvl = 'Эксперт! Ты знаешь Linux глубоко.';
+  else if (percent >= 70) lvl = 'Продвинутый пользователь. Уверенно ориентируешься.';
+  else if (percent >= 50) lvl = 'Пользователь. Основы есть, дальше — практика.';
+  else if (percent >= 30) lvl = 'Новичок. Читай сайт дальше, всё получится.';
+  else lvl = 'Совсем новичок. Начни с главной и FAQ.';
+
+  document.getElementById('result').innerHTML =
+    '<div class="test-result"><h2>' + score + ' / ' + total + ' (' + percent + '%)</h2><p>' + lvl + '</p><p><a href="levels.html" class="btn">Узнать про уровни →</a></p></div>';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  try { localStorage.setItem('test-score', score); } catch(e){}
+}
+</script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

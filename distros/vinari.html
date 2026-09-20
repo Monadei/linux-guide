@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Vinari OS — Linux Guide</title>
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/extra.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta property="og:image" content="../icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="../index.html">Главная</a><a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a><a href="../history.html">История</a>
+<a href="index.html" class="active">Дистрибутивы</a><a href="../about.html">Обо мне</a>
+<a href="../my-recommendations.html">Рекомендую</a><a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Vinari OS</h1>
+<p class="lead">Лёгкий и быстрый дистрибутив на базе Debian для старого и нового железа.</p>
+<section><h2>История</h2><p>Vinari OS — это дистрибутив на базе Debian 13 (Trixie), который предлагает лёгкий и отзывчивый опыт работы. Он позиционируется как идеальный выбор для разработчиков, дизайнеров и владельцев старого оборудования.</p></section>
+<section><h2>Особенности</h2><ul>Базируется на Debian 13.,Лёгкий и быстрый, даже на 2-ядерных CPU.,Низкое потребление памяти (около 1 ГБ в простое).,Современный интерфейс на базе GNOME.</ul></section>
+<section><h2>Кому подходит</h2><p>Пользователям, которые ищут стабильную и быструю систему на базе Debian.</p></section>
+<section><h2>Как скачать</h2><p>Официальный сайт: <a href="https://vinarios.org" target="_blank" rel="noopener">https://vinarios.org</a>.</p></section>
+
+<section class="screenshot-section">
+<h2>Скриншот</h2>
+<div class="screenshot-slot" id="screenshot-vinari" data-slug="vinari">
+<div class="ss-icon">📷</div>
+<p><strong>Место для скриншота Vinari OS</strong></p>
+<p class="ss-hint">Положи PNG в <code>img/vinari.png</code> и замени этот блок на:</p>
+<pre class="ss-code">&lt;img src="../img/vinari.png" alt="Vinari OS"&gt;</pre>
+</div>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a>
+<a href="../my-recommendations.html">Рекомендую</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/extras.js"></script><script src="../js/fun.js"></script>
+<script src="../js/site-theme.js"></script>
+</body>
+</html>

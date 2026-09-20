@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Карта мира — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Карта мира</h1>
+<p class="lead">Откуда родом дистрибутивы Linux. Сгруппировано по регионам.</p>
+
+<style>
+.region-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.region { background: var(--panel); border: 1px solid var(--border); border-top: 3px solid var(--accent); padding: 1.2rem; }
+.region h3 { margin: 0 0 0.3rem; color: var(--accent); font-size: 1.05rem; }
+.region .flag { font-size: 1.5rem; margin-right: 0.4rem; vertical-align: middle; }
+.region .count { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.8rem; }
+.region ul { padding-left: 1.1rem; margin: 0.5rem 0 0; }
+.region li { padding: 0.15rem 0; font-size: 0.9rem; }
+.region li a { color: var(--accent); }
+.region li .year { color: var(--muted); font-size: 0.8rem; }
+</style>
+
+<div class="region-grid">
+
+<div class="region">
+<h3><span class="flag">🇫🇮</span>Финляндия</h3>
+<p class="count">1 дистрибутив · родина Linux</p>
+<ul>
+<li>Ядро Linux <span class="year">(1991, Линус Торвальдс)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇺🇸</span>США</h3>
+<p class="count">Основа Linux-индустрии</p>
+<ul>
+<li><a href="distros/debian.html">Debian</a> <span class="year">(1993)</span></li>
+<li><a href="distros/redhat.html">Red Hat / RHEL</a> <span class="year">(1994)</span></li>
+<li><a href="distros/fedora.html">Fedora</a> <span class="year">(2003)</span></li>
+<li><a href="distros/ubuntu.html">Ubuntu (Canonical)</a> <span class="year">(2004)</span></li>
+<li><a href="distros/mint.html">Linux Mint</a> <span class="year">(2006)</span></li>
+<li><a href="distros/pop-os.html">Pop!_OS (System76)</a> <span class="year">(2017)</span></li>
+<li><a href="distros/elementary.html">elementary OS</a> <span class="year">(2011)</span></li>
+<li><a href="distros/tails.html">Tails</a> <span class="year">(2009)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇩🇪</span>Германия</h3>
+<p class="count">Европейский центр</p>
+<ul>
+<li><a href="distros/opensuse.html">SUSE / openSUSE</a> <span class="year">(1992)</span></li>
+<li><a href="distros/kde-linux.html">KDE</a> <span class="year">(1996)</span></li>
+<li>GNOME (частично) <span class="year">(1997)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇫🇷</span>Франция</h3>
+<p class="count">Mandriv'а и современники</p>
+<ul>
+<li>Mandriva / Mandrake <span class="year">(1998)</span></li>
+<li><a href="distros/manjaro.html">Manjaro</a> <span class="year">(2011)</span></li>
+<li><a href="distros/lmde.html">LMDE</a> <span class="year">(2010)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇮🇪</span>Ирландия</h3>
+<p class="count">Дружелюбный Linux</p>
+<ul>
+<li><a href="distros/zorin.html">Zorin OS</a> <span class="year">(2008)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇬🇧</span>Великобритания</h3>
+<p class="count">Canonical</p>
+<ul>
+<li><a href="distros/ubuntu.html">Ubuntu</a> <span class="year">(база — США, юрлицо — UK)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇿🇦</span>ЮАР</h3>
+<p class="count">Родина Ubuntu</p>
+<ul>
+<li>Марк Шаттлворт <span class="year">(основатель Canonical, 2004)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇨🇳</span>Китай</h3>
+<p class="count">Собственные проекты</p>
+<ul>
+<li><a href="distros/deepin.html">Deepin</a> <span class="year">(2004)</span></li>
+<li>Kylin OS <span class="year">(2001)</span></li>
+<li>UOS <span class="year">(2019)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇯🇵</span>Япония</h3>
+<p class="count">Локальные проекты</p>
+<ul>
+<li>Vine Linux <span class="year">(1998)</span></li>
+<li>Plamo Linux <span class="year">(1998)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇮🇳</span>Индия</h3>
+<p class="count">Геймерский Arch</p>
+<ul>
+<li><a href="distros/garuda.html">Garuda Linux</a> <span class="year">(2020)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇷🇺</span>Россия</h3>
+<p class="count">Собственные ОС и госсектор</p>
+<ul>
+<li><a href="distros/rosa.html">ROSA Linux</a> <span class="year">(2010)</span></li>
+<li><a href="distros/alt.html">ALT Linux</a> <span class="year">(2001)</span></li>
+<li><a href="distros/astra.html">Astra Linux</a> <span class="year">(2008)</span></li>
+<li><a href="distros/calculate.html">Calculate Linux</a> <span class="year">(2007)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇦🇷</span>Аргентина</h3>
+<p class="count">FSF-одобренный проект</p>
+<ul>
+<li><a href="distros/dragora.html">Dragora GNU/Linux-Libre</a> <span class="year">(2008)</span></li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🇦🇺</span>Австралия</h3>
+<p class="count">Пока пусто</p>
+<ul>
+<li>—</li>
+</ul>
+</div>
+
+<div class="region">
+<h3><span class="flag">🌍</span>Международные</h3>
+<p class="count">Команды по всему миру</p>
+<ul>
+<li><a href="distros/arch.html">Arch Linux</a> <span class="year">(2002)</span></li>
+<li><a href="distros/nixos.html">NixOS</a> <span class="year">(2003/2013)</span></li>
+<li><a href="distros/void.html">Void Linux</a> <span class="year">(2008)</span></li>
+<li><a href="distros/alpine.html">Alpine Linux</a> <span class="year">(2005)</span></li>
+<li><a href="distros/qubes.html">Qubes OS</a> <span class="year">(2010)</span></li>
+<li><a href="distros/tails.html">Tails</a> <span class="year">(2009)</span></li>
+</ul>
+</div>
+
+</div>
+
+<h2>Как читать эту карту</h2>
+<p>Многие дистрибутивы делаются международными командами, поэтому привязка к стране условна. Здесь указано место основания проекта или родина ключевых людей. База Ubuntu — Debian из США, но финансируется Canonical из Великобритании, а основатель — из ЮАР. Arch основан канадцем. Так что карта — скорее для ориентира, чем строгая классификация.</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

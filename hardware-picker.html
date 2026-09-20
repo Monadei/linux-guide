@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Подбор дистрибутива — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Подбор дистрибутива — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Подбор дистрибутива по железу</h1>
+<p class="lead">Введи характеристики — получи рекомендацию.</p>
+
+<label style="display:block;margin:0.5rem 0;">Оперативная память (ГБ):
+<input type="number" id="ram" value="8" min="1" max="128" style="width:80px;background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;"></label>
+
+<label style="display:block;margin:0.5rem 0;">Возраст компьютера:
+<select id="age" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="new">До 3 лет</option>
+<option value="mid">3–7 лет</option>
+<option value="old">7–12 лет</option>
+<option value="ancient">12+ лет</option>
+</select></label>
+
+<label style="display:block;margin:0.5rem 0;">Тип видеокарты:
+<select id="gpu" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="nvidia">NVIDIA</option>
+<option value="amd">AMD Radeon</option>
+<option value="intel">Intel встроенная</option>
+<option value="none">Не знаю</option>
+</select></label>
+
+<label style="display:block;margin:0.5rem 0;">Опыт с Linux:
+<select id="exp" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="new">Первый раз</option>
+<option value="some">Что-то знаю</option>
+<option value="exp">Опытный</option>
+</select></label>
+
+<button class="btn" onclick="pickDistro()">Подобрать</button>
+
+<div id="result"></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+function pickDistro() {
+  var ram = parseInt(document.getElementById('ram').value, 10) || 8;
+  var age = document.getElementById('age').value;
+  var gpu = document.getElementById('gpu').value;
+  var exp = document.getElementById('exp').value;
+  var rec;
+  if (ram <= 2 || age === 'ancient') rec = { name:'antiX', slug:'antix', why:'Работает на 256 МБ RAM, лёгкий оконный менеджер.' };
+  else if (ram <= 4 && age === 'old') rec = { name:'Lubuntu', slug:'lubuntu', why:'Ubuntu с лёгким LXQt.' };
+  else if (ram <= 4) rec = { name:'Xubuntu', slug:'xubuntu', why:'Ubuntu с Xfce.' };
+  else if (gpu === 'nvidia' && age !== 'new' && exp === 'new') rec = { name:'Linux Mint', slug:'mint', why:'Простой, драйверы NVIDIA ставятся через менеджер драйверов.' };
+  else if (gpu === 'nvidia' && exp === 'new') rec = { name:'Pop!_OS', slug:'pop-os', why:'ISO с готовыми драйверами NVIDIA.' };
+  else if (gpu === 'nvidia' && exp === 'exp') rec = { name:'CachyOS', slug:'cachyos', why:'Arch с оптимизацией и автоустановкой NVIDIA.' };
+  else if (exp === 'new') rec = { name:'Linux Mint', slug:'mint', why:'Универсальный выбор для новичка.' };
+  else if (exp === 'some') rec = { name:'Fedora', slug:'fedora', why:'Свежие технологии, хорошая поддержка.' };
+  else rec = { name:'Arch Linux', slug:'arch', why:'Полный контроль, rolling release.' };
+  document.getElementById('result').innerHTML =
+    '<div class="test-result"><h2>Тебе подойдёт: ' + rec.name + '</h2>' +
+    '<p>' + rec.why + '</p>' +
+    '<p><a href="distros/' + rec.slug + '.html" class="btn">Открыть страницу →</a></p></div>';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+</script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Почему так назвали — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Почему так назвали — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Почему дистрибутивы так названы</h1>
+<p class="lead">Истории имён — от имён жён до мифических птиц.</p>
+
+<dl>
+<div class="origin"><dt>Debian</dt><dd>От имён создателя <strong>Ian</strong> Murdock и его жены <strong>Deb</strong>ra. Deb + Ian = Debian.</dd></div>
+<div class="origin"><dt>Ubuntu</dt><dd>Зулусское слово, означающее «человечность». Философия: «Я есть потому, что мы есть».</dd></div>
+<div class="origin"><dt>Linux Mint</dt><dd>«Mint» — мята, символ свежести. Плюс ассоциация с «freshly minted coins» (новенькие монеты).</dd></div>
+<div class="origin"><dt>Fedora</dt><dd>Fedora — фетровая шляпа. Red Hat назвала так, потому что в логотипе RHEL есть красная шляпа, а Fedora — её «мягкая» версия.</dd></div>
+<div class="origin"><dt>Arch Linux</dt><dd>«Arch» — арка, главный (architect). Символизирует фундамент системы.</dd></div>
+<div class="origin"><dt>Gentoo</dt><dd>От вида пингвинов Gentoo, самого быстрого из ныряющих. Намёк на скорость сборки.</dd></div>
+<div class="origin"><dt>Slackware</dt><dd>От «slack» (расслабленность) — против «строгости» других дистрибутивов. Плюс отсылка к Slackware Church of the SubGenius.</dd></div>
+<div class="origin"><dt>SUSE</dt><dd>Немецкая аббревиатура: <strong>S</strong>oftware- und <strong>S</strong>ystem-<strong>E</strong>ntwicklung (разработка ПО и систем).</dd></div>
+<div class="origin"><dt>openSUSE</dt><dd>Открытая версия SUSE.</dd></div>
+<div class="origin"><dt>Kali Linux</dt><dd>От индуистской богини Кали — разрушительницы зла. Отсылка к пентесту.</dd></div>
+<div class="origin"><dt>Parrot OS</dt><dd>Не отсылка к попугаю, а к «parrot» — повторитель, отражение атак. А ещё в пентесте часто используют «parrot» как имя.</dd></div>
+<div class="origin"><dt>Manjaro</dt><dd>От горы Килиманджаро. Первоначально разработчик писал «Manjaro», сокращение от «Kilimanjaro».</dd></div>
+<div class="origin"><dt>Garuda</dt><dd>Гаруда — мифическая птица в индуизме и буддизме. Разработчик из Индии.</dd></div>
+<div class="origin"><dt>Tails</dt><dd><strong>T</strong>he <strong>A</strong>mnesic <strong>I</strong>ncognito <strong>L</strong>ive <strong>S</strong>ystem. Акроним. Плюс отсылка к «tails» — следы.</dd></div>
+<div class="origin"><dt>Qubes OS</dt><dd>От «cube» (куб) — изолированные контейнеры. Игра слов: «cute qubes».</dd></div>
+<div class="origin"><dt>Trisquel</dt><dd>От кельтского «трискель» — символ из трёх спиралей. Разработчик — из Галисии, кельтского региона Испании.</dd></div>
+<div class="origin"><dt>Pop!_OS</dt><dd>От System76. «Pop» — восклицание, плюс «pop!» как звук открытия. Игра слов с «OS».</dd></div>
+<div class="origin"><dt>Zorin OS</dt><dd>По фамилии создателей — братьев Зориных. Не отсылка к русскому «Зорин», просто ирландская фамилия.</dd></div>
+<div class="origin"><dt>elementary OS</dt><dd>От Шерлока Холмса: «Elementary, my dear Watson!» Простота и очевидность.</dd></div>
+<div class="origin"><dt>Deepin</dt><dd>От «deep in» — «глубоко в». Намёк на глубину технологий.</dd></div>
+<div class="origin"><dt>ROSA Linux</dt><dd>ROSA — не отсылка к цветку, а аббревиатура. По-разному расшифровывается, но чаще — просто звучное имя.</dd></div>
+<div class="origin"><dt>Astra Linux</dt><dd>«Astra» — звезда. Намёк на звёздное небо и государственную важность.</dd></div>
+<div class="origin"><dt>NixOS</dt><dd>От «nix» — немецкое «ничто», но также Unix-подобное. Игра слов с Unix.</dd></div>
+<div class="origin"><dt>Void Linux</dt><dd>«Void» — пустота. Символизирует минимализм и отсутствие лишнего.</dd></div>
+<div class="origin"><dt>Alpine</dt><dd>«Alpine» — альпийский. Намёк на лёгкость и холод.</dd></div>
+</dl>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

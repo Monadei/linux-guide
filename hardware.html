@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Как узнать комплектующие — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Как узнать комплектующие — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav>
+</div></header>
+<main class="container page">
+<h1>Как узнать комплектующие</h1>
+<p class="lead">Что у тебя внутри компьютера — процессор, память, диск, видеокарта. Без разбора корпуса.</p>
+
+<section>
+<h2>Самое простое: команда lscpu</h2>
+<p>Открой терминал (<code>Ctrl+Alt+T</code>) и введи:</p>
+<pre><code>lscpu</code></pre>
+<p>Покажет процессор: модель, ядра, частоту, архитектуру.</p>
+</section>
+
+<section>
+<h2>Память: free -h</h2>
+<pre><code>free -h</code></pre>
+<p>Строка <code>Mem:</code> — оперативная память. <code>total</code> — сколько всего.</p>
+</section>
+
+<section>
+<h2>Диски: lsblk</h2>
+<pre><code>lsblk</code></pre>
+<p>Дерево дисков и разделов. Показывает размер каждого.</p>
+<p>Ещё подробнее:</p>
+<pre><code>df -h</code></pre>
+<p>Показывает, сколько места занято и свободно.</p>
+</section>
+
+<section>
+<h2>Видеокарта: lspci</h2>
+<pre><code>lspci | grep -i vga</code></pre>
+<p>Покажет модель видеокарты — Intel, AMD или NVIDIA.</p>
+<p>Для NVIDIA:</p>
+<pre><code>nvidia-smi</code></pre>
+</section>
+
+<section>
+<h2>Всё сразу: inxi</h2>
+<p>Это лучший инструмент. Обычно не установлен, но ставится одной командой:</p>
+<pre><code>sudo apt install inxi</code></pre>
+<p>Потом:</p>
+<pre><code>inxi -F</code></pre>
+<p>Выдаст полную картину: модель ПК, процессор, память, диски, видеокарты, сеть, звук. Один экран — вся система.</p>
+</section>
+
+<section>
+<h2>Красиво: neofetch / fastfetch</h2>
+<pre><code>sudo apt install neofetch</code></pre>
+<pre><code>neofetch</code></pre>
+<p>Покажет логотип дистрибутива и краткую сводку: ОС, ядро, DE, процессор, память. Красиво для скриншота, полезно для форумов.</p>
+<p>Современная альтернатива — <code>fastfetch</code> (быстрее):</p>
+<pre><code>sudo apt install fastfetch</code></pre>
+</section>
+
+<section>
+<h2>Если что-то не установлено</h2>
+<p>Все команды выше, кроме <code>lscpu</code>, <code>lsblk</code>, <code>lspci</code>, <code>free</code> — могут требовать установки. Список базовых:</p>
+<ul>
+<li><code>lscpu</code> — часть <code>util-linux</code>, есть всегда</li>
+<li><code>lsblk</code> — там же</li>
+<li><code>lspci</code> — пакет <code>pciutils</code></li>
+<li><code>inxi</code> — отдельно</li>
+<li><code>neofetch</code> / <code>fastfetch</code> — отдельно</li>
+</ul>
+</section>
+
+<section>
+<h2>Графический способ</h2>
+<p>Не хочешь терминал? Есть GUI-утилиты:</p>
+<ul>
+<li><strong>Hardinfo</strong> — <code>sudo apt install hardinfo</code></li>
+<li><strong>CPU-G</strong> — <code>sudo apt install cpu-g</code></li>
+<li><strong>GNOME Settings → About</strong> — базовые данные о системе</li>
+</ul>
+</section>
+
+<section>
+<h2>Для моего MacBook 2014</h2>
+<p>На старых маках Linux видит не всё идеально, но основные данные доступны:</p>
+<pre><code>sudo dmidecode -t system
+sudo dmidecode -t memory</code></pre>
+<p>Покажет модель мака и сколько памяти распаяно.</p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

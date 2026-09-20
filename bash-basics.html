@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Основы Bash — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Основы Bash — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Основы Bash</h1>
+<p class="lead">Переменные, условия, циклы, функции — простыми словами.</p>
+
+<h2>Переменные</h2>
+<pre><code>NAME="Артём"
+echo "Привет, $NAME"
+echo "Сегодня $(date)"</code></pre>
+
+<h2>Условия</h2>
+<pre><code>if [ -f /etc/passwd ]; then
+  echo "Файл есть"
+else
+  echo "Файла нет"
+fi</code></pre>
+
+<h2>Циклы</h2>
+<pre><code>for f in *.txt; do
+  echo "Обрабатываю $f"
+done
+
+while read line; do
+  echo "$line"
+done &lt; file.txt</code></pre>
+
+<h2>Функции</h2>
+<pre><code>greet() {
+  echo "Привет, $1!"
+}
+greet "Артём"</code></pre>
+
+<h2>Аргументы скрипта</h2>
+<pre><code># script.sh
+echo "Первый аргумент: $1"
+echo "Всего аргументов: $#"
+echo "Все аргументы: $@"</code></pre>
+<p>Запуск: <code>./script.sh hello world</code></p>
+
+<h2>Проверки</h2>
+<pre><code>[ -f файл ]    # файл существует
+[ -d папка ]   # папка существует
+[ -z "$VAR" ]  # переменная пуста
+[ "$a" = "$b" ] # строки равны
+[ "$a" -eq "$b" ] # числа равны</code></pre>
+
+<h2>Полезные конструкции</h2>
+<pre><code># Проверка на root
+if [ "$EUID" -ne 0 ]; then
+  echo "Запусти от sudo"; exit 1
+fi
+
+# Значение по умолчанию
+NAME=${1:-"гость"}
+
+# Команда с проверкой
+command -v git &gt;/dev/null || sudo apt install git</code></pre>
+
+<h2>Пример: бэкап</h2>
+<pre><code>#!/bin/bash
+SRC="$HOME/Documents"
+DST="/mnt/backup/$(date +%Y-%m-%d)"
+mkdir -p "$DST"
+rsync -avh --delete "$SRC/" "$DST/"
+echo "Готово: $DST"</code></pre>
+<p>Сохрани как <code>backup.sh</code>, потом:</p>
+<pre><code>chmod +x backup.sh
+./backup.sh</code></pre>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

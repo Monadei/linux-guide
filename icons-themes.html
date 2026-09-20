@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Иконки и курсоры — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Иконки и курсоры</h1>
+<p class="lead">Лучшие наборы для красивого рабочего стола.</p>
+
+<h2>Иконки</h2>
+<ul>
+<li><strong>Papirus</strong> — самый популярный, огромная база. <code>sudo apt install papirus-icon-theme</code></li>
+<li><strong>Numix</strong> — минимализм, плоский стиль. <code>sudo apt install numix-icon-theme</code></li>
+<li><strong>Reversal</strong> — цветные, в том числе тёмные версии</li>
+<li><strong>WhiteSur</strong> — в стиле macOS Big Sur</li>
+<li><strong>Fluent</strong> — в стиле Windows 11</li>
+<li><strong>Materia</strong> — Google Material Design</li>
+<li><strong>Arc</strong> — минималистичный, серые</li>
+<li><strong>Yaru</strong> — стандартные Ubuntu</li>
+<li><strong>Adwaita</strong> — стандартные GNOME</li>
+<li><strong>Colloid</strong> — гибкий, много вариантов цвета</li>
+</ul>
+
+<h2>Курсоры</h2>
+<ul>
+<li><strong>Bibata</strong> — современный, круглый. <code>sudo apt install bibata-cursor-theme</code></li>
+<li><strong>Phinger</strong> — минималистичный, в стиле macOS</li>
+<li><strong>Adwaita</strong> — стандартный</li>
+<li><strong>WhiteSur</strong> — macOS-стиль</li>
+<li><strong>Lyra</strong> — нежный, пастельные оттенки</li>
+<li><strong>Quintom</strong> — минималистичный</li>
+<li><strong>aosp</strong> — в стиле Android</li>
+</ul>
+
+<h2>Установка</h2>
+<p>Из репозитория (простой путь):</p>
+<pre><code>sudo apt install papirus-icon-theme bibata-cursor-theme</code></pre>
+<p>Вручную — скачал архив, распаковал в <code>~/.icons/</code>:</p>
+<pre><code>mkdir -p ~/.icons
+cd ~/.icons
+tar -xzf ~/Downloads/набор.tar.gz
+# или
+unzip ~/Downloads/набор.zip</code></pre>
+<p>Системно:</p>
+<pre><code>sudo tar -xzf набор.tar.gz -C /usr/share/icons/</code></pre>
+
+<h2>Применение</h2>
+<p>GNOME: <code>gnome-tweaks</code> → Appearance → Icons / Cursors.</p>
+<p>KDE: Параметры → Внешний вид → Иконки / Курсоры.</p>
+<p>Xfce: Настройки → Внешний вид → Значки.</p>
+<p>Вручную через <code>gsettings</code>:</p>
+<pre><code>gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'</code></pre>
+
+<h2>Смена цвета Papirus</h2>
+<p>Papirus Folders Color — утилита для смены цвета папок:</p>
+<pre><code>sudo apt install papirus-folders
+papirus-folders -l --theme Papirus-Dark
+papirus-folders -C blue --theme Papirus-Dark</code></pre>
+
+<h2>Лучшие источники</h2>
+<ul>
+<li><a href="https://www.gnome-look.org" target="_blank" rel="noopener">GNOME-Look.org</a> — иконки, темы, курсоры</li>
+<li><a href="https://www.pling.com" target="_blank" rel="noopener">Pling</a> — то же самое, современный</li>
+<li><a href="https://github.com/topics/icon-theme" target="_blank" rel="noopener">GitHub — icon-theme</a></li>
+<li>Официальные репозитории дистрибутивов</li>
+</ul>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

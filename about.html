@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Обо мне — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Обо мне — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="sitemap.html">Карта сайта</a>
+<a href="about.html" class="active">Обо мне</a>
+</nav>
+</div></header>
+<main class="container page">
+<h1>Обо мне</h1>
+<p class="lead">Создатель этого сайта.</p>
+
+<section>
+<div class="author-card">
+<div class="author-avatar">&gt;_</div>
+<div class="author-info">
+<h2>Артём</h2>
+<p class="nick">ник: <strong>Monadei</strong></p>
+<p>Делаю этот сайт, чтобы собрать в одном месте понятную информацию о Linux — без воды, без снобизма, без «RTFM». Сам я не гуру, а обычный пользователь: учусь, ошибаюсь, чиню — и записываю то, что узнал.</p>
+<p>Сайт живой, растёт вместе со мной. Если что-то не так — это нормально.</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Мои системы</h2>
+<div class="sys-grid">
+
+<div class="sys-card">
+<img src="icons/distros/ubuntu.svg" class="distro-icon" style="width:48px;height:48px;" alt="Ubuntu">
+<h3>Основной ПК «NEO»</h3>
+<p class="sys-os">Ubuntu 26.04.1 LTS (Resolute Raccoon)</p>
+<p class="sys-desc">Домашняя рабочая станция. Три монитора, GNOME на Wayland, тема Aura-Glass. Здесь я работаю, учусь и делаю этот сайт.</p>
+<table class="hw-table">
+<tr><td>Процессор</td><td>Intel Core i5-12400F</td></tr>
+<tr><td>Видеокарта</td><td>NVIDIA RTX 3050 8 GB</td></tr>
+<tr><td>Память</td><td>16 GB</td></tr>
+<tr><td>Диск (система)</td><td>456 GB SSD, ext4</td></tr>
+<tr><td>Диск (данные)</td><td>239 GB, NTFS</td></tr>
+<tr><td>Ядро</td><td>Linux 7.0.0-31</td></tr>
+<tr><td>Окружение</td><td>GNOME 50.1 / Mutter (Wayland)</td></tr>
+</table>
+</div>
+
+<div class="sys-card">
+<img src="icons/distros/mint.svg" class="distro-icon" style="width:48px;height:48px;" alt="Linux Mint">
+<h3>MacBook Pro 2014</h3>
+<p class="sys-os">Linux Mint (Cinnamon)</p>
+<p class="sys-desc">Старый мак, который жив благодаря Linux. Cinnamon как рабочее окружение — привычно и удобно. Пример того, что Linux возвращает к жизни железо, которое «устарело» по мнению производителя.</p>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>Моя конфигурация</h2>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Компонент</th><th>Модель</th><th>Заметки</th></tr></thead>
+<tbody>
+<tr><td>ПК</td><td>NEO M137 (2.0)</td><td>—</td></tr>
+<tr><td>ОС</td><td>Ubuntu 26.04.1 LTS</td><td>Resolute Raccoon</td></tr>
+<tr><td>Ядро</td><td>Linux 7.0.0-31-generic</td><td>—</td></tr>
+<tr><td>Процессор</td><td>Intel Core i5-12400F</td><td>12 потоков, 4.40 ГГц</td></tr>
+<tr><td>Видеокарта</td><td>NVIDIA GeForce RTX 3050</td><td>8 ГБ, дискретная</td></tr>
+<tr><td>Память</td><td>16 ГБ</td><td>~7 ГБ занято при работе</td></tr>
+<tr><td>Swap</td><td>4 ГБ</td><td>~1 ГБ используется</td></tr>
+<tr><td>Системный диск</td><td>456 ГБ</td><td>ext4, 55% занято</td></tr>
+<tr><td>Диск /mnt/data</td><td>239 ГБ</td><td>NTFS, 21% занято</td></tr>
+<tr><td>Монитор 1</td><td>27" AF27N1</td><td>1920x1080, 240 Гц</td></tr>
+<tr><td>Монитор 2</td><td>24" KTC</td><td>1080x1920 (портрет), 75 Гц</td></tr>
+<tr><td>Окружение</td><td>GNOME 50.1</td><td>Wayland через Mutter</td></tr>
+<tr><td>Тема</td><td>Aura-Glass</td><td>GTK2/3/4</td></tr>
+<tr><td>Иконки</td><td>Reversal-purple-dark</td><td>—</td></tr>
+<tr><td>Шрифт</td><td>Ubuntu Sans 11pt</td><td>—</td></tr>
+<tr><td>Курсор</td><td>aosp 20px</td><td>—</td></tr>
+<tr><td>Терминал</td><td>GNOME Terminal (gjs)</td><td>bash 5.3.9</td></tr>
+<tr><td>Пакеты</td><td>2283 dpkg + 22 snap</td><td>—</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section>
+<h2>Почему Linux</h2>
+<p>Мне нравится, что Linux не навязывает ничего. Хочешь — GNOME, хочешь — KDE, хочешь — тайловый i3. Хочешь обновляться каждый день, хочешь — раз в год. Выбор есть, и это главное.</p>
+<p>Второе: Linux возвращает к жизни старое железо. Мой MacBook 2014 года работает под Mint лучше, чем под современными системами, которые его «не поддерживают». Это ощущение — что вещь не выбрасывают из-за даты выпуска — дорогого стоит.</p>
+</section>
+
+<section>
+<h2>Как я делаю этот сайт</h2>
+<ul>
+<li><strong>Контент</strong> — вручную, из личного опыта и официальной документации</li>
+<li><strong>Стиль</strong> — терминальная эстетика, моноширинный шрифт, 30+ цветовых тем</li>
+<li><strong>Технологии</strong> — чистый HTML/CSS/JS, без фреймворков</li>
+<li><strong>Хостинг</strong> — пока локально, на моём компьютере</li>
+<li><strong>Никаких трекеров</strong> — сайт не собирает ничего о посетителях</li>
+</ul>
+</section>
+
+<section>
+<h2>Контакты</h2>
+<p>Ник <strong>Monadei</strong> — ищи меня на форумах и в сообществах. Если что-то понадобится — ты знаешь, кто делал этот сайт.</p>
+</section>
+
+<section>
+<h2>Благодарности</h2>
+<p>Спасибо сообществам Ubuntu, Linux Mint, Debian и Arch — их вики и форумы научили меня почти всему, что я знаю. Спасибо разработчикам дистрибутивов, которые делают Linux доступным. И спасибо тебе, что читаешь этот сайт.</p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

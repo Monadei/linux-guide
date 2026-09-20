@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Сообщества — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Сообщества — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Сообщества и ресурсы</h1>
+<p class="lead">Где спрашивать и читать.</p>
+
+<h2>Русскоязычные</h2>
+<ul>
+<li><a href="https://forum.ubuntu.ru" target="_blank" rel="noopener">forum.ubuntu.ru</a> — главный форум</li>
+<li><a href="https://mintlinux.ru" target="_blank" rel="noopener">mintlinux.ru</a> — про Linux Mint</li>
+<li><a href="https://archlinux.com.ru" target="_blank" rel="noopener">archlinux.com.ru</a> — про Arch</li>
+<li><a href="https://t.me/linuxchannels" target="_blank" rel="noopener">Telegram-каналы</a> — про Linux</li>
+<li><a href="https://habr.com/ru/hubs/linux/" target="_blank" rel="noopener">Habr / Linux</a> — статьи</li>
+<li><a href="https://opennet.ru" target="_blank" rel="noopener">OpenNet</a> — новости</li>
+</ul>
+
+<h2>Международные</h2>
+<ul>
+<li><a href="https://askubuntu.com" target="_blank" rel="noopener">Ask Ubuntu</a> — StackExchange</li>
+<li><a href="https://unix.stackexchange.com" target="_blank" rel="noopener">Unix & Linux StackExchange</a></li>
+<li><a href="https://www.reddit.com/r/linux/" target="_blank" rel="noopener">r/linux</a></li>
+<li><a href="https://www.reddit.com/r/linuxquestions/" target="_blank" rel="noopener">r/linuxquestions</a></li>
+<li><a href="https://www.reddit.com/r/archlinux/" target="_blank" rel="noopener">r/archlinux</a></li>
+</ul>
+
+<h2>Вики и документация</h2>
+<ul>
+<li><a href="https://wiki.archlinux.org" target="_blank" rel="noopener">Arch Wiki</a> — лучшая вики про Linux (не только про Arch)</li>
+<li><a href="https://wiki.ubuntu.com" target="_blank" rel="noopener">Ubuntu Wiki</a></li>
+<li><a href="https://wiki.debian.org" target="_blank" rel="noopener">Debian Wiki</a></li>
+<li><a href="https://docs.fedoraproject.org" target="_blank" rel="noopener">Fedora Docs</a></li>
+<li><a href="https://en.opensuse.org" target="_blank" rel="noopener">openSUSE Wiki</a></li>
+</ul>
+
+<h2>Новости</h2>
+<ul>
+<li><a href="https://distrowatch.com" target="_blank" rel="noopener">DistroWatch</a> — рейтинги дистрибутивов</li>
+<li><a href="https://www.phoronix.com" target="_blank" rel="noopener">Phoronix</a> — технические новости</li>
+<li><a href="https://lwn.net" target="_blank" rel="noopener">LWN</a> — глубокие статьи</li>
+<li><a href="https://itsfoss.com" target="_blank" rel="noopener">Itʼs FOSS</a> — обзоры</li>
+</ul>
+
+<h2>YouTube</h2>
+<ul>
+<li>Learn Linux TV — англ., понятно</li>
+<li>DistroTube — англ., обзоры дистрибутивов</li>
+<li>The Linux Experiment — англ., новости</li>
+<li>Хауди Хо — рус., IT</li>
+<li>ADV-IT — рус., серверы</li>
+</ul>
+
+<h2>Подкасты</h2>
+<ul>
+<li>Late Night Linux</li>
+<li>Linux Unplugged</li>
+<li>The Changelog</li>
+<li>Ubuntu Podcast</li>
+</ul>
+
+<h2>Где скачать дистрибутивы</h2>
+<ul>
+<li>Только официальные сайты. См. страницы дистрибутивов в каталоге.</li>
+<li><a href="https://distrowatch.com" target="_blank" rel="noopener">DistroWatch</a> — ссылки на официальные сайты</li>
+</ul>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

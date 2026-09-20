@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Обзор рабочих столов — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Обзор рабочих столов</h1>
+<p class="lead">Каждый DE — отдельная философия. Разбираем подробно.</p>
+
+<h2>GNOME</h2>
+<p><strong>Философия:</strong> минимализм и фокус на задачах. Меньше интерфейса — больше дела.</p>
+<p><strong>Плюсы:</strong> современный дизайн, отличная поддержка Wayland, огромная экосистема расширений, отличные жесты тачпада.</p>
+<p><strong>Минусы:</strong> мало настроек из коробки, приходится ставить расширения для базовых вещей, требователен к ресурсам.</p>
+<p><strong>Где стоит:</strong> Ubuntu, Fedora, Debian, Pop!_OS (COSMIC — форк).</p>
+<p><strong>Кому:</strong> тем, кто любит «чистый» интерфейс и готов допиливать напильником.</p>
+
+<h2>KDE Plasma</h2>
+<p><strong>Философия:</strong> максимальная гибкость и контроль. Настроить можно всё.</p>
+<p><strong>Плюсы:</strong> гибкость как у конструктора, отличная поддержка Wayland (с 6.0), лёгкий по сравнению с GNOME, огромное количество встроенных приложений.</p>
+<p><strong>Минусы:</strong> перегруженность настроек (иногда сложно найти нужное), исторически нестабилен (сейчас лучше).</p>
+<p><strong>Где стоит:</strong> Kubuntu, KDE Neon, openSUSE, KDE Linux.</p>
+<p><strong>Кому:</strong> тем, кто хочет контролировать каждую деталь, мигрантам с Windows.</p>
+
+<h2>Xfce</h2>
+<p><strong>Философия:</strong> лёгкость, стабильность, классика.</p>
+<p><strong>Плюсы:</strong> очень лёгкий, стабильный как скала, работает на старом железе, знакомый интерфейс (панель + меню).</p>
+<p><strong>Минусы:</strong> не самый современный вид, не всё поддерживает Wayland, меньше «вау-эффекта».</p>
+<p><strong>Где стоит:</strong> Xubuntu, MX Linux, Manjaro Xfce.</p>
+<p><strong>Кому:</strong> владельцам старого железа, тем, кому нужна классика и стабильность.</p>
+
+<h2>Cinnamon</h2>
+<p><strong>Философия:</strong> GNOME 2 «как надо». Классический интерфейс без компромиссов.</p>
+<p><strong>Плюсы:</strong> знакомый интерфейс как в Windows 7, из коробки всё что нужно, отличная интеграция с Linux Mint.</p>
+<p><strong>Минусы:</strong> только в Linux Mint и производных, не так активно развивается как GNOME/KDE.</p>
+<p><strong>Где стоит:</strong> Linux Mint, LMDE, Fedora Cinnamon Spin.</p>
+<p><strong>Кому:</strong> мигрантам с Windows, тем, кто любит классику.</p>
+
+<h2>MATE</h2>
+<p><strong>Философия:</strong> продолжение GNOME 2. Классика без изменений.</p>
+<p><strong>Плюсы:</strong> очень стабилен, лёгкий, знакомый интерфейс, живёт активным сообществом.</p>
+<p><strong>Минусы:</strong> визуально устарел, некоторые приложения не интегрируются хорошо.</p>
+<p><strong>Где стоит:</strong> Ubuntu MATE, Linux Mint MATE.</p>
+<p><strong>Кому:</strong> любителям GNOME 2, владельцам старого железа.</p>
+
+<h2>LXQt</h2>
+<p><strong>Философия:</strong> максимально лёгкий. Минимум ресурсов — максимум пользы.</p>
+<p><strong>Плюсы:</strong> очень лёгкий (работает на 512 МБ RAM), стабильный, модульный.</p>
+<p><strong>Минусы:</strong> не самый красивый, меньше возможностей настройки.</p>
+<p><strong>Где стоит:</strong> Lubuntu.</p>
+<p><strong>Кому:</strong> старым ноутбукам, нетбукам, встраиваемым системам.</p>
+
+<h2>Budgie</h2>
+<p><strong>Философия:</strong> современный минимализм с классической логикой.</p>
+<p><strong>Плюсы:</strong> красивый, интуитивный, отличается от GNOME/KDE.</p>
+<p><strong>Минусы:</strong> меньше сообщества, ограниченная кастомизация.</p>
+<p><strong>Где стоит:</strong> Ubuntu Budgie, Solus.</p>
+<p><strong>Кому:</strong> тем, кто хочет что-то нетипичное, но удобное.</p>
+
+<h2>Pantheon</h2>
+<p><strong>Философия:</strong> дизайн прежде всего. Красота и простота в каждой детали.</p>
+<p><strong>Плюсы:</strong> один из самых красивых DE, знакомый macOS-подобный интерфейс, отличные фирменные приложения.</p>
+<p><strong>Минусы:</strong> только elementary OS, ограниченная кастомизация, медленнее развивается.</p>
+<p><strong>Где стоит:</strong> elementary OS.</p>
+<p><strong>Кому:</strong> дизайнерам, любителям macOS-подобного интерфейса.</p>
+
+<h2>COSMIC</h2>
+<p><strong>Философия:</strong> новый DE от System76, написан на Rust.</p>
+<p><strong>Плюсы:</strong> тайлирование из коробки, современный, быстрый, активно развивается.</p>
+<p><strong>Минусы:</strong> ещё молодой, не всё готово, мало документации.</p>
+<p><strong>Где стоит:</strong> Pop!_OS.</p>
+<p><strong>Кому:</strong> энтузиастам, тем кто хочет попробовать новое.</p>
+
+<h2>Тайловые WM</h2>
+<p>Не полноценные DE, а оконные менеджеры. Окна делят экран, управление — с клавиатуры.</p>
+<ul>
+<li><strong>i3</strong> — классика, настраивается вручную, X11</li>
+<li><strong>Sway</strong> — i3 для Wayland</li>
+<li><strong>Hyprland</strong> — современный, с анимациями, Wayland</li>
+<li><strong>bspwm</strong> — бинарное дерево, минимализм</li>
+<li><strong>dwm</strong> — минималистичный, настройка через C-код</li>
+<li><strong>Openbox</strong> — стековый WM, классика</li>
+</ul>
+<p><strong>Кому:</strong> разработчикам, тем, кто много работает с терминалом, любителям ricing.</p>
+
+<h2>Как выбрать</h2>
+<ul>
+<li>Новичку → GNOME (Ubuntu) или Cinnamon (Mint)</li>
+<li>Со старым ПК → Xfce или LXQt</li>
+<li>С древним ПК → Moksha, IceWM</li>
+<li>Любителю настраивать → KDE Plasma</li>
+<li>Дизайнеру → Pantheon (elementary)</li>
+<li>Мигранту с Windows → Cinnamon или Zorin</li>
+<li>Разработчику → i3, Sway, Hyprland</li>
+</ul>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

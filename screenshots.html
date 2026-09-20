@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Скриншоты — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Скриншоты</h1>
+<p class="lead">Как выглядят разные системы. Здесь будут мои фото — пока заглушки.</p>
+
+<h2>🖥️ Мой рабочий стол в Ubuntu</h2>
+<div class="screenshot-slot">
+[ Место для скриншота: GNOME 50 на Wayland, тема Aura-Glass, три монитора ]
+<p style="margin-top:1rem;font-size:0.85rem;">Скинь скриншот в <code>~/data/linux-guide/img/desktop.png</code>, потом замени этот блок на:</p>
+<p><code>&lt;div class="screenshot-frame"&gt;&lt;img src="img/desktop.png" alt="Мой стол в Ubuntu"&gt;&lt;/div&gt;</code></p>
+</div>
+
+<h2>💻 MacBook Pro 2014 под Mint</h2>
+<div class="screenshot-slot">
+[ Место для скриншота: Linux Mint с Cinnamon на MacBook ]
+</div>
+
+<h2>⌨️ Терминал с neofetch</h2>
+<div class="screenshot-slot">
+[ Место для скриншота: терминал с neofetch ]
+</div>
+
+<h2>🎨 30 тем сайта</h2>
+<div class="screenshot-slot">
+[ Место для коллажа: одна страница в разных темах ]
+</div>
+
+<h2>Как сделать скриншот в Ubuntu</h2>
+<ul>
+<li><strong>Весь экран:</strong> <code>Print Screen</code></li>
+<li><strong>Окно:</strong> <code>Alt + Print Screen</code></li>
+<li><strong>Область:</strong> <code>Shift + Print Screen</code></li>
+<li><strong>Сохранить сразу в файл:</strong> <code>Ctrl + Print Screen</code> → сохранит в <code>~/Pictures/Screenshots/</code></li>
+</ul>
+<p>Скриншоты автоматически сохраняются в <code>~/Pictures/Screenshots/</code> с именами вида <code>Screenshot from 2026-09-20 15-30-45.png</code>.</p>
+
+<h2>Как вставить в сайт</h2>
+<ol>
+<li>Сделай скриншот — он сохранится в <code>~/Pictures/Screenshots/</code></li>
+<li>Скопируй файл:
+<pre><code>cp ~/Pictures/Screenshots/*.png ~/data/linux-guide/img/</code></pre></li>
+<li>Переименуй для удобства:
+<pre><code>mv ~/data/linux-guide/img/"Screenshot from..."*.png ~/data/linux-guide/img/desktop.png</code></pre></li>
+<li>В файле <code>screenshots.html</code> замени блок <code>&lt;div class="screenshot-slot"&gt;...&lt;/div&gt;</code> на:
+<pre><code>&lt;div class="screenshot-frame"&gt;
+  &lt;img src="img/desktop.png" alt="Мой рабочий стол в Ubuntu"&gt;
+&lt;/div&gt;</code></pre></li>
+</ol>
+
+<h2>Полезные утилиты для скриншотов</h2>
+<ul>
+<li><strong>GNOME Screenshot</strong> — встроен, простой</li>
+<li><strong>Flameshot</strong> — редактор + скриншот: <code>sudo apt install flameshot</code></li>
+<li><strong>Shutter</strong> — мощный, но давно не обновляется</li>
+<li><strong>Spectacle</strong> — для KDE</li>
+<li><strong>scrot</strong> — для терминала: <code>scrot screenshot.png</code></li>
+</ul>
+
+<h2>Что хочу показать</h2>
+<ul>
+<li>Как выглядит мой стол с тремя мониторами (портретный режим справа)</li>
+<li>GNOME с расширениями и темой Aura-Glass</li>
+<li>Мой MacBook 2014 под Mint Cinnamon</li>
+<li>Терминал с <code>neofetch</code>, где видны все характеристики</li>
+<li>VS Code с открытым проектом этого сайта</li>
+<li>Как выглядит одна страница в 30 разных темах</li>
+</ul>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+</body></html>

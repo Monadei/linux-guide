@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /secret.html
+
+Sitemap: https://example.org/linux-guide/sitemap.xml

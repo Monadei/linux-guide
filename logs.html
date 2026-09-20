@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Логи и journalctl — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Логи и journalctl</h1>
+<p class="lead">Куда смотреть, когда что-то сломалось.</p>
+
+<h2>journalctl — основной инструмент</h2>
+<pre><code>journalctl                 # все логи
+journalctl -b              # с последней загрузки
+journalctl -b -1           # предыдущая загрузка
+journalctl -f              # следить в реальном времени
+journalctl -n 50           # последние 50 строк
+journalctl -p err          # только ошибки
+journalctl --since "1 hour ago"
+journalctl --since "2026-09-19" --until "2026-09-20"</code></pre>
+
+<h2>По юниту</h2>
+<pre><code>journalctl -u nginx
+journalctl -u ssh -f
+journalctl -u docker --since today</code></pre>
+
+<h2>По процессу или пользователю</h2>
+<pre><code>journalctl _PID=1234
+journalctl _UID=1000
+journalctl _COMM=firefox</code></pre>
+
+<h2>Уровни важности</h2>
+<ul>
+<li><code>0</code> emerg — паника</li>
+<li><code>1</code> alert</li>
+<li><code>2</code> crit</li>
+<li><code>3</code> err — ошибки</li>
+<li><code>4</code> warning</li>
+<li><code>5</code> notice</li>
+<li><code>6</code> info</li>
+<li><code>7</code> debug</li>
+</ul>
+<pre><code>journalctl -p 3          # ошибки и выше
+journalctl -p warning    # предупреждения и выше</code></pre>
+
+<h2>Формат вывода</h2>
+<pre><code>journalctl -o short        # по умолчанию
+journalctl -o short-precise  # с микросекундами
+journalctl -o json         # JSON
+journalctl -o cat          # только сообщение
+journalctl -o verbose      # все метаданные</code></pre>
+
+<h2>Управление размером</h2>
+<pre><code>journalctl --disk-usage
+sudo journalctl --vacuum-size=500M
+sudo journalctl --vacuum-time=2weeks</code></pre>
+<p>Конфиг: <code>/etc/systemd/journald.conf</code>:</p>
+<pre><code>SystemMaxUse=500M
+MaxRetentionSec=2week</code></pre>
+<p>Применить:</p>
+<pre><code>sudo systemctl restart systemd-journald</code></pre>
+
+<h2>Классические логи</h2>
+<pre><code>/var/log/syslog      # системный (Debian/Ubuntu)
+/var/log/messages    # системный (RHEL)
+/var/log/auth.log    # авторизация
+/var/log/kern.log    # ядро
+/var/log/dpkg.log    # установка пакетов (Debian)
+/var/log/apt/        # apt
+/var/log/nginx/      # веб-сервер
+/var/log/Xorg.0.log  # графика</code></pre>
+<pre><code>tail -f /var/log/syslog
+less /var/log/auth.log
+grep "error" /var/log/syslog</code></pre>
+
+<h2>logrotate</h2>
+<p>Автоматически ротирует и сжимает логи. Конфиги в <code>/etc/logrotate.d/</code>.</p>
+<pre><code>sudo logrotate -d /etc/logrotate.conf   # dry-run
+sudo logrotate -f /etc/logrotate.conf   # применить</code></pre>
+
+<h2>Что искать при проблемах</h2>
+<pre><code># Ошибки с последней загрузки
+journalctl -p err -b
+
+# Что не запустилось
+systemctl --failed
+
+# Что долго грузилось
+systemd-analyze blame
+
+# Кто упал
+journalctl -b | grep -i "segfault\|panic\|failed"</code></pre>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

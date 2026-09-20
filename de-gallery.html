@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Галерея DE — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Галерея DE — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Рабочие столы Linux</h1>
+<p class="lead">Как выглядят основные окружения. ASCII-превью для быстрого сравнения.</p>
+
+<div class="de-card"><h3>GNOME</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  Activities  │  9:41   │  🔋 🔊 ⚙  │
+├──────────────────────────────────────┤
+│                                      │
+│            [ Приветствие ]            │
+│                                      │
+│              ⬢  ⬢  ⬢                 │
+│           (док снизу)                │
+└──────────────────────────────────────┘</div>
+<p>Современный минимализм. Верхняя панель, док снизу, рабочие столы. Ubuntu, Fedora, Debian. Тяжёлый, но красивый.</p></div>
+
+<div class="de-card"><h3>KDE Plasma</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  ☰ Меню   │  Приложения  │  9:41  │  │
+├──────────────────────────────────────┤
+│  📁 Документы      │  🌐 Firefox      │
+│  📝 Заметки        │  💻 Терминал     │
+├──────────────────────────────────────┤
+│  ⬢  🖥  📁  🌐  💬         │ 🔋 🔊  │
+└──────────────────────────────────────┘</div>
+<p>Максимальная гибкость. Как Windows, но всё можно настроить. KDE Neon, Kubuntu, openSUSE.</p></div>
+
+<div class="de-card"><h3>Xfce</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  Приложения  │  Рабочий стол 1 2 3  │
+├──────────────────────────────────────┤
+│  📁 Домашняя     │  🌐 Интернет     │
+│  🖥 Терминал     │  📝 Заметки      │
+├──────────────────────────────────────┤
+│  ☰  🖥  📁  🌐              9:41  │
+└──────────────────────────────────────┘</div>
+<p>Классика. Панель сверху или снизу, меню, значки. Xubuntu, MX Linux. Лёгкий и стабильный.</p></div>
+
+<div class="de-card"><h3>Cinnamon</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  ☰ Меню  📁  🌐  💬  📝    9:41 🔊│
+├──────────────────────────────────────┤
+│  📁 Документы      │  🌐 Firefox      │
+│  🖥 Терминал       │  🎵 Музыка       │
+│  📝 Заметки        │  🗑 Корзина      │
+└──────────────────────────────────────┘</div>
+<p>Как Windows 7. Панель снизу, меню «Пуск». Linux Mint. Идеален для мигрантов.</p></div>
+
+<div class="de-card"><h3>MATE</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  Applications  Places  System  │ 9:41│
+├──────────────────────────────────────┤
+│  📁 Домашняя     │  🌐 Интернет     │
+│  🖥 Терминал     │  📝 Заметки      │
+├──────────────────────────────────────┤
+│  ☰  🖥  📁  🌐              9:41  │
+└──────────────────────────────────────┘</div>
+<p>Классический GNOME 2. Ubuntu MATE, Mint MATE. Ностальгия.</p></div>
+
+<div class="de-card"><h3>LXQt / LXDE</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  ☰  │  📁  🖥  🌐          9:41 🔊│
+├──────────────────────────────────────┤
+│  📁 Домашняя     │  🌐 Интернет     │
+│  🖥 Терминал     │  📝 Заметки      │
+└──────────────────────────────────────┘</div>
+<p>Максимально лёгкий. Lubuntu. Для старого железа.</p></div>
+
+<div class="de-card"><h3>Budgie</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  ☰ Приложения                 9:41 │
+├──────────────────────────────────────┤
+│  📁 Документы      │  🌐 Firefox      │
+│  🖥 Терминал       │  🎵 Музыка       │
+│  ⬢  🖥  📁  🌐  📝       │ 🔊 ⚙  │
+└──────────────────────────────────────┘</div>
+<p>Современный минимализм. Ubuntu Budgie, Solus.</p></div>
+
+<div class="de-card"><h3>Pantheon</h3>
+<div class="preview">┌──────────────────────────────────────┐
+│  Applications  │  9:41  │  🔊 ⚙   │
+├──────────────────────────────────────┤
+│  📁 Файлы         │  🌐 Firefox      │
+│  📝 Заметки       │  🎵 Музыка       │
+│  ⬢  🖥  📁  🌐  📝      (док снизу)│
+└──────────────────────────────────────┘</div>
+<p>Дизайн в духе macOS. elementary OS.</p></div>
+
+<div class="de-card"><h3>i3 / Sway / Hyprland (тайловые)</h3>
+<div class="preview">┌────────────┬─────────────┬──────────┐
+│            │             │          │
+│  Терминал  │   Браузер   │  Редактор│
+│            │             │          │
+│            │             │          │
+├────────────┴─────────────┴──────────┤
+│ work 1  2  3  4  5  │  9:41 🔊 │
+└──────────────────────────────────────┘</div>
+<p>Окна делят экран. Только клавиатура. Для разработчиков. Regolith, Archcraft.</p></div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

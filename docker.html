@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Docker и Podman — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Docker и Podman — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Docker и Podman</h1>
+<p class="lead">Контейнеры для разработки и развёртывания. Что выбрать и как начать.</p>
+
+<section><h2>Docker vs Podman</h2>
+<ul>
+<li><strong>Docker</strong> — стандарт индустрии. Демон работает от root. Больше документации.</li>
+<li><strong>Podman</strong> — от Red Hat. Без демона, rootless по умолчанию. Более безопасен. Команды совместимы.</li>
+</ul>
+<p>Для начала: если не знаешь — бери Docker. Если ценишь безопасность — Podman.</p></section>
+
+<section><h2>Установка Docker</h2>
+<pre><code>sudo apt update
+sudo apt install docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER</code></pre>
+<p>После добавления в группу — перелогинься. Проверка:</p>
+<pre><code>docker run hello-world</code></pre></section>
+
+<section><h2>Установка Podman</h2>
+<pre><code>sudo apt install podman</code></pre>
+<p>Проверка:</p>
+<pre><code>podman run hello-world</code></pre></section>
+
+<section><h2>Основные команды</h2>
+<div class="cmd-list">
+<div class="cmd-row"><code>docker ps</code><span class="desc">Запущенные контейнеры</span></div>
+<div class="cmd-row"><code>docker ps -a</code><span class="desc">Все контейнеры</span></div>
+<div class="cmd-row"><code>docker images</code><span class="desc">Скачанные образы</span></div>
+<div class="cmd-row"><code>docker run -it ubuntu bash</code><span class="desc">Запустить Ubuntu в контейнере</span></div>
+<div class="cmd-row"><code>docker run -d -p 8080:80 nginx</code><span class="desc">Nginx на порту 8080</span></div>
+<div class="cmd-row"><code>docker stop имя</code><span class="desc">Остановить</span></div>
+<div class="cmd-row"><code>docker rm имя</code><span class="desc">Удалить контейнер</span></div>
+<div class="cmd-row"><code>docker rmi образ</code><span class="desc">Удалить образ</span></div>
+</div></section>
+
+<section><h2>Docker Compose</h2>
+<p>Для многосервисных приложений:</p>
+<pre><code>sudo apt install docker-compose-v2</code></pre>
+<p>Пример <code>docker-compose.yml</code>:</p>
+<pre><code>services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret</code></pre>
+<p>Запуск: <code>docker compose up -d</code>.</p></section>
+
+<section><h2>Полезные советы</h2>
+<ul>
+<li>Не запускай контейнеры от root без необходимости</li>
+<li>Чисти старые образы: <code>docker system prune -a</code></li>
+<li>Логи: <code>docker logs имя</code></li>
+<li>Войти в запущенный контейнер: <code>docker exec -it имя bash</code></li>
+</ul></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

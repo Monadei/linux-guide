@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Мои рекомендации — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('site-theme');
+    if (!t) {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) t = decodeURIComponent(m[1]);
+    }
+    if (t && t !== 'default') document.documentElement.setAttribute('data-site-theme', t);
+  } catch(e){}
+})();
+</script>
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Мои рекомендации</h1>
+<p class="lead">Не топ-5 вообще, а мои личные. Те дистрибутивы, которые я реально ставил или ставлю. С объяснением — почему именно они.</p>
+
+<style>
+.rec-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+.rec-card .rec-num {
+  position: absolute;
+  top: -12px;
+  left: 1.5rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+}
+.rec-card h2 {
+  margin: 0.5rem 0 0.3rem;
+  color: var(--accent);
+  border-bottom: none;
+  padding-bottom: 0;
+  font-size: 1.4rem;
+}
+.rec-card h2::before { content: ""; }
+.rec-card .rec-tagline {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0 0 1rem;
+}
+.rec-card .rec-icon {
+  width: 56px;
+  height: 56px;
+  float: right;
+  margin-left: 1rem;
+}
+.rec-card p { margin: 0.6rem 0; }
+.rec-card .rec-my {
+  background: var(--panel-2);
+  border-left: 2px solid var(--accent-dim);
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.rec-card .rec-my strong { color: var(--accent); }
+.rec-card .rec-links {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.rec-card .rec-links a {
+  border: 1px dashed var(--accent-dim);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+}
+.rec-card .rec-links a:hover {
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  border-style: solid;
+}
+@media (max-width: 600px) {
+  .rec-card .rec-icon { float: none; display: block; margin: 0 0 0.5rem; }
+}
+</style>
+
+<p>Этот список — не рейтинг «лучших дистрибутивов мира». Это <strong>то, что я реально использовал</strong> и могу рекомендовать от себя. У каждого — своя история.</p>
+
+<div class="rec-card">
+<img src="icons/distros/arch.svg" class="rec-icon" alt="Arch">
+<span class="rec-num">1</span>
+<h2>Arch Linux</h2>
+<p class="rec-tagline">Для тех, кто хочет понять, как всё устроено</p>
+<p>Arch — это не «дистрибутив для повседневки». Это скорее <strong>философия</strong>. Ты собираешь систему сам, шаг за шагом, читая вики. И именно в процессе сборки начинаешь понимать, что такое ядро, initramfs, как работает pacman, зачем нужны fstab и GRUB.</p>
+<p>Главное — <strong>Arch Wiki</strong>. Это лучшая документация в мире Linux. Даже если ты никогда не поставишь Arch, читать их вики полезно на любой системе. Ubuntu-проблемы там разобраны лучше, чем на форумах Ubuntu.</p>
+<p>Rolling release, AUR с десятками тысяч пакетов, полный контроль над каждым решением. Ты не ставишь «то, что решил разработчик» — ты сам решаешь, что тебе нужно.</p>
+<div class="rec-my">
+<strong>Почему я советую:</strong> даже если ты не останешься на Arch, ты станешь понимать Linux в разы лучше после нескольких установок. Это школа, а не просто ОС.
+</div>
+<div class="rec-links">
+<a href="distros/arch.html">Подробнее →</a>
+<a href="install.html">Как установить</a>
+</div>
+</div>
+
+<div class="rec-card">
+<img src="icons/distros/fedora.svg" class="rec-icon" alt="Fedora">
+<span class="rec-num">2</span>
+<h2>Fedora</h2>
+<p class="rec-tagline">Мой первый Linux на MacBook</p>
+<p>Это был мой первый опыт настоящего Linux — не WSL, не Live USB, а реальная система на моём старом MacBook Pro 2014. Именно Fedora показала мне, каким может быть Linux: свежие пакеты, GNOME на Wayland, современные технологии быстрее всех.</p>
+<p>Fedora — это <strong>полигон Red Hat</strong>. Все технологии сначала обкатываются здесь, потом попадают в RHEL. Поэтому тут ты получаешь новое раньше всех: Wayland по умолчанию, PipeWire, rpm-ostree, Wayland-версии приложений.</p>
+<p>Цикл релизов — раз в полгода. Поддержка — 13 месяцев. Это даёт баланс между свежестью и предсказуемостью. Не так быстро, как Arch, но и не так консервативно, как Debian.</p>
+<p>Для MacBook у Fedora есть отдельная сборка — <a href="distros/asahi.html">Fedora Asahi Remix</a> — для Apple Silicon. А для Intel-Mac 2014 года обычная Workstation встала идеально.</p>
+<div class="rec-my">
+<strong>Личный опыт:</strong> на моём MacBook Pro 2014 Fedora работала быстрее и стабильнее macOS Big Sur. Wi-Fi, Bluetooth, камера, тачпад — всё работало из коробки.
+</div>
+<div class="rec-links">
+<a href="distros/fedora.html">Подробнее →</a>
+<a href="distros/asahi.html">Fedora Asahi для Apple Silicon</a>
+</div>
+</div>
+
+<div class="rec-card">
+<img src="icons/distros/ubuntu.svg" class="rec-icon" alt="Ubuntu">
+<span class="rec-num">3</span>
+<h2>Ubuntu</h2>
+<p class="rec-tagline">С него начинают все — и не зря</p>
+<p>Ubuntu — это <strong>точка входа в Linux для большинства</strong>. Не потому что он лучший, а потому что с ним проще всего: огромное сообщество, ответ на любой вопрос гуглится за минуту, каждая вторая инструкция в интернете написана под Ubuntu.</p>
+<p>Он основан на Debian, но добрее к новичку: свежие драйверы, готовая настройка, GNOME с доработками Canonical, LTS-релизы раз в 2 года с поддержкой 5 лет. Для домашнего ПК или работы — идеально.</p>
+<p>Да, Ubuntu критикуют за Snap-пакеты, за решения Canonical, за телеметрию (которую можно отключить). Но факт остаётся фактом: <strong>именно Ubuntu я использую как основную систему</strong> на своём ПК с RTX 3050.</p>
+<div class="rec-my">
+<strong>Почему советую:</strong> потому что с него надо начинать. Если ты никогда не ставил Linux — Ubuntu. Потом, когда разберёшься, сам решишь, куда двигаться.
+</div>
+<div class="rec-links">
+<a href="distros/ubuntu.html">Подробнее →</a>
+<a href="my-ubuntu-install.html">Как я ставил Ubuntu</a>
+</div>
+</div>
+
+<div class="rec-card">
+<img src="icons/distros/nixos.svg" class="rec-icon" alt="NixOS">
+<span class="rec-num">4</span>
+<h2>NixOS</h2>
+<p class="rec-tagline">Если однажды надоест «настраивать систему заново»</p>
+<p>NixOS — это <strong>совсем другой подход</strong>. Вся система описывается в одном файле <code>configuration.nix</code>. Не «поставил пакеты и настроил», а «написал декларацию, и система стала такой».</p>
+<p>Главная магия — <strong>атомарные обновления и откаты</strong>. Обновился и что-то сломалось? Перезагружаешься в предыдущую конфигурацию, и всё работает. Никаких снапшотов Timeshift, никаких «а если откатиться не получится» — это встроено в саму систему.</p>
+<p>Вторая магия — <strong>воспроизводимость</strong>. Твой конфиг можно положить в git, склонировать на другом компьютере — и получить точно такую же систему. Идеально для серверов и для тех, кто устал от «а как я это настраивал полгода назад?».</p>
+<p>Минус — <strong>крутая кривая обучения</strong>. Язык Nix нужно учить, документация не всегда дружелюбна, ошибки бывают непонятными. Это не для новичков.</p>
+<div class="rec-my">
+<strong>Почему советую:</strong> если ты уже уверенный пользователь и хочешь систему, которая <em>не ломается никогда</em> — попробуй. Поначалу будет тяжело, но потом не захочется возвращаться.
+</div>
+<div class="rec-links">
+<a href="distros/nixos.html">Подробнее →</a>
+</div>
+</div>
+
+<div class="rec-card">
+<img src="icons/distros/debian.svg" class="rec-icon" alt="Debian">
+<span class="rec-num">5</span>
+<h2>Debian</h2>
+<p class="rec-tagline">Фундамент, на котором стоит пол-Linux</p>
+<p>Debian — <strong>отец-основатель</strong>. Ubuntu, Mint, Pop!_OS, elementary, Kali, Astra, Raspberry Pi OS — все они выросли из Debian. Если ты пользуешься Ubuntu, ты уже пользуешься Debian-подобной системой.</p>
+<p>Главная ценность Debian — <strong>стабильность и свобода</strong>. Общественный контракт, никакой корпорации, релизы раз в 2 года, поддержка 5 лет. Один раз поставил — работает годами. Идеально для серверов и для домашних «рабочих лошадок», которые должны просто работать.</p>
+<p>Debian — это <strong>эталон надёжности</strong>. Если программа собирается в Debian, она соберётся везде. Если она работает в Debian, она будет работать в любой системе. Debian — это фундамент, на котором держится пол-Linux-мира.</p>
+<p>Минус — <strong>старые пакеты</strong>. Иногда очень старые. Свежий софт приходится ставить через backports, Flatpak или сборку из исходников. Зато за стабильность платишь свежестью — и это честный обмен.</p>
+<div class="rec-my">
+<strong>Почему советую:</strong> если тебе нужна система, которая не подведёт — сервер, домашний ПК родителям, рабочая машина. Debian не удивит, но и не сломается.
+</div>
+<div class="rec-links">
+<a href="distros/debian.html">Подробнее →</a>
+</div>
+</div>
+
+<h2>Кому что из этого списка</h2>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Если ты…</th><th>Попробуй</th></tr></thead>
+<tbody>
+<tr><td>Первый раз ставишь Linux</td><td><a href="distros/ubuntu.html">Ubuntu</a> или <a href="distros/mint.html">Linux Mint</a></td></tr>
+<tr><td>Хочешь свежие технологии</td><td><a href="distros/fedora.html">Fedora</a></td></tr>
+<tr><td>Хочешь понять Linux изнутри</td><td><a href="distros/arch.html">Arch</a></td></tr>
+<tr><td>Хочешь «поставил и забыл» на сервер</td><td><a href="distros/debian.html">Debian</a></td></tr>
+<tr><td>Хочешь декларативную систему</td><td><a href="distros/nixos.html">NixOS</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Честно про этот список</h2>
+<p>Тут <strong>нет Linux Mint</strong>, хотя он отличный — просто я его использую на MacBook, а не на ПК. Нет <strong>Pop!_OS</strong>, <strong>openSUSE</strong>, <strong>Gentoo</strong> — не потому что они плохие, а потому что это <em>мои</em> рекомендации, а не универсальный рейтинг.</p>
+<p>Со временем список может меняться. Если попробую что-то новое и оно зайдёт — добавлю. Если разочаруюсь — уберу. Здесь только то, за что я готов отвечать лично.</p>
+
+<p style="color:var(--muted);margin-top:2rem;">— Артём (Monadei), Ubuntu 26.04 на ПК, Linux Mint на MacBook Pro 2014</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+</body></html>

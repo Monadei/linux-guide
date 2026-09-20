@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Генеалогическое древо — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Генеалогическое древо — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Генеалогическое древо</h1>
+<p class="lead">Кто от кого произошёл. Четыре главных корня и всё, что выросло.</p>
+
+<div style="background: var(--panel); padding: 1.5rem; border: 1px solid var(--border); overflow-x: auto;">
+<pre style="font-size: 0.75rem; line-height: 1.5; color: var(--text); margin: 0;">
+<span style="color: var(--accent);">ЯДРО LINUX (1991)</span>
+│
+├── <span style="color:#d70a53;">Debian (1993)</span>
+│   ├── <span style="color:#e95420;">Ubuntu (2004)</span>
+│   │   ├── <span style="color:#87cf3e;">Linux Mint (2006)</span>
+│   │   │   └── <span style="color:#7bb842;">LMDE</span>
+│   │   ├── <span style="color:#48b9c7;">Pop!_OS (2017)</span>
+│   │   ├── <span style="color:#15a6f0;">Zorin OS (2008)</span>
+│   │   ├── <span style="color:#64bae2;">elementary OS (2011)</span>
+│   │   ├── <span style="color:#1d99f3;">KDE Neon (2016)</span>
+│   │   ├── <span style="color:#7c5cbf;">Ubuntu Budgie</span>
+│   │   ├── <span style="color:#87cf3e;">Ubuntu MATE</span>
+│   │   ├── <span style="color:#d94d4d;">Ubuntu Studio</span>
+│   │   ├── <span style="color:#0068c8;">Lubuntu / Xubuntu / Kubuntu</span>
+│   │   └── <span style="color:#0066cc;">Kali Linux (2013)</span>
+│   ├── <span style="color:#00a2e8;">MX Linux (2014)</span>
+│   │   └── <span style="color:#2c8fb8;">AV Linux</span>
+│   ├── <span style="color:#cf1e2a;">antiX (2007)</span>
+│   ├── <span style="color:#16d0ff;">Parrot OS (2013)</span>
+│   ├── <span style="color:#0080ff;">Deepin (2004)</span>
+│   ├── <span style="color:#3874d8;">Qubes OS (2010)</span>
+│   ├── <span style="color:#0066b3;">Astra Linux (2008)</span>
+│   ├── <span style="color:#3d7c5d;">PureOS (2017)</span>
+│   └── <span style="color:#c51a4a;">Raspberry Pi OS</span>
+│
+├── <span style="color:#932279;">Slackware (1993)</span>
+│   └── <span style="color:#0f5f9c;">SUSE (1992)</span>
+│       └── <span style="color:#73ba25;">openSUSE (2005)</span>
+│           ├── <span style="color:#73ba25;">Leap</span>
+│           ├── <span style="color:#73ba25;">Tumbleweed</span>
+│           └── <span style="color:#73ba25;">MicroOS</span>
+│
+├── <span style="color:#c74634;">Red Hat (1994)</span>
+│   ├── <span style="color:#51a2da;">Fedora (2003)</span>
+│   │   ├── <span style="color:#4a90d9;">Silverblue</span>
+│   │   ├── <span style="color:#4a90d9;">Kinoite</span>
+│   │   ├── <span style="color:#4a90d9;">CoreOS</span>
+│   │   ├── <span style="color:#cf2029;">Nobara</span>
+│   │   └── <span style="color:#7c3aed;">Bazzite</span>
+│   └── <span style="color:#3b7ab8;">RHEL (2000)</span>
+│       ├── <span style="color:#932279;">CentOS (2004)</span>
+│       │   └── <span style="color:#932279;">CentOS Stream</span>
+│       ├── <span style="color:#3b7ab8;">AlmaLinux (2021)</span>
+│       ├── <span style="color:#10b981;">Rocky Linux (2021)</span>
+│       └── <span style="color:#c74634;">Oracle Linux (2006)</span>
+│
+└── <span style="color:#1793d1;">Arch Linux (2002)</span>
+    ├── <span style="color:#35bfa6;">Manjaro (2011)</span>
+    ├── <span style="color:#a78bfa;">EndeavourOS (2019)</span>
+    ├── <span style="color:#00b8d4;">CachyOS (2021)</span>
+    ├── <span style="color:#c92a2a;">Garuda (2020)</span>
+    ├── <span style="color:#1a9fff;">SteamOS (2022)</span>
+    ├── <span style="color:#a0a0a0;">BlackArch</span>
+    ├── <span style="color:#4a5568;">Artix</span>
+    ├── <span style="color:#a78bfa;">Parabola</span>
+    └── <span style="color:#2c8fb8;">RebornOS</span>
+
+<span style="color: var(--accent);">НЕЗАВИСИМЫЕ</span>
+├── <span style="color:#a78bfa;">Gentoo (2000)</span>
+│   └── <span style="color:#2d6e2d;">Calculate Linux</span>
+├── <span style="color:#478061;">Void Linux (2008)</span>
+├── <span style="color:#5277c3;">NixOS (2013)</span>
+├── <span style="color:#0d597f;">Alpine (2005)</span>
+│   └── <span style="color:#5a9e5c;">postmarketOS</span>
+├── <span style="color:#4c8ff0;">Solus (2015)</span>
+├── <span style="color:#00c7fd;">Clear Linux (2015)</span>
+└── <span style="color:#8b7355;">Tiny Core</span>
+</pre>
+</div>
+
+<p style="color: var(--muted); margin-top: 1rem;">Клик по названию в каталоге — переход на страницу дистрибутива.</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

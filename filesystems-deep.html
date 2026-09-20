@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Файловые системы — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Файловые системы</h1>
+<p class="lead">ext4, Btrfs, XFS, ZFS, F2FS — что выбрать и почему.</p>
+
+<h2>ext4</h2>
+<p>Дефолт для большинства Linux-систем. Проверенная, стабильная, быстрая.</p>
+<ul>
+<li><strong>Плюсы:</strong> стабильность, простая, отлично документирована, проверена 15+ лет</li>
+<li><strong>Минусы:</strong> нет снапшотов, нет встроенного сжатия, нет контроля целостности</li>
+<li><strong>Когда:</strong> обычный десктоп, сервер, всё что требует надёжности без наворотов</li>
+<li><strong>Размер:</strong> до 1 ЭБ, файл до 16 ТБ</li>
+</ul>
+
+<h2>Btrfs</h2>
+<p>Современная ФС от Oracle. По умолчанию в Fedora, openSUSE. Активно используется в Synology NAS.</p>
+<ul>
+<li><strong>Плюсы:</strong> снапшоты, subvolumes, сжатие (zstd), контроль целостности, RAID на уровне ФС, можно менять размер онлайн</li>
+<li><strong>Минусы:</strong> исторически нестабильна (сейчас лучше), RAID 5/6 проблематичен, сложнее ext4</li>
+<li><strong>Когда:</strong> если нужны снапшоты и откаты (Timeshift на Btrfs — идеален)</li>
+<li><strong>Инструменты:</strong> <code>btrfs subvolume list</code>, <code>btrfs filesystem usage</code></li>
+</ul>
+<p>Пример: снапшот перед обновлением:</p>
+<pre><code>sudo btrfs subvolume snapshot / /.snapshots/$(date +%Y%m%d)</code></pre>
+
+<h2>XFS</h2>
+<p>От SGI. Стандарт в RHEL. Отличная для больших файлов.</p>
+<ul>
+<li><strong>Плюсы:</strong> очень быстрая на больших файлах, надёжная, поддержка до 8 ЭБ, онлайн-дефрагментация</li>
+<li><strong>Минусы:</strong> нельзя уменьшить размер, нет снапшотов</li>
+<li><strong>Когда:</strong> серверы, базы данных, работа с большими файлами</li>
+</ul>
+
+<h2>ZFS</h2>
+<p>От Sun, теперь OpenZFS. Стандарт для NAS и серверов.</p>
+<ul>
+<li><strong>Плюсы:</strong> снапшоты, дедупликация, сжатие, RAIDZ, контроль целостности, шифрование</li>
+<li><strong>Минусы:</strong> требует много RAM (1 ГБ на 1 ТБ), лицензия CDDL (не в ядре Linux), сложная</li>
+<li><strong>Когда:</strong> NAS, серверы с большими объёмами, где важна сохранность данных</li>
+<li><strong>Установка:</strong> <code>sudo apt install zfsutils-linux</code></li>
+</ul>
+
+<h2>F2FS</h2>
+<p>Flash-Friendly File System, от Samsung. Оптимизирована для флешек и SSD.</p>
+<ul>
+<li><strong>Плюсы:</strong> меньше износ SSD, лучше работает на SD-картах</li>
+<li><strong>Минусы:</strong> менее распространена, не так хорошо изучена</li>
+<li><strong>Когда:</strong> флешки, SD-карты, eMMC, Android-устройства</li>
+</ul>
+
+<h2>NTFS и exFAT</h2>
+<p>Для обмена с Windows.</p>
+<ul>
+<li><strong>NTFS</strong> — поддерживается через <code>ntfs-3g</code> или ядро (ntfs3)</li>
+<li><strong>exFAT</strong> — современный, поддержка в ядре, лучше для больших флешек</li>
+<li><strong>FAT32</strong> — старый, ограничение 4 ГБ на файл</li>
+</ul>
+<pre><code>sudo apt install exfat-fuse exfatprogs
+sudo apt install ntfs-3g</code></pre>
+
+<h2>Сравнительная таблица</h2>
+<table class="data">
+<thead><tr><th>ФС</th><th>Снапшоты</th><th>Сжатие</th><th>Уменьшить</th><th>Для</th></tr></thead>
+<tbody>
+<tr><td>ext4</td><td>нет</td><td>нет</td><td>да</td><td>десктоп, сервер</td></tr>
+<tr><td>Btrfs</td><td>да</td><td>да</td><td>да</td><td>десктоп с откатами</td></tr>
+<tr><td>XFS</td><td>нет</td><td>нет</td><td>нет</td><td>большие файлы, сервер</td></tr>
+<tr><td>ZFS</td><td>да</td><td>да</td><td>да</td><td>NAS, сервер</td></tr>
+<tr><td>F2FS</td><td>нет</td><td>нет</td><td>да</td><td>флешки, SSD</td></tr>
+</tbody>
+</table>
+
+<h2>Создание файловой системы</h2>
+<pre><code>sudo mkfs.ext4 /dev/sdb1
+sudo mkfs.btrfs /dev/sdb1
+sudo mkfs.xfs /dev/sdb1</code></pre>
+<p><strong>Внимание:</strong> уничтожит все данные на разделе.</p>
+
+<h2>Проверка целостности</h2>
+<pre><code>sudo fsck /dev/sdb1     # ext4
+sudo btrfs check /dev/sdb1
+sudo xfs_repair /dev/sdb1</code></pre>
+<p>Проверять только на размонтированном разделе. Или использовать <code>sudo touch /forcefsck</code> — при следующей загрузке.</p>
+
+<h2>Изменение размера</h2>
+<pre><code># ext4
+sudo resize2fs /dev/sdb1
+
+# Btrfs
+sudo btrfs filesystem resize max /mount/point
+
+# XFS — только увеличивать
+sudo xfs_growfs /mount/point</code></pre>
+
+<h2>Что выбрать для дома</h2>
+<ul>
+<li>Просто работает → <strong>ext4</strong></li>
+<li>Хочу снапшоты и откаты → <strong>Btrfs</strong></li>
+<li>NAS с бэкапами → <strong>ZFS</strong></li>
+<li>Флешка → <strong>exFAT</strong> или <strong>F2FS</strong></li>
+<li>Большие файлы на сервере → <strong>XFS</strong></li>
+</ul>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

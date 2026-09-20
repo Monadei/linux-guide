@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Как я ушёл с Windows — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Как я ушёл с Windows — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>Как я перешёл с Windows на Linux</h1>
+<p class="lead">Личная история. Без драмы, но честно.</p>
+
+<h2>Почему ушёл</h2>
+<p>Windows 10 начал раздражать. Постоянные обновления, которые ломают драйверы. Телеметрия, которую нельзя полностью отключить. Реклама в меню «Пуск». Принудительные перезагрузки. Ощущение, что система не твоя.</p>
+
+<h2>Первый опыт</h2>
+<p>Сначала попробовал Ubuntu на Live USB. Загрузился, посмотрел — понравилось. Потом поставил рядом с Windows, чтобы был «путь отступления». Через месяц понял, что в Windows не захожу.</p>
+
+<h2>Что было сложно</h2>
+<ul>
+<li>Первая установка драйвера NVIDIA — пару раз получил чёрный экран</li>
+<li>Игры — часть не запускалась, пришлось разбираться с Proton</li>
+<li>Привычка к MS Office — перешёл на LibreOffice и Google Docs</li>
+<li>Некоторые программы (Adobe, 1С) — заменил или использую через Wine</li>
+</ul>
+
+<h2>Что стало проще</h2>
+<ul>
+<li>Обновления — когда я хочу, а не когда Microsoft решит</li>
+<li>Установка софта — одной командой или через центр приложений</li>
+<li>Терминал — быстро, гибко, мощно</li>
+<li>Кастомизация — можно сделать систему под себя</li>
+<li>Никакой рекламы и телеметрии</li>
+</ul>
+
+<h2>Что использую сейчас</h2>
+<ul>
+<li><strong>Ubuntu 26.04 LTS</strong> — основная система</li>
+<li><strong>GNOME 50 на Wayland</strong> — рабочее окружение</li>
+<li><strong>Тема Aura-Glass</strong> — визуально приятно</li>
+<li><strong>Firefox + Chrome</strong> — браузеры</li>
+<li><strong>VS Code</strong> — редактор</li>
+<li><strong>Steam + Proton</strong> — игры</li>
+</ul>
+
+<h2>Совет тем, кто думает</h2>
+<p>Не спеши сносить Windows. Поставь Linux рядом. Попробуй неделю. Если не зайдёт — всегда можно вернуться. Но я почти уверен, что не вернёшься.</p>
+
+<h2>Итог</h2>
+<p>Linux — не идеален. Но он мой. Я контролирую систему, а не она меня. Это дорогого стоит.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

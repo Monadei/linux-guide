@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>История sudo — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>История одной команды: sudo</h1>
+<p class="lead">Как маленькая программа изменила подход к администрированию.</p>
+
+<h2>До sudo</h2>
+<p>В 1970-х в Unix был только <code>su</code> (substitute user). Чтобы выполнить команду от имени root, ты:</p>
+<ol>
+<li>Вводил <code>su</code></li>
+<li>Вводил пароль root</li>
+<li>Выполнял команду</li>
+<li>Выходил через <code>exit</code></li>
+</ol>
+<p>Проблема: для этого нужно было знать пароль root. А если работают несколько админов — пароль у всех один. И никакого лога, кто что делал.</p>
+
+<h2>1980: появление sudo</h2>
+<p>Боб Кокран и Клифф Спенсер из SUNY/Buffalo разработали <code>sudo</code> — «superuser do». Идея: пользователь вводит свой пароль, а не root'а. Система проверяет по файлу <code>/etc/sudoers</code>, что ему разрешено, и выполняет команду от имени root.</p>
+
+<h2>1994: переход в open source</h2>
+<p>Тодд Миллер (Todd C. Miller) взял проект и поддерживает его до сих пор — уже 30+ лет. sudo стала стандартом де-факто в Unix-подобных системах.</p>
+
+<h2>Что даёт sudo</h2>
+<ul>
+<li><strong>Свой пароль</strong>, а не root'а — каждый админ знает только свой</li>
+<li><strong>Гибкая настройка</strong> — кому что разрешено, в <code>/etc/sudoers</code></li>
+<li><strong>Логи</strong> — видно, кто и что выполнял</li>
+<li><strong>Таймаут</strong> — после первого ввода пароль запоминается на 15 минут</li>
+<li><strong>Ограничения</strong> — можно разрешить только конкретные команды</li>
+</ul>
+
+<h2>Как это выглядит</h2>
+<pre><code>sudo apt install firefox</code></pre>
+<p>Что происходит:</p>
+<ol>
+<li>sudo проверяет, есть ли пользователь в <code>/etc/sudoers</code></li>
+<li>Спрашивает пароль (свой)</li>
+<li>Проверяет права</li>
+<li>Выполняет команду от root</li>
+<li>Записывает в лог</li>
+</ol>
+
+<h2>Конфигурация</h2>
+<p>Файл <code>/etc/sudoers</code>. Редактировать только через <code>visudo</code> — он проверяет синтаксис и не даст сохранить сломанный файл.</p>
+<pre><code>sudo visudo</code></pre>
+<p>Пример: разрешить пользователю <code>monadei</code> команды apt без пароля:</p>
+<pre><code>monadei ALL=(ALL) NOPASSWD: /usr/bin/apt</code></pre>
+
+<h2>Альтернативы</h2>
+<ul>
+<li><strong>doas</strong> — минималистичная альтернатива из OpenBSD, ~500 строк кода против 100 000 у sudo</li>
+<li><strong>pkexec</strong> — используется в GNOME и KDE для графических запросов пароля</li>
+<li><strong>run0</strong> — новая утилита systemd (2024), задумана как замена sudo</li>
+</ul>
+
+<h2>Пасхалка</h2>
+<p>Если ввести:</p>
+<pre><code>sudo make me a sandwich</code></pre>
+<p>sudo ответит:</p>
+<pre><code>Okay.</code></pre>
+<p>А если написать <code>make me a sandwich</code> без sudo — ответит <code>What? Make it yourself.</code>. Это наследие XKCD комикса №149.</p>
+
+<h2>В России</h2>
+<p>sudo включён в большинство дистрибутивов. В Ubuntu пользователь, созданный при установке, автоматически получает права sudo. В Debian — надо добавить в группу <code>sudo</code>:</p>
+<pre><code>usermod -aG sudo monadei</code></pre>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

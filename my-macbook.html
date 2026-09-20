@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Мой MacBook 2014 — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Мой MacBook 2014 — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+
+<h1>MacBook Pro 2014 под Linux Mint</h1>
+<p class="lead">Как старый мак ожил благодаря Linux.</p>
+
+<h2>Что было</h2>
+<p>MacBook Pro 2014 года с macOS. Последняя официально поддерживаемая версия — macOS Big Sur (2020). После этого Apple перестала выпускать обновления. Ноутбук работал, но:</p>
+<ul>
+<li>Браузеры не обновлялись</li>
+<li>Многие сайты перестали открываться</li>
+<li>Приложения требовали новых версий системы</li>
+<li>Батарея держала всё хуже</li>
+</ul>
+
+<h2>Что стало</h2>
+<p>Поставил Linux Mint с Cinnamon. Теперь:</p>
+<ul>
+<li>Все браузеры свежие</li>
+<li>Все сайты открываются</li>
+<li>Система обновляется каждые 2 года</li>
+<li>Батарея держит лучше, чем на macOS</li>
+<li>Ноутбук работает быстрее, чем в 2014</li>
+</ul>
+
+<h2>Что работает</h2>
+<ul>
+<li>Wi-Fi</li>
+<li>Bluetooth</li>
+<li>Камера</li>
+<li>Микрофон</li>
+<li>Звук</li>
+<li>Клавиатура с подсветкой</li>
+<li>Тачпад (мультитач)</li>
+<li>Регулировка яркости</li>
+<li>Порт HDMI</li>
+<li>SD-карта</li>
+<li>USB</li>
+<li>Зарядка</li>
+</ul>
+
+<h2>Что не работает или работает хуже</h2>
+<ul>
+<li>Touch Bar (на моделях с ним)</li>
+<li>FaceTime HD камера — иногда с артефактами</li>
+<li>Спящий режим — иногда не выходит корректно</li>
+<li>Автоматическая яркость клавиатуры — работает вручную</li>
+</ul>
+
+<h2>Почему Cinnamon</h2>
+<p>Cinnamon — привычный интерфейс. Панель снизу, меню, значки. Как классический рабочий стол. Не надо переучиваться. И работает быстро на старом железе.</p>
+
+<h2>Выводы</h2>
+<p>MacBook 2014 работает под Linux лучше, чем под последней официальной macOS. Это пример того, как Linux продлевает жизнь железу, которое производитель решил «устарелым».</p>
+<p>Если у тебя старый Mac — попробуй Linux. Не пожалеешь.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

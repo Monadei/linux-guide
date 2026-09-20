@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Дистрибутивы Linux — Linux Guide</title>
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/extra.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta property="og:image" content="../icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="../index.html">Главная</a><a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a><a href="../history.html">История</a>
+<a href="index.html" class="active">Дистрибутивы</a><a href="../about.html">Обо мне</a>
+<a href="../my-recommendations.html">Рекомендую</a><a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Дистрибутивы Linux</h1>
+<p class="lead">Полный каталог дистрибутивов Linux, сгруппированных по семействам и назначению. Включает как популярные, так и нишевые проекты 2025–2026 годов.</p>
+
+<h2>Семейство Debian</h2>
+<div class="cards">
+<article class="card"><img src="../icons/distros/debian.svg" class="distro-icon" alt="Debian" loading="lazy"><h3>Debian</h3><p>Отец семейства.</p><a href="debian.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/ubuntu.svg" class="distro-icon" alt="Ubuntu" loading="lazy"><h3>Ubuntu</h3><p>Самый узнаваемый Linux.</p><a href="ubuntu.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/mint.svg" class="distro-icon" alt="Linux Mint" loading="lazy"><h3>Linux Mint</h3><p>Уютный десктоп.</p><a href="mint.html">Подробнее →</a></article>
+<article class="card"><h3>LMDE</h3><p>Mint без Ubuntu.</p><a href="lmde.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/pop-os.svg" class="distro-icon" alt="Pop!_OS" loading="lazy"><h3>Pop!_OS</h3><p>От System76.</p><a href="pop-os.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/zorin.svg" class="distro-icon" alt="Zorin OS" loading="lazy"><h3>Zorin OS</h3><p>Для мигрантов с Windows.</p><a href="zorin.html">Подробнее →</a></article>
+<article class="card"><h3>Zorin OS Lite</h3><p>Облегчённая версия.</p><a href="zorinlite.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/elementary.svg" class="distro-icon" alt="elementary OS" loading="lazy"><h3>elementary OS</h3><p>Самый дизайнерский.</p><a href="elementary.html">Подробнее →</a></article>
+<article class="card"><h3>KDE Neon</h3><p>Свежий Plasma.</p><a href="kde-neon.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/kali.svg" class="distro-icon" alt="Kali Linux" loading="lazy"><h3>Kali Linux</h3><p>Пентест.</p><a href="kali.html">Подробнее →</a></article>
+<article class="card"><h3>Parrot OS</h3><p>Безопасность и анонимность.</p><a href="parrot.html">Подробнее →</a></article>
+<article class="card"><h3>MX Linux</h3><p>Debian + утилиты.</p><a href="mxlinux.html">Подробнее →</a></article>
+<article class="card"><h3>antiX</h3><p>Ультралёгкий.</p><a href="antix.html">Подробнее →</a></article>
+<article class="card"><h3>Puppy Linux</h3><p>Грузится в RAM.</p><a href="puppy.html">Подробнее →</a></article>
+<article class="card"><h3>Lubuntu</h3><p>Ubuntu с LXQt.</p><a href="lubuntu.html">Подробнее →</a></article>
+<article class="card"><h3>Xubuntu</h3><p>Ubuntu с Xfce.</p><a href="xubuntu.html">Подробнее →</a></article>
+<article class="card"><h3>Kubuntu</h3><p>Ubuntu с KDE.</p><a href="kubuntu.html">Подробнее →</a></article>
+<article class="card"><h3>Ubuntu Budgie</h3><p>С Budgie.</p><a href="ubuntu-budgie.html">Подробнее →</a></article>
+<article class="card"><h3>Ubuntu MATE</h3><p>С MATE.</p><a href="ubuntu-mate.html">Подробнее →</a></article>
+<article class="card"><h3>Ubuntu Studio</h3><p>Для мультимедиа.</p><a href="ubuntu-studio.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/deepin.svg" class="distro-icon" alt="Deepin" loading="lazy"><h3>Deepin</h3><p>Красивый китайский.</p><a href="deepin.html">Подробнее →</a></article>
+<article class="card"><h3>Raspberry Pi OS</h3><p>Для Raspberry Pi.</p><a href="raspberry-pi-os.html">Подробнее →</a></article>
+<article class="card"><h3>Bodhi Linux</h3><p>Лёгкий, Moksha.</p><a href="bodhi.html">Подробнее →</a></article>
+<article class="card"><h3>Regolith Linux</h3><p>Ubuntu + i3.</p><a href="regolith.html">Подробнее →</a></article>
+<article class="card"><h3>Kaisen Linux</h3><p>Для сисадминов.</p><a href="kaisen.html">Подробнее →</a></article>
+<article class="card"><h3>Nitrux</h3><p>AppImage + OpenRC.</p><a href="nitrux.html">Подробнее →</a></article>
+<article class="card"><h3>Rhino Linux</h3><p>Rolling Ubuntu.</p><a href="rhino.html">Подробнее →</a></article>
+<article class="card"><h3>Vanilla OS</h3><p>Иммутабельная Ubuntu.</p><a href="vanilla.html">Подробнее →</a></article>
+<article class="card"><h3>NebiOS</h3><p>NebiDE на Wayland.</p><a href="nebios.html">Подробнее →</a></article>
+<article class="card"><h3>AnduinOS</h3><p>Ubuntu как Windows 11.</p><a href="anduinos.html">Подробнее →</a></article>
+<article class="card"><h3>MakuluLinux LinDoz</h3><p>Cinnamon под Windows.</p><a href="makulu-lindoz.html">Подробнее →</a></article>
+<article class="card"><h3>MX Moksha</h3><p>MX + Enlightenment.</p><a href="mx-moksha.html">Подробнее →</a></article>
+<article class="card"><h3>Vinari OS</h3><p>Быстрый Debian для старого и нового.</p><a href="vinari.html">Подробнее →</a></article>
+<article class="card"><h3>Linux Lite</h3><p>Дружелюбный и лёгкий.</p><a href="linuxlite.html">Подробнее →</a></article>
+<article class="card"><h3>EXE GNU/Linux</h3><p>Ретро Devuan для спасения.</p><a href="exe.html">Подробнее →</a></article>
+<article class="card"><h3>GoboLinux</h3><p>Уникальная ФС.</p><a href="gobolinux.html">Подробнее →</a></article>
+<article class="card"><h3>4MLinux</h3><p>Минимализм для мультимедиа.</p><a href="4mlinux.html">Подробнее →</a></article>
+</div>
+
+<h2>Семейство Red Hat</h2>
+<div class="cards">
+<article class="card"><img src="../icons/distros/fedora.svg" class="distro-icon" alt="Fedora" loading="lazy"><h3>Fedora</h3><p>Полигон новых технологий.</p><a href="fedora.html">Подробнее →</a></article>
+<article class="card"><h3>Fedora Silverblue</h3><p>Иммутабельная GNOME.</p><a href="fedora-silverblue.html">Подробнее →</a></article>
+<article class="card"><h3>Fedora Kinoite</h3><p>Иммутабельная KDE.</p><a href="fedora-kinoite.html">Подробнее →</a></article>
+<article class="card"><h3>Fedora CoreOS</h3><p>Для контейнеров.</p><a href="fedora-coreos.html">Подробнее →</a></article>
+<article class="card"><h3>Fedora Asahi Remix</h3><p>Для Apple Silicon.</p><a href="asahi.html">Подробнее →</a></article>
+<article class="card"><h3>Fedora Hummingbird</h3><p>Для AI-разработчиков.</p><a href="hummingbird.html">Подробнее →</a></article>
+<article class="card"><h3>AlmaLinux</h3><p>1:1 клон RHEL.</p><a href="almalinux.html">Подробнее →</a></article>
+<article class="card"><h3>Rocky Linux</h3><p>Клон RHEL.</p><a href="rocky.html">Подробнее →</a></article>
+<article class="card"><h3>CentOS Stream</h3><p>Между Fedora и RHEL.</p><a href="centos-stream.html">Подробнее →</a></article>
+<article class="card"><h3>Oracle Linux</h3><p>От Oracle.</p><a href="oracle-linux.html">Подробнее →</a></article>
+<article class="card"><h3>Ultramarine Linux</h3><p>Fedora для повседневного использования.</p><a href="ultramarine.html">Подробнее →</a></article>
+<article class="card"><h3>Vojtux</h3><p>Fedora для слабовидящих.</p><a href="vojtux.html">Подробнее →</a></article>
+</div>
+
+<h2>Семейство Arch</h2>
+<div class="cards">
+<article class="card"><img src="../icons/distros/arch.svg" class="distro-icon" alt="Arch Linux" loading="lazy"><h3>Arch Linux</h3><p>Минимализм и вики.</p><a href="arch.html">Подробнее →</a></article>
+<article class="card"><h3>Artix</h3><p>Arch без systemd.</p><a href="artix.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/manjaro.svg" class="distro-icon" alt="Manjaro" loading="lazy"><h3>Manjaro</h3><p>Arch с установщиком.</p><a href="manjaro.html">Подробнее →</a></article>
+<article class="card"><h3>EndeavourOS</h3><p>Почти чистый Arch.</p><a href="endeavouros.html">Подробнее →</a></article>
+<article class="card"><h3>CachyOS</h3><p>Для игр и скорости.</p><a href="cachyos.html">Подробнее →</a></article>
+<article class="card"><h3>Garuda Linux</h3><p>Брутальный дизайн.</p><a href="garuda.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/steamos.svg" class="distro-icon" alt="SteamOS" loading="lazy"><h3>SteamOS</h3><p>Игровая ОС Valve.</p><a href="steamos.html">Подробнее →</a></article>
+<article class="card"><h3>BlackArch</h3><p>Arch + пентест.</p><a href="blackarch.html">Подробнее →</a></article>
+<article class="card"><h3>Archcraft</h3><p>Красивый Arch.</p><a href="archcraft.html">Подробнее →</a></article>
+<article class="card"><h3>RebornOS</h3><p>Arch с выбором DE.</p><a href="rebornos.html">Подробнее →</a></article>
+<article class="card"><h3>blendOS</h3><p>Гибрид.</p><a href="blendos.html">Подробнее →</a></article>
+<article class="card"><h3>Noid Linux</h3><p>Минималистичный Void.</p><a href="noid.html">Подробнее →</a></article>
+<article class="card"><h3>AgarimOS</h3><p>Респин Void Linux.</p><a href="agarimos.html">Подробнее →</a></article>
+<article class="card"><h3>ShaniOS</h3><p>Иммутабельный Arch.</p><a href="shanios.html">Подробнее →</a></article>
+<article class="card"><h3>Omega Linux</h3><p>Arch для старого железа.</p><a href="omega.html">Подробнее →</a></article>
+<article class="card"><h3>ElysiaOS</h3><p>Hyprland + аниме-стиль.</p><a href="elysiaos.html">Подробнее →</a></article>
+<article class="card"><h3>Kazeta</h3><p>Ретро-консоль 90-х.</p><a href="kazeta.html">Подробнее →</a></article>
+<article class="card"><h3>Porteus</h3><p>Модульный Slackware.</p><a href="porteus.html">Подробнее →</a></article>
+<article class="card"><h3>Chimera Linux</h3><p>Linux + FreeBSD tools.</p><a href="chimera.html">Подробнее →</a></article>
+</div>
+
+<h2>Семейство SUSE</h2>
+<div class="cards">
+<article class="card"><img src="../icons/distros/opensuse.svg" class="distro-icon" alt="openSUSE" loading="lazy"><h3>openSUSE</h3><p>Leap и Tumbleweed.</p><a href="opensuse.html">Подробнее →</a></article>
+<article class="card"><h3>openSUSE MicroOS</h3><p>Иммутабельный.</p><a href="microos.html">Подробнее →</a></article>
+</div>
+
+<h2>Независимые</h2>
+<div class="cards">
+<article class="card"><img src="../icons/distros/gentoo.svg" class="distro-icon" alt="Gentoo" loading="lazy"><h3>Gentoo</h3><p>Из исходников.</p><a href="gentoo.html">Подробнее →</a></article>
+<article class="card"><h3>Slackware</h3><p>Старейший живой.</p><a href="slackware.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/void.svg" class="distro-icon" alt="Void Linux" loading="lazy"><h3>Void Linux</h3><p>Без systemd.</p><a href="void.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/nixos.svg" class="distro-icon" alt="NixOS" loading="lazy"><h3>NixOS</h3><p>Декларативная.</p><a href="nixos.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/alpine.svg" class="distro-icon" alt="Alpine Linux" loading="lazy"><h3>Alpine Linux</h3><p>Для контейнеров.</p><a href="alpine.html">Подробнее →</a></article>
+<article class="card"><h3>Solus</h3><p>Budgie.</p><a href="solus.html">Подробнее →</a></article>
+<article class="card"><h3>Clear Linux</h3><p>Intel.</p><a href="clear.html">Подробнее →</a></article>
+<article class="card"><h3>PCLinuxOS</h3><p>Прост для новичков.</p><a href="pclinuxos.html">Подробнее →</a></article>
+<article class="card"><h3>AerynOS</h3><p>Атомарные обновления, moss.</p><a href="aerynos.html">Подробнее →</a></article>
+<article class="card"><h3>KDE Linux</h3><p>Официальный от KDE.</p><a href="kde-linux.html">Подробнее →</a></article>
+<article class="card"><h3>Bedrock Linux</h3><p>Мета-дистрибутив.</p><a href="bedrock.html">Подробнее →</a></article>
+<article class="card"><h3>Dragora GNU/Linux-Libre</h3><p>Аргентинский, FSF.</p><a href="dragora.html">Подробнее →</a></article>
+<article class="card"><h3>Vendefoul Wolf</h3><p>Devuan + SysVinit.</p><a href="vendefoul.html">Подробнее →</a></article>
+<article class="card"><h3>Loss32</h3><p>Имитация Windows на Linux.</p><a href="loss32.html">Подробнее →</a></article>
+<article class="card"><h3>matrixOS</h3><p>Иммутабельный Gentoo.</p><a href="matrixos.html">Подробнее →</a></article>
+<article class="card"><h3>ENux</h3><p>На базе Bedrock.</p><a href="enux.html">Подробнее →</a></article>
+<article class="card"><h3>Origami Linux</h3><p>Fedora + COSMIC.</p><a href="origami.html">Подробнее →</a></article>
+<article class="card"><h3>FLOPPINUX</h3><p>Linux на одной дискете.</p><a href="floppinux.html">Подробнее →</a></article>
+</div>
+
+<h2>Российские дистрибутивы</h2>
+<div class="cards">
+<article class="card"><h3>ROSA Linux</h3><p>Наследник Mandriva.</p><a href="rosa.html">Подробнее →</a></article>
+<article class="card"><h3>ALT Linux</h3><p>Дом, школа, сервер.</p><a href="alt.html">Подробнее →</a></article>
+<article class="card"><h3>Astra Linux</h3><p>Сертифицирована.</p><a href="astra.html">Подробнее →</a></article>
+<article class="card"><h3>Calculate Linux</h3><p>На базе Gentoo.</p><a href="calculate.html">Подробнее →</a></article>
+</div>
+
+<h2>Игровые и мультимедиа</h2>
+<div class="cards">
+<article class="card"><h3>Nobara</h3><p>Fedora для геймеров.</p><a href="nobara.html">Подробнее →</a></article>
+<article class="card"><h3>Bazzite</h3><p>Игровая Fedora Atomic.</p><a href="bazzite.html">Подробнее →</a></article>
+<article class="card"><h3>ChimeraOS</h3><p>Своя консоль.</p><a href="chimeraos.html">Подробнее →</a></article>
+<article class="card"><h3>Batocera</h3><p>Ретро-консоль.</p><a href="batocera.html">Подробнее →</a></article>
+<article class="card"><h3>LibreELEC</h3><p>Kodi-медиацентр.</p><a href="libreelec.html">Подробнее →</a></article>
+<article class="card"><h3>AV Linux</h3><p>Для аудио и видео.</p><a href="avlinux.html">Подробнее →</a></article>
+<article class="card"><h3>NawaOS</h3><p>Лёгкий игровой Debian.</p><a href="nawaos.html">Подробнее →</a></article>
+</div>
+
+<h2>NAS и серверы</h2>
+<div class="cards">
+<article class="card"><h3>TrueNAS SCALE</h3><p>NAS с ZFS.</p><a href="truenas-scale.html">Подробнее →</a></article>
+<article class="card"><h3>OpenMediaVault</h3><p>Простой NAS.</p><a href="openmediavault.html">Подробнее →</a></article>
+<article class="card"><h3>Proxmox VE</h3><p>Виртуализация.</p><a href="proxmox.html">Подробнее →</a></article>
+<article class="card"><h3>EasyNAS</h3><p>NAS для начинающих.</p><a href="easynas.html">Подробнее →</a></article>
+<article class="card"><h3>Rockstor</h3><p>NAS на openSUSE + Btrfs.</p><a href="rockstor.html">Подробнее →</a></article>
+<article class="card"><h3>XigmaNAS</h3><p>FreeBSD + ZFS.</p><a href="xigmanas.html">Подробнее →</a></article>
+<article class="card"><h3>OviOS Linux</h3><p>Специализированная NAS.</p><a href="ovios.html">Подробнее →</a></article>
+</div>
+
+<h2>Роутеры и firewall</h2>
+<div class="cards">
+<article class="card"><h3>OpenWrt</h3><p>Прошивка для роутеров.</p><a href="openwrt.html">Подробнее →</a></article>
+<article class="card"><h3>OPNsense</h3><p>Firewall на FreeBSD.</p><a href="opnsense.html">Подробнее →</a></article>
+<article class="card"><h3>pfSense</h3><p>Firewall-стандарт.</p><a href="pfsense.html">Подробнее →</a></article>
+<article class="card"><h3>IPFire</h3><p>Мощный firewall.</p><a href="ipfire.html">Подробнее →</a></article>
+</div>
+
+<h2>Контейнеры и облако</h2>
+<div class="cards">
+<article class="card"><h3>Fedora CoreOS</h3><p>Для Kubernetes.</p><a href="fedora-coreos.html">Подробнее →</a></article>
+<article class="card"><h3>Photon OS</h3><p>От VMware.</p><a href="photon.html">Подробнее →</a></article>
+<article class="card"><h3>Ubuntu Core</h3><p>Для IoT.</p><a href="ubuntu-core.html">Подробнее →</a></article>
+</div>
+
+<h2>Мобильные</h2>
+<div class="cards">
+<article class="card"><h3>postmarketOS</h3><p>Linux на смартфонах.</p><a href="postmarketos.html">Подробнее →</a></article>
+<article class="card"><h3>Ubuntu Touch</h3><p>Мобильная Ubuntu.</p><a href="ubuntu-touch.html">Подробнее →</a></article>
+</div>
+
+<h2>Минималистичные</h2>
+<div class="cards">
+<article class="card"><h3>Tiny Core Linux</h3><p>16 МБ, в RAM.</p><a href="tinycore.html">Подробнее →</a></article>
+<article class="card"><h3>SliTaz</h3><p>40 МБ.</p><a href="slitaz.html">Подробнее →</a></article>
+</div>
+
+<h2>Только свободное ПО</h2>
+<div class="cards">
+<article class="card"><h3>Parabola</h3><p>Arch без проприетарного.</p><a href="parabola.html">Подробнее →</a></article>
+<article class="card"><h3>Trisquel</h3><p>Ubuntu без проприетарного.</p><a href="trisquel.html">Подробнее →</a></article>
+<article class="card"><h3>PureOS</h3><p>От Purism.</p><a href="pureos.html">Подробнее →</a></article>
+</div>
+
+<h2>Безопасность и анонимность</h2>
+<div class="cards">
+<article class="card"><img src="../icons/distros/tails.svg" class="distro-icon" alt="Tails" loading="lazy"><h3>Tails</h3><p>Анонимность через Tor.</p><a href="tails.html">Подробнее →</a></article>
+<article class="card"><img src="../icons/distros/qubes.svg" class="distro-icon" alt="Qubes OS" loading="lazy"><h3>Qubes OS</h3><p>Изоляция в VM.</p><a href="qubes.html">Подробнее →</a></article>
+</div>
+
+<h2>Умный дом и киоски</h2>
+<div class="cards">
+<article class="card"><h3>Home Assistant OS</h3><p>Для умного дома.</p><a href="homeassistant.html">Подробнее →</a></article>
+<article class="card"><h3>AnotterKiosk</h3><p>Для киосков.</p><a href="anotterkiosk.html">Подробнее →</a></article>
+</div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a>
+<a href="../my-recommendations.html">Рекомендую</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/extras.js"></script><script src="../js/fun.js"></script>
+<script src="../js/site-theme.js"></script>
+</body>
+</html>

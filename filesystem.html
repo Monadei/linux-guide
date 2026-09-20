@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Файловая система — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Файловая система изнутри</h1>
+<p class="lead">Как Linux хранит файлы и почему это по-другому, чем в Windows.</p>
+
+<h2>Всё — файл</h2>
+<p>В Linux даже устройства — файлы. Клавиатура — файл <code>/dev/input/event0</code>. Диск — <code>/dev/sda</code>. Процессы — папка <code>/proc/1234</code>. Это философия Unix.</p>
+
+<h2>Иерархия</h2>
+<pre><code>/
+├── bin → /usr/bin     основные команды
+├── boot               ядро и GRUB
+├── dev                устройства
+├── etc                конфиги
+├── home               домашние папки
+│   └── monadei        твоя папка
+├── lib → /usr/lib     библиотеки
+├── media              автомонтируемые диски
+├── mnt                ручное монтирование
+├── opt                сторонние программы
+├── proc               информация о процессах
+├── root               домашняя папка root
+├── sbin → /usr/sbin   команды админа
+├── srv                данные сервисов
+├── sys                информация о железе
+├── tmp                временные файлы (удаляется при перезагрузке)
+├── usr                программы и данные
+│   ├── bin            команды
+│   ├── lib            библиотеки
+│   ├── share          ресурсы
+│   └── local          вручную установленное
+└── var                изменяемые данные
+    ├── log            логи
+    ├── cache          кеш
+    └── lib            базы данных</code></pre>
+
+<h2>Права доступа</h2>
+<pre><code>-rwxr-xr-x 1 monadei monadei 4096 Sep 19 file.txt</code></pre>
+<ul>
+<li><code>-</code> — тип (файл, папка — <code>d</code>, ссылка — <code>l</code>)</li>
+<li><code>rwx</code> — права владельца (чтение, запись, выполнение)</li>
+<li><code>r-x</code> — права группы</li>
+<li><code>r-x</code> — права остальных</li>
+<li><code>monadei monadei</code> — владелец и группа</li>
+</ul>
+
+<h2>Числовая запись прав</h2>
+<ul>
+<li><code>r</code> = 4, <code>w</code> = 2, <code>x</code> = 1</li>
+<li><code>chmod 755 файл</code> = rwxr-xr-x (обычно для исполняемых)</li>
+<li><code>chmod 644 файл</code> = rw-r--r-- (обычно для обычных файлов)</li>
+<li><code>chmod 600 файл</code> = rw------- (приватные, например ключи SSH)</li>
+<li><code>chmod 700 папка</code> = rwx------ (приватная папка)</li>
+</ul>
+
+<h2>Смена владельца</h2>
+<pre><code>sudo chown monadei:monadei файл</code></pre>
+
+<h2>Жёсткие и мягкие ссылки</h2>
+<p><strong>Мягкая (symlink)</strong> — как ярлык. Указывает на путь:</p>
+<pre><code>ln -s /path/to/original link</code></pre>
+<p><strong>Жёсткая</strong> — то же самое содержимое, но другое имя:</p>
+<pre><code>ln /path/to/original link</code></pre>
+<p>Жёсткие ссылки работают только в пределах одной файловой системы.</p>
+
+<h2>inode</h2>
+<p>Каждый файл имеет inode — запись, где хранятся метаданные (права, владелец, размер, дата). Имя файла — это ссылка на inode. Посмотреть:</p>
+<pre><code>ls -i файл</code></pre>
+
+<h2>Файловые системы</h2>
+<ul>
+<li><strong>ext4</strong> — стандарт для Linux, надёжная, проверенная</li>
+<li><strong>Btrfs</strong> — современная, снапшоты, сжатие</li>
+<li><strong>XFS</strong> — для больших серверов</li>
+<li><strong>ZFS</strong> — мощная, для NAS</li>
+<li><strong>F2FS</strong> — для SSD и флешек</li>
+<li><strong>NTFS</strong> — Windows, монтируется через ntfs-3g</li>
+<li><strong>FAT32</strong> — старый, для EFI-раздела</li>
+</ul>
+
+<h2>Монтирование</h2>
+<p>В Linux нет «дисков C:». Всё — часть единого дерева. Подключить диск:</p>
+<pre><code>sudo mkdir /mnt/mydisk
+sudo mount /dev/sdb1 /mnt/mydisk</code></pre>
+<p>Отмонтировать:</p>
+<pre><code>sudo umount /mnt/mydisk</code></pre>
+<p>Автомонтирование при загрузке — через <code>/etc/fstab</code>.</p>
+
+<h2>Проверить место</h2>
+<pre><code>df -h        # все ФС и место
+du -sh ~     # размер домашней папки</code></pre>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

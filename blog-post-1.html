@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Как я делал этот сайт — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Как я делал этот сайт — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<p><a href="blog.html">← Все записи</a></p>
+<h1>Как я делал этот сайт</h1>
+<p class="lead">19 сентября 2026</p>
+
+<p>Начиналось всё с идеи: «давай сделаем сайт-руководство по всем дистрибутивам Linux». Я не думал, что из этого вырастет что-то большое. Думал — страниц пять, ну десять.</p>
+
+<p>Первая версия была на чистом HTML. Один файл. Потом CSS. Потом я понял, что 89 дистрибутивов в один файл не влезут — пришлось делать папки. Так появились <code>distros/</code>, <code>css/</code>, <code>js/</code>.</p>
+
+<h2>Что было сложно</h2>
+<p>Самое сложное — не написать код, а решить, что вообще должно быть на сайте. Когда я начал собирать список дистрибутивов, я думал, что их штук 20. Потом оказалось 50. Сейчас 89, и я знаю, что это не предел.</p>
+
+<p>Второе — оформить так, чтобы не было скучно. Терминальная эстетика с янтарным цветом — это, конечно, красиво, но пользователю хочется выбора. Так появились 30 цветовых тем.</p>
+
+<h2>Что получилось</h2>
+<p>Сайт состоит из 40+ страниц. Там есть:</p>
+<ul>
+<li>Каталог из 89 дистрибутивов по семействам</li>
+<li>30 цветовых тем</li>
+<li>Викторина «Какой дистрибутив мой?»</li>
+<li>Полный гайд по установке</li>
+<li>Шпаргалка по терминалу на 50 команд</li>
+<li>Разделы про игры, бэкапы, Docker, NVIDIA</li>
+<li>FAQ</li>
+</ul>
+
+<p>Всё это — на чистом HTML/CSS/JS без единого фреймворка. Работает локально, не требует интернета, никаких трекеров.</p>
+
+<h2>Что дальше</h2>
+<p>Хочу добавить:</p>
+<ul>
+<li>Больше дистрибутивов — редкие, экзотические</li>
+<li>Скриншоты рабочих столов</li>
+<li>Раздел с новостями Linux</li>
+<li>Хостинг на Codeberg Pages, чтобы сайт был доступен всем</li>
+</ul>
+
+<h2>Чему я научился</h2>
+<p>Linux — это не страшно. Терминал — это быстро. А ещё — что вещи, которые кажутся «сложно», обычно сложны только на первый взгляд. Нужно просто начать и разбираться по ходу.</p>
+
+<p>Если ты читаешь это — значит сайт работает. Значит, не зря.</p>
+
+<p style="color: var(--muted); margin-top: 2rem;">— Артём (Monadei), Ubuntu 26.04, RTX 3050, GNOME на Wayland</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

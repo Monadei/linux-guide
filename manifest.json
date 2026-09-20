@@ -1,0 +1,13 @@
+{
+  "name": "Linux Guide",
+  "short_name": "Linux Guide",
+  "description": "Руководство по дистрибутивам Linux",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#ffb000",
+  "lang": "ru",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

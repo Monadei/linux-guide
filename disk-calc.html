@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Калькулятор разметки — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Калькулятор разметки диска</h1>
+<p class="lead">Сколько выделить под /, /home и swap.</p>
+
+<label style="display:block;margin:0.5rem 0;">Размер диска (ГБ):
+<input type="number" id="disk" value="500" min="20" style="width:100px;padding:0.3rem;background:var(--panel);color:var(--text);border:1px solid var(--border);font-family:inherit;"></label>
+
+<label style="display:block;margin:0.5rem 0;">RAM (ГБ):
+<input type="number" id="ram" value="16" min="1" style="width:100px;padding:0.3rem;background:var(--panel);color:var(--text);border:1px solid var(--border);font-family:inherit;"></label>
+
+<label style="display:block;margin:0.5rem 0;">Схема:
+<select id="scheme" style="background:var(--panel);color:var(--text);border:1px solid var(--border);padding:0.3rem;font-family:inherit;">
+<option value="simple">Простому пользователю (одна ФС)</option>
+<option value="separate">Отдельный /home</option>
+<option value="advanced">Продвинутая (/, /home, /var, swap)</option>
+</select></label>
+
+<label style="display:block;margin:0.5rem 0;">Гибернация:
+<input type="checkbox" id="hib"></label>
+
+<button class="btn" onclick="calc()">Рассчитать</button>
+
+<div id="result"></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script>
+function calc() {
+  var disk = parseInt(document.getElementById('disk').value, 10);
+  var ram = parseInt(document.getElementById('ram').value, 10);
+  var scheme = document.getElementById('scheme').value;
+  var hib = document.getElementById('hib').checked;
+  var swap = hib ? ram + 2 : (ram <= 4 ? ram * 2 : 4);
+
+  var html = '<div class="test-result"><h2>Схема разметки</h2><table style="width:100%;border-collapse:collapse;margin-top:1rem;">';
+  html += '<tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;color:var(--accent);padding:0.5rem;">Раздел</th><th style="text-align:left;color:var(--accent);padding:0.5rem;">Размер</th><th style="text-align:left;color:var(--accent);padding:0.5rem;">ФС</th><th style="text-align:left;color:var(--accent);padding:0.5rem;">Назначение</th></tr>';
+
+  html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">/boot/efi</td><td style="padding:0.5rem;">512 МБ</td><td style="padding:0.5rem;">FAT32</td><td style="padding:0.5rem;color:var(--muted);">UEFI-загрузчик</td></tr>';
+
+  if (scheme === 'simple') {
+    var root = disk - 0.5 - swap;
+    html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">/</td><td style="padding:0.5rem;">' + root.toFixed(1) + ' ГБ</td><td style="padding:0.5rem;">ext4 или Btrfs</td><td style="padding:0.5rem;color:var(--muted);">Вся система и данные</td></tr>';
+  } else if (scheme === 'separate') {
+    var root2 = Math.min(80, disk * 0.3);
+    var home = disk - 0.5 - swap - root2;
+    html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">/</td><td style="padding:0.5rem;">' + root2.toFixed(1) + ' ГБ</td><td style="padding:0.5rem;">ext4</td><td style="padding:0.5rem;color:var(--muted);">Система</td></tr>';
+    html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">/home</td><td style="padding:0.5rem;">' + home.toFixed(1) + ' ГБ</td><td style="padding:0.5rem;">ext4 или Btrfs</td><td style="padding:0.5rem;color:var(--muted);">Данные пользователя</td></tr>';
+  } else {
+    var root3 = 50;
+    var varSize = 30;
+    var home3 = disk - 0.5 - swap - root3 - varSize;
+    html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">/</td><td style="padding:0.5rem;">' + root3 + ' ГБ</td><td style="padding:0.5rem;">ext4</td><td style="padding:0.5rem;color:var(--muted);">Система</td></tr>';
+    html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">/var</td><td style="padding:0.5rem;">' + varSize + ' ГБ</td><td style="padding:0.5rem;">ext4</td><td style="padding:0.5rem;color:var(--muted);">Логи, базы, Docker</td></tr>';
+    html += '<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem;">/home</td><td style="padding:0.5rem;">' + home3.toFixed(1) + ' ГБ</td><td style="padding:0.5rem;">Btrfs</td><td style="padding:0.5rem;color:var(--muted);">Данные + снапшоты</td></tr>';
+  }
+
+  html += '<tr><td style="padding:0.5rem;">swap</td><td style="padding:0.5rem;">' + swap + ' ГБ</td><td style="padding:0.5rem;">swap</td><td style="padding:0.5rem;color:var(--muted);">' + (hib ? 'Для гибернации' : 'Подкачка') + '</td></tr>';
+  html += '</table>';
+  html += '<p style="margin-top:1rem;color:var(--muted);font-size:0.9rem;">Совет: для современных дисков и SSD лучше Btrfs — есть снапшоты и сжатие. Для старых систем — ext4.</p>';
+  html += '</div>';
+  document.getElementById('result').innerHTML = html;
+}
+calc();
+</script>
+<script src="js/site-theme.js"></script>
+</body></html>

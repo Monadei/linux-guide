@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta property="og:title" content="Какой дистрибутив мой? — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Какой дистрибутив мой? — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav>
+</div></header>
+<main class="container page">
+<h1>Какой дистрибутив мой?</h1>
+<p class="lead">6 вопросов — и получишь рекомендацию из 89 дистрибутивов.</p>
+
+<form id="quiz">
+<div class="quiz-q"><h3>1. Твой опыт с Linux?</h3>
+<label><input type="radio" name="q1" value="new"> Первый раз слышу</label>
+<label><input type="radio" name="q1" value="some"> Пробовал пару раз</label>
+<label><input type="radio" name="q1" value="exp"> Уверенный пользователь</label>
+<label><input type="radio" name="q1" value="pro"> Профи, хочу контроля</label>
+</div>
+
+<div class="quiz-q"><h3>2. Для чего нужен Linux?</h3>
+<label><input type="radio" name="q2" value="desktop"> Домашний десктоп</label>
+<label><input type="radio" name="q2" value="games"> Игры</label>
+<label><input type="radio" name="q2" value="dev"> Разработка</label>
+<label><input type="radio" name="q2" value="server"> Сервер</label>
+<label><input type="radio" name="q2" value="security"> Безопасность/пентест</label>
+<label><input type="radio" name="q2" value="old"> Оживить старое железо</label>
+</div>
+
+<div class="quiz-q"><h3>3. Какой интерфейс ближе?</h3>
+<label><input type="radio" name="q3" value="windows"> Как Windows</label>
+<label><input type="radio" name="q3" value="mac"> Как macOS</label>
+<label><input type="radio" name="q3" value="classic"> Классический (панель + меню)</label>
+<label><input type="radio" name="q3" value="tiling"> Тайловый (i3, Sway)</label>
+<label><input type="radio" name="q3" value="any"> Без разницы</label>
+</div>
+
+<div class="quiz-q"><h3>4. Как часто готов обновляться?</h3>
+<label><input type="radio" name="q4" value="stable"> Раз в 2 года, лишь бы работало</label>
+<label><input type="radio" name="q4" value="balanced"> Каждые полгода</label>
+<label><input type="radio" name="q4" value="rolling"> Постоянно, хочу свежее</label>
+</div>
+
+<div class="quiz-q"><h3>5. Что важнее?</h3>
+<label><input type="radio" name="q5" value="stability"> Стабильность</label>
+<label><input type="radio" name="q5" value="fresh"> Свежие пакеты</label>
+<label><input type="radio" name="q5" value="control"> Контроль над системой</label>
+<label><input type="radio" name="q5" value="easy"> Простота</label>
+</div>
+
+<div class="quiz-q"><h3>6. Твоё железо?</h3>
+<label><input type="radio" name="q6" value="new"> Новое, мощное</label>
+<label><input type="radio" name="q6" value="mid"> Среднее</label>
+<label><input type="radio" name="q6" value="old"> Старое (4+ лет)</label>
+<label><input type="radio" name="q6" value="ancient"> Древнее (10+ лет)</label>
+</div>
+
+<button type="button" class="btn" onclick="calcQuiz()">Показать результат</button>
+</form>
+
+<div id="result"></div>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/search.js"></script>
+<script>
+function calcQuiz() {
+  var f = document.getElementById('quiz');
+  var a = {};
+  ['q1','q2','q3','q4','q5','q6'].forEach(function(k){
+    var v = f.querySelector('input[name="'+k+'"]:checked');
+    a[k] = v ? v.value : null;
+  });
+  if (!a.q1 || !a.q2) { alert('Ответь хотя бы на первые два вопроса'); return; }
+  var rec = { name:'Linux Mint', slug:'mint', why:'Универсальный выбор для новичка с любыми задачами.' };
+  if (a.q6 === 'ancient') rec = { name:'antiX', slug:'antix', why:'Ультралёгкий, работает на 256 МБ RAM.' };
+  else if (a.q6 === 'old' && a.q2 === 'desktop') rec = { name:'Lubuntu', slug:'lubuntu', why:'Ubuntu с лёгким LXQt для слабых машин.' };
+  else if (a.q2 === 'games') rec = { name:'Nobara', slug:'nobara', why:'Fedora с патчами для игр, Proton и драйверами NVIDIA.' };
+  else if (a.q2 === 'security') rec = { name:a.q1 === 'pro' ? 'BlackArch' : 'Kali Linux', slug:a.q1 === 'pro' ? 'blackarch' : 'kali', why:'Инструменты для пентеста.' };
+  else if (a.q2 === 'server') rec = { name:'AlmaLinux', slug:'almalinux', why:'1:1 клон RHEL, поддержка до 2032.' };
+  else if (a.q2 === 'dev' && a.q1 === 'exp') rec = { name:'Fedora', slug:'fedora', why:'Свежие технологии, отличная поддержка контейнеров.' };
+  else if (a.q4 === 'rolling' && a.q1 !== 'new') rec = { name:a.q1 === 'pro' ? 'Arch Linux' : 'Manjaro', slug:a.q1 === 'pro' ? 'arch' : 'manjaro', why:'Rolling release, свежие пакеты.' };
+  else if (a.q3 === 'mac') rec = { name:'elementary OS', slug:'elementary', why:'Дизайн в духе macOS, аккуратный интерфейс.' };
+  else if (a.q3 === 'windows' && a.q2 === 'desktop') rec = { name:'Zorin OS', slug:'zorin', why:'Интерфейс как в Windows, минимум изменений в привычках.' };
+  else if (a.q5 === 'control') rec = { name:'Gentoo', slug:'gentoo', why:'Сборка из исходников, максимальный контроль.' };
+  else if (a.q5 === 'fresh' && a.q1 === 'exp') rec = { name:'CachyOS', slug:'cachyos', why:'Arch с оптимизацией под скорость.' };
+
+  document.getElementById('result').innerHTML = '<div class="quiz-result"><h3>Тебе подойдёт: ' + rec.name + '</h3><p>' + rec.why + '</p><p><a href="distros/' + rec.slug + '.html" class="btn">Открыть страницу дистрибутива</a></p></div>';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+</script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

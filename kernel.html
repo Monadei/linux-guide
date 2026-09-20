@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Ядро Linux — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Ядро Linux для чайников</h1>
+<p class="lead">Что это, зачем нужно и почему все о нём говорят.</p>
+
+<h2>Что такое ядро</h2>
+<p>Ядро (kernel) — это посредник между программами и железом. Когда ты открываешь файл, играешь музыку или подключаешь флешку — все эти операции проходят через ядро. Оно управляет:</p>
+<ul>
+<li>Процессором (какая программа сколько времени работает)</li>
+<li>Памятью (какая программа где лежит)</li>
+<li>Дисками (чтение и запись файлов)</li>
+<li>Сетью (передача данных)</li>
+<li>Устройствами (клавиатура, мышь, USB, GPU)</li>
+</ul>
+
+<h2>Ядро и дистрибутив — разные вещи</h2>
+<p>Часто путают. Ядро — это одно. Дистрибутив — это ядро + утилиты + оболочка + приложения. Ubuntu, Fedora, Arch — все они используют одно и то же ядро Linux, только разные версии.</p>
+
+<h2>Версии ядра</h2>
+<p>Формат: <code>6.8.0-31-generic</code>. Расшифровка:</p>
+<ul>
+<li><code>6</code> — major (главная версия)</li>
+<li><code>8</code> — minor (обновления с новыми фичами)</li>
+<li><code>0</code> — patch (баг-фиксы)</li>
+<li><code>31</code> — сборка</li>
+<li><code>generic</code> — тип (для Ubuntu это стандартное ядро)</li>
+</ul>
+
+<h2>Типы ядер</h2>
+<ul>
+<li><strong>Generic</strong> — стандартное, для большинства</li>
+<li><strong>Low-latency</strong> — для аудио (Ubuntu Studio)</li>
+<li><strong>RT (Real-Time)</strong> — для промышленных систем</li>
+<li><strong>Hardened</strong> — усиленная безопасность</li>
+<li><strong>LTS</strong> — долгосрочная поддержка</li>
+<li><strong>Zen</strong> — для игр и десктопа (CachyOS)</li>
+</ul>
+
+<h2>Как посмотреть версию</h2>
+<pre><code>uname -r</code></pre>
+<p>Или красиво:</p>
+<pre><code>uname -a</code></pre>
+
+<h2>Обновление ядра</h2>
+<p>Обычно приходит вместе с системными обновлениями. Проверить:</p>
+<pre><code>sudo apt update && sudo apt upgrade</code></pre>
+<p>Список установленных ядер:</p>
+<pre><code>dpkg --list | grep linux-image</code></pre>
+<p>Удалить старое:</p>
+<pre><code>sudo apt autoremove</code></pre>
+
+<h2>Модули ядра</h2>
+<p>Ядро состоит из модулей — кусочков, которые можно включать и выключать на лету. Например, драйвер Wi-Fi или поддержка NTFS. Посмотреть загруженные:</p>
+<pre><code>lsmod</code></pre>
+<p>Загрузить модуль:</p>
+<pre><code>sudo modprobe nvidia</code></pre>
+<p>Параметры ядра передаются при загрузке через GRUB. Например <code>nomodeset</code> — если чёрный экран.</p>
+
+<h2>Зачем вообще знать про ядро</h2>
+<ul>
+<li>Понимать, почему обновление ядра иногда ломает драйверы</li>
+<li>Знать, как откатиться на старое ядро из меню GRUB</li>
+<li>Понимать, зачем нужны LTS-ядра</li>
+<li>Выбирать правильное ядро под задачи (low-latency для аудио, RT для производств)</li>
+</ul>
+
+<h2>Сборка своего ядра</h2>
+<p>Можно, но не нужно 99% пользователей. Gentoo-фанаты собирают своё ядро для оптимизации. Это часы работы и много чтения. Если не понимаешь зачем — не начинай.</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

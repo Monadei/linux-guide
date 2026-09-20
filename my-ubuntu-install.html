@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+<title>Как я ставил Ubuntu — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/extra.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a><a href="install.html">Как установить</a><a href="history.html">История</a><a href="distros/index.html">Дистрибутивы</a><a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Как я ставил Ubuntu</h1>
+<p class="lead">Личный опыт. Что было просто, что сложно, что бы сделал иначе.</p>
+
+<h2>Подготовка</h2>
+<p>Скачал ISO Ubuntu 26.04 LTS с ubuntu.com. Проверил SHA256 — совпало. Записал на флешку 16 ГБ через Rufus на старом ноутбуке (был под рукой).</p>
+
+<h2>Первая попытка: dual-boot</h2>
+<p>Решил поставить рядом с Windows — на всякий случай. В управлении дисками сжал Windows-раздел, освободил 100 ГБ. Отключил Fast Startup в настройках электропитания. Загрузился с флешки через F12.</p>
+
+<h2>Установщик</h2>
+<p>Ubuntu 26.04 использует новый установщик на Flutter. Выбрал:</p>
+<ul>
+<li>Язык — русский</li>
+<li>Раскладка — русская + английская</li>
+<li>Обновления — скачивать во время установки</li>
+<li>Стороннее ПО — да (драйверы NVIDIA!)</li>
+<li>Тип установки — «Установить рядом с Windows»</li>
+</ul>
+
+<h2>Проблема с NVIDIA</h2>
+<p>Первый запуск — чёрный экран после входа. Оказалось, драйвер NVIDIA 550 не подхватился на Wayland. Загрузка в recovery mode и:</p>
+<pre><code>sudo ubuntu-drivers autoinstall
+sudo reboot</code></pre>
+<p>Помогло. Драйвер 550 встал, Wayland заработал, <code>nvidia-smi</code> показывает RTX 3050.</p>
+
+<h2>Первые настройки</h2>
+<ol>
+<li>Обновил систему — 15 минут</li>
+<li>Поставил темы Aura-Glass + иконки Reversal-purple-dark</li>
+<li>GNOME Extensions: AppIndicator, Dash to Dock, Blur My Shell</li>
+<li>Firefox с логинами, Chrome для работы</li>
+<li>Steam + Proton — проверил пару игр, работают</li>
+<li>Timeshift — первый снапшот системы</li>
+<li>rsync бэкап важных данных на внешний диск</li>
+</ol>
+
+<h2>Что не сработало сразу</h2>
+<ul>
+<li>Принтер HP — поставил через <code>hplip</code></li>
+<li>Bluetooth-наушники — пришлось установить <code>pulseaudio-module-bluetooth</code></li>
+<li>Второй монитор с портретным режимом — не сразу настроил в GNOME</li>
+<li>Сканер — через <code>simple-scan</code></li>
+</ul>
+
+<h2>Что бы сделал иначе</h2>
+<ul>
+<li>Сразу создал бы отдельный раздел <code>/home</code></li>
+<li>Поставил бы <code>timeshift</code> до того, как что-то ломать</li>
+<li>Изучил бы <code>man</code> и <code>tldr</code> раньше — они экономят кучу времени</li>
+</ul>
+
+<h2>Через месяц</h2>
+<p>Захожу в Windows раз в неделю — для одной специфичной программы. Всё остальное делаю в Ubuntu. Система работает стабильно, ничего не ломалось. Если ты ещё думаешь — ставь, не пожалеешь.</p>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/search.js"></script><script src="js/extras.js"></script><script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body></html>

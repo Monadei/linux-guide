@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta property="og:title" content="Как скачать Linux — Linux Guide">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Как скачать Linux — Linux Guide</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<a href="index.html" class="logo">Linux Guide</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="download.html" class="active">Как скачать</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a>
+<a href="faq.html">FAQ</a>
+<a href="sitemap.html">Карта сайта</a>
+</nav>
+</div>
+</header>
+<main class="container page">
+<h1>Как скачать Linux</h1>
+<p class="lead">Скачивать дистрибутив нужно только с официального сайта или доверенного зеркала. Ниже — базовый порядок действий.</p>
+<section><h2>1. Выбери дистрибутив</h2><p>Для первого раза обычно советуют Ubuntu, Linux Mint или Fedora. Если не уверен — начни с Linux Mint.</p></section>
+<section><h2>2. Скачай ISO-образ</h2><p>Зайди на официальный сайт дистрибутива и скачай ISO. Не используй случайные сайты со «сборками».</p>
+<ul><li>Ubuntu — ubuntu.com</li><li>Linux Mint — linuxmint.com</li><li>Fedora — fedoraproject.org</li></ul></section>
+<section><h2>3. Проверь контрольную сумму</h2><p>Сравни SHA256 скачанного файла с тем, что указан на сайте. Это защищает от битой загрузки и подмены.</p></section>
+<section><h2>4. Запиши на флешку</h2><p>Используй Rufus (Windows), balenaEtcher (кроссплатформенно) или <code>dd</code> (Linux). Все данные на флешке будут уничтожены.</p></section>
+<section><h2>5. Загрузись с флешки</h2><p>Перезагрузи компьютер, войди в Boot Menu (обычно F12, F10, Esc) и выбери USB-накопитель.</p></section>
+</main>
+<footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a>
+<a href="my-recommendations.html">Рекомендую</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/copy-code.js"></script>
+<script src="js/fun.js"></script>
+<script src="js/site-theme.js"></script>
+</body>
+</html>
