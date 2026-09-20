@@ -61,18 +61,19 @@
   .nav a:last-child { border-bottom: none; }
   .nav a::before, .nav a::after { content: ""; }
 
-  /* --- Переключатели --- */
+  /* --- Переключатели — компактно, в одну строку --- */
   .theme-switcher {
     order: 3;
-    margin: 0.5rem 0 0 0 !important;
-    width: 100%;
+    margin: 0.4rem 0 0 0 !important;
+    flex: 1 1 auto;
+    max-width: 48%;
   }
   .theme-switcher select {
     width: 100%;
-    padding: 0.6rem;
-    font-size: 0.95rem;
+    padding: 0.35rem 0.4rem;
+    font-size: 0.8rem;
     font-family: inherit;
-    min-height: 44px;
+    min-height: 34px;
     background: var(--panel);
     color: var(--text);
     border: 1px solid var(--border);
@@ -80,16 +81,19 @@
   }
   .font-ctrl { display: none; }
 
+  /* Поиск — рядом с темой */
   .search-box {
     order: 4;
-    margin: 0.5rem 0 0 0 !important;
-    width: 100%;
+    margin: 0.4rem 0 0 0 !important;
+    flex: 1 1 auto;
+    max-width: 48%;
+    position: relative;
   }
   .search-box input {
     width: 100% !important;
-    padding: 0.7rem 0.9rem;
-    font-size: 1rem;
-    min-height: 44px;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.8rem;
+    min-height: 34px;
     background: var(--panel);
     color: var(--text);
     border: 1px solid var(--border);
