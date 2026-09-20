@@ -1,246 +1,472 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
-<meta name="yandex-verification" content="b41091ced16d0116" />
-<script>
-(function() {
-  function getFromUrl() {
-    try {
-      var m = window.location.search.match(/[?&]theme=([^&]+)/);
-      if (m) return decodeURIComponent(m[1]);
-      var h = window.location.hash.match(/theme=([^&]+)/);
-      if (h) return decodeURIComponent(h[1]);
-    } catch(e) {}
-    return null;
-  }
-  function getFromStorage() {
-    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
-    try {
-      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
-      if (m) return decodeURIComponent(m[1]);
-    } catch(e) {}
-    return null;
-  }
-  var theme = getFromUrl() || getFromStorage() || 'default';
-  if (theme && theme !== 'default') {
-    document.documentElement.setAttribute('data-site-theme', theme);
-  }
-  // Сохраняем для следующих страниц
-  try { localStorage.setItem('site-theme', theme); } catch(e) {}
-  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
-  window.__INITIAL_THEME = theme;
-})();
-</script>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Дистрибутивы Linux — Linux Guide</title>
-<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/extra.css">
-<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
-<meta property="og:image" content="../icons/og.svg">
-<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
 <link rel="stylesheet" href="../css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
 </head>
 <body>
 <header class="site-header"><div class="container header-inner">
 <a href="../index.html" class="logo">Linux Guide</a>
 <nav class="nav">
-<a href="../index.html">Главная</a><a href="../download.html">Как скачать</a>
-<a href="../install.html">Как установить</a><a href="../history.html">История</a>
-<a href="index.html" class="active">Дистрибутивы</a><a href="../about.html">Обо мне</a>
-<a href="../my-recommendations.html">Рекомендую</a><a href="../faq.html">FAQ</a>
-<a href="../sitemap.html">Карта сайта</a>
+<a href="../index.html">Главная</a><a href="../download.html">Как скачать</a><a href="../install.html">Как установить</a><a href="../history.html">История</a><a href="index.html" class="active">Дистрибутивы</a><a href="../about.html">Обо мне</a><a href="../faq.html">FAQ</a><a href="../sitemap.html">Карта сайта</a>
 </nav></div></header>
+
 <main class="container page">
 <h1>Дистрибутивы Linux</h1>
-<p class="lead">Полный каталог дистрибутивов Linux, сгруппированных по семействам и назначению. Включает как популярные, так и нишевые проекты 2025–2026 годов.</p>
+<p class="lead">130+ дистрибутивов в одном месте. Ищи, фильтруй, выбирай.</p>
 
-<h2>Семейство Debian</h2>
-<div class="cards">
-<article class="card"><img src="../icons/distros/debian.svg" class="distro-icon" alt="Debian" loading="lazy"><h3>Debian</h3><p>Отец семейства.</p><a href="debian.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/ubuntu.svg" class="distro-icon" alt="Ubuntu" loading="lazy"><h3>Ubuntu</h3><p>Самый узнаваемый Linux.</p><a href="ubuntu.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/mint.svg" class="distro-icon" alt="Linux Mint" loading="lazy"><h3>Linux Mint</h3><p>Уютный десктоп.</p><a href="mint.html">Подробнее →</a></article>
-<article class="card"><h3>LMDE</h3><p>Mint без Ubuntu.</p><a href="lmde.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/pop-os.svg" class="distro-icon" alt="Pop!_OS" loading="lazy"><h3>Pop!_OS</h3><p>От System76.</p><a href="pop-os.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/zorin.svg" class="distro-icon" alt="Zorin OS" loading="lazy"><h3>Zorin OS</h3><p>Для мигрантов с Windows.</p><a href="zorin.html">Подробнее →</a></article>
-<article class="card"><h3>Zorin OS Lite</h3><p>Облегчённая версия.</p><a href="zorinlite.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/elementary.svg" class="distro-icon" alt="elementary OS" loading="lazy"><h3>elementary OS</h3><p>Самый дизайнерский.</p><a href="elementary.html">Подробнее →</a></article>
-<article class="card"><h3>KDE Neon</h3><p>Свежий Plasma.</p><a href="kde-neon.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/kali.svg" class="distro-icon" alt="Kali Linux" loading="lazy"><h3>Kali Linux</h3><p>Пентест.</p><a href="kali.html">Подробнее →</a></article>
-<article class="card"><h3>Parrot OS</h3><p>Безопасность и анонимность.</p><a href="parrot.html">Подробнее →</a></article>
-<article class="card"><h3>MX Linux</h3><p>Debian + утилиты.</p><a href="mxlinux.html">Подробнее →</a></article>
-<article class="card"><h3>antiX</h3><p>Ультралёгкий.</p><a href="antix.html">Подробнее →</a></article>
-<article class="card"><h3>Puppy Linux</h3><p>Грузится в RAM.</p><a href="puppy.html">Подробнее →</a></article>
-<article class="card"><h3>Lubuntu</h3><p>Ubuntu с LXQt.</p><a href="lubuntu.html">Подробнее →</a></article>
-<article class="card"><h3>Xubuntu</h3><p>Ubuntu с Xfce.</p><a href="xubuntu.html">Подробнее →</a></article>
-<article class="card"><h3>Kubuntu</h3><p>Ubuntu с KDE.</p><a href="kubuntu.html">Подробнее →</a></article>
-<article class="card"><h3>Ubuntu Budgie</h3><p>С Budgie.</p><a href="ubuntu-budgie.html">Подробнее →</a></article>
-<article class="card"><h3>Ubuntu MATE</h3><p>С MATE.</p><a href="ubuntu-mate.html">Подробнее →</a></article>
-<article class="card"><h3>Ubuntu Studio</h3><p>Для мультимедиа.</p><a href="ubuntu-studio.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/deepin.svg" class="distro-icon" alt="Deepin" loading="lazy"><h3>Deepin</h3><p>Красивый китайский.</p><a href="deepin.html">Подробнее →</a></article>
-<article class="card"><h3>Raspberry Pi OS</h3><p>Для Raspberry Pi.</p><a href="raspberry-pi-os.html">Подробнее →</a></article>
-<article class="card"><h3>Bodhi Linux</h3><p>Лёгкий, Moksha.</p><a href="bodhi.html">Подробнее →</a></article>
-<article class="card"><h3>Regolith Linux</h3><p>Ubuntu + i3.</p><a href="regolith.html">Подробнее →</a></article>
-<article class="card"><h3>Kaisen Linux</h3><p>Для сисадминов.</p><a href="kaisen.html">Подробнее →</a></article>
-<article class="card"><h3>Nitrux</h3><p>AppImage + OpenRC.</p><a href="nitrux.html">Подробнее →</a></article>
-<article class="card"><h3>Rhino Linux</h3><p>Rolling Ubuntu.</p><a href="rhino.html">Подробнее →</a></article>
-<article class="card"><h3>Vanilla OS</h3><p>Иммутабельная Ubuntu.</p><a href="vanilla.html">Подробнее →</a></article>
-<article class="card"><h3>NebiOS</h3><p>NebiDE на Wayland.</p><a href="nebios.html">Подробнее →</a></article>
-<article class="card"><h3>AnduinOS</h3><p>Ubuntu как Windows 11.</p><a href="anduinos.html">Подробнее →</a></article>
-<article class="card"><h3>MakuluLinux LinDoz</h3><p>Cinnamon под Windows.</p><a href="makulu-lindoz.html">Подробнее →</a></article>
-<article class="card"><h3>MX Moksha</h3><p>MX + Enlightenment.</p><a href="mx-moksha.html">Подробнее →</a></article>
-<article class="card"><h3>Vinari OS</h3><p>Быстрый Debian для старого и нового.</p><a href="vinari.html">Подробнее →</a></article>
-<article class="card"><h3>Linux Lite</h3><p>Дружелюбный и лёгкий.</p><a href="linuxlite.html">Подробнее →</a></article>
-<article class="card"><h3>EXE GNU/Linux</h3><p>Ретро Devuan для спасения.</p><a href="exe.html">Подробнее →</a></article>
-<article class="card"><h3>GoboLinux</h3><p>Уникальная ФС.</p><a href="gobolinux.html">Подробнее →</a></article>
-<article class="card"><h3>4MLinux</h3><p>Минимализм для мультимедиа.</p><a href="4mlinux.html">Подробнее →</a></article>
+<style>
+/* Управление каталогом */
+.catalog-controls {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+.catalog-controls input[type="search"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.catalog-controls input[type="search"]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.catalog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.filter-btn {
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: 0.15s;
+}
+.filter-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
+.filter-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.catalog-stats {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 0.8rem;
+}
+.catalog-stats strong { color: var(--accent); }
+
+/* Карточки дистрибутивов */
+.distros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.distro-tile {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  padding: 1rem 1.1rem;
+  transition: 0.2s;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-radius: 4px;
+}
+.distro-tile:hover {
+  border-left-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  text-decoration: none;
+}
+.distro-tile .tile-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.distro-tile .tile-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.distro-tile .tile-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+.distro-tile .tile-desc {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  margin: 0;
+}
+.distro-tile .tile-meta {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+.distro-tile .tile-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--accent-dim);
+  color: var(--accent-dim);
+  border-radius: 3px;
+}
+.distro-tile .tile-tag.hot {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* Секции семейств */
+.family-section {
+  margin: 2rem 0;
+}
+.family-title {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed var(--border);
+}
+.family-title::before {
+  content: "> ";
+  color: var(--accent-dim);
+}
+
+/* Скрытые карточки при фильтрации */
+.distro-tile.hidden { display: none; }
+.family-section.hidden { display: none; }
+
+/* Быстрые ссылки */
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.quick-links a {
+  background: var(--panel);
+  border: 1px dashed var(--accent-dim);
+  color: var(--accent);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 3px;
+}
+.quick-links a:hover {
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  border-style: solid;
+}
+
+@media (max-width: 768px) {
+  .distros-grid { grid-template-columns: 1fr; gap: 0.7rem; }
+  .catalog-controls { padding: 0.8rem; }
+  .filter-btn { font-size: 0.78rem; padding: 0.35rem 0.7rem; }
+  .quick-links a { font-size: 0.8rem; padding: 0.4rem 0.7rem; }
+}
+</style>
+
+<!-- Быстрые ссылки -->
+<div class="quick-links">
+<a href="#debian">🐧 Debian</a>
+<a href="#arch">⚡ Arch</a>
+<a href="#redhat">🎩 Red Hat</a>
+<a href="#suse">🦎 SUSE</a>
+<a href="#russian">🇷🇺 Русские</a>
+<a href="#games">🎮 Игровые</a>
+<a href="#security">🔒 Безопасность</a>
 </div>
 
-<h2>Семейство Red Hat</h2>
-<div class="cards">
-<article class="card"><img src="../icons/distros/fedora.svg" class="distro-icon" alt="Fedora" loading="lazy"><h3>Fedora</h3><p>Полигон новых технологий.</p><a href="fedora.html">Подробнее →</a></article>
-<article class="card"><h3>Fedora Silverblue</h3><p>Иммутабельная GNOME.</p><a href="fedora-silverblue.html">Подробнее →</a></article>
-<article class="card"><h3>Fedora Kinoite</h3><p>Иммутабельная KDE.</p><a href="fedora-kinoite.html">Подробнее →</a></article>
-<article class="card"><h3>Fedora CoreOS</h3><p>Для контейнеров.</p><a href="fedora-coreos.html">Подробнее →</a></article>
-<article class="card"><h3>Fedora Asahi Remix</h3><p>Для Apple Silicon.</p><a href="asahi.html">Подробнее →</a></article>
-<article class="card"><h3>Fedora Hummingbird</h3><p>Для AI-разработчиков.</p><a href="hummingbird.html">Подробнее →</a></article>
-<article class="card"><h3>AlmaLinux</h3><p>1:1 клон RHEL.</p><a href="almalinux.html">Подробнее →</a></article>
-<article class="card"><h3>Rocky Linux</h3><p>Клон RHEL.</p><a href="rocky.html">Подробнее →</a></article>
-<article class="card"><h3>CentOS Stream</h3><p>Между Fedora и RHEL.</p><a href="centos-stream.html">Подробнее →</a></article>
-<article class="card"><h3>Oracle Linux</h3><p>От Oracle.</p><a href="oracle-linux.html">Подробнее →</a></article>
-<article class="card"><h3>Ultramarine Linux</h3><p>Fedora для повседневного использования.</p><a href="ultramarine.html">Подробнее →</a></article>
-<article class="card"><h3>Vojtux</h3><p>Fedora для слабовидящих.</p><a href="vojtux.html">Подробнее →</a></article>
+<!-- Поиск и фильтры -->
+<div class="catalog-controls">
+<input type="search" id="catalog-search" placeholder="/ Начни печатать: ubuntu, arch, игровой..." autocomplete="off">
+<div class="catalog-filters">
+<button class="filter-btn active" data-family="all">Все</button>
+<button class="filter-btn" data-family="debian">Debian</button>
+<button class="filter-btn" data-family="arch">Arch</button>
+<button class="filter-btn" data-family="redhat">Red Hat</button>
+<button class="filter-btn" data-family="suse">SUSE</button>
+<button class="filter-btn" data-family="independent">Независимые</button>
+<button class="filter-btn" data-family="russian">Русские</button>
+<button class="filter-btn" data-family="games">Игровые</button>
+<button class="filter-btn" data-family="security">Безопасность</button>
+<button class="filter-btn" data-family="nas">NAS</button>
+</div>
+<div class="catalog-stats">Показано: <strong id="visible-count">0</strong> из <strong id="total-count">0</strong></div>
 </div>
 
-<h2>Семейство Arch</h2>
-<div class="cards">
-<article class="card"><img src="../icons/distros/arch.svg" class="distro-icon" alt="Arch Linux" loading="lazy"><h3>Arch Linux</h3><p>Минимализм и вики.</p><a href="arch.html">Подробнее →</a></article>
-<article class="card"><h3>Artix</h3><p>Arch без systemd.</p><a href="artix.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/manjaro.svg" class="distro-icon" alt="Manjaro" loading="lazy"><h3>Manjaro</h3><p>Arch с установщиком.</p><a href="manjaro.html">Подробнее →</a></article>
-<article class="card"><h3>EndeavourOS</h3><p>Почти чистый Arch.</p><a href="endeavouros.html">Подробнее →</a></article>
-<article class="card"><h3>CachyOS</h3><p>Для игр и скорости.</p><a href="cachyos.html">Подробнее →</a></article>
-<article class="card"><h3>Garuda Linux</h3><p>Брутальный дизайн.</p><a href="garuda.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/steamos.svg" class="distro-icon" alt="SteamOS" loading="lazy"><h3>SteamOS</h3><p>Игровая ОС Valve.</p><a href="steamos.html">Подробнее →</a></article>
-<article class="card"><h3>BlackArch</h3><p>Arch + пентест.</p><a href="blackarch.html">Подробнее →</a></article>
-<article class="card"><h3>Archcraft</h3><p>Красивый Arch.</p><a href="archcraft.html">Подробнее →</a></article>
-<article class="card"><h3>RebornOS</h3><p>Arch с выбором DE.</p><a href="rebornos.html">Подробнее →</a></article>
-<article class="card"><h3>blendOS</h3><p>Гибрид.</p><a href="blendos.html">Подробнее →</a></article>
-<article class="card"><h3>Noid Linux</h3><p>Минималистичный Void.</p><a href="noid.html">Подробнее →</a></article>
-<article class="card"><h3>AgarimOS</h3><p>Респин Void Linux.</p><a href="agarimos.html">Подробнее →</a></article>
-<article class="card"><h3>ShaniOS</h3><p>Иммутабельный Arch.</p><a href="shanios.html">Подробнее →</a></article>
-<article class="card"><h3>Omega Linux</h3><p>Arch для старого железа.</p><a href="omega.html">Подробнее →</a></article>
-<article class="card"><h3>ElysiaOS</h3><p>Hyprland + аниме-стиль.</p><a href="elysiaos.html">Подробнее →</a></article>
-<article class="card"><h3>Kazeta</h3><p>Ретро-консоль 90-х.</p><a href="kazeta.html">Подробнее →</a></article>
-<article class="card"><h3>Porteus</h3><p>Модульный Slackware.</p><a href="porteus.html">Подробнее →</a></article>
-<article class="card"><h3>Chimera Linux</h3><p>Linux + FreeBSD tools.</p><a href="chimera.html">Подробнее →</a></article>
-</div>
+<!-- Сетка дистрибутивов -->
+<div class="distros-grid" id="distros-grid"></div>
 
-<h2>Семейство SUSE</h2>
-<div class="cards">
-<article class="card"><img src="../icons/distros/opensuse.svg" class="distro-icon" alt="openSUSE" loading="lazy"><h3>openSUSE</h3><p>Leap и Tumbleweed.</p><a href="opensuse.html">Подробнее →</a></article>
-<article class="card"><h3>openSUSE MicroOS</h3><p>Иммутабельный.</p><a href="microos.html">Подробнее →</a></article>
-</div>
-
-<h2>Независимые</h2>
-<div class="cards">
-<article class="card"><img src="../icons/distros/gentoo.svg" class="distro-icon" alt="Gentoo" loading="lazy"><h3>Gentoo</h3><p>Из исходников.</p><a href="gentoo.html">Подробнее →</a></article>
-<article class="card"><h3>Slackware</h3><p>Старейший живой.</p><a href="slackware.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/void.svg" class="distro-icon" alt="Void Linux" loading="lazy"><h3>Void Linux</h3><p>Без systemd.</p><a href="void.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/nixos.svg" class="distro-icon" alt="NixOS" loading="lazy"><h3>NixOS</h3><p>Декларативная.</p><a href="nixos.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/alpine.svg" class="distro-icon" alt="Alpine Linux" loading="lazy"><h3>Alpine Linux</h3><p>Для контейнеров.</p><a href="alpine.html">Подробнее →</a></article>
-<article class="card"><h3>Solus</h3><p>Budgie.</p><a href="solus.html">Подробнее →</a></article>
-<article class="card"><h3>Clear Linux</h3><p>Intel.</p><a href="clear.html">Подробнее →</a></article>
-<article class="card"><h3>PCLinuxOS</h3><p>Прост для новичков.</p><a href="pclinuxos.html">Подробнее →</a></article>
-<article class="card"><h3>AerynOS</h3><p>Атомарные обновления, moss.</p><a href="aerynos.html">Подробнее →</a></article>
-<article class="card"><h3>KDE Linux</h3><p>Официальный от KDE.</p><a href="kde-linux.html">Подробнее →</a></article>
-<article class="card"><h3>Bedrock Linux</h3><p>Мета-дистрибутив.</p><a href="bedrock.html">Подробнее →</a></article>
-<article class="card"><h3>Dragora GNU/Linux-Libre</h3><p>Аргентинский, FSF.</p><a href="dragora.html">Подробнее →</a></article>
-<article class="card"><h3>Vendefoul Wolf</h3><p>Devuan + SysVinit.</p><a href="vendefoul.html">Подробнее →</a></article>
-<article class="card"><h3>Loss32</h3><p>Имитация Windows на Linux.</p><a href="loss32.html">Подробнее →</a></article>
-<article class="card"><h3>matrixOS</h3><p>Иммутабельный Gentoo.</p><a href="matrixos.html">Подробнее →</a></article>
-<article class="card"><h3>ENux</h3><p>На базе Bedrock.</p><a href="enux.html">Подробнее →</a></article>
-<article class="card"><h3>Origami Linux</h3><p>Fedora + COSMIC.</p><a href="origami.html">Подробнее →</a></article>
-<article class="card"><h3>FLOPPINUX</h3><p>Linux на одной дискете.</p><a href="floppinux.html">Подробнее →</a></article>
-</div>
-
-<h2>Российские дистрибутивы</h2>
-<div class="cards">
-<article class="card"><h3>ROSA Linux</h3><p>Наследник Mandriva.</p><a href="rosa.html">Подробнее →</a></article>
-<article class="card"><h3>ALT Linux</h3><p>Дом, школа, сервер.</p><a href="alt.html">Подробнее →</a></article>
-<article class="card"><h3>Astra Linux</h3><p>Сертифицирована.</p><a href="astra.html">Подробнее →</a></article>
-<article class="card"><h3>Calculate Linux</h3><p>На базе Gentoo.</p><a href="calculate.html">Подробнее →</a></article>
-</div>
-
-<h2>Игровые и мультимедиа</h2>
-<div class="cards">
-<article class="card"><h3>Nobara</h3><p>Fedora для геймеров.</p><a href="nobara.html">Подробнее →</a></article>
-<article class="card"><h3>Bazzite</h3><p>Игровая Fedora Atomic.</p><a href="bazzite.html">Подробнее →</a></article>
-<article class="card"><h3>ChimeraOS</h3><p>Своя консоль.</p><a href="chimeraos.html">Подробнее →</a></article>
-<article class="card"><h3>Batocera</h3><p>Ретро-консоль.</p><a href="batocera.html">Подробнее →</a></article>
-<article class="card"><h3>LibreELEC</h3><p>Kodi-медиацентр.</p><a href="libreelec.html">Подробнее →</a></article>
-<article class="card"><h3>AV Linux</h3><p>Для аудио и видео.</p><a href="avlinux.html">Подробнее →</a></article>
-<article class="card"><h3>NawaOS</h3><p>Лёгкий игровой Debian.</p><a href="nawaos.html">Подробнее →</a></article>
-</div>
-
-<h2>NAS и серверы</h2>
-<div class="cards">
-<article class="card"><h3>TrueNAS SCALE</h3><p>NAS с ZFS.</p><a href="truenas-scale.html">Подробнее →</a></article>
-<article class="card"><h3>OpenMediaVault</h3><p>Простой NAS.</p><a href="openmediavault.html">Подробнее →</a></article>
-<article class="card"><h3>Proxmox VE</h3><p>Виртуализация.</p><a href="proxmox.html">Подробнее →</a></article>
-<article class="card"><h3>EasyNAS</h3><p>NAS для начинающих.</p><a href="easynas.html">Подробнее →</a></article>
-<article class="card"><h3>Rockstor</h3><p>NAS на openSUSE + Btrfs.</p><a href="rockstor.html">Подробнее →</a></article>
-<article class="card"><h3>XigmaNAS</h3><p>FreeBSD + ZFS.</p><a href="xigmanas.html">Подробнее →</a></article>
-<article class="card"><h3>OviOS Linux</h3><p>Специализированная NAS.</p><a href="ovios.html">Подробнее →</a></article>
-</div>
-
-<h2>Роутеры и firewall</h2>
-<div class="cards">
-<article class="card"><h3>OpenWrt</h3><p>Прошивка для роутеров.</p><a href="openwrt.html">Подробнее →</a></article>
-<article class="card"><h3>OPNsense</h3><p>Firewall на FreeBSD.</p><a href="opnsense.html">Подробнее →</a></article>
-<article class="card"><h3>pfSense</h3><p>Firewall-стандарт.</p><a href="pfsense.html">Подробнее →</a></article>
-<article class="card"><h3>IPFire</h3><p>Мощный firewall.</p><a href="ipfire.html">Подробнее →</a></article>
-</div>
-
-<h2>Контейнеры и облако</h2>
-<div class="cards">
-<article class="card"><h3>Fedora CoreOS</h3><p>Для Kubernetes.</p><a href="fedora-coreos.html">Подробнее →</a></article>
-<article class="card"><h3>Photon OS</h3><p>От VMware.</p><a href="photon.html">Подробнее →</a></article>
-<article class="card"><h3>Ubuntu Core</h3><p>Для IoT.</p><a href="ubuntu-core.html">Подробнее →</a></article>
-</div>
-
-<h2>Мобильные</h2>
-<div class="cards">
-<article class="card"><h3>postmarketOS</h3><p>Linux на смартфонах.</p><a href="postmarketos.html">Подробнее →</a></article>
-<article class="card"><h3>Ubuntu Touch</h3><p>Мобильная Ubuntu.</p><a href="ubuntu-touch.html">Подробнее →</a></article>
-</div>
-
-<h2>Минималистичные</h2>
-<div class="cards">
-<article class="card"><h3>Tiny Core Linux</h3><p>16 МБ, в RAM.</p><a href="tinycore.html">Подробнее →</a></article>
-<article class="card"><h3>SliTaz</h3><p>40 МБ.</p><a href="slitaz.html">Подробнее →</a></article>
-</div>
-
-<h2>Только свободное ПО</h2>
-<div class="cards">
-<article class="card"><h3>Parabola</h3><p>Arch без проприетарного.</p><a href="parabola.html">Подробнее →</a></article>
-<article class="card"><h3>Trisquel</h3><p>Ubuntu без проприетарного.</p><a href="trisquel.html">Подробнее →</a></article>
-<article class="card"><h3>PureOS</h3><p>От Purism.</p><a href="pureos.html">Подробнее →</a></article>
-</div>
-
-<h2>Безопасность и анонимность</h2>
-<div class="cards">
-<article class="card"><img src="../icons/distros/tails.svg" class="distro-icon" alt="Tails" loading="lazy"><h3>Tails</h3><p>Анонимность через Tor.</p><a href="tails.html">Подробнее →</a></article>
-<article class="card"><img src="../icons/distros/qubes.svg" class="distro-icon" alt="Qubes OS" loading="lazy"><h3>Qubes OS</h3><p>Изоляция в VM.</p><a href="qubes.html">Подробнее →</a></article>
-</div>
-
-<h2>Умный дом и киоски</h2>
-<div class="cards">
-<article class="card"><h3>Home Assistant OS</h3><p>Для умного дома.</p><a href="homeassistant.html">Подробнее →</a></article>
-<article class="card"><h3>AnotterKiosk</h3><p>Для киосков.</p><a href="anotterkiosk.html">Подробнее →</a></article>
-</div>
 </main>
+
 <footer class="site-footer"><div class="container"><p>Linux Guide — учебный проект. Создал Артём (Monadei), 2026.</p>
-<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a>
-<a href="../my-recommendations.html">Рекомендую</a> · <a href="../faq.html">FAQ</a></p></div></footer>
-<script src="../js/theme.js"></script><script src="../js/search.js"></script><script src="../js/extras.js"></script><script src="../js/fun.js"></script>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+
+<script src="../js/theme.js"></script>
 <script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/fun.js"></script>
+
+<script>
+// Каталог дистрибутивов с метаданными
+var DISTROS = [
+  // Debian
+  { slug:'debian', name:'Debian', icon:'debian', desc:'Отец семейства. Стабильность и свобода.', family:'debian', tags:['сервер','классика'] },
+  { slug:'ubuntu', name:'Ubuntu', icon:'ubuntu', desc:'Самый узнаваемый Linux. Идеален для новичков.', family:'debian', tags:['новичок','популярное'], hot:true },
+  { slug:'mint', name:'Linux Mint', icon:'mint', desc:'Уютный десктоп как Windows 7.', family:'debian', tags:['новичок','мигрант'], hot:true },
+  { slug:'lmde', name:'LMDE', icon:'lmde', desc:'Mint на базе Debian, без Ubuntu.', family:'debian', tags:['новичок'] },
+  { slug:'pop-os', name:'Pop!_OS', icon:'pop-os', desc:'Ubuntu от System76. Для разработчиков.', family:'debian', tags:['разработка','NVIDIA'] },
+  { slug:'zorin', name:'Zorin OS', icon:'zorin', desc:'Максимально дружелюбен к мигрантам с Windows.', family:'debian', tags:['новичок','мигрант'] },
+  { slug:'zorinlite', name:'Zorin OS Lite', icon:'zorinlite', desc:'Облегчённая версия Zorin.', family:'debian', tags:['старое железо'] },
+  { slug:'elementary', name:'elementary OS', icon:'elementary', desc:'Самый «дизайнерский» десктоп в Linux.', family:'debian', tags:['дизайн','macOS'] },
+  { slug:'kde-neon', name:'KDE Neon', icon:'kde-neon', desc:'Ubuntu LTS с самым свежим KDE Plasma.', family:'debian', tags:['KDE','новичок'] },
+  { slug:'kali', name:'Kali Linux', icon:'kali', desc:'Инструменты пентеста на базе Debian testing.', family:'debian', tags:['пентест'], family2:'security' },
+  { slug:'parrot', name:'Parrot OS', icon:'parrot', desc:'Безопасность и анонимность.', family:'debian', tags:['пентест'], family2:'security' },
+  { slug:'mxlinux', name:'MX Linux', icon:'mxlinux', desc:'Debian + собственные утилиты. Быстрый.', family:'debian', tags:['старое железо'] },
+  { slug:'antix', name:'antiX', icon:'antix', desc:'Ультралёгкий, работает на 256 МБ RAM.', family:'debian', tags:['древнее железо'] },
+  { slug:'puppy', name:'Puppy Linux', icon:'puppy', desc:'Микроскопический, грузится целиком в RAM.', family:'debian', tags:['Live USB','старое железо'] },
+  { slug:'lubuntu', name:'Lubuntu', icon:'lubuntu', desc:'Ubuntu с лёгким LXQt.', family:'debian', tags:['старое железо'] },
+  { slug:'xubuntu', name:'Xubuntu', icon:'xubuntu', desc:'Ubuntu с классическим Xfce.', family:'debian', tags:['классика'] },
+  { slug:'kubuntu', name:'Kubuntu', icon:'kubuntu', desc:'Ubuntu с гибким KDE Plasma.', family:'debian', tags:['KDE'] },
+  { slug:'ubuntu-budgie', name:'Ubuntu Budgie', icon:'ubuntu-budgie', desc:'Ubuntu с рабочим столом Budgie.', family:'debian', tags:['новичок'] },
+  { slug:'ubuntu-mate', name:'Ubuntu MATE', icon:'ubuntu-mate', desc:'Ubuntu с классическим MATE.', family:'debian', tags:['классика'] },
+  { slug:'ubuntu-studio', name:'Ubuntu Studio', icon:'ubuntu-studio', desc:'Для работы с мультимедиа.', family:'debian', tags:['мультимедиа'] },
+  { slug:'deepin', name:'Deepin', icon:'deepin', desc:'Красивый китайский дистрибутив с DDE.', family:'debian', tags:['дизайн'] },
+  { slug:'raspberry-pi-os', name:'Raspberry Pi OS', icon:'raspberry-pi-os', desc:'Официальная ОС для Raspberry Pi.', family:'debian', tags:['Raspberry Pi'] },
+  { slug:'bodhi', name:'Bodhi Linux', icon:'bodhi', desc:'Лёгкий, оконный менеджер Moksha.', family:'debian', tags:['старое железо'] },
+  { slug:'regolith', name:'Regolith Linux', icon:'regolith', desc:'Ubuntu с i3 без ручной настройки.', family:'debian', tags:['тайловый'] },
+  { slug:'kaisen', name:'Kaisen Linux', icon:'kaisen', desc:'Для сисадминов и DevOps.', family:'debian', tags:['сисадмин'] },
+  { slug:'nitrux', name:'Nitrux', icon:'nitrux', desc:'Дизайн + AppImage + OpenRC.', family:'debian', tags:['дизайн'] },
+  { slug:'rhino', name:'Rhino Linux', icon:'rhino', desc:'Rolling Ubuntu с rhino-pkg.', family:'debian', tags:['rolling'] },
+  { slug:'vanilla', name:'Vanilla OS', icon:'vanilla', desc:'Иммутабельная Ubuntu.', family:'debian', tags:['иммутабельная'] },
+  { slug:'nebios', name:'NebiOS', icon:'nebios', desc:'Своё окружение NebiDE на Wayland.', family:'debian', tags:['новое'] },
+  { slug:'anduinos', name:'AnduinOS', icon:'anduinos', desc:'Ubuntu с интерфейсом Windows 11.', family:'debian', tags:['мигрант'] },
+  { slug:'makulu-lindoz', name:'MakuluLinux LinDoz', icon:'makulu-lindoz', desc:'Cinnamon с интерфейсом Windows.', family:'debian', tags:['мигрант'] },
+  { slug:'mx-moksha', name:'MX Moksha', icon:'mx-moksha', desc:'MX Linux с Enlightenment/Moksha.', family:'debian', tags:['старое железо'] },
+  { slug:'vinari', name:'Vinari OS', icon:'vinari', desc:'Быстрый Debian 13 для любого железа.', family:'debian', tags:['новичок'] },
+  { slug:'linuxlite', name:'Linux Lite', icon:'linuxlite', desc:'Дружелюбный и лёгкий.', family:'debian', tags:['новичок'] },
+  { slug:'exe', name:'EXE GNU/Linux', icon:'exe', desc:'Ретро Devuan для спасения системы.', family:'debian', tags:['Live USB'] },
+  { slug:'gobolinux', name:'GoboLinux', icon:'gobolinux', desc:'Уникальная файловая система.', family:'debian', tags:['эксперимент'] },
+  { slug:'4mlinux', name:'4MLinux', icon:'4mlinux', desc:'Минимализм для мультимедиа и спасения.', family:'debian', tags:['Live USB'] },
+  { slug:'avlinux', name:'AV Linux', icon:'avlinux', desc:'Для аудио- и видеопроизводства.', family:'debian', tags:['мультимедиа'] },
+
+  // Red Hat
+  { slug:'fedora', name:'Fedora', icon:'fedora', desc:'Полигон новых технологий Red Hat.', family:'redhat', tags:['разработка','свежее'], hot:true },
+  { slug:'fedora-silverblue', name:'Fedora Silverblue', icon:'fedora-silverblue', desc:'Иммутабельная Fedora с GNOME.', family:'redhat', tags:['иммутабельная'] },
+  { slug:'fedora-kinoite', name:'Fedora Kinoite', icon:'fedora-kinoite', desc:'Иммутабельная Fedora с KDE.', family:'redhat', tags:['иммутабельная','KDE'] },
+  { slug:'fedora-coreos', name:'Fedora CoreOS', icon:'fedora-coreos', desc:'Для контейнеров и Kubernetes.', family:'redhat', tags:['контейнеры'] },
+  { slug:'asahi', name:'Fedora Asahi Remix', icon:'asahi', desc:'Fedora для Apple Silicon (M1/M2).', family:'redhat', tags:['Apple Silicon'] },
+  { slug:'hummingbird', name:'Fedora Hummingbird', icon:'hummingbird', desc:'Для AI-разработчиков и агентов.', family:'redhat', tags:['AI'] },
+  { slug:'almalinux', name:'AlmaLinux', icon:'almalinux', desc:'1:1 клон RHEL для серверов.', family:'redhat', tags:['сервер'], family2:'server' },
+  { slug:'rocky', name:'Rocky Linux', icon:'rocky', desc:'Клон RHEL от основателя CentOS.', family:'redhat', tags:['сервер'] },
+  { slug:'centos-stream', name:'CentOS Stream', icon:'centos-stream', desc:'Между Fedora и RHEL.', family:'redhat', tags:['разработка'] },
+  { slug:'oracle-linux', name:'Oracle Linux', icon:'oracle-linux', desc:'RHEL-клон от Oracle.', family:'redhat', tags:['сервер'] },
+  { slug:'ultramarine', name:'Ultramarine Linux', icon:'ultramarine', desc:'Fedora для повседневного использования.', family:'redhat', tags:['новичок'] },
+  { slug:'vojtux', name:'Vojtux', icon:'vojtux', desc:'Fedora для слабовидящих.', family:'redhat', tags:['доступность'] },
+
+  // Arch
+  { slug:'arch', name:'Arch Linux', icon:'arch', desc:'Rolling release, минимализм, легендарная вики.', family:'arch', tags:['энтузиаст','сложно'], hot:true },
+  { slug:'artix', name:'Artix', icon:'artix', desc:'Arch без systemd.', family:'arch', tags:['без systemd'] },
+  { slug:'manjaro', name:'Manjaro', icon:'manjaro', desc:'Arch с графическим установщиком.', family:'arch', tags:['мост','новичок'] },
+  { slug:'endeavouros', name:'EndeavourOS', icon:'endeavouros', desc:'Почти чистый Arch с установщиком.', family:'arch', tags:['мост'] },
+  { slug:'cachyos', name:'CachyOS', icon:'cachyos', desc:'Оптимизированный Arch для игр.', family:'arch', tags:['игры'], family2:'games' },
+  { slug:'garuda', name:'Garuda Linux', icon:'garuda', desc:'Arch с брутальным дизайном.', family:'arch', tags:['игры','дизайн'], family2:'games' },
+  { slug:'steamos', name:'SteamOS', icon:'steamos', desc:'Игровая ОС Valve для Steam Deck.', family:'arch', tags:['Steam Deck'], family2:'games' },
+  { slug:'blackarch', name:'BlackArch', icon:'blackarch', desc:'Arch + 3000 инструментов пентеста.', family:'arch', tags:['пентест'], family2:'security' },
+  { slug:'archcraft', name:'Archcraft', icon:'archcraft', desc:'Красивый Arch с готовыми WM.', family:'arch', tags:['ricing','дизайн'] },
+  { slug:'rebornos', name:'RebornOS', icon:'rebornos', desc:'Arch с выбором DE.', family:'arch', tags:['новичок'] },
+  { slug:'blendos', name:'blendOS', icon:'blendos', desc:'Гибрид Arch, Fedora и Ubuntu.', family:'arch', tags:['гибрид'] },
+  { slug:'noid', name:'Noid Linux', icon:'noid', desc:'Минималистичный Void.', family:'arch', tags:['минимализм'] },
+  { slug:'agarimos', name:'AgarimOS', icon:'agarimos', desc:'Респин Void Linux.', family:'arch', tags:['минимализм'] },
+  { slug:'shanios', name:'ShaniOS', icon:'shanios', desc:'Иммутабельный Arch.', family:'arch', tags:['иммутабельная'] },
+  { slug:'omega', name:'Omega Linux', icon:'omega', desc:'Arch для старого железа.', family:'arch', tags:['старое железо'] },
+  { slug:'elysiaos', name:'ElysiaOS', icon:'elysiaos', desc:'Hyprland + аниме-стиль.', family:'arch', tags:['дизайн','тайловый'] },
+  { slug:'kazeta', name:'Kazeta', icon:'kazeta', desc:'Ретро-консоль 90-х.', family:'arch', tags:['ретро'], family2:'games' },
+  { slug:'porteus', name:'Porteus', icon:'porteus', desc:'Модульный Slackware для USB.', family:'arch', tags:['Live USB'] },
+  { slug:'chimera', name:'Chimera Linux', icon:'chimera', desc:'Linux + инструменты FreeBSD.', family:'arch', tags:['эксперимент'] },
+
+  // SUSE
+  { slug:'opensuse', name:'openSUSE', icon:'opensuse', desc:'Leap и Tumbleweed, плюс мощный YaST.', family:'suse', tags:['сервер','KDE'] },
+  { slug:'microos', name:'openSUSE MicroOS', icon:'microos', desc:'Иммутабельный openSUSE.', family:'suse', tags:['иммутабельная','сервер'] },
+
+  // Независимые
+  { slug:'gentoo', name:'Gentoo', icon:'gentoo', desc:'Сборка из исходников, максимальный контроль.', family:'independent', tags:['профи'] },
+  { slug:'slackware', name:'Slackware', icon:'slackware', desc:'Старейший живой дистрибутив.', family:'independent', tags:['классика'] },
+  { slug:'void', name:'Void Linux', icon:'void', desc:'Без systemd, собственный XBPS.', family:'independent', tags:['без systemd'] },
+  { slug:'nixos', name:'NixOS', icon:'nixos', desc:'Декларативная система, атомарные обновления.', family:'independent', tags:['DevOps'] },
+  { slug:'alpine', name:'Alpine Linux', icon:'alpine', desc:'Крошечный дистрибутив для контейнеров.', family:'independent', tags:['контейнеры'] },
+  { slug:'solus', name:'Solus', icon:'solus', desc:'Независимый, с окружением Budgie.', family:'independent', tags:['десктоп'] },
+  { slug:'clear', name:'Clear Linux', icon:'clear', desc:'Оптимизирован Intel.', family:'independent', tags:['Intel','сервер'] },
+  { slug:'pclinuxos', name:'PCLinuxOS', icon:'pclinuxos', desc:'Прост для новичков.', family:'independent', tags:['новичок'] },
+  { slug:'aerynos', name:'AerynOS', icon:'aerynos', desc:'Атомарные обновления, менеджер moss.', family:'independent', tags:['новое'] },
+  { slug:'kde-linux', name:'KDE Linux', icon:'kde-linux', desc:'Официальный дистрибутив от KDE.', family:'independent', tags:['KDE'] },
+  { slug:'bedrock', name:'Bedrock Linux', icon:'bedrock', desc:'Мета-дистрибутив для смешивания.', family:'independent', tags:['эксперимент'] },
+  { slug:'dragora', name:'Dragora', icon:'dragora', desc:'Аргентинский, одобрен FSF.', family:'independent', tags:['FOSS'] },
+  { slug:'vendefoul', name:'Vendefoul Wolf', icon:'vendefoul', desc:'Devuan + SysVinit.', family:'independent', tags:['без systemd'] },
+  { slug:'loss32', name:'Loss32', icon:'loss32', desc:'Имитация Windows на Linux.', family:'independent', tags:['мигрант'] },
+  { slug:'matrixos', name:'matrixOS', icon:'matrixos', desc:'Иммутабельный Gentoo.', family:'independent', tags:['иммутабельная'] },
+  { slug:'enux', name:'ENux', icon:'enux', desc:'На базе Bedrock.', family:'independent', tags:['эксперимент'] },
+  { slug:'origami', name:'Origami Linux', icon:'origami', desc:'Fedora + COSMIC.', family:'independent', tags:['новое'] },
+  { slug:'floppinux', name:'FLOPPINUX', icon:'floppinux', desc:'Linux на одной дискете.', family:'independent', tags:['эксперимент'] },
+  { slug:'calculate', name:'Calculate Linux', icon:'calculate', desc:'Русский на базе Gentoo.', family:'independent', tags:['RU'] },
+
+  // Русские
+  { slug:'rosa', name:'ROSA Linux', icon:'rosa', desc:'Наследник Mandriva.', family:'russian', tags:['RU'] },
+  { slug:'alt', name:'ALT Linux', icon:'alt', desc:'Дом, школа, сервер.', family:'russian', tags:['RU'] },
+  { slug:'astra', name:'Astra Linux', icon:'astra', desc:'Сертифицирована для гостайны.', family:'russian', tags:['RU','безопасность'] },
+
+  // Игровые
+  { slug:'nobara', name:'Nobara', icon:'nobara', desc:'Fedora для геймеров от создателя Proton-GE.', family:'games', tags:['игры'] },
+  { slug:'bazzite', name:'Bazzite', icon:'bazzite', desc:'Игровая Fedora Atomic.', family:'games', tags:['игры','иммутабельная'] },
+  { slug:'chimeraos', name:'ChimeraOS', icon:'chimeraos', desc:'Своя игровая консоль из ПК.', family:'games', tags:['игры'] },
+  { slug:'batocera', name:'Batocera', icon:'batocera', desc:'Ретро-консоль, эмуляторы всех платформ.', family:'games', tags:['ретро'] },
+  { slug:'libreelec', name:'LibreELEC', icon:'libreelec', desc:'Kodi-медиацентр.', family:'games', tags:['медиацентр'] },
+  { slug:'nawaos', name:'NawaOS', icon:'nawaos', desc:'Лёгкий игровой Debian.', family:'games', tags:['игры'] },
+
+  // NAS и серверы
+  { slug:'truenas-scale', name:'TrueNAS SCALE', icon:'truenas-scale', desc:'NAS с ZFS.', family:'nas', tags:['NAS'] },
+  { slug:'openmediavault', name:'OpenMediaVault', icon:'openmediavault', desc:'Простой NAS.', family:'nas', tags:['NAS'] },
+  { slug:'proxmox', name:'Proxmox VE', icon:'proxmox', desc:'Виртуализация KVM и LXC.', family:'nas', tags:['виртуализация'] },
+  { slug:'easynas', name:'EasyNAS', icon:'easynas', desc:'NAS для начинающих.', family:'nas', tags:['NAS'] },
+  { slug:'rockstor', name:'Rockstor', icon:'rockstor', desc:'NAS на openSUSE + Btrfs.', family:'nas', tags:['NAS'] },
+  { slug:'xigmanas', name:'XigmaNAS', icon:'xigmanas', desc:'FreeBSD + ZFS.', family:'nas', tags:['NAS'] },
+  { slug:'ovios', name:'OviOS Linux', icon:'ovios', desc:'Специализированная NAS.', family:'nas', tags:['NAS'] },
+
+  // Роутеры
+  { slug:'openwrt', name:'OpenWrt', icon:'openwrt', desc:'Прошивка для роутеров.', family:'independent', tags:['роутер'] },
+  { slug:'opnsense', name:'OPNsense', icon:'opnsense', desc:'Firewall на FreeBSD.', family:'independent', tags:['firewall'] },
+  { slug:'pfsense', name:'pfSense', icon:'pfsense', desc:'Firewall-стандарт.', family:'independent', tags:['firewall'] },
+  { slug:'ipfire', name:'IPFire', icon:'ipfire', desc:'Мощный firewall.', family:'independent', tags:['firewall'] },
+
+  // Контейнеры и IoT
+  { slug:'photon', name:'Photon OS', icon:'photon', desc:'От VMware.', family:'independent', tags:['контейнеры'] },
+  { slug:'ubuntu-core', name:'Ubuntu Core', icon:'ubuntu-core', desc:'Иммутабельная для IoT.', family:'debian', tags:['IoT'] },
+  { slug:'postmarketos', name:'postmarketOS', icon:'postmarketos', desc:'Linux на смартфонах.', family:'independent', tags:['мобильный'] },
+  { slug:'ubuntu-touch', name:'Ubuntu Touch', icon:'ubuntu-touch', desc:'Мобильная Ubuntu.', family:'debian', tags:['мобильный'] },
+
+  // Минималистичные
+  { slug:'tinycore', name:'Tiny Core Linux', icon:'tinycore', desc:'16 МБ, работает в RAM.', family:'independent', tags:['минимализм'] },
+  { slug:'slitaz', name:'SliTaz', icon:'slitaz', desc:'40 МБ, швейцарский.', family:'independent', tags:['минимализм'] },
+
+  // FOSS-only
+  { slug:'parabola', name:'Parabola', icon:'parabola', desc:'Arch без проприетарного ПО.', family:'independent', tags:['FOSS'] },
+  { slug:'trisquel', name:'Trisquel', icon:'trisquel', desc:'Ubuntu без проприетарного ПО.', family:'independent', tags:['FOSS'] },
+  { slug:'pureos', name:'PureOS', icon:'pureos', desc:'Свободный от Purism.', family:'independent', tags:['FOSS'] },
+
+  // Безопасность
+  { slug:'tails', name:'Tails', icon:'tails', desc:'Анонимность через Tor.', family:'security', tags:['анонимность'] },
+  { slug:'qubes', name:'Qubes OS', icon:'qubes', desc:'Изоляция каждого приложения в VM.', family:'security', tags:['безопасность'] },
+
+  // Умный дом
+  { slug:'homeassistant', name:'Home Assistant OS', icon:'homeassistant', desc:'Для умного дома.', family:'independent', tags:['IoT'] },
+  { slug:'anotterkiosk', name:'AnotterKiosk', icon:'anotterkiosk', desc:'Для киосков и вывесок.', family:'independent', tags:['киоск'] },
+];
+
+// Спец-метки для карточек
+var HOT = ['ubuntu','mint','fedora','arch','pop-os','manjaro','steamos'];
+
+// Рендер
+var grid = document.getElementById('distros-grid');
+var total = DISTROS.length;
+document.getElementById('total-count').textContent = total;
+
+function render() {
+  var html = '';
+  DISTROS.forEach(function(d) {
+    var isHot = HOT.indexOf(d.slug) !== -1;
+    var tagsHtml = '';
+    if (d.tags) {
+      tagsHtml = d.tags.map(function(t) {
+        return '<span class="tile-tag">' + t + '</span>';
+      }).join('');
+    }
+    if (isHot) {
+      tagsHtml = '<span class="tile-tag hot">топ</span>' + tagsHtml;
+    }
+    html += '<a href="' + d.slug + '.html" class="distro-tile" data-family="' + d.family + '"' +
+      (d.family2 ? ' data-family2="' + d.family2 + '"' : '') +
+      ' data-name="' + d.name.toLowerCase() + '"' +
+      ' data-desc="' + d.desc.toLowerCase() + '">' +
+      '<div class="tile-head">' +
+      '<img src="../icons/distros/' + d.icon + '.svg" class="tile-icon" alt="" loading="lazy" onerror="this.style.display=\'none\'">' +
+      '<span class="tile-name">' + d.name + '</span>' +
+      '</div>' +
+      '<p class="tile-desc">' + d.desc + '</p>' +
+      '<div class="tile-meta">' + tagsHtml + '</div>' +
+      '</a>';
+  });
+  grid.innerHTML = html;
+  updateCount();
+}
+
+function updateCount() {
+  var visible = document.querySelectorAll('.distro-tile:not(.hidden)').length;
+  document.getElementById('visible-count').textContent = visible;
+}
+
+// Фильтры по семейству
+var activeFamily = 'all';
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    activeFamily = this.dataset.family;
+    applyFilters();
+  });
+});
+
+// Поиск
+document.getElementById('catalog-search').addEventListener('input', function() {
+  applyFilters();
+});
+
+function applyFilters() {
+  var q = document.getElementById('catalog-search').value.toLowerCase().trim();
+  document.querySelectorAll('.distro-tile').forEach(function(tile) {
+    var fam = tile.dataset.family;
+    var fam2 = tile.dataset.family2 || '';
+    var name = tile.dataset.name;
+    var desc = tile.dataset.desc;
+    
+    var famMatch = (activeFamily === 'all') || (fam === activeFamily) || (fam2 === activeFamily);
+    var searchMatch = !q || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+    
+    if (famMatch && searchMatch) {
+      tile.classList.remove('hidden');
+    } else {
+      tile.classList.add('hidden');
+    }
+  });
+  updateCount();
+}
+
+render();
+</script>
 </body>
 </html>
