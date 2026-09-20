@@ -828,3 +828,32 @@ h1 img.page-icon {
   border: none;
   padding: 0;
 }
+
+/* Скриншот — на всю ширину */
+.screenshot-section {
+  width: 100%;
+}
+.screenshot-slot.filled {
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.screenshot-slot.filled img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* На мобиле — тоже на всю ширину */
+@media (max-width: 768px) {
+  .screenshot-slot.filled img {
+    width: 100%;
+    margin: 0.8rem 0;
+  }
+}
