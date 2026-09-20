@@ -291,3 +291,43 @@
   /* Скрыть хлебные крошки на мобиле */
   .breadcrumbs { display: none; }
 }
+
+/* ============================================
+   ФИНАЛЬНЫЙ ФИКС ДЛЯ МОБИЛЫ
+   Убираем переключатель темы и контраста
+   ============================================ */
+
+@media (max-width: 768px) {
+
+  /* Скрыть селект темы полностью */
+  .theme-switcher {
+    display: none !important;
+  }
+
+  /* Скрыть кнопку контраста (◐) */
+  .header-inner > .menu-toggle:nth-of-type(n+2),
+  .header-inner > button.menu-toggle:not(:first-of-type) {
+    display: none !important;
+  }
+
+  /* Поиск — на всю ширину, раз тема скрыта */
+  .search-box {
+    order: 4 !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    margin: 0.4rem 0 0 0 !important;
+  }
+  .search-box input {
+    font-size: 0.85rem !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0.4rem 0.7rem !important;
+  }
+
+  /* Гамбургер — единственная кнопка справа */
+  .menu-toggle {
+    width: 40px !important;
+    height: 36px !important;
+    font-size: 1.1rem !important;
+  }
+}
