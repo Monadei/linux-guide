@@ -1,0 +1,260 @@
+/* ============================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   Только для экранов ≤ 768px
+   ============================================ */
+
+@media (max-width: 768px) {
+
+  /* ----- Базовое ----- */
+  html { font-size: 15px; }
+  body { line-height: 1.6; overflow-x: hidden; }
+
+  .container { width: 95%; }
+
+  /* ----- Шапка ----- */
+  .site-header { padding: 0; }
+  .header-inner {
+    flex-wrap: wrap;
+    padding: 0.7rem 0;
+    gap: 0.5rem;
+  }
+  .logo { font-size: 1rem; }
+
+  /* Мобильное меню (гамбургер) */
+  .menu-toggle {
+    display: block !important;
+    order: 2;
+    margin-left: auto;
+    background: transparent;
+    border: 1px dashed var(--accent-dim);
+    color: var(--accent);
+    font-size: 1.4rem;
+    padding: 0.2rem 0.7rem;
+    cursor: pointer;
+  }
+  .menu-toggle:hover { background: var(--accent); color: var(--bg); }
+
+  .nav {
+    display: none;
+    order: 10;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--border);
+  }
+  .nav.open { display: flex; }
+  .nav a {
+    padding: 0.7rem 0.3rem;
+    font-size: 0.95rem;
+    border-bottom: 1px dashed var(--border);
+    width: 100%;
+  }
+  .nav a:last-child { border-bottom: none; }
+  .nav a::before, .nav a::after { content: ""; }
+
+  /* Переключатели тем/шрифтов — компактнее */
+  .theme-switcher {
+    order: 3;
+    margin: 0.5rem 0 0 0 !important;
+    width: 100%;
+  }
+  .theme-switcher select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .font-ctrl { display: none; }
+
+  /* Поиск */
+  .search-box {
+    order: 4;
+    margin: 0.5rem 0 0 0 !important;
+    width: 100%;
+  }
+  .search-box input {
+    width: 100% !important;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  .search-results {
+    min-width: 100%;
+    right: auto;
+    left: 0;
+    width: 100%;
+  }
+
+  /* ----- Hero (главная) ----- */
+  .hero { padding: 2rem 0 1.5rem; }
+  .hero h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  .hero p { font-size: 0.95rem; padding: 0 0.5rem; }
+  .hero h1::before { content: ""; }
+
+  /* ----- Карточки ----- */
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding-bottom: 2rem;
+  }
+  .card { padding: 1rem; }
+  .card h2, .card h3 { font-size: 1rem; }
+  .card p { font-size: 0.85rem; }
+  .distro-icon { width: 32px; height: 32px; margin-bottom: 0.4rem; }
+
+  /* ----- Страницы ----- */
+  .page { padding: 1.5rem 0 3rem; }
+  .page h1 {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+  .page h1::before { content: ""; }
+  .page h2 {
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+  }
+  .page h2::before { content: ""; }
+  .lead { font-size: 0.95rem; }
+
+  /* ----- Таблицы ----- */
+  .table-wrap, .data { font-size: 0.8rem; }
+  table.data th, table.data td { padding: 0.4rem 0.5rem; }
+  .table-wrap { -webkit-overflow-scrolling: touch; }
+
+  /* ----- Код ----- */
+  pre, code {
+    font-size: 0.75rem;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  pre { padding: 0.7rem; overflow-x: auto; }
+  .ss-code { font-size: 0.7rem; }
+
+  /* ----- Скриншоты ----- */
+  .screenshot-slot { padding: 1.2rem 0.8rem; }
+  .screenshot-slot .ss-icon { font-size: 1.8rem; }
+  .screenshot-slot img { max-width: 100%; height: auto; }
+
+  /* ----- Заголовки-эмодзи ----- */
+  .rec-card { padding: 1rem; }
+  .rec-card h2 { font-size: 1.15rem; }
+  .rec-card .rec-icon {
+    width: 36px;
+    height: 36px;
+    float: right;
+    margin-left: 0.5rem;
+  }
+  .rec-card .rec-num {
+    left: 1rem;
+    font-size: 0.7rem;
+  }
+
+  /* ----- Кнопки ----- */
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    display: block;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  /* ----- Футер ----- */
+  .site-footer { padding: 1rem 0; font-size: 0.8rem; }
+  .site-footer .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  /* ----- Кнопка «Наверх» ----- */
+  .to-top {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  /* ----- Мини-терминал ----- */
+  .mini-term { font-size: 0.75rem; padding: 0.7rem; }
+  .mini-term input { width: 60%; font-size: 0.75rem; }
+
+  /* ----- Оглавление ----- */
+  .page-toc { display: none !important; }
+
+  /* ----- Хлебные крошки ----- */
+  .breadcrumbs { font-size: 0.75rem; }
+
+  /* ----- Тесты и викторины ----- */
+  .test-q { padding: 0.8rem; }
+  .test-q h3 { font-size: 0.95rem; }
+  .quiz-q label { padding: 0.6rem; font-size: 0.85rem; }
+  .test-result { padding: 1rem; }
+  .test-result h2 { font-size: 1.2rem; }
+
+  /* ----- Древо дистрибутивов ----- */
+  pre[style*="font-size"] { font-size: 0.6rem !important; }
+
+  /* ----- Сравнение ----- */
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-result table { font-size: 0.8rem; }
+
+  /* ----- Таймлайн ----- */
+  .timeline { padding-left: 1.5rem; }
+  .tl-item { font-size: 0.9rem; }
+
+  /* ----- Ачивки ----- */
+  .ach-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .ach { padding: 0.7rem; }
+  .ach .icon { font-size: 1.5rem; }
+  .ach .name { font-size: 0.85rem; }
+  .ach .desc { font-size: 0.7rem; }
+
+  /* ----- Галерея тем ----- */
+  .theme-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .theme-card { padding: 0.6rem; }
+  .theme-card .name { font-size: 0.75rem; }
+
+  /* ----- Уровни ----- */
+  .level { padding: 0.8rem; }
+  .level h3 { font-size: 1rem; }
+
+  /* ----- FAQ ----- */
+  .faq-item summary { font-size: 0.9rem; padding: 0.5rem 0; }
+  .faq-item p { font-size: 0.85rem; margin-left: 0.5rem; }
+
+  /* ----- About ----- */
+  .author-card { flex-direction: column; padding: 1rem; }
+  .author-avatar { font-size: 1.5rem; padding: 0.6rem 0.9rem; }
+  .sys-grid { grid-template-columns: 1fr; }
+
+  /* ----- Tux анимация — отключаем на мобиле ----- */
+  .tux { display: none; }
+
+  /* ----- Konami toast ----- */
+  .konami-toast { font-size: 0.85rem; padding: 0.6rem 1rem; }
+}
+
+/* ============================================
+   ОЧЕНЬ УЗКИЕ ЭКРАНЫ (≤ 380px)
+   ============================================ */
+@media (max-width: 380px) {
+  html { font-size: 14px; }
+  .container { width: 96%; }
+  .hero h1 { font-size: 1.3rem; }
+  .page h1 { font-size: 1.25rem; }
+  .nav a { font-size: 0.9rem; padding: 0.6rem 0.2rem; }
+  .btn { font-size: 0.85rem; padding: 0.55rem 0.9rem; }
+}
+
+/* ============================================
+   ПЛАНШЕТЫ (769px – 1024px)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .container { width: 92%; }
+  .rec-card .rec-icon { width: 48px; height: 48px; }
+}
