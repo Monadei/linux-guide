@@ -1,260 +1,576 @@
 /* ============================================
-   МОБИЛЬНАЯ АДАПТАЦИЯ
-   Только для экранов ≤ 768px
+   MOBILE.CSS — v2
+   Полностью переработанная мобильная версия
    ============================================ */
 
-@media (max-width: 768px) {
+/* ============================================
+   ОБЩЕЕ ДЛЯ ВСЕХ МОБИЛЬНЫХ (≤ 900px)
+   ============================================ */
+@media (max-width: 900px) {
 
-  /* ----- Базовое ----- */
-  html { font-size: 15px; }
-  body { line-height: 1.6; overflow-x: hidden; }
-
-  .container { width: 95%; }
-
-  /* ----- Шапка ----- */
-  .site-header { padding: 0; }
-  .header-inner {
-    flex-wrap: wrap;
-    padding: 0.7rem 0;
-    gap: 0.5rem;
+  /* ----- База ----- */
+  html { font-size: 16px; }
+  body {
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
   }
-  .logo { font-size: 1rem; }
 
-  /* Мобильное меню (гамбургер) */
+  .container { width: 94%; max-width: 100%; }
+  img { max-width: 100%; height: auto; }
+
+  /* ----- Шапка — компактная ----- */
+  .site-header {
+    padding: 0;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(12px);
+    background: rgba(10,10,10,0.95);
+  }
+  .header-inner {
+    padding: 0.55rem 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    min-height: auto;
+  }
+  .logo {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .logo::after { display: none; } /* убираем мигающий курсор — на мобиле раздражает */
+
+  /* Гамбургер — крупный, удобный */
   .menu-toggle {
-    display: block !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
     order: 2;
     margin-left: auto;
     background: transparent;
-    border: 1px dashed var(--accent-dim);
+    border: 1px solid var(--accent-dim);
     color: var(--accent);
-    font-size: 1.4rem;
-    padding: 0.2rem 0.7rem;
+    font-size: 1.1rem;
+    font-family: inherit;
+    padding: 0.4rem 0.7rem;
     cursor: pointer;
+    min-width: 44px;
+    min-height: 40px;
+    transition: 0.15s;
+    border-radius: 4px;
   }
-  .menu-toggle:hover { background: var(--accent); color: var(--bg); }
+  .menu-toggle:active,
+  .menu-toggle:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
 
+  /* Выпадающее меню — на всю ширину */
   .nav {
     display: none;
-    order: 10;
+    order: 20;
     width: 100%;
     flex-direction: column;
     gap: 0;
     margin-top: 0.5rem;
     padding-top: 0.5rem;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
   }
   .nav.open { display: flex; }
   .nav a {
-    padding: 0.7rem 0.3rem;
-    font-size: 0.95rem;
-    border-bottom: 1px dashed var(--border);
+    padding: 0.85rem 0.4rem;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
     width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    transition: 0.15s;
   }
+  .nav a:active { background: var(--panel-2); }
   .nav a:last-child { border-bottom: none; }
   .nav a::before, .nav a::after { content: ""; }
 
-  /* Переключатели тем/шрифтов — компактнее */
+  /* Переключатели — компактнее, но кликабельны */
   .theme-switcher {
     order: 3;
-    margin: 0.5rem 0 0 0 !important;
+    margin: 0.4rem 0 0 0 !important;
     width: 100%;
   }
   .theme-switcher select {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.55rem 0.6rem;
     font-size: 0.9rem;
+    font-family: inherit;
+    min-height: 42px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
   }
   .font-ctrl { display: none; }
 
   /* Поиск */
   .search-box {
     order: 4;
-    margin: 0.5rem 0 0 0 !important;
+    margin: 0.4rem 0 0 0 !important;
     width: 100%;
   }
   .search-box input {
     width: 100% !important;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    min-height: 44px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
   }
+  .search-box input:focus { width: 100% !important; }
   .search-results {
     min-width: 100%;
     right: auto;
     left: 0;
     width: 100%;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .search-results a {
+    padding: 0.8rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
-  /* ----- Hero (главная) ----- */
-  .hero { padding: 2rem 0 1.5rem; }
+  /* ============================================
+     HERO (главная)
+     ============================================ */
+  .hero {
+    padding: 1.8rem 0 1.2rem;
+    text-align: left;
+  }
   .hero h1 {
     font-size: 1.5rem;
-    line-height: 1.3;
+    line-height: 1.25;
+    margin-bottom: 0.7rem;
   }
-  .hero p { font-size: 0.95rem; padding: 0 0.5rem; }
   .hero h1::before { content: ""; }
+  .hero p {
+    font-size: 0.95rem;
+    padding: 0;
+    margin-bottom: 1.2rem;
+  }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    text-align: center;
+    min-height: 48px;
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
+  .btn::before, .btn::after { content: ""; }
 
-  /* ----- Карточки ----- */
+  /* ============================================
+     КАРТОЧКИ — плотнее и красивее
+     ============================================ */
   .cards {
     grid-template-columns: 1fr;
-    gap: 0.8rem;
-    padding-bottom: 2rem;
+    gap: 0.7rem;
+    padding-bottom: 1.5rem;
   }
-  .card { padding: 1rem; }
-  .card h2, .card h3 { font-size: 1rem; }
-  .card p { font-size: 0.85rem; }
-  .distro-icon { width: 32px; height: 32px; margin-bottom: 0.4rem; }
+  .card {
+    padding: 1rem;
+    border-radius: 6px;
+    transition: 0.15s;
+  }
+  .card:active {
+    transform: scale(0.98);
+    border-left-color: var(--accent);
+  }
+  .card h2, .card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.3rem;
+  }
+  .card p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0.3rem 0 0.6rem;
+  }
+  .card a {
+    font-size: 0.9rem;
+    display: inline-block;
+    padding: 0.3rem 0;
+    min-height: 32px;
+  }
+  .distro-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 0.5rem;
+  }
 
-  /* ----- Страницы ----- */
-  .page { padding: 1.5rem 0 3rem; }
+  /* ============================================
+     СТРАНИЦЫ
+     ============================================ */
+  .page { padding: 1.2rem 0 2.5rem; }
   .page h1 {
-    font-size: 1.4rem;
-    line-height: 1.3;
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
   }
   .page h1::before { content: ""; }
   .page h2 {
-    font-size: 1.05rem;
-    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.3rem;
   }
   .page h2::before { content: ""; }
-  .lead { font-size: 0.95rem; }
-
-  /* ----- Таблицы ----- */
-  .table-wrap, .data { font-size: 0.8rem; }
-  table.data th, table.data td { padding: 0.4rem 0.5rem; }
-  .table-wrap { -webkit-overflow-scrolling: touch; }
-
-  /* ----- Код ----- */
-  pre, code {
-    font-size: 0.75rem;
-    word-break: break-word;
-    white-space: pre-wrap;
+  .page h3 {
+    font-size: 1rem;
+    margin-top: 1.2rem;
   }
-  pre { padding: 0.7rem; overflow-x: auto; }
-  .ss-code { font-size: 0.7rem; }
+  .lead {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 1.2rem;
+  }
+  .lead::before { content: ""; }
 
-  /* ----- Скриншоты ----- */
-  .screenshot-slot { padding: 1.2rem 0.8rem; }
-  .screenshot-slot .ss-icon { font-size: 1.8rem; }
-  .screenshot-slot img { max-width: 100%; height: auto; }
+  section { margin-bottom: 1.3rem; }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.2rem; }
+  li { margin: 0.3rem 0; }
+  strong { font-weight: 600; }
 
-  /* ----- Заголовки-эмодзи ----- */
-  .rec-card { padding: 1rem; }
-  .rec-card h2 { font-size: 1.15rem; }
+  /* ============================================
+     КОД — горизонтальный скролл вместо переноса
+     ============================================ */
+  pre {
+    padding: 0.7rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    border-left: 3px solid var(--accent);
+    white-space: pre;
+    word-break: normal;
+  }
+  pre code {
+    font-size: 0.8rem;
+    white-space: pre;
+    word-break: normal;
+  }
+  code {
+    font-size: 0.82rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  /* ============================================
+     ТАБЛИЦЫ — горизонтальный скролл
+     ============================================ */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem -4% 1rem 0;
+    padding-right: 4%;
+  }
+  table.data {
+    font-size: 0.8rem;
+    min-width: 500px;
+  }
+  table.data th,
+  table.data td {
+    padding: 0.5rem 0.6rem;
+    white-space: nowrap;
+  }
+
+  /* ============================================
+     СКРИНШОТЫ
+     ============================================ */
+  .screenshot-section { margin-top: 2rem; }
+  .screenshot-slot {
+    padding: 1.5rem 1rem;
+    border-radius: 6px;
+  }
+  .screenshot-slot .ss-icon { font-size: 1.5rem; }
+  .screenshot-slot p { font-size: 0.9rem; }
+  .screenshot-slot .ss-hint { font-size: 0.8rem; }
+  .screenshot-slot .ss-code {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .screenshot-slot.filled img {
+    width: 100%;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+  }
+
+  /* ============================================
+     REC-CARD (мои рекомендации)
+     ============================================ */
+  .rec-card {
+    padding: 1rem;
+    margin: 1.2rem 0;
+    border-radius: 6px;
+  }
+  .rec-card h2 {
+    font-size: 1.15rem;
+    padding-top: 1rem;
+  }
+  .rec-card .rec-tagline { font-size: 0.85rem; }
   .rec-card .rec-icon {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     float: right;
     margin-left: 0.5rem;
   }
   .rec-card .rec-num {
     left: 1rem;
+    top: -0.7rem;
     font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
   }
-
-  /* ----- Кнопки ----- */
-  .btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+  .rec-card .rec-links { flex-direction: column; }
+  .rec-card .rec-links a {
     display: block;
     text-align: center;
-    margin: 0.5rem 0;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    min-height: 40px;
+    border-radius: 4px;
   }
 
-  /* ----- Футер ----- */
-  .site-footer { padding: 1rem 0; font-size: 0.8rem; }
+  /* ============================================
+     FAQ
+     ============================================ */
+  .faq-item summary {
+    font-size: 0.95rem;
+    padding: 0.85rem 0;
+    min-height: 44px;
+  }
+  .faq-item p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-left: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  /* ============================================
+     ТЕСТЫ / ВИКТОРИНЫ
+     ============================================ */
+  .test-q { padding: 1rem; margin: 1rem 0; border-radius: 6px; }
+  .test-q h3 { font-size: 0.95rem; margin-bottom: 0.7rem; }
+  .test-q label {
+    padding: 0.7rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  .test-q input[type="radio"] { transform: scale(1.3); margin-right: 0.7rem; }
+  .test-result {
+    padding: 1.2rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+  }
+  .test-result h2 { font-size: 1.25rem; }
+
+  /* ============================================
+     ABOUT / ПРОФИЛЬ
+     ============================================ */
+  .author-card { padding: 1rem; gap: 1rem; }
+  .author-avatar { font-size: 1.5rem; padding: 0.6rem 0.9rem; }
+  .author-info h2 { font-size: 1.2rem; }
+  .sys-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+  .sys-card { padding: 1rem; border-radius: 6px; }
+  .hw-table { font-size: 0.78rem; }
+  .hw-table td { padding: 0.35rem 0; }
+
+  /* ============================================
+     ДРЕВО / ТАЙМЛАЙН / КАРТА
+     ============================================ */
+  pre[style*="font-size"] { font-size: 0.55rem !important; line-height: 1.4; }
+  .timeline { padding-left: 1.5rem; }
+  .timeline::before { left: 0.35rem; }
+  .tl-item { font-size: 0.9rem; margin-bottom: 1rem; }
+  .tl-item::before { left: -1.35rem; width: 8px; height: 8px; }
+
+  /* ============================================
+     КАТАЛОГ ДИСТРИБУТИВОВ
+     ============================================ */
+  .cards .card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.9rem;
+  }
+  .cards .card .distro-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .cards .card h3 { margin-top: 0; }
+  .cards .card > *:not(.distro-icon) { flex: 1 1 auto; min-width: 0; }
+  .cards .card > *:not(.distro-icon):not(.distro-icon) { width: 100%; }
+  /* fallback — если карточка без иконки */
+  .cards .card:not(:has(.distro-icon)) { display: block; }
+
+  /* ============================================
+     ТЕМЫ (theme-grid)
+     ============================================ */
+  .theme-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+  }
+  .theme-card {
+    padding: 0.7rem;
+    border-radius: 6px;
+  }
+  .theme-card .name { font-size: 0.8rem; }
+  .theme-card .swatch span { width: 18px; height: 18px; }
+
+  /* ============================================
+     АЧИВКИ
+     ============================================ */
+  .ach-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .ach { padding: 0.8rem 0.6rem; border-radius: 6px; }
+  .ach .icon { font-size: 1.6rem; }
+  .ach .name { font-size: 0.85rem; }
+  .ach .desc { font-size: 0.72rem; line-height: 1.4; }
+
+  /* ============================================
+     КОМАНДНАЯ ШПАРГАЛКА
+     ============================================ */
+  .cmd-row {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+    padding: 0.6rem 0.8rem;
+  }
+  .cmd-row code { font-size: 0.85rem; }
+  .cmd-row .desc { font-size: 0.8rem; }
+
+  /* ============================================
+     ФУТЕР
+     ============================================ */
+  .site-footer {
+    padding: 1.2rem 0;
+    font-size: 0.8rem;
+    text-align: center;
+  }
   .site-footer .footer-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.7rem;
     justify-content: center;
+    margin-top: 0.8rem;
+  }
+  .site-footer .footer-links a {
+    padding: 0.3rem 0;
+    min-height: 32px;
   }
 
-  /* ----- Кнопка «Наверх» ----- */
+  /* ============================================
+     ПЛАВАЮЩИЕ ЭЛЕМЕНТЫ
+     ============================================ */
   .to-top {
     bottom: 1rem;
     right: 1rem;
-    padding: 0.6rem 0.9rem;
-    font-size: 0.9rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 1rem;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
 
-  /* ----- Мини-терминал ----- */
-  .mini-term { font-size: 0.75rem; padding: 0.7rem; }
-  .mini-term input { width: 60%; font-size: 0.75rem; }
+  /* Мини-терминал */
+  .mini-term { font-size: 0.75rem; padding: 0.7rem; border-radius: 4px; }
+  .mini-term input { width: 65%; font-size: 0.75rem; }
 
-  /* ----- Оглавление ----- */
+  /* Оглавление и Tux — отключаем */
   .page-toc { display: none !important; }
-
-  /* ----- Хлебные крошки ----- */
-  .breadcrumbs { font-size: 0.75rem; }
-
-  /* ----- Тесты и викторины ----- */
-  .test-q { padding: 0.8rem; }
-  .test-q h3 { font-size: 0.95rem; }
-  .quiz-q label { padding: 0.6rem; font-size: 0.85rem; }
-  .test-result { padding: 1rem; }
-  .test-result h2 { font-size: 1.2rem; }
-
-  /* ----- Древо дистрибутивов ----- */
-  pre[style*="font-size"] { font-size: 0.6rem !important; }
-
-  /* ----- Сравнение ----- */
-  .compare-grid { grid-template-columns: 1fr; }
-  .compare-result table { font-size: 0.8rem; }
-
-  /* ----- Таймлайн ----- */
-  .timeline { padding-left: 1.5rem; }
-  .tl-item { font-size: 0.9rem; }
-
-  /* ----- Ачивки ----- */
-  .ach-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .ach { padding: 0.7rem; }
-  .ach .icon { font-size: 1.5rem; }
-  .ach .name { font-size: 0.85rem; }
-  .ach .desc { font-size: 0.7rem; }
-
-  /* ----- Галерея тем ----- */
-  .theme-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
-  .theme-card { padding: 0.6rem; }
-  .theme-card .name { font-size: 0.75rem; }
-
-  /* ----- Уровни ----- */
-  .level { padding: 0.8rem; }
-  .level h3 { font-size: 1rem; }
-
-  /* ----- FAQ ----- */
-  .faq-item summary { font-size: 0.9rem; padding: 0.5rem 0; }
-  .faq-item p { font-size: 0.85rem; margin-left: 0.5rem; }
-
-  /* ----- About ----- */
-  .author-card { flex-direction: column; padding: 1rem; }
-  .author-avatar { font-size: 1.5rem; padding: 0.6rem 0.9rem; }
-  .sys-grid { grid-template-columns: 1fr; }
-
-  /* ----- Tux анимация — отключаем на мобиле ----- */
   .tux { display: none; }
 
-  /* ----- Konami toast ----- */
-  .konami-toast { font-size: 0.85rem; padding: 0.6rem 1rem; }
+  /* Хлебные крошки */
+  .breadcrumbs {
+    font-size: 0.75rem;
+    padding: 0.6rem 0 0.3rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* Konami */
+  .konami-toast { font-size: 0.8rem; padding: 0.6rem 1rem; }
+
+  /* Сравнение */
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-grid select { min-height: 42px; padding: 0.6rem; }
+  .compare-result { padding: 0.8rem; border-radius: 6px; overflow-x: auto; }
+  .compare-result table { font-size: 0.8rem; min-width: 400px; }
+
+  /* Уровни */
+  .level { padding: 1rem; margin: 1rem 0; border-radius: 6px; }
+  .level h3 { font-size: 1rem; }
+  .level .badge { font-size: 0.7rem; }
+
+  /* Словарь */
+  .origin dt { font-size: 0.95rem; }
+  .origin dd { font-size: 0.88rem; }
+
+  /* Скриншот-слот на мобиле уже был — дублируем на всякий */
+  .screenshot-slot.filled { padding: 0; }
 }
 
 /* ============================================
-   ОЧЕНЬ УЗКИЕ ЭКРАНЫ (≤ 380px)
+   ОЧЕНЬ УЗКИЕ ЭКРАНЫ (≤ 400px)
    ============================================ */
-@media (max-width: 380px) {
-  html { font-size: 14px; }
-  .container { width: 96%; }
-  .hero h1 { font-size: 1.3rem; }
-  .page h1 { font-size: 1.25rem; }
-  .nav a { font-size: 0.9rem; padding: 0.6rem 0.2rem; }
-  .btn { font-size: 0.85rem; padding: 0.55rem 0.9rem; }
+@media (max-width: 400px) {
+  html { font-size: 15px; }
+  .container { width: 95%; }
+  .hero h1 { font-size: 1.35rem; }
+  .page h1 { font-size: 1.3rem; }
+  .card h2, .card h3 { font-size: 1rem; }
+  .nav a { font-size: 0.95rem; padding: 0.75rem 0.3rem; }
+  .btn { font-size: 0.9rem; padding: 0.75rem 0.9rem; }
+  .theme-grid { grid-template-columns: 1fr; }
+  .ach-grid { grid-template-columns: 1fr; }
 }
 
 /* ============================================
-   ПЛАНШЕТЫ (769px – 1024px)
+   ПЛАНШЕТЫ (901px – 1100px)
    ============================================ */
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 901px) and (max-width: 1100px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
   .container { width: 92%; }
-  .rec-card .rec-icon { width: 48px; height: 48px; }
+}
+
+/* ============================================
+   ТАЧ-УСТРОЙСТВА — фокус на удобство
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  /* Убираем hover-эффекты, оставляем active */
+  .card:hover { transform: none; }
+  .card:active { transform: scale(0.98); }
+  .nav a:hover { background: none; }
+  .nav a:active { background: var(--panel-2); }
+
+  /* Все интерактивные элементы — минимум 44px */
+  a, button, select, input[type="checkbox"], input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  a { display: inline-flex; align-items: center; }
+  /* Исключения — обычные ссылки в тексте */
+  p a, li a, dd a { display: inline; min-height: auto; }
 }
