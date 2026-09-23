@@ -1624,8 +1624,9 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
 }
 
 
+
 /* ============================================
-   BOOT SCREEN — пиксельный Tux
+   BOOT SCREEN — короткая загрузка с пингвином
    ============================================ */
 .boot-screen {
   position: fixed;
@@ -1638,96 +1639,24 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.4s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 .boot-screen.boot-fade {
   opacity: 0;
 }
 
-.boot-screen.boot-flash::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: #ffb000;
-  opacity: 0;
-  animation: boot-flash-anim 0.3s ease-out;
-  pointer-events: none;
-}
-
-@keyframes boot-flash-anim {
-  0% { opacity: 0; }
-  30% { opacity: 0.6; }
-  100% { opacity: 0; }
-}
-
-.boot-tux-wrap {
-  text-align: center;
-}
-
 .boot-tux {
   display: grid;
-  grid-template-columns: repeat(32, 1fr);
-  grid-template-rows: repeat(32, 1fr);
-  width: min(240px, 55vw);
-  height: min(240px, 55vw);
-  margin: 0 auto;
-  filter: drop-shadow(0 0 15px rgba(255, 176, 0, 0.5));
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(24, 1fr);
+  width: min(200px, 50vw);
+  height: min(200px, 50vw);
+  filter: drop-shadow(0 0 20px rgba(255, 176, 0, 0.6));
 }
 
 .boot-px {
   opacity: 0;
   transform: scale(0);
-  transition: opacity 0.15s, transform 0.15s;
-}
-
-.boot-text {
-  color: #ffb000;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: clamp(1.3rem, 5vw, 2.2rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  margin-top: 1.5rem;
-  text-shadow: 0 0 20px rgba(255, 176, 0, 0.7);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-}
-
-.boot-text-show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-  .boot-text {
-    margin-top: 1rem;
-  }
-}
-
-
-/* ============================================
-   Monade OS — большой статичный заголовок на главной
-   ============================================ */
-.monade-title {
-  text-align: center;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 700;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  color: var(--accent);
-  letter-spacing: 0.05em;
-  line-height: 1.15;
-  margin: 1.5rem 0 1rem;
-  text-shadow:
-    0 0 10px rgba(255, 176, 0, 0.4),
-    0 0 30px rgba(255, 176, 0, 0.2);
-}
-
-.monade-title::before { content: ""; }
-
-@media (max-width: 768px) {
-  .monade-title {
-    font-size: clamp(2rem, 12vw, 3rem);
-    margin: 1rem 0 0.8rem;
-  }
+  transition: opacity 0.1s, transform 0.1s;
 }
