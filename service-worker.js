@@ -1,4 +1,4 @@
-const CACHE = 'monade-os-v3';
+const CACHE = 'monade-os-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -7,35 +7,23 @@ const ASSETS = [
   './css/mobile.css',
   './js/theme.js',
   './js/site-theme.js',
-  './js/search.js',
-  './js/hero-logo.js',
-  './js/boot-screen.js'
+  './js/search.js'
 ];
 
 self.addEventListener('install', e => {
-  // Сразу активируем новый SW, не ждём закрытия вкладок
   self.skipWaiting();
-  e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(ASSETS).catch(() => {}))
-  );
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS).catch(() => {})));
 });
 
 self.addEventListener('activate', e => {
-  // Удаляем ВСЕ старые кеши
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(
-        keys.filter(k => k !== CACHE).map(k => {
-          console.log('[SW] Удаляю старый кеш:', k);
-          return caches.delete(k);
-        })
-      )
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', e => {
-  // HTML — сначала сеть, потом кеш (чтобы всегда свежий)
   if (e.request.mode === 'navigate') {
     e.respondWith(
       fetch(e.request).then(res => {
@@ -46,8 +34,6 @@ self.addEventListener('fetch', e => {
     );
     return;
   }
-
-  // JS и CSS — сначала сеть, потом кеш (важно для обновлений)
   if (e.request.url.match(/\.(js|css)($|\?)/)) {
     e.respondWith(
       fetch(e.request).then(res => {
@@ -58,9 +44,5 @@ self.addEventListener('fetch', e => {
     );
     return;
   }
-
-  // Всё остальное — сначала кеш
-  e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
-  );
+  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
 });

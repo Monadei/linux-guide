@@ -1704,3 +1704,30 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
     margin-top: 1rem;
   }
 }
+
+
+/* ============================================
+   Monade OS — большой статичный заголовок на главной
+   ============================================ */
+.monade-title {
+  text-align: center;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  margin: 1.5rem 0 1rem;
+  text-shadow:
+    0 0 10px rgba(255, 176, 0, 0.4),
+    0 0 30px rgba(255, 176, 0, 0.2);
+}
+
+.monade-title::before { content: ""; }
+
+@media (max-width: 768px) {
+  .monade-title {
+    font-size: clamp(2rem, 12vw, 3rem);
+    margin: 1rem 0 0.8rem;
+  }
+}
