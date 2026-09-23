@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор RAID — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="kali/index.html">Kali</a>
+<a href="about.html">Обо мне</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Калькулятор RAID</h1>
+
+<p class="lead">Какой уровень RAID выбрать для дома или сервера.</p>
+
+<style>
+.raid-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.2rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+.raid-card h3 {
+  margin: 0 0 0.4rem;
+  color: var(--accent);
+}
+.raid-card .spec {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.3rem 0.8rem;
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+}
+.raid-card .spec dt { color: var(--muted); }
+.raid-card .spec dd { margin: 0; }
+.raid-calc {
+  background: var(--panel-2);
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+}
+.raid-calc input[type="number"] {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.4rem;
+  font-family: inherit;
+  width: 100px;
+  border-radius: 3px;
+}
+@media (max-width: 600px) {
+  .raid-card .spec { grid-template-columns: 1fr; }
+}
+</style>
+
+<h2>Калькулятор</h2>
+<div class="raid-calc">
+<label>Количество дисков:
+<input type="number" id="disks" value="4" min="2" max="24">
+</label>
+
+<label style="margin-left: 1rem;">Размер одного диска (ТБ):
+<input type="number" id="size" value="2" min="0.5" step="0.5">
+</label>
+
+<button class="btn" onclick="calcRaid()" style="margin-left: 1rem;">Рассчитать</button>
+
+<div id="raid-result" style="margin-top: 1rem;"></div>
+</div>
+
+<h2>Уровни RAID</h2>
+
+<div class="raid-card">
+<h3>RAID 0 — скорость, без защиты</h3>
+<dl class="spec">
+<dt>Мин. дисков</dt><dd>2</dd>
+<dt>Ёмкость</dt><dd>100% (все диски)</dd>
+<dt>Скорость</dt><dd>Очень высокая (запись/чтение параллельно)</dd>
+<dt>Отказоустойчивость</dt><dd>❌ Нет. Смерть одного диска = потеря всего</dd>
+<dt>Для чего</dt><dd>Временные данные, кеш, тесты. Не для важного.</dd>
+</dl>
+</div>
+
+<div class="raid-card">
+<h3>RAID 1 — зеркало</h3>
+<dl class="spec">
+<dt>Мин. дисков</dt><dd>2</dd>
+<dt>Ёмкость</dt><dd>50% (размер одного диска)</dd>
+<dt>Скорость</dt><dd>Чтение быстрое, запись как один диск</dd>
+<dt>Отказоустойчивость</dt><dd>✅ Да, до 1 диска</dd>
+<dt>Для чего</dt><dd>Домашний NAS, важные данные. Просто и надёжно.</dd>
+</dl>
+</div>
+
+<div class="raid-card">
+<h3>RAID 5 — баланс</h3>
+<dl class="spec">
+<dt>Мин. дисков</dt><dd>3</dd>
+<dt>Ёмкость</dt><dd>(N-1) дисков, например 3×2ТБ = 4ТБ</dd>
+<dt>Скорость</dt><dd>Чтение быстрое, запись средняя</dd>
+<dt>Отказоустойчивость</dt><dd>✅ Да, до 1 диска</dd>
+<dt>Для чего</dt><dd>NAS, файловые серверы. Минус: долгое восстановление, риск при 2 отказах.</dd>
+</dl>
+</div>
+
+<div class="raid-card">
+<h3>RAID 6 — двойная защита</h3>
+<dl class="spec">
+<dt>Мин. дисков</dt><dd>4</dd>
+<dt>Ёмкость</dt><dd>(N-2) дисков, например 4×2ТБ = 4ТБ</dd>
+<dt>Скорость</dt><dd>Чтение быстрое, запись медленнее RAID 5</dd>
+<dt>Отказоустойчивость</dt><dd>✅ Да, до 2 дисков</dd>
+<dt>Для чего</dt><dd>Большие массивы (6+ дисков). Когда 1 диск мало.</dd>
+</dl>
+</div>
+
+<div class="raid-card">
+<h3>RAID 10 — скорость + надёжность</h3>
+<dl class="spec">
+<dt>Мин. дисков</dt><dd>4</dd>
+<dt>Ёмкость</dt><dd>50% (как RAID 1, но быстрее)</dd>
+<dt>Скорость</dt><dd>Очень высокая (лучшая для БД)</dd>
+<dt>Отказоустойчивость</dt><dd>✅ Да, до 1 диска в каждой паре</dd>
+<dt>Для чего</dt><dd>Базы данных, виртуализация. Дорого, но быстро и надёжно.</dd>
+</dl>
+</div>
+
+<h2>Что выбрать дома</h2>
+<ul>
+<li><strong>2 диска</strong> — RAID 1 (зеркало)</li>
+<li><strong>3 диска</strong> — RAID 5 (баланс)</li>
+<li><strong>4 диска</strong> — RAID 10 (скорость + надёжность)</li>
+<li><strong>6+ дисков</strong> — RAID 6 (двойная защита)</li>
+<li><strong>SSD + важные данные</strong> — RAID 1 из двух SSD</li>
+</ul>
+
+<h2>Важно понимать</h2>
+<div style="background: var(--panel-2); border-left: 3px solid #ff5555; padding: 0.8rem 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0;">
+<strong>RAID — это не бэкап.</strong> RAID защищает от отказа диска, но не от:
+<ul style="margin-top: 0.5rem;">
+<li>Случайного удаления файлов</li>
+<li>Вирусов-шифровальщиков</li>
+<li>Пожара, кражи, скачка напряжения</li>
+<li>Ошибки оператора</li>
+</ul>
+<br>
+Настоящий бэкап — <strong>3-2-1</strong>: 3 копии, 2 носителя, 1 вне дома. RAID + регулярный бэкап на внешний диск = золотой стандарт.
+</div>
+
+<h2>Альтернативы: ZFS и Btrfs</h2>
+<p>Современные ФС умеют RAID-подобные схемы на уровне софта:</p>
+<ul>
+<li><strong>ZFS</strong> — RAIDZ1 (как RAID 5), RAIDZ2 (как RAID 6), зеркала. Используется в TrueNAS.</li>
+<li><strong>Btrfs</strong> — RAID 0/1/10 из коробки. RAID 5/6 есть, но нестабильны.</li>
+<li><strong>mdadm</strong> — классический софт-RAID в Linux</li>
+</ul>
+
+<h2>mdadm — быстрый старт</h2>
+<pre><code># Установка
+sudo apt install mdadm
+
+# Создать RAID 1 из двух дисков
+sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb /dev/sdc
+
+# Посмотреть статус
+cat /proc/mdstat
+sudo mdadm --detail /dev/md0
+
+# Сохранить конфигурацию
+sudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf
+sudo update-initramfs -u</code></pre>
+
+<script>
+function calcRaid() {
+  var n = parseInt(document.getElementById('disks').value) || 0;
+  var s = parseFloat(document.getElementById('size').value) || 0;
+
+  if (n < 2) {
+    document.getElementById('raid-result').innerHTML = '<em style="color: #ff5555;">Минимум 2 диска</em>';
+    return;
+  }
+
+  var total = n * s;
+  var result = '<strong>Из ' + n + ' дисков по ' + s + ' ТБ (всего ' + total.toFixed(1) + ' ТБ):</strong><br><br>';
+
+  result += '<table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">';
+  result += '<tr style="border-bottom: 1px solid var(--border);"><th style="text-align:left;padding:0.4rem;">RAID</th><th style="text-align:left;padding:0.4rem;">Доступно</th><th style="text-align:left;padding:0.4rem;">Защита</th></tr>';
+
+  // RAID 0
+  result += '<tr style="border-bottom: 1px solid var(--border);"><td style="padding:0.4rem;">0</td><td style="padding:0.4rem;">' + total.toFixed(1) + ' ТБ</td><td style="padding:0.4rem;color:#ff5555;">нет</td></tr>';
+
+  // RAID 1
+  if (n >= 2) {
+    var raid1 = Math.floor(n / 2) * s + (n % 2) * s;
+    result += '<tr style="border-bottom: 1px solid var(--border);"><td style="padding:0.4rem;">1</td><td style="padding:0.4rem;">' + (s * Math.floor(n/2)).toFixed(1) + ' ТБ</td><td style="padding:0.4rem;color:#4caf50;">1 диск</td></tr>';
+  }
+
+  // RAID 5
+  if (n >= 3) {
+    var raid5 = (n - 1) * s;
+    result += '<tr style="border-bottom: 1px solid var(--border);"><td style="padding:0.4rem;">5</td><td style="padding:0.4rem;">' + raid5.toFixed(1) + ' ТБ</td><td style="padding:0.4rem;color:#4caf50;">1 диск</td></tr>';
+  }
+
+  // RAID 6
+  if (n >= 4) {
+    var raid6 = (n - 2) * s;
+    result += '<tr style="border-bottom: 1px solid var(--border);"><td style="padding:0.4rem;">6</td><td style="padding:0.4rem;">' + raid6.toFixed(1) + ' ТБ</td><td style="padding:0.4rem;color:#4caf50;">2 диска</td></tr>';
+  }
+
+  // RAID 10
+  if (n >= 4 && n % 2 === 0) {
+    var raid10 = (n / 2) * s;
+    result += '<tr style="border-bottom: 1px solid var(--border);"><td style="padding:0.4rem;">10</td><td style="padding:0.4rem;">' + raid10.toFixed(1) + ' ТБ</td><td style="padding:0.4rem;color:#4caf50;">1 диск в паре</td></tr>';
+  }
+
+  result += '</table>';
+
+  document.getElementById('raid-result').innerHTML = result;
+}
+calcRaid();
+</script>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/fun.js"></script><script src="js/boot-screen.js"></script>
+</body>
+</html>

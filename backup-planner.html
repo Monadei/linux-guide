@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Планировщик бэкапов — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="kali/index.html">Kali</a>
+<a href="about.html">Обо мне</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Планировщик бэкапов</h1>
+
+<p class="lead">Что, куда, как часто. Собери свою стратегию бэкапов.</p>
+
+<style>
+.bp-form {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.3rem;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+}
+.bp-form label {
+  display: block;
+  margin: 0.6rem 0;
+}
+.bp-form input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+}
+.bp-output {
+  background: var(--panel-2);
+  padding: 1.2rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.bp-output h3 {
+  color: var(--accent);
+  margin-top: 1rem;
+}
+.bp-output h3:first-child { margin-top: 0; }
+</style>
+
+<h2>Принцип 3-2-1</h2>
+<p>Золотой стандарт бэкапов:</p>
+<ul>
+<li><strong>3</strong> копии данных (оригинал + 2 бэкапа)</li>
+<li><strong>2</strong> разных носителя (SSD + HDD, или диск + облако)</li>
+<li><strong>1</strong> копия вне дома (облако, у друга, в сейфе)</li>
+</ul>
+
+<div class="bp-form">
+<h3 style="color: var(--accent); margin-top: 0;">Что бэкапим</h3>
+<label><input type="checkbox" class="cat" value="system" checked> Система целиком</label>
+<label><input type="checkbox" class="cat" value="docs" checked> Документы</label>
+<label><input type="checkbox" class="cat" value="photos" checked> Фотографии и видео</label>
+<label><input type="checkbox" class="cat" value="projects" checked> Проекты и код</label>
+<label><input type="checkbox" class="cat" value="configs"> Конфиги системы</label>
+<label><input type="checkbox" class="cat" value="browser"> Профили браузеров</label>
+<label><input type="checkbox" class="cat" value="ssh"> SSH-ключи и GPG</label>
+<label><input type="checkbox" class="cat" value="databases"> Базы данных</label>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem;">Куда</h3>
+<label><input type="checkbox" class="dst" value="external" checked> Внешний диск</label>
+<label><input type="checkbox" class="dst" value="second-hdd" checked> Второй HDD в системе</label>
+<label><input type="checkbox" class="dst" value="cloud"> Облако (Dropbox, Google Drive, Яндекс.Диск)</label>
+<label><input type="checkbox" class="dst" value="remote"> Удалённый сервер (SSH)</label>
+<label><input type="checkbox" class="dst" value="nas"> Свой NAS</label>
+<label><input type="checkbox" class="dst" value="friend"> Диск у друга / в другом месте</label>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem;">Как часто</h3>
+<label><input type="radio" name="freq" value="daily" checked> Каждый день</label>
+<label><input type="radio" name="freq" value="weekly"> Раз в неделю</label>
+<label><input type="radio" name="freq" value="monthly"> Раз в месяц</label>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem;">Чем</h3>
+<label><input type="checkbox" class="tool" value="timeshift" checked> Timeshift (система)</label>
+<label><input type="checkbox" class="tool" value="rsync" checked> rsync (файлы)</label>
+<label><input type="checkbox" class="tool" value="borg"> Borg (дедупликация + шифрование)</label>
+<label><input type="checkbox" class="tool" value="restic"> Restic (современный)</label>
+<label><input type="checkbox" class="tool" value="rclone"> rclone (облака)</label>
+
+<button class="btn" onclick="genBackup()" style="margin-top: 1.5rem;">Собрать план</button>
+</div>
+
+<div class="bp-output" id="bp-output">Отметь, что нужно, и нажми «Собрать план»</div>
+
+<script>
+function genBackup() {
+  var cats = Array.from(document.querySelectorAll('.cat:checked')).map(function(el) { return el.value; });
+  var dsts = Array.from(document.querySelectorAll('.dst:checked')).map(function(el) { return el.value; });
+  var freq = document.querySelector('input[name="freq"]:checked');
+  var tools = Array.from(document.querySelectorAll('.tool:checked')).map(function(el) { return el.value; });
+
+  if (cats.length === 0 || dsts.length === 0) {
+    document.getElementById('bp-output').innerHTML = '<em style="color: #ff5555;">Выбери хотя бы что и куда бэкапить</em>';
+    return;
+  }
+
+  var catNames = {system:'систему',docs:'документы',photos:'фото и видео',projects:'проекты',configs:'конфиги',browser:'браузер',ssh:'SSH-ключи',databases:'базы данных'};
+  var dstNames = {external:'внешний диск','second-hdd':'второй HDD',cloud:'облако',remote:'удалённый сервер',nas:'NAS',friend:'у друга'};
+  var toolNames = {timeshift:'Timeshift',rsync:'rsync',borg:'Borg',restic:'Restic',rclone:'rclone'};
+  var freqName = {daily:'каждый день',weekly:'раз в неделю',monthly:'раз в месяц'};
+
+  var html = '<h3>План бэкапа</h3>';
+  html += '<p><strong>Частота:</strong> ' + (freq ? freqName[freq.value] : '—') + '</p>';
+  html += '<p><strong>Что:</strong> ' + cats.map(function(c){return catNames[c];}).join(', ') + '</p>';
+  html += '<p><strong>Куда:</strong> ' + dsts.map(function(d){return dstNames[d];}).join(', ') + '</p>';
+  html += '<p><strong>Инструменты:</strong> ' + tools.map(function(t){return toolNames[t];}).join(', ') + '</p>';
+
+  html += '<h3>Проверка 3-2-1</h3>';
+  html += '<ul>';
+  html += '<li>' + (dsts.length >= 2 ? '✅' : '❌') + ' Копий на разных носителях: ' + dsts.length + ' (нужно ≥2)</li>';
+  html += '<li>' + (dsts.indexOf('cloud') !== -1 || dsts.indexOf('remote') !== -1 || dsts.indexOf('friend') !== -1 ? '✅' : '❌') + ' Копия вне дома: ' + (dsts.indexOf('cloud') !== -1 || dsts.indexOf('remote') !== -1 || dsts.indexOf('friend') !== -1 ? 'да' : 'нет') + '</li>';
+  html += '<li>' + (cats.indexOf('system') !== -1 && tools.indexOf('timeshift') !== -1 ? '✅' : '⚠️') + ' Система защищена через Timeshift</li>';
+  html += '<li>' + (cats.indexOf('docs') !== -1 || cats.indexOf('photos') !== -1 ? '✅' : '⚠️') + ' Личные файлы в плане</li>';
+  html += '</ul>';
+
+  html += '<h3>Команды для настройки</h3>';
+  html += '<pre style="background:#000;color:#0f0;padding:1rem;border-radius:4px;overflow-x:auto;font-size:0.85rem;">';
+  
+  if (tools.indexOf('timeshift') !== -1) {
+    html += '# Установка Timeshift\n';
+    html += 'sudo apt install timeshift\n';
+    html += 'sudo timeshift --create --comments "auto"\n\n';
+  }
+
+  if (tools.indexOf('rsync') !== -1) {
+    html += '# rsync — основной бэкап\n';
+    html += 'rsync -avh --delete ~/Documents /mnt/backup/\n';
+    html += 'rsync -avh --delete ~/Pictures /mnt/backup/\n\n';
+  }
+
+  if (tools.indexOf('borg') !== -1) {
+    html += '# Borg — с шифрованием и дедупликацией\n';
+    html += 'borg init --encryption=repokey /mnt/backup/borg\n';
+    html += 'borg create /mnt/backup/borg::$(date +%Y%m%d) ~/Documents\n\n';
+  }
+
+  if (tools.indexOf('restic') !== -1) {
+    html += '# Restic\n';
+    html += 'restic init --repo /mnt/backup/restic\n';
+    html += 'restic -r /mnt/backup/restic backup ~/Documents\n\n';
+  }
+
+  if (tools.indexOf('rclone') !== -1) {
+    html += '# rclone — облако\n';
+    html += 'rclone config  # настроить провайдера\n';
+    html += 'rclone sync ~/Documents remote:backup/Documents\n\n';
+  }
+
+  html += '</pre>';
+
+  html += '<h3>Cron для автоматизации</h3>';
+  html += '<pre style="background:#000;color:#0f0;padding:1rem;border-radius:4px;overflow-x:auto;font-size:0.85rem;">';
+  html += '# crontab -e\n';
+  if (freq && freq.value === 'daily') {
+    html += '0 3 * * * /home/user/backup.sh\n';
+  } else if (freq && freq.value === 'weekly') {
+    html += '0 3 * * 0 /home/user/backup.sh\n';
+  } else {
+    html += '0 3 1 * * /home/user/backup.sh\n';
+  }
+  html += '</pre>';
+
+  document.getElementById('bp-output').innerHTML = html;
+}
+</script>
+
+<h2>Правила бэкапов</h2>
+<ul>
+<li><strong>Автоматически</strong> — если бэкап надо делать руками, ты его не будешь делать</li>
+<li><strong>Проверяй восстановление</strong> — бэкап, который не проверен, не бэкап</li>
+<li><strong>Не в той же комнате</strong> — пожар уничтожит и оригинал, и бэкап</li>
+<li><strong>Шифруй</strong> — если данные уехали в облако, шифруй перед отправкой</li>
+<li><strong>3-2-1</strong> — три копии, два носителя, одна вне дома</li>
+</ul>
+
+<h2>Timeshift — основа для системы</h2>
+<pre><code>sudo apt install timeshift
+
+# Настройка через GUI
+sudo timeshift-launcher
+
+# Создать снапшот вручную
+sudo timeshift --create --comments "перед обновлением"
+
+# Список снапшотов
+sudo timeshift --list
+
+# Восстановить
+sudo timeshift --restore</code></pre>
+
+<h2>Что не нужно бэкапить</h2>
+<ul>
+<li><code>~/.cache</code> — кеш, восстанавливается сам</li>
+<li><code>/tmp</code> — временные файлы</li>
+<li><code>~/.local/share/Trash</code> — корзина</li>
+<li><code>node_modules</code>, <code>venv</code>, <code>__pycache__</code> — восстанавливаются из манифестов</li>
+</ul>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/fun.js"></script><script src="js/boot-screen.js"></script>
+</body>
+</html>

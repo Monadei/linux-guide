@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Календарь релизов — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="kali/index.html">Kali</a>
+<a href="about.html">Обо мне</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Календарь релизов</h1>
+
+<p class="lead">Когда выходят новые версии популярных дистрибутивов. Даты обновляются.</p>
+
+<style>
+.release-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 100px;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  margin: 0.5rem 0;
+  border-radius: 4px;
+  align-items: center;
+}
+.release-row .name {
+  font-weight: 700;
+  color: var(--accent);
+}
+.release-row .date {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.release-row .badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 3px;
+  text-align: center;
+}
+.release-row .badge.soon {
+  background: #ff5555;
+  animation: pulse-badge 2s infinite;
+}
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@media (max-width: 768px) {
+  .release-row {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}
+</style>
+
+<h2>Фиксированные релизы</h2>
+
+<div class="release-row">
+<span class="name">Ubuntu 26.10</span>
+<span class="date">Октябрь 2026 · обычный релиз, 9 мес поддержки</span>
+<span class="badge soon">Скоро</span>
+</div>
+
+<div class="release-row">
+<span class="name">Fedora 44</span>
+<span class="date">Октябрь 2026 · осенний релиз</span>
+<span class="badge soon">Скоро</span>
+</div>
+
+<div class="release-row">
+<span class="name">openSUSE Leap 16</span>
+<span class="date">Ноябрь 2026 · фиксированный релиз</span>
+<span class="badge">План</span>
+</div>
+
+<div class="release-row">
+<span class="name">Linux Mint 23</span>
+<span class="date">Декабрь 2026 · на базе Ubuntu 26.04 LTS</span>
+<span class="badge">План</span>
+</div>
+
+<div class="release-row">
+<span class="name">Fedora 45</span>
+<span class="date">Апрель 2027 · весенний релиз</span>
+<span class="badge">План</span>
+</div>
+
+<div class="release-row">
+<span class="name">Ubuntu 27.04 LTS</span>
+<span class="date">Апрель 2027 · следующий LTS</span>
+<span class="badge">План</span>
+</div>
+
+<div class="release-row">
+<span class="name">Debian 14 Forky</span>
+<span class="date">~Июнь 2027 · ожидаемый релиз</span>
+<span class="badge">План</span>
+</div>
+
+<h2>Rolling release (постоянные обновления)</h2>
+
+<div class="release-row">
+<span class="name">Arch Linux</span>
+<span class="date">ISO пересобирается ежемесячно. Пакеты — постоянно.</span>
+<span class="badge">Rolling</span>
+</div>
+
+<div class="release-row">
+<span class="name">Manjaro</span>
+<span class="date">Обновления с задержкой 1–2 недели от Arch</span>
+<span class="badge">Rolling</span>
+</div>
+
+<div class="release-row">
+<span class="name">openSUSE Tumbleweed</span>
+<span class="date">Обновляется непрерывно</span>
+<span class="badge">Rolling</span>
+</div>
+
+<div class="release-row">
+<span class="name">EndeavourOS</span>
+<span class="date">Чистое зеркало Arch</span>
+<span class="badge">Rolling</span>
+</div>
+
+<div class="release-row">
+<span class="name">CachyOS</span>
+<span class="date">Arch с оптимизациями под новое железо</span>
+<span class="badge">Rolling</span>
+</div>
+
+<h2>LTS и долгосрочные</h2>
+
+<div class="release-row">
+<span class="name">Ubuntu 24.04 LTS</span>
+<span class="date">Поддержка до 2029 (стандарт) / 2034 (ESM)</span>
+<span class="badge">LTS</span>
+</div>
+
+<div class="release-row">
+<span class="name">Debian 12 Bookworm</span>
+<span class="date">Поддержка до 2028</span>
+<span class="badge">LTS</span>
+</div>
+
+<div class="release-row">
+<span class="name">AlmaLinux 9</span>
+<span class="date">Поддержка до 2032</span>
+<span class="badge">LTS</span>
+</div>
+
+<div class="release-row">
+<span class="name">Rocky Linux 9</span>
+<span class="date">Поддержка до 2032</span>
+<span class="badge">LTS</span>
+</div>
+
+<h2>Как следить за релизами</h2>
+<ul>
+<li><a href="https://distrowatch.com" target="_blank" rel="noopener">DistroWatch</a> — новости всех дистрибутивов</li>
+<li><a href="https://www.phoronix.com" target="_blank" rel="noopener">Phoronix</a> — технические новости Linux</li>
+<li><a href="https://lwn.net" target="_blank" rel="noopener">LWN</a> — глубокие статьи</li>
+<li><a href="https://fedoraproject.org/wiki/Releases" target="_blank" rel="noopener">Fedora Schedule</a> — точные даты Fedora</li>
+<li><a href="https://wiki.ubuntu.com/Releases" target="_blank" rel="noopener">Ubuntu Releases</a> — точные даты Ubuntu</li>
+</ul>
+
+<h2>Как обновляться</h2>
+<pre><code># Ubuntu / Debian
+sudo apt update && sudo apt full-upgrade
+
+# Fedora
+sudo dnf upgrade --refresh
+
+# Arch / Manjaro
+sudo pacman -Syu
+
+# openSUSE
+sudo zypper dup</code></pre>
+
+<h2>Совет</h2>
+<p>Для продакшена — LTS. Для экспериментов — rolling. Для дома — LTS с точками обновления безопасности. Не гонись за свежим — стабильность важнее.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/fun.js"></script><script src="js/boot-screen.js"></script>
+</body>
+</html>

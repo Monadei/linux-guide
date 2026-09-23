@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Генеалогическое древо дистрибутивов — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="kali/index.html">Kali</a>
+<a href="about.html">Обо мне</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Генеалогическое древо дистрибутивов</h1>
+
+<p class="lead">Кто от кого произошёл. Кликай на узлы — перейдёшь на страницу дистрибутива.</p>
+
+<style>
+.tree-wrap {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.tree-node {
+  cursor: pointer;
+  transition: 0.15s;
+}
+.tree-node:hover rect {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.tree-node:hover text {
+  fill: #fff;
+}
+.tree-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+.tree-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.tree-legend i {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+}
+</style>
+
+<div class="tree-legend">
+<span><i style="background:#d70a53"></i>Debian</span>
+<span><i style="background:#c74634"></i>Red Hat</span>
+<span><i style="background:#1793d1"></i>Arch</span>
+<span><i style="background:#73ba25"></i>SUSE</span>
+<span><i style="background:#7c6f64"></i>Независимые</span>
+<span><i style="background:#8b5cf6"></i>Безопасность</span>
+</div>
+
+<div class="tree-wrap">
+<svg viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:800px;font-family:monospace;">
+  <!-- Корень -->
+  <g class="tree-node" onclick="location.href='history.html'">
+    <rect x="400" y="20" width="200" height="50" rx="6" fill="#0a0a0a" stroke="#ffb000" stroke-width="2"/>
+    <text x="500" y="52" fill="#ffb000" font-size="18" font-weight="bold" text-anchor="middle">Ядро Linux</text>
+  </g>
+  <line x1="500" y1="70" x2="500" y2="100" stroke="#444" stroke-width="2"/>
+
+  <!-- Три корня -->
+  <line x1="500" y1="100" x2="150" y2="140" stroke="#444" stroke-width="1"/>
+  <line x1="500" y1="100" x2="500" y2="140" stroke="#444" stroke-width="1"/>
+  <line x1="500" y1="100" x2="850" y2="140" stroke="#444" stroke-width="1"/>
+
+  <!-- Debian -->
+  <g class="tree-node" onclick="location.href='distros/debian.html'">
+    <rect x="50" y="140" width="200" height="45" rx="6" fill="#d70a53" stroke="#d70a53" stroke-width="2"/>
+    <text x="150" y="168" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">Debian (1993)</text>
+  </g>
+
+  <!-- Red Hat -->
+  <g class="tree-node" onclick="location.href='distros/fedora.html'">
+    <rect x="400" y="140" width="200" height="45" rx="6" fill="#c74634" stroke="#c74634" stroke-width="2"/>
+    <text x="500" y="168" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">Red Hat (1994)</text>
+  </g>
+
+  <!-- Arch -->
+  <g class="tree-node" onclick="location.href='distros/arch.html'">
+    <rect x="750" y="140" width="200" height="45" rx="6" fill="#1793d1" stroke="#1793d1" stroke-width="2"/>
+    <text x="850" y="168" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle">Arch (2002)</text>
+  </g>
+
+  <!-- От Debian -->
+  <line x1="150" y1="185" x2="100" y2="230" stroke="#444"/>
+  <line x1="150" y1="185" x2="200" y2="230" stroke="#444"/>
+  <line x1="150" y1="185" x2="300" y2="230" stroke="#444"/>
+
+  <g class="tree-node" onclick="location.href='distros/ubuntu.html'">
+    <rect x="20" y="230" width="150" height="40" rx="6" fill="#e95420" stroke="#e95420"/>
+    <text x="95" y="256" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">Ubuntu</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/kali.html'">
+    <rect x="180" y="230" width="150" height="40" rx="6" fill="#2777ff" stroke="#2777ff"/>
+    <text x="255" y="256" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">Kali</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/mint.html'">
+    <rect x="280" y="230" width="130" height="40" rx="6" fill="#87cf3e" stroke="#87cf3e"/>
+    <text x="345" y="256" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">Mint</text>
+  </g>
+
+  <!-- От Ubuntu -->
+  <line x1="95" y1="270" x2="95" y2="310" stroke="#444"/>
+  <line x1="95" y1="270" x2="200" y2="310" stroke="#444"/>
+  <line x1="95" y1="270" x2="300" y2="310" stroke="#444"/>
+
+  <g class="tree-node" onclick="location.href='distros/pop-os.html'">
+    <rect x="30" y="310" width="120" height="35" rx="6" fill="#48b9c7" stroke="#48b9c7"/>
+    <text x="90" y="333" fill="#fff" font-size="12" text-anchor="middle">Pop!_OS</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/zorin.html'">
+    <rect x="160" y="310" width="100" height="35" rx="6" fill="#15a6f0" stroke="#15a6f0"/>
+    <text x="210" y="333" fill="#fff" font-size="12" text-anchor="middle">Zorin</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/elementary.html'">
+    <rect x="270" y="310" width="120" height="35" rx="6" fill="#64bae2" stroke="#64bae2"/>
+    <text x="330" y="333" fill="#fff" font-size="12" text-anchor="middle">elementary</text>
+  </g>
+
+  <!-- От Red Hat -->
+  <line x1="500" y1="185" x2="450" y2="230" stroke="#444"/>
+  <line x1="500" y1="185" x2="550" y2="230" stroke="#444"/>
+  <line x1="500" y1="185" x2="650" y2="230" stroke="#444"/>
+
+  <g class="tree-node" onclick="location.href='distros/fedora.html'">
+    <rect x="390" y="230" width="130" height="40" rx="6" fill="#51a2da" stroke="#51a2da"/>
+    <text x="455" y="256" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">Fedora</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/almalinux.html'">
+    <rect x="530" y="230" width="130" height="40" rx="6" fill="#3b7ab8" stroke="#3b7ab8"/>
+    <text x="595" y="256" fill="#fff" font-size="13" text-anchor="middle">AlmaLinux</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/rocky.html'">
+    <rect x="650" y="230" width="120" height="40" rx="6" fill="#10b981" stroke="#10b981"/>
+    <text x="710" y="256" fill="#fff" font-size="14" text-anchor="middle">Rocky</text>
+  </g>
+
+  <!-- От Arch -->
+  <line x1="850" y1="185" x2="800" y2="230" stroke="#444"/>
+  <line x1="850" y1="185" x2="900" y2="230" stroke="#444"/>
+
+  <g class="tree-node" onclick="location.href='distros/manjaro.html'">
+    <rect x="740" y="230" width="130" height="40" rx="6" fill="#35bfa6" stroke="#35bfa6"/>
+    <text x="805" y="256" fill="#fff" font-size="14" text-anchor="middle">Manjaro</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/endeavouros.html'">
+    <rect x="870" y="230" width="120" height="40" rx="6" fill="#a78bfa" stroke="#a78bfa"/>
+    <text x="930" y="256" fill="#fff" font-size="13" text-anchor="middle">Endeavour</text>
+  </g>
+
+  <!-- От Mint, независимые, безопасность -->
+  <line x1="345" y1="270" x2="345" y2="310" stroke="#444"/>
+  <line x1="345" y1="270" x2="450" y2="380" stroke="#444"/>
+  <line x1="345" y1="270" x2="550" y2="380" stroke="#444"/>
+  <line x1="345" y1="270" x2="650" y2="380" stroke="#444"/>
+  <line x1="345" y1="270" x2="750" y2="380" stroke="#444"/>
+  <line x1="345" y1="270" x2="850" y2="380" stroke="#444"/>
+
+  <g class="tree-node" onclick="location.href='distros/lmde.html'">
+    <rect x="290" y="310" width="100" height="35" rx="6" fill="#7bb842" stroke="#7bb842"/>
+    <text x="340" y="333" fill="#fff" font-size="12" text-anchor="middle">LMDE</text>
+  </g>
+
+  <!-- Независимые -->
+  <g class="tree-node" onclick="location.href='distros/gentoo.html'">
+    <rect x="380" y="380" width="120" height="40" rx="6" fill="#54487a" stroke="#7c6f64"/>
+    <text x="440" y="406" fill="#fff" font-size="13" text-anchor="middle">Gentoo</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/void.html'">
+    <rect x="510" y="380" width="100" height="40" rx="6" fill="#478061" stroke="#7c6f64"/>
+    <text x="560" y="406" fill="#fff" font-size="13" text-anchor="middle">Void</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/nixos.html'">
+    <rect x="620" y="380" width="100" height="40" rx="6" fill="#5277c3" stroke="#7c6f64"/>
+    <text x="670" y="406" fill="#fff" font-size="13" text-anchor="middle">NixOS</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/slackware.html'">
+    <rect x="730" y="380" width="110" height="40" rx="6" fill="#0f5f9c" stroke="#7c6f64"/>
+    <text x="785" y="406" fill="#fff" font-size="12" text-anchor="middle">Slackware</text>
+  </g>
+
+  <!-- SUSE отдельно -->
+  <g class="tree-node" onclick="location.href='distros/opensuse.html'">
+    <rect x="850" y="380" width="120" height="40" rx="6" fill="#73ba25" stroke="#73ba25"/>
+    <text x="910" y="406" fill="#fff" font-size="13" text-anchor="middle">openSUSE</text>
+  </g>
+
+  <!-- Производные от независимых -->
+  <line x1="440" y1="420" x2="440" y2="460" stroke="#444"/>
+  <line x1="560" y1="420" x2="560" y2="460" stroke="#444"/>
+  <line x1="670" y1="420" x2="670" y2="460" stroke="#444"/>
+
+  <g class="tree-node" onclick="location.href='distros/calculate.html'">
+    <rect x="380" y="460" width="120" height="35" rx="6" fill="#2d6e2d" stroke="#2d6e2d"/>
+    <text x="440" y="483" fill="#fff" font-size="12" text-anchor="middle">Calculate</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/artix.html'">
+    <rect x="510" y="460" width="100" height="35" rx="6" fill="#4a5568" stroke="#4a5568"/>
+    <text x="560" y="483" fill="#fff" font-size="12" text-anchor="middle">Artix</text>
+  </g>
+
+  <!-- Безопасность -->
+  <g class="tree-node" onclick="location.href='distros/tails.html'">
+    <rect x="270" y="540" width="110" height="40" rx="6" fill="#8b5cf6" stroke="#8b5cf6"/>
+    <text x="325" y="566" fill="#fff" font-size="13" text-anchor="middle">Tails</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/qubes.html'">
+    <rect x="390" y="540" width="110" height="40" rx="6" fill="#3874d8" stroke="#8b5cf6"/>
+    <text x="445" y="566" fill="#fff" font-size="13" text-anchor="middle">Qubes</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/parrot.html'">
+    <rect x="510" y="540" width="110" height="40" rx="6" fill="#16d0ff" stroke="#8b5cf6"/>
+    <text x="565" y="566" fill="#fff" font-size="13" text-anchor="middle">Parrot</text>
+  </g>
+  <g class="tree-node" onclick="location.href='distros/blackarch.html'">
+    <rect x="630" y="540" width="130" height="40" rx="6" fill="#a0a0a0" stroke="#8b5cf6"/>
+    <text x="695" y="566" fill="#fff" font-size="13" text-anchor="middle">BlackArch</text>
+  </g>
+
+  <text x="500" y="660" fill="#666" font-size="12" text-anchor="middle">Клик по узлу — переход на страницу дистрибутива</text>
+  <text x="500" y="700" fill="#666" font-size="11" text-anchor="middle">Показаны ключевые дистрибутивы. Всего на сайте 235+ страниц.</text>
+</svg>
+</div>
+
+<h2>Как читать древо</h2>
+<ul>
+<li><strong>Debian</strong> — отец-основатель. Ubuntu, Mint, Kali, Pop!_OS, elementary, Zorin — все выросли отсюда.</li>
+<li><strong>Red Hat</strong> — коммерческий путь. Fedora — полигон, RHEL — бизнес. AlmaLinux и Rocky — клоны RHEL.</li>
+<li><strong>Arch</strong> — минимализм. Manjaro и EndeavourOS — «Arch для людей».</li>
+<li><strong>SUSE</strong> — немецкий путь, отдельно от других.</li>
+<li><strong>Независимые</strong> — Gentoo, Void, NixOS, Slackware — сами по себе, не основаны ни на чём.</li>
+<li><strong>Безопасность</strong> — Tails, Qubes, Parrot, BlackArch — заточены под анонимность и пентест.</li>
+</ul>
+
+<h2>Что это показывает</h2>
+<p>Linux — это не одна система, а целая экосистема. Все дистрибутивы связаны родством. Даже если ты не знаешь, что выбрать — понимание, кто кому родня, помогает сделать правильный выбор.</p>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/fun.js"></script><script src="js/boot-screen.js"></script>
+</body>
+</html>
