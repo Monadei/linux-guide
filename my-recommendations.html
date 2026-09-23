@@ -98,6 +98,80 @@
 }
 </style>
 
+
+<style>
+.video-section {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+}
+.video-section h2 {
+  margin-top: 0;
+  color: var(--accent);
+  border: none;
+  padding: 0;
+}
+.video-section h2::before { content: ""; }
+.video-section .video-intro {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.video-card {
+  display: flex;
+  gap: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  margin: 0.8rem 0;
+  transition: 0.2s;
+  text-decoration: none;
+  color: var(--text);
+}
+.video-card:hover {
+  border-left: 3px solid var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.video-card .vc-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+.video-card .vc-info {
+  flex: 1;
+  min-width: 0;
+}
+.video-card .vc-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 0.2rem;
+}
+.video-card .vc-desc {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.video-card .vc-source {
+  display: inline-block;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  margin-top: 0.4rem;
+}
+@media (max-width: 768px) {
+  .video-card { flex-direction: column; gap: 0.5rem; }
+  .video-card .vc-icon { font-size: 1.4rem; }
+}
+</style>
+
 </head>
 <body>
 <header class="site-header"><div class="container header-inner">
@@ -287,6 +361,114 @@
 <p>Со временем список может меняться. Если попробую что-то новое и оно зайдёт — добавлю. Если разочаруюсь — уберу. Здесь только то, за что я готов отвечать лично.</p>
 
 <p style="color:var(--muted);margin-top:2rem;">— Артём (Monadei), Ubuntu 26.04 на ПК, Linux Mint на MacBook Pro 2014</p>
+
+<div class="video-section">
+<h2>📺 Видео-гайды по дистрибутивам</h2>
+<p class="video-intro">Собрал видео, которые сам смотрел или которые советуют. Все на русском. Rutube — работает без VPN.</p>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem;">Arch Linux</h3>
+
+<a class="video-card" href="https://rutube.ru/video/593be3147fea0dd240bea75a7e58a09f/" target="_blank" rel="noopener">
+<span class="vc-icon">⚡</span>
+<span class="vc-info">
+<div class="vc-title">Самая простая установка Arch Linux и KDE Plasma (archinstall, rufus)</div>
+<div class="vc-desc">Пошагово: скачивание ISO, запись через Rufus, разметка диска, archinstall, настройка KDE, pacman, yay, AUR. Идеально для первого раза.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/87de0cc7dcfa322946c0a9563a877e38/" target="_blank" rel="noopener">
+<span class="vc-icon">⚡</span>
+<span class="vc-info">
+<div class="vc-title">How to Install Arch Linux (Guided Installer) from Start to Finish + Basic Configurations [2025]</div>
+<div class="vc-desc">Подробный разбор archinstall с объяснением каждой опции: шифрование, загрузчик, подкачка, профили, ядро. На английском, но с субтитрами.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem;">Fedora</h3>
+
+<a class="video-card" href="https://rutube.ru/video/1a21b7f35e4ddb907b39dda9c2f72b11/" target="_blank" rel="noopener">
+<span class="vc-icon">🎩</span>
+<span class="vc-info">
+<div class="vc-title">FEDORA LINUX: Большой разбор и установка</div>
+<div class="vc-desc">История, обзор, установка, интерфейс GNOME, расширения. Хороший обзор для тех, кто только знакомится с Fedora.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/af876297fcc28c86ef27506a4e0355ec/" target="_blank" rel="noopener">
+<span class="vc-icon">🎩</span>
+<span class="vc-info">
+<div class="vc-title">Install Fedora 40 with Btrfs, Snapper, and Grub-Btrfs</div>
+<div class="vc-desc">Установка Fedora с Btrfs и снапшотами. Если хочешь откатывать систему после сломанных обновлений — это видео для тебя.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem;">Ubuntu</h3>
+
+<a class="video-card" href="https://rutube.ru/video/302eb263e263b9b030389fb75964ee6e/" target="_blank" rel="noopener">
+<span class="vc-icon">🟠</span>
+<span class="vc-info">
+<div class="vc-title">Установка Ubuntu Server 20.04 LTS + настройка программного RAID1 в режиме UEFI</div>
+<div class="vc-desc">Для серверного варианта. Настройка BIOS, разметка, RAID1, монтирование. Полезно, если ставишь Ubuntu на сервер.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem;">NixOS</h3>
+
+<a class="video-card" href="https://rutube.ru/video/8c80fa484d290f32ebb4b567c3a314ae/" target="_blank" rel="noopener">
+<span class="vc-icon">❄️</span>
+<span class="vc-info">
+<div class="vc-title">Установите NixOS. Базовое РУКОВОДСТВО</div>
+<div class="vc-desc">Установка NixOS с Qtile. Объяснение декларативной конфигурации, атомарных обновлений и откатов. Есть PDF-шпаргалка с командами.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/53289ff8c179cf7cb682efcfa60e2da7/" target="_blank" rel="noopener">
+<span class="vc-icon">❄️</span>
+<span class="vc-info">
+<div class="vc-title">NixOS - Полный Разбор : Nixpkgs, Flakes, home-manager (Ampersand)</div>
+<div class="vc-desc">Глубокий разбор: flakes, home-manager, язык Nix. Для тех, кто хочет понять NixOS изнутри, а не просто поставить.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem;">Debian</h3>
+
+<a class="video-card" href="https://rutube.ru/video/292ed5faea918c0d5ca0e082391cab4b/" target="_blank" rel="noopener">
+<span class="vc-icon">🌀</span>
+<span class="vc-info">
+<div class="vc-title">Установка Debian 12</div>
+<div class="vc-desc">Пошагово: скачивание, запись, настройки BIOS, установка, выбор окружения, первичные настройки. Для новичков.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/b0c1d7be58dd0d098f838f5be4618626/" target="_blank" rel="noopener">
+<span class="vc-icon">🌀</span>
+<span class="vc-info">
+<div class="vc-title">Установка Debian 12.06 графическая/консольная</div>
+<div class="vc-desc">Два способа установки: графический и консольный. Показано, как для новичка, без лишних нюансов.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div style="margin-top: 2rem; padding: 1rem; background: var(--bg); border-left: 3px solid var(--accent-dim); border-radius: 0 4px 4px 0;">
+<strong style="color: var(--accent);">Ищи больше на YouTube:</strong>
+<ul style="margin-top: 0.5rem; margin-bottom: 0;">
+<li><a href="https://www.youtube.com/results?search_query=установка+arch+linux+на+русском" target="_blank" rel="noopener">Arch Linux — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+fedora+linux+на+русском" target="_blank" rel="noopener">Fedora — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+ubuntu+на+русском" target="_blank" rel="noopener">Ubuntu — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+nixos+на+русском" target="_blank" rel="noopener">NixOS — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+debian+на+русском" target="_blank" rel="noopener">Debian — установка на русском</a></li>
+</ul>
+</div>
+</div>
+
 
 <div class="video-section">
 <h2>📺 Видео-гайды по дистрибутивам</h2>
