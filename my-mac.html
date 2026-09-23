@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Мой MacBook Pro 2014 — Monade OS</title>
+<title>MacBook Pro 2014 — Monade OS</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/extra.css">
 <link rel="stylesheet" href="css/mobile.css">
@@ -19,8 +19,8 @@
 </nav></div></header>
 
 <main class="container page">
-<h1>Мой MacBook Pro 2014</h1>
-<p class="lead">Какой Linux поставить на старый Mac. Проверенные варианты с гайдами.</p>
+<h1>MacBook Pro 2014</h1>
+<p class="lead">Все дистрибутивы, которые реально встают на MacBookPro11,x. С нюансами и гайдами.</p>
 
 <style>
 .mac-specs {
@@ -37,64 +37,82 @@
 .mac-specs td { padding: 0.4rem 0; }
 .mac-specs td:first-child { color: var(--muted); width: 40%; }
 
-.distro-check {
+.distro-row {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  padding: 1.5rem;
-  margin: 1.5rem 0;
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin: 1.2rem 0;
   border-radius: 6px;
 }
-.distro-check h2 {
-  margin-top: 0;
+.distro-row h3 {
+  margin: 0 0 0.3rem;
   color: var(--accent);
-  border: none;
-  padding: 0;
+  font-size: 1.15rem;
 }
-.distro-check h2::before { content: ""; }
-.distro-check .badge {
+.distro-row h3::before { content: ""; }
+.distro-row .tag {
   display: inline-block;
-  background: var(--accent);
-  color: var(--bg);
   padding: 0.15rem 0.6rem;
   font-size: 0.7rem;
   font-weight: 700;
   border-radius: 3px;
-  margin-left: 0.5rem;
   text-transform: uppercase;
+  margin-left: 0.5rem;
+  vertical-align: middle;
 }
-.distro-check .why {
+.tag-verified { background: #4caf50; color: #fff; }
+.tag-workable { background: #ff9800; color: #000; }
+.tag-tricky { background: #ff5555; color: #fff; }
+.tag-nvidia { background: #76b900; color: #000; }
+
+.distro-row .why {
   background: var(--bg);
   border-left: 2px solid var(--accent-dim);
   padding: 0.8rem 1rem;
-  margin: 1rem 0;
+  margin: 0.8rem 0;
   font-size: 0.9rem;
   color: var(--muted);
+  border-radius: 0 3px 3px 0;
 }
-.distro-check .why::before {
-  content: "Почему подходит: ";
-  color: var(--accent);
-  font-weight: 600;
+.distro-row .why strong { color: var(--accent); }
+
+.distro-row .nuance {
+  background: color-mix(in srgb, #ff9800 8%, var(--panel));
+  border-left: 3px solid #ff9800;
+  padding: 0.7rem 1rem;
+  margin: 0.8rem 0;
+  font-size: 0.88rem;
+  border-radius: 0 3px 3px 0;
 }
-.distro-check ul { margin: 0.5rem 0; }
-.distro-check .links {
+.distro-row .nuance::before {
+  content: "Нюанс: ";
+  color: #ff9800;
+  font-weight: 700;
+}
+
+.distro-row ul { margin: 0.5rem 0; padding-left: 1.2rem; }
+.distro-row ul li { margin: 0.2rem 0; font-size: 0.9rem; }
+
+.distro-row .links {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
-.distro-check .links a {
+.distro-row .links a {
   border: 1px dashed var(--accent-dim);
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.82rem;
   border-radius: 3px;
   text-decoration: none;
 }
-.distro-check .links a:hover {
+.distro-row .links a:hover {
   background: var(--accent);
   color: var(--bg);
   border-style: solid;
 }
+
 .warn-mac {
   background: color-mix(in srgb, #ff5555 10%, var(--panel));
   border-left: 3px solid #ff5555;
@@ -107,69 +125,37 @@
 <div class="mac-specs">
 <h2>Что за машина</h2>
 <table>
-<tr><td>Модель</td><td><strong>MacBook Pro (Retina, 13-inch, Mid 2014)</strong></td></tr>
-<tr><td>Идентификатор</td><td>MacBookPro11,1</td></tr>
-<tr><td>Процессор</td><td>Intel Core i5 (Haswell), 2 ядра / 4 потока</td></tr>
-<tr><td>Память</td><td>8 ГБ (распаяна, не апгрейдится)</td></tr>
-<tr><td>Диск</td><td>128 ГБ SSD (Apple PCIe)</td></tr>
-<tr><td>Графика</td><td>Intel Iris (встроенная)</td></tr>
+<tr><td>Модель</td><td><strong>MacBook Pro (Retina, 13/15-inch, Mid 2014)</strong></td></tr>
+<tr><td>Идентификатор</td><td>MacBookPro11,1 / 11,2 / 11,3</td></tr>
+<tr><td>Процессор</td><td>Intel Core i5/i7 (Haswell)</td></tr>
+<tr><td>Память</td><td>8–16 ГБ (распаяна)</td></tr>
+<tr><td>Графика</td><td>Intel Iris / Iris Pro (+ NVIDIA GT 750M на 15")</td></tr>
 <tr><td>Wi-Fi</td><td>Broadcom BCM4360 — <strong>требует драйвер</strong></td></tr>
 <tr><td>Камера</td><td>FaceTime HD — требует <code>facetimehd</code></td></tr>
 </table>
 </div>
 
 <div class="warn-mac">
-<strong>Главная проблема:</strong> Wi-Fi Broadcom BCM4360 не работает из коробки ни в одном дистрибутиве. Драйвер проприетарный, его нельзя включить в ISO. <strong>Решение:</strong> подключись по кабелю через Thunderbolt-Ethernet адаптер, или через USB-модем с телефона, поставь драйвер, потом Wi-Fi заработает.
+<strong>Главная проблема:</strong> Wi-Fi Broadcom BCM4360 не работает из коробки. Драйвер <code>broadcom-sta-dkms</code> (Ubuntu/Mint/Debian) или <code>akmod-wl</code> (Fedora) или <code>broadcom-wl-dkms</code> (Arch). <strong>Исключение:</strong> Linux Mint 22 — драйвер уже в ISO.
 </div>
 
-<h2>Три проверенных дистрибутива</h2>
-<p>Эти дистрибутивы <strong>реально ставили</strong> на MacBook Pro Mid 2014 разные люди. Не «должно работать», а «работало».</p>
-
-<!-- Fedora KDE -->
-<div class="distro-check">
-<h2>Fedora KDE Plasma <span class="badge">Проверено</span></h2>
-<p><strong>Что это:</strong> Fedora с рабочим столом KDE Plasma. Свежие пакеты, современный интерфейс.</p>
-<div class="why">
-Автор MacSales использовал Fedora KDE на <strong>точно таком же</strong> MacBook Pro mid-2014 (8 ГБ RAM) 30 дней. Установка прошла гладко, единственная проблема — Wi-Fi Broadcom. После установки драйвера всё работало: клавиатура, тачпад, принтер, периферия[citation:22]. Другой пользователь на PC Weenies тоже перешёл на Fedora KDE на этом же Mac и отметил, что система работает быстрее, чем macOS[citation:34].
-</div>
-<h3>Что работает</h3>
-<ul>
-<li>Wi-Fi (после установки <code>akmod-wl</code>)</li>
-<li>Клавиатура, тачпад, подсветка</li>
-<li>Звук, камера (после <code>facetimehd</code>)</li>
-<li>Внешние мониторы через Thunderbolt</li>
-<li>Принтеры</li>
-</ul>
-<h3>Что может не работать</h3>
-<ul>
-<li>FaceTime HD камера — нужен драйвер <code>facetimehd-kmod</code> из COPR[citation:28]</li>
-<li>Спящий режим — иногда требует настройки</li>
-</ul>
-<div class="links">
-<a href="distros/fedora.html">О Fedora →</a>
-<a href="guides/first-setup-fedora.html">Первые настройки →</a>
-<a href="guides/install-arch.html">Установка (похожая логика) →</a>
-</div>
-</div>
+<h2>Дистрибутивы, которые встают</h2>
 
 <!-- Linux Mint -->
-<div class="distro-check">
-<h2>Linux Mint 22 <span class="badge">Проверено</span></h2>
-<p><strong>Что это:</strong> Ubuntu-based дистрибутив с Cinnamon. Всё из коробки, дружелюбный.</p>
+<div class="distro-row">
+<h3>Linux Mint 22 <span class="tag tag-verified">Проверено</span></h3>
+<p>Ubuntu-based, Cinnamon. Самый простой путь.</p>
 <div class="why">
-Пользователь из Японии поставил Linux Mint 22 на MacBook Pro Retina 13" Mid 2014. Wi-Fi драйвер <strong>был в установщике Mint 22</strong> — не пришлось подключать кабель. Звук работал без настройки, японская раскладка тоже. PyCharm и Sublime Text работают без проблем[citation:33]. Плюс есть специальный скрипт <strong>mintbook</strong> для MacBook Pro 2013–2015 — автоматизирует создание флешки и установку[citation:21].
+Пользователь из Японии поставил Mint 22 на <strong>точно такую же модель</strong> (Mid 2014, 13"). Wi-Fi драйвер <strong>был в ISO</strong> — не пришлось подключать кабель. Звук работал сразу, японская раскладка тоже. PyCharm и Sublime Text 4 работают. Есть специальный скрипт <strong>mintbook</strong> для автоматизации установки на MacBook Pro 2013–2015.
 </div>
-<h3>Что работает</h3>
+<div class="nuance">
+После обновления ядра до 7.0 может сломаться Wi-Fi. Решение: поставить <code>broadcom-sta-dkms</code> из <code>noble-proposed</code> или загрузиться со старого ядра 6.14, установить драйвер, потом обновиться. Canonical патчит <code>wl</code> для каждого ядра, но с задержкой.
+</div>
 <ul>
-<li>Wi-Fi (в Mint 22 драйвер уже в ISO!)</li>
-<li>Звук, клавиатура, тачпад</li>
-<li>Японская/русская раскладка</li>
-<li>VNC, IDE, браузеры</li>
-</ul>
-<h3>Что может не работать</h3>
-<ul>
-<li>Камера — иногда требует настройки</li>
-<li>Bluetooth — может отваливаться</li>
+<li><strong>Wi-Fi:</strong> в ISO для Mint 22 ✅</li>
+<li><strong>Камера:</strong> нужен <code>facetimehd</code></li>
+<li><strong>Спящий режим:</strong> работает</li>
+<li><strong>HiDPI:</strong> настраивается</li>
 </ul>
 <div class="links">
 <a href="distros/mint.html">О Mint →</a>
@@ -179,51 +165,124 @@
 </div>
 
 <!-- Ubuntu -->
-<div class="distro-check">
-<h2>Ubuntu 24.04 / 25.10 <span class="badge">Проверено</span></h2>
-<p><strong>Что это:</strong> Самый популярный Linux. GNOME, LTS, огромное сообщество.</p>
+<div class="distro-row">
+<h3>Ubuntu 24.04 / 25.10 <span class="tag tag-verified">Проверено</span></h3>
+<p>Самый популярный Linux. GNOME, LTS, огромное сообщество.</p>
 <div class="why">
-Пользователь на Zenn поставил Ubuntu 25.10 на Intel MacBook Pro Mid 2014. Установка прошла без проблем, система работала «резво». Wi-Fi заработал после <code>broadcom-sta-dkms</code>. Японский ввод через <code>fcitx5-mozc</code>[citation:36]. Ubuntu Help содержит официальную страницу установки на MacBookPro11,1 (2014) с настройками efibootmgr и GRUB[citation:30].
+Пользователь на Zenn поставил Ubuntu 25.10 на Intel MacBook Pro Mid 2014. Установка прошла без проблем, система работала «резво». Wi-Fi заработал после <code>broadcom-sta-dkms</code>. Японский ввод через <code>fcitx5-mozc</code>. Ubuntu Help содержит официальную страницу установки на MacBookPro11,1 с настройками efibootmgr и GRUB.
 </div>
-<h3>Что работает</h3>
+<div class="nuance">
+Wi-Fi не работает в Live-режиме. Нужен USB-Ethernet адаптер или tethering с телефона. После установки: <code>sudo apt install broadcom-sta-dkms</code>. Спящий режим может не работать — маскировка: <code>sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target</code>.
+</div>
 <ul>
-<li>Wi-Fi (после <code>sudo apt install broadcom-sta-dkms</code>)</li>
-<li>Звук, клавиатура, тачпад</li>
-<li>Русский/японский ввод</li>
-<li>Спящий режим (с настройкой)</li>
-</ul>
-<h3>Что может не работать</h3>
-<ul>
-<li>Камера — нужен <code>facetimehd</code></li>
-<li>Автоматическая яркость клавиатуры</li>
-<li>Спящий режим — иногда требует маскировки systemd targets</li>
+<li><strong>Wi-Fi:</strong> <code>sudo apt install broadcom-sta-dkms</code></li>
+<li><strong>Камера:</strong> <code>facetimehd-dkms</code> (может быть не в репо)</li>
+<li><strong>Спящий режим:</strong> требует настройки</li>
+<li><strong>HiDPI:</strong> работает из коробки</li>
 </ul>
 <div class="links">
 <a href="distros/ubuntu.html">Об Ubuntu →</a>
 <a href="guides/first-setup-ubuntu.html">Первые настройки →</a>
-<a href="https://help.ubuntu.com/community/MacBookPro11-1/utopic" target="_blank">Официальный гайд →</a>
+</div>
+</div>
+
+<!-- Fedora KDE -->
+<div class="distro-row">
+<h3>Fedora KDE Plasma <span class="tag tag-verified">Проверено</span></h3>
+<p>Свежие пакеты, современный интерфейс KDE.</p>
+<div class="why">
+Автор MacSales использовал Fedora KDE на <strong>точно таком же</strong> MacBook Pro mid-2014 (8 ГБ RAM) 30 дней. Установка прошла гладко. После установки драйвера Wi-Fi всё работало: клавиатура, тачпад, принтер, периферия. Другой пользователь на PC Weenies отметил, что система работает быстрее macOS.
+</div>
+<div class="nuance">
+<strong>Важно:</strong> начиная с Fedora 42 (2025), пакет <code>akmod-wl</code> <strong>больше не собирается</strong> для старых ядер Broadcom. Нужен USB Wi-Fi dongle или Thunderbolt-Ethernet. Либо использовать Fedora Silverblue (иммутабельная) — там драйвер можно поставить через rpm-ostree. Также slow wake from sleep — известная проблема.
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> <code>akmod-wl</code> (может не собраться)</li>
+<li><strong>Альтернатива:</strong> USB Wi-Fi dongle</li>
+<li><strong>Камера:</strong> <code>facetimehd-kmod</code> из COPR</li>
+<li><strong>Спящий режим:</strong> медленное пробуждение</li>
+</ul>
+<div class="links">
+<a href="distros/fedora.html">О Fedora →</a>
+<a href="guides/first-setup-fedora.html">Первые настройки →</a>
+</div>
+</div>
+
+<!-- Ultramarine Linux -->
+<div class="distro-row">
+<h3>Ultramarine Linux <span class="tag tag-workable">С нюансом</span></h3>
+<p>Fedora-based, дружелюбнее к железу.</p>
+<div class="why">
+Пользователь на Fosstodon использовал Ultramarine Linux (Fedora-based) на <strong>MacBook Air 2014 и Pro 2015</strong>. Единственная проблема — Wi-Fi (та же Broadcom). Всё остальное работало. Ultramarine включает дополнительные драйверы и кодеки из коробки.
+</div>
+<div class="nuance">
+Та же проблема с Broadcom, что и в Fedora. Нужен dongle или ручная установка <code>akmod-wl</code>.
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> та же проблема, что в Fedora</li>
+<li><strong>Плюс:</strong> больше драйверов из коробки</li>
+</ul>
+<div class="links">
+<a href="distros/ultramarine.html">Об Ultramarine →</a>
+</div>
+</div>
+
+<!-- Pop!_OS -->
+<div class="distro-row">
+<h3>Pop!_OS <span class="tag tag-workable">С нюансом</span></h3>
+<p>Ubuntu-based от System76. Отдельные ISO для NVIDIA.</p>
+<div class="why">
+Pop!_OS — тот же Ubuntu под капотом, поэтому Wi-Fi Broadcom лечится так же: <code>broadcom-sta-dkms</code>. Плюс: если у тебя <strong>15" MacBook Pro с NVIDIA GT 750M</strong>, у Pop!_OS есть <strong>отдельный ISO с драйверами NVIDIA</strong> — не придётся ставить вручную.
+</div>
+<div class="nuance">
+Для 13" модели (только Intel) бери <strong>generic ISO</strong>. Для 15" с NVIDIA — <strong>NVIDIA ISO</strong>. Secure Boot нужно отключить в Mac (Option → выбрать EFI Boot).
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> <code>sudo apt install broadcom-sta-dkms</code></li>
+<li><strong>NVIDIA:</strong> отдельный ISO для 15"</li>
+<li><strong>Камера:</strong> <code>facetimehd</code></li>
+</ul>
+<div class="links">
+<a href="distros/pop-os.html">О Pop!_OS →</a>
+</div>
+</div>
+
+<!-- Debian -->
+<div class="distro-row">
+<h3>Debian 13 Trixie <span class="tag tag-tricky">Требует навыка</span></h3>
+<p>Стабильность, надёжность, долгая поддержка.</p>
+<div class="why">
+Пользователь на Codeberg установил Debian 13 Trixie на MacBookPro11,2 (15" Mid 2014). Использовал Thunderbolt-Ethernet адаптер для интернета. Wi-Fi работает, но драйвер <strong>не в установщике</strong> — нужно ставить офлайн. GNOME работает лучше, чем KDE (KDE плохо дружит со сном на этой модели).
+</div>
+<div class="nuance">
+Есть специальный offline-пакет: <code>debian-intel-macbook-broadcom-offline</code> на GitHub — 90+ .deb файлов с драйвером Broadcom. Скачиваешь на флешку, ставишь через <code>dpkg -i *.deb</code> потом <code>dpkg --configure -a</code>. Также нужен Thunderbolt-Ethernet для первой установки.
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> offline .deb пакет</li>
+<li><strong>Камера:</strong> <code>facetimehd</code></li>
+<li><strong>Спящий режим:</strong> с GNOME работает</li>
+</ul>
+<div class="links">
+<a href="distros/debian.html">О Debian →</a>
+<a href="https://github.com/willardcsoriano/debian-intel-macbook-broadcom-offline" target="_blank">Offline Broadcom пакет →</a>
 </div>
 </div>
 
 <!-- Arch -->
-<div class="distro-check">
-<h2>Arch Linux <span class="badge">Для опытных</span></h2>
-<p><strong>Что это:</strong> Rolling release, полный контроль, легендарная вики.</p>
+<div class="distro-row">
+<h3>Arch Linux <span class="tag tag-tricky">Для опытных</span></h3>
+<p>Rolling release, полный контроль, Arch Wiki.</p>
 <div class="why">
-Arch Wiki содержит отдельную страницу для MacBookPro11,x (включая твою модель). Там описаны все проблемы: Broadcom Wi-Fi, тачпад, HiDPI экран, звук, управление питанием[citation:29]. Xakep.ru публиковал гайд по установке Arch на MacBook Pro Retina 2014 с dual-boot, шифрованием LUKS и оптимизацией батареи[citation:35].
+Arch Wiki содержит <strong>отдельную страницу для MacBookPro11,x</strong> (включая твою модель). Там всё: Broadcom Wi-Fi, тачпад, HiDPI, звук, управление питанием, systemd-boot. Установка занимает время, но документация исчерпывающая.
 </div>
-<h3>Что работает</h3>
+<div class="nuance">
+<strong>Wi-Fi:</strong> для BCM4360 нужен <code>broadcom-wl-dkms</code> (проприетарный). <code>b43</code> не поддерживает AC-версию чипа. Драйвер <code>broadcom-wl</code> есть в установщике Arch, но может потребоваться ручная загрузка. <strong>Тачпад:</strong> <code>xf86-input-synaptics</code> или <code>mtrack</code>. <strong>Камера:</strong> <code>facetimehd-dkms</code> из AUR. <strong>HiDPI:</strong> нужна ручная настройка.
+</div>
 <ul>
-<li>Wi-Fi (через <code>broadcom-wl</code> или <code>b43-firmware</code>)</li>
-<li>Тачпад (через <code>xf86-input-synaptics</code> или <code>mtrack</code>)</li>
-<li>HiDPI (Retina) — настраивается</li>
-<li>Звук, клавиатура</li>
-</ul>
-<h3>Что может не работать</h3>
-<ul>
-<li>Камера — <code>facetimehd</code> из AUR</li>
-<li>Некоторые функции требуют ручной настройки</li>
-<li>Установка занимает время</li>
+<li><strong>Wi-Fi:</strong> <code>broadcom-wl-dkms</code></li>
+<li><strong>Тачпад:</strong> <code>xf86-input-synaptics</code> / <code>mtrack</code></li>
+<li><strong>Камера:</strong> <code>facetimehd-dkms</code> (AUR)</li>
+<li><strong>Загрузчик:</strong> systemd-boot или GRUB</li>
 </ul>
 <div class="links">
 <a href="distros/arch.html">Об Arch →</a>
@@ -232,45 +291,123 @@ Arch Wiki содержит отдельную страницу для MacBookPro
 </div>
 </div>
 
-<h2>Что я рекомендую</h2>
-<p>Если хочешь <strong>просто чтобы работало</strong> — ставь <strong>Linux Mint 22</strong>. Драйвер Wi-Fi в ISO, всё из коробки, скрипт mintbook автоматизирует установку.</p>
-<p>Если хочешь <strong>свежие пакеты и KDE</strong> — ставь <strong>Fedora KDE Plasma</strong>. Проверено на такой же машине, работает быстрее macOS.</p>
-<p>Если хочешь <strong>хардкор и контроль</strong> — ставь <strong>Arch</strong>. Arch Wiki для твоей модели всё расскажет.</p>
-
-<div class="warn-mac">
-<strong>Перед установкой:</strong> сделай бэкап macOS через Time Machine. Установка Linux <strong>уничтожит</strong> всё на диске, если выберешь «Стереть диск». Для dual-boot нужно сначала сжать раздел macOS через <code>diskutil</code>.
+<!-- LMDE -->
+<div class="distro-row">
+<h3>LMDE 6 <span class="tag tag-workable">Стабильный вариант</span></h3>
+<p>Linux Mint на Debian, без Ubuntu.</p>
+<div class="why">
+Пользователь на Lemdro.id использовал <strong>LMDE на Mac Mini 2014</strong> (то же железо, что в MacBook). Работает «очень хорошо». Плюс: rolling kernel updates не ломают Wi-Fi так часто, как в Ubuntu-based Mint. Рекомендуют для тех, кто устал от «Wi-Fi ломается после каждого обновления ядра».
 </div>
+<div class="nuance">
+LMDE использует Debian, а не Ubuntu. Wi-Fi драйвер нужно ставить через <code>broadcom-sta-dkms</code> после подключения по кабелю. Может потребоваться добавление <code>non-free</code> репозитория.
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> <code>broadcom-sta-dkms</code></li>
+<li><strong>Стабильность:</strong> выше, чем Ubuntu-based</li>
+<li><strong>Камера:</strong> <code>facetimehd</code></li>
+</ul>
+<div class="links">
+<a href="distros/lmde.html">О LMDE →</a>
+</div>
+</div>
+
+<!-- elementary OS -->
+<div class="distro-row">
+<h3>elementary OS <span class="tag tag-workable">Красивый вариант</span></h3>
+<p>Дизайнерский десктоп в стиле macOS.</p>
+<div class="why">
+Пользователь на Linux.org использовал elementary на <strong>точно такой же модели</strong> (Mid 2014). Работало. Wi-Fi Broadcom — та же проблема. Камера FaceTime не работала из коробки, нужно компилировать драйвер. NVIDIA на 15" — нужны драйверы.
+</div>
+<div class="nuance">
+Есть отдельный гайд <code>elementary-on-a-mac</code> на GitHub для dual-boot с macOS через rEFInd. Требует <code>ubiquity -b</code> (без установки GRUB). Если ставишь elementary, скорее всего понадобится ручная настройка загрузчика.
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> <code>broadcom-sta-dkms</code></li>
+<li><strong>Камера:</strong> компиляция из исходников</li>
+<li><strong>NVIDIA:</strong> для 15"</li>
+</ul>
+<div class="links">
+<a href="distros/elementary.html">О elementary →</a>
+<a href="https://github.com/aroman/elementary-on-a-mac" target="_blank">Гайд на GitHub →</a>
+</div>
+</div>
+
+<!-- NixOS -->
+<div class="distro-row">
+<h3>NixOS <span class="tag tag-workable">Декларативный</span></h3>
+<p>Вся система в одном конфиге.</p>
+<div class="why">
+Пользователь на Lemdro.id поставил NixOS на <strong>MacBook Air 2014</strong>, скопировал конфиг со своего Framework ноутбука (поменял только hardware-config). «Просто работает». Все современные дистрибутивы должны работать.
+</div>
+<div class="nuance">
+Wi-Fi Broadcom настраивается через <code>configuration.nix</code>: <code>boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];</code> и <code>boot.blacklistedKernelModules = [ "b43" "bcma" "ssb" ];</code>. Кривая обучения крутая, но для MacBook работает.
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> через configuration.nix</li>
+<li><strong>Камера:</strong> facetimehd в nixpkgs</li>
+<li><strong>Спящий режим:</strong> настраивается</li>
+</ul>
+<div class="links">
+<a href="distros/nixos.html">О NixOS →</a>
+</div>
+</div>
+
+<!-- openSUSE -->
+<div class="distro-row">
+<h3>openSUSE Tumbleweed <span class="tag tag-tricky">Rolling с нюансом</span></h3>
+<p>Rolling release от SUSE, YaST.</p>
+<div class="why">
+Пользователь на Lemdro.id рекомендовал openSUSE Tumbleweed для MacBook, если хочешь rolling release. SUSE хорошо поддерживает Broadcom через <code>broadcom-wl</code>. Но rolling release = kernel updates могут ломать Wi-Fi.
+</div>
+<div class="nuance">
+Wi-Fi драйвер <code>broadcom-wl</code> доступен в <code>Packman</code> репозитории. После каждого обновления ядра может потребоваться пересборка DKMS. Tumbleweed очень активно обновляется — следи за Wi-Fi.
+</div>
+<ul>
+<li><strong>Wi-Fi:</strong> <code>broadcom-wl</code> из Packman</li>
+<li><strong>Камера:</strong> <code>facetimehd</code> (проблематично)</li>
+<li><strong>Стабильность:</strong> ниже, чем LTS</li>
+</ul>
+<div class="links">
+<a href="distros/opensuse.html">Об openSUSE →</a>
+</div>
+</div>
+
+<h2>Что выбрать</h2>
+<table class="data">
+<thead><tr><th>Если ты хочешь</th><th>Ставь</th><th>Сложность</th></tr></thead>
+<tbody>
+<tr><td>Просто чтобы работало</td><td>Linux Mint 22</td><td>⭐ Легко</td></tr>
+<tr><td>Свежие пакеты + KDE</td><td>Fedora KDE (с USB Wi-Fi)</td><td>⭐⭐ Средне</td></tr>
+<tr><td>Ubuntu + NVIDIA (15")</td><td>Pop!_OS</td><td>⭐ Легко</td></tr>
+<tr><td>Стабильность без сюрпризов</td><td>LMDE 6</td><td>⭐⭐ Средне</td></tr>
+<tr><td>Хардкор и контроль</td><td>Arch</td><td>⭐⭐⭐ Сложно</td></tr>
+<tr><td>Декларативность</td><td>NixOS</td><td>⭐⭐⭐ Сложно</td></tr>
+<tr><td>Красивый десктоп</td><td>elementary OS</td><td>⭐⭐ Средне</td></tr>
+</tbody>
+</table>
 
 <h2>Ключевые шаги для любого дистрибутива</h2>
 <ol>
 <li><strong>Скачай ISO</strong> нужного дистрибутива</li>
 <li><strong>Запиши на флешку</strong> через balenaEtcher (на Mac или Ubuntu)</li>
-<li><strong>Выключи Mac</strong>, вставь флешку, включи с зажатой клавишей <strong>Option (⌥)</strong></li>
+<li><strong>Выключи Mac</strong>, вставь флешку, включи с зажатой <strong>Option (⌥)</strong></li>
 <li><strong>Выбери EFI Boot</strong> с флешки</li>
-<li><strong>Загрузись в Live-режим</strong> (Try without installing) — проверь Wi-Fi, звук, тачпад</li>
-<li><strong>Подключи интернет</strong> через кабель/телефон (Wi-Fi не работает до установки драйвера)</li>
-<li><strong>Установи систему</strong> (выбери «Стереть диск» для Linux-only, или «Рядом с macOS»)</li>
+<li><strong>Загрузись в Live-режим</strong> — проверь Wi-Fi, звук, тачпад</li>
+<li><strong>Подключи интернет</strong> через USB-Ethernet/телефон (Wi-Fi не работает до драйвера)</li>
+<li><strong>Установи систему</strong> («Стереть диск» для Linux-only, или «Рядом с macOS»)</li>
 <li><strong>После установки</strong> — поставь драйвер Wi-Fi</li>
 </ol>
 
 <h2>Драйвер Wi-Fi для каждой системы</h2>
 <table class="data">
-<thead><tr><th>Дистрибутив</th><th>Команда для Wi-Fi</th></tr></thead>
-<tbody>
-<tr><td>Ubuntu / Mint</td><td><code>sudo apt install broadcom-sta-dkms</code></td></tr>
-<tr><td>Fedora</td><td><code>sudo dnf install akmod-wl</code></td></tr>
-<tr><td>Arch</td><td><code>sudo pacman -S broadcom-wl-dkms</code></td></tr>
-<tr><td>Debian</td><td><code>sudo apt install broadcom-sta-dkms</code> (нужен offline-пакет)[citation:26]</td></tr>
-</tbody>
-</table>
-
-<h2>Драйвер камеры (FaceTime HD)</h2>
-<table class="data">
 <thead><tr><th>Дистрибутив</th><th>Команда</th></tr></thead>
 <tbody>
-<tr><td>Ubuntu / Mint</td><td><code>sudo apt install facetimehd-dkms</code> (может быть не в репо)</td></tr>
-<tr><td>Fedora</td><td><code>sudo dnf copr enable mulderje/facetimehd-kmod</code> + <code>sudo dnf install facetimehd-kmod</code>[citation:28]</td></tr>
-<tr><td>Arch</td><td><code>yay -S facetimehd-dkms</code></td></tr>
+<tr><td>Ubuntu / Mint / Pop!_OS / elementary</td><td><code>sudo apt install broadcom-sta-dkms</code></td></tr>
+<tr><td>Debian / LMDE</td><td>Offline .deb пакет или <code>broadcom-sta-dkms</code></td></tr>
+<tr><td>Fedora / Ultramarine</td><td><code>sudo dnf install akmod-wl</code> (может не собраться)</td></tr>
+<tr><td>Arch</td><td><code>sudo pacman -S broadcom-wl-dkms</code></td></tr>
+<tr><td>openSUSE</td><td><code>broadcom-wl</code> из Packman</td></tr>
+<tr><td>NixOS</td><td>Через configuration.nix</td></tr>
 </tbody>
 </table>
 
