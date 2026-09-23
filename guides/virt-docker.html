@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docker — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Docker</h1>
+<p class="lead">Контейнеры для разработки.</p>
+<section class="kali-section"><h2>Установка</h2><pre><code>curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+# Перелогинься</code></pre></section>
+<section class="kali-section"><h2>Основы</h2><pre><code>docker run hello-world
+docker run -it ubuntu bash
+docker run -d -p 8080:80 nginx
+docker ps
+docker images
+docker stop container_id
+docker rm container_id</code></pre></section>
+<section class="kali-section"><h2>Dockerfile</h2><pre><code>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]</code></pre></section>
+<section class="kali-section"><h2>Сборка</h2><pre><code>docker build -t myapp .
+docker run -p 8000:8000 myapp</code></pre></section>
+<section class="kali-section"><h2>docker-compose</h2><pre><code>services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: postgres</code></pre><pre><code>docker compose up -d
+docker compose logs -f
+docker compose down</code></pre></section>
+<section class="kali-section"><h2>Очистка</h2><pre><code>docker system prune -a
+docker volume prune</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

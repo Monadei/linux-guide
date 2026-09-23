@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Btrfs — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Btrfs</h1>
+<p class="lead">Снапшоты, сжатие, subvolumes.</p>
+<section class="kali-section"><h2>Что это</h2><p>Btrfs — современная ФС от Oracle. Используется в Fedora, openSUSE, Synology.</p></section>
+<section class="kali-section"><h2>Плюсы и минусы</h2><p><strong>Плюсы:</strong> снапшоты, сжатие zstd, subvolumes, RAID на уровне ФС, resize онлайн.</p><p><strong>Минусы:</strong> RAID 5/6 проблематичен, сложнее ext4.</p></section>
+<section class="kali-section"><h2>Создание</h2><pre><code>sudo mkfs.btrfs -L DATA /dev/sdb1
+sudo mkfs.btrfs -d single -m raid1 /dev/sdb1 /dev/sdc1</code></pre></section>
+<section class="kali-section"><h2>Subvolumes</h2><pre><code>sudo btrfs subvolume create /mnt/data/documents
+sudo btrfs subvolume list /mnt/data
+sudo btrfs subvolume delete /mnt/data/documents</code></pre></section>
+<section class="kali-section"><h2>Снапшоты</h2><pre><code>sudo btrfs subvolume snapshot /mnt/data /mnt/snapshots/data-$(date +%Y%m%d)
+sudo btrfs subvolume snapshot -r /mnt/data /mnt/snapshots/data-backup</code></pre></section>
+<section class="kali-section"><h2>Обслуживание</h2><pre><code>sudo btrfs filesystem usage /mnt/data
+sudo btrfs check /dev/sdb1
+sudo btrfs balance start -dusage=50 /mnt/data</code></pre></section>
+<section class="kali-section"><h2>Сжатие</h2><pre><code>sudo mount -o compress=zstd /dev/sdb1 /mnt/data
+# В fstab:
+UUID=xxx /mnt/data btrfs defaults,compress=zstd,noatime 0 2</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xbps — пакетный менеджер — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>xbps — пакетный менеджер</h1>
+<p class="lead">xbps — пакетный менеджер Void Linux.</p>
+<section class="kali-section">
+<h2>Основные команды</h2>
+<table class="data">
+<thead><tr><th>Действие</th><th>Команда</th></tr></thead>
+<tbody>
+<tr><td>Обновить индексы</td><td><code>sudo xbps-install -S</code></td></tr>
+<tr><td>Обновить всё</td><td><code>sudo xbps-install -Su</code></td></tr>
+<tr><td>Установить</td><td><code>sudo xbps-install имя</code></td></tr>
+<tr><td>Удалить</td><td><code>sudo xbps-remove имя</code></td></tr>
+<tr><td>Удалить с зависимостями</td><td><code>sudo xbps-remove -R имя</code></td></tr>
+<tr><td>Поиск</td><td><code>xbps-query -Rs запрос</code></td></tr>
+<tr><td>Инфо о пакете</td><td><code>xbps-query -R имя</code></td></tr>
+<tr><td>Список установленных</td><td><code>xbps-query -l</code></td></tr>
+<tr><td>Какие файлы у пакета</td><td><code>xbps-query -f имя</code></td></tr>
+<tr><td>Очистить кеш</td><td><code>sudo xbps-remove -O</code></td></tr>
+</tbody>
+</table>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

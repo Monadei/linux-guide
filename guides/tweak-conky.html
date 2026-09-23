@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conky — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Conky</h1>
+<p class="lead">Мониторинг на рабочем столе.</p>
+<section class="kali-section"><h2>Установка</h2><pre><code>sudo apt install conky-all</code></pre></section>
+<section class="kali-section"><h2>Конфиг</h2><pre><code># ~/.config/conky/conky.conf
+conky.config = {
+    alignment = "top_right",
+    gap_x = 20,
+    gap_y = 40,
+    own_window = true,
+    own_window_type = "desktop",
+    font = "JetBrains Mono:size=10",
+};
+
+conky.text = [[
+${time %H:%M}
+CPU: ${cpu}%
+RAM: ${mem}/${memmax}
+Disk: ${fs_used /}/${fs_size /}
+]]</code></pre></section>
+<section class="kali-section"><h2>Запуск</h2><pre><code>conky</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

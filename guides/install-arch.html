@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Установка Arch Linux — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Установка Arch Linux</h1>
+<p class="lead">Пошагово: от загрузки ISO до первого входа в систему.</p>
+
+<section class="kali-section">
+<h2>Что нужно</h2>
+<ul><li>Флешка 8+ ГБ</li><li>ISO Arch с archlinux.org</li><li>Интернет</li><li>30–60 минут</li></ul>
+<div style="background: var(--panel-2); border-left: 3px solid #ff5555; padding: 0.8rem 1rem; margin: 1rem 0;">⚠️ Все данные на диске будут уничтожены. Сделай бэкап.</div>
+</section>
+
+<section class="kali-section">
+<h2>1. Загрузка с флешки</h2>
+<pre><code># Проверь интернет
+ping -c 3 archlinux.org
+
+# Если Wi-Fi
+iwctl
+  station wlan0 scan
+  station wlan0 get-networks
+  station wlan0 connect "Имя сети"
+  exit</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>2. Разметка диска</h2>
+<pre><code># Смотрим диски
+lsblk
+
+# Размечаем (замени /dev/sda на свой)
+fdisk /dev/sda
+# n — новый раздел
+# 1 — EFI, 512M, тип EFI
+# 2 — root, всё остальное
+
+# Форматируем
+mkfs.fat -F32 /dev/sda1
+mkfs.ext4 /dev/sda2
+
+# Монтируем
+mount /dev/sda2 /mnt
+mount --mkdir /dev/sda1 /mnt/boot</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>3. Установка базовой системы</h2>
+<pre><code># Ставим базовые пакеты
+pacstrap -K /mnt base linux linux-firmware vim sudo networkmanager
+
+# Генерируем fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# Заходим в систему
+arch-chroot /mnt</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>4. Базовая настройка</h2>
+<pre><code># Часовой пояс
+ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+hwclock --systohc
+
+# Локаль
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+
+# Имя хоста
+echo "arch-pc" > /etc/hostname
+
+# Пароль root
+passwd</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>5. Загрузчик GRUB</h2>
+<pre><code># Для UEFI
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>6. Пользователь и сеть</h2>
+<pre><code># Создаём пользователя
+useradd -m -G wheel -s /bin/bash monadei
+passwd monadei
+
+# Даём sudo
+EDITOR=vim visudo
+# Раскомментируй: %wheel ALL=(ALL:ALL) ALL
+
+# Включаем сеть
+systemctl enable NetworkManager
+
+# Выходим и перезагружаемся
+exit
+umount -R /mnt
+reboot</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Что дальше</h2>
+<p>После перезагрузки ты в чистом Arch. Дальше — <a href="first-setup-arch.html">первые настройки</a>.</p>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

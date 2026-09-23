@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>chmod — права доступа — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>chmod — права доступа</h1>
+<p class="lead">rwx, 755, 644.</p>
+<section class="kali-section"><h2>Что такое права</h2><p>Каждый файл имеет три категории прав: владелец, группа, остальные. Каждая — rwx.</p></section>
+<section class="kali-section"><h2>Просмотр</h2><pre><code>ls -la
+-rwxr-xr-x 1 monadei monadei 4096 file.sh</code></pre></section>
+<section class="kali-section"><h2>Числовая запись</h2><table class="data"><thead><tr><th>Число</th><th>Буквы</th><th>Права</th></tr></thead><tbody><tr><td>7</td><td>rwx</td><td>полные</td></tr><tr><td>6</td><td>rw-</td><td>чтение+запись</td></tr><tr><td>5</td><td>r-x</td><td>чтение+выполнение</td></tr><tr><td>4</td><td>r--</td><td>чтение</td></tr><tr><td>0</td><td>---</td><td>нет прав</td></tr></tbody></table></section>
+<section class="kali-section"><h2>Популярные</h2><pre><code>chmod 755 file   # rwxr-xr-x
+chmod 644 file   # rw-r--r--
+chmod 600 file   # rw------- (SSH ключи)
+chmod 700 dir    # rwx------
+chmod 777 file   # ОПАСНО
+chmod +x file
+chmod -R 755 папка/</code></pre></section>
+<section class="kali-section"><h2>Специальные биты</h2><ul><li><code>4xxx</code> — SUID</li><li><code>2xxx</code> — SGID</li><li><code>1xxx</code> — sticky bit</li></ul><pre><code>chmod 1777 /tmp
+chmod 4755 /usr/bin/passwd</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

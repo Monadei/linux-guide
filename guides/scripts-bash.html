@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bash-скрипты — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Bash-скрипты</h1>
+<p class="lead">От простого к сложному.</p>
+<section class="kali-section"><h2>Первый скрипт</h2><pre><code>#!/bin/bash
+echo "Привет, мир!"</code></pre><pre><code>chmod +x script.sh
+./script.sh</code></pre></section>
+<section class="kali-section"><h2>Переменные</h2><pre><code>NAME="Артём"
+echo "Привет, $NAME"
+echo "Сегодня $(date)"</code></pre></section>
+<section class="kali-section"><h2>Условия</h2><pre><code>if [ -f /etc/passwd ]; then
+  echo "Файл есть"
+else
+  echo "Файла нет"
+fi</code></pre></section>
+<section class="kali-section"><h2>Циклы</h2><pre><code>for f in *.txt; do
+  echo "Обрабатываю $f"
+done
+
+while read line; do
+  echo "$line"
+done < file.txt</code></pre></section>
+<section class="kali-section"><h2>Функции</h2><pre><code>greet() {
+  echo "Привет, $1!"
+}
+greet "Артём"</code></pre></section>
+<section class="kali-section"><h2>Аргументы</h2><pre><code>echo "Первый: $1"
+echo "Всего: $#"
+echo "Все: $@"</code></pre></section>
+<section class="kali-section"><h2>Пример: бэкап</h2><pre><code>#!/bin/bash
+SRC="$HOME/Documents"
+DST="/mnt/backup/$(date +%Y-%m-%d)"
+mkdir -p "$DST"
+rsync -avh --delete "$SRC/" "$DST/"
+echo "Готово: $DST"</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kali — что после установки — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Kali — что после установки</h1>
+<p class="lead">Что делать сразу после установки.</p>
+<section class="kali-section"><h2>Важно</h2><div style="background: var(--panel-2); border-left: 3px solid #ff5555; padding: 0.8rem 1rem; margin: 1rem 0;">Kali — не для повседневного использования. Ставь только в виртуалке или на отдельный диск.</div></section>
+<section class="kali-section"><h2>1. Обновление</h2><pre><code>sudo apt update && sudo apt full-upgrade -y</code></pre></section>
+<section class="kali-section"><h2>2. Смена пользователя</h2><pre><code>useradd -m -G sudo -s /bin/bash monadei
+passwd monadei</code></pre></section>
+<section class="kali-section"><h2>3. Что установлено</h2><ul><li>nmap, Metasploit, Burp Suite, Wireshark</li><li>John, Hashcat, Hydra</li><li>Aircrack-ng, Reaver</li><li>Maltego, BeEF, SQLMap</li></ul></section>
+<section class="kali-section"><h2>4. Дополнительные инструменты</h2><pre><code>sudo apt install kali-linux-default
+sudo apt install kali-linux-large
+sudo apt install kali-linux-everything</code></pre></section>
+<section class="kali-section"><h2>5. Практика</h2><p>Установил Kali — не значит «стал хакером». Дальше: <a href="../kali/kali-practice.html">где практиковаться</a>.</p></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

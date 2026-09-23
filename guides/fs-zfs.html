@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZFS — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>ZFS</h1>
+<p class="lead">Для NAS и серверов. Максимальная надёжность.</p>
+<section class="kali-section"><h2>Что это</h2><p>ZFS — ФС от Sun (теперь OpenZFS). Стандарт для NAS. Снапшоты, дедупликация, RAIDZ, шифрование.</p></section>
+<section class="kali-section"><h2>Плюсы и минусы</h2><p><strong>Плюсы:</strong> снапшоты, дедупликация, сжатие, RAIDZ, контроль целостности, шифрование.</p><p><strong>Минусы:</strong> требует много RAM (1 ГБ на 1 ТБ), лицензия CDDL.</p></section>
+<section class="kali-section"><h2>Установка</h2><pre><code># Ubuntu
+sudo apt install zfsutils-linux
+
+# Fedora
+sudo dnf install zfs</code></pre></section>
+<section class="kali-section"><h2>Создание пула</h2><pre><code>sudo zpool create tank /dev/sdb              # простой
+sudo zpool create tank mirror /dev/sdb /dev/sdc  # зеркало
+sudo zpool create tank raidz /dev/sdb /dev/sdc /dev/sdd  # RAIDZ1
+sudo zpool create -O compression=lz4 tank /dev/sdb</code></pre></section>
+<section class="kali-section"><h2>Datasets</h2><pre><code>sudo zfs create tank/documents
+zfs list
+sudo zfs set compression=zstd tank/documents
+sudo zfs set quota=100G tank/photos</code></pre></section>
+<section class="kali-section"><h2>Снапшоты</h2><pre><code>sudo zfs snapshot tank/documents@backup-$(date +%Y%m%d)
+zfs list -t snapshot
+sudo zfs rollback tank/documents@backup-20260101</code></pre></section>
+<section class="kali-section"><h2>Обслуживание</h2><pre><code>sudo zpool status
+sudo zpool scrub tank
+zpool history</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

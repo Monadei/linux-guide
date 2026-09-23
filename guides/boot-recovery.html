@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Восстановление загрузки — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Восстановление загрузки</h1>
+<p class="lead">Если GRUB или systemd-boot сломались.</p>
+<section class="kali-section"><h2>Что делать</h2><p>Загрузись с Live USB, открой терминал.</p></section>
+<section class="kali-section"><h2>Восстановление GRUB (UEFI)</h2><pre><code>sudo fdisk -l
+sudo mount /dev/sda2 /mnt
+sudo mount /dev/sda1 /mnt/boot/efi
+for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+sudo chroot /mnt
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ubuntu
+update-grub
+exit
+sudo umount -R /mnt
+sudo reboot</code></pre></section>
+<section class="kali-section"><h2>Восстановление GRUB (BIOS)</h2><pre><code>sudo mount /dev/sda1 /mnt
+for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+sudo chroot /mnt
+grub-install /dev/sda
+update-grub
+exit
+sudo umount -R /mnt
+sudo reboot</code></pre></section>
+<section class="kali-section"><h2>Если не помогает</h2><ul><li>Super GRUB2 Disk</li><li>Переустановка загрузчика с нуля</li><li>Live USB с rEFInd</li></ul></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

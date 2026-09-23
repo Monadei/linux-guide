@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мой MacBook Pro 2014 — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="distros/index.html">Дистрибутивы</a>
+<a href="guides/index.html">Гайды</a><a href="choose/index.html">Что выбрать</a>
+<a href="kali/index.html">Kali</a><a href="about.html">Обо мне</a>
+</nav></div></header>
+
+<main class="container page">
+<h1>Мой MacBook Pro 2014</h1>
+<p class="lead">Какой Linux поставить на старый Mac. Проверенные варианты с гайдами.</p>
+
+<style>
+.mac-specs {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
+.mac-specs h2 { margin-top: 0; color: var(--accent); border: none; }
+.mac-specs h2::before { content: ""; }
+.mac-specs table { width: 100%; }
+.mac-specs td { padding: 0.4rem 0; }
+.mac-specs td:first-child { color: var(--muted); width: 40%; }
+
+.distro-check {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+}
+.distro-check h2 {
+  margin-top: 0;
+  color: var(--accent);
+  border: none;
+  padding: 0;
+}
+.distro-check h2::before { content: ""; }
+.distro-check .badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.15rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+}
+.distro-check .why {
+  background: var(--bg);
+  border-left: 2px solid var(--accent-dim);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.distro-check .why::before {
+  content: "Почему подходит: ";
+  color: var(--accent);
+  font-weight: 600;
+}
+.distro-check ul { margin: 0.5rem 0; }
+.distro-check .links {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.distro-check .links a {
+  border: 1px dashed var(--accent-dim);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.distro-check .links a:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-style: solid;
+}
+.warn-mac {
+  background: color-mix(in srgb, #ff5555 10%, var(--panel));
+  border-left: 3px solid #ff5555;
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
+</style>
+
+<div class="mac-specs">
+<h2>Что за машина</h2>
+<table>
+<tr><td>Модель</td><td><strong>MacBook Pro (Retina, 13-inch, Mid 2014)</strong></td></tr>
+<tr><td>Идентификатор</td><td>MacBookPro11,1</td></tr>
+<tr><td>Процессор</td><td>Intel Core i5 (Haswell), 2 ядра / 4 потока</td></tr>
+<tr><td>Память</td><td>8 ГБ (распаяна, не апгрейдится)</td></tr>
+<tr><td>Диск</td><td>128 ГБ SSD (Apple PCIe)</td></tr>
+<tr><td>Графика</td><td>Intel Iris (встроенная)</td></tr>
+<tr><td>Wi-Fi</td><td>Broadcom BCM4360 — <strong>требует драйвер</strong></td></tr>
+<tr><td>Камера</td><td>FaceTime HD — требует <code>facetimehd</code></td></tr>
+</table>
+</div>
+
+<div class="warn-mac">
+<strong>Главная проблема:</strong> Wi-Fi Broadcom BCM4360 не работает из коробки ни в одном дистрибутиве. Драйвер проприетарный, его нельзя включить в ISO. <strong>Решение:</strong> подключись по кабелю через Thunderbolt-Ethernet адаптер, или через USB-модем с телефона, поставь драйвер, потом Wi-Fi заработает.
+</div>
+
+<h2>Три проверенных дистрибутива</h2>
+<p>Эти дистрибутивы <strong>реально ставили</strong> на MacBook Pro Mid 2014 разные люди. Не «должно работать», а «работало».</p>
+
+<!-- Fedora KDE -->
+<div class="distro-check">
+<h2>Fedora KDE Plasma <span class="badge">Проверено</span></h2>
+<p><strong>Что это:</strong> Fedora с рабочим столом KDE Plasma. Свежие пакеты, современный интерфейс.</p>
+<div class="why">
+Автор MacSales использовал Fedora KDE на <strong>точно таком же</strong> MacBook Pro mid-2014 (8 ГБ RAM) 30 дней. Установка прошла гладко, единственная проблема — Wi-Fi Broadcom. После установки драйвера всё работало: клавиатура, тачпад, принтер, периферия[citation:22]. Другой пользователь на PC Weenies тоже перешёл на Fedora KDE на этом же Mac и отметил, что система работает быстрее, чем macOS[citation:34].
+</div>
+<h3>Что работает</h3>
+<ul>
+<li>Wi-Fi (после установки <code>akmod-wl</code>)</li>
+<li>Клавиатура, тачпад, подсветка</li>
+<li>Звук, камера (после <code>facetimehd</code>)</li>
+<li>Внешние мониторы через Thunderbolt</li>
+<li>Принтеры</li>
+</ul>
+<h3>Что может не работать</h3>
+<ul>
+<li>FaceTime HD камера — нужен драйвер <code>facetimehd-kmod</code> из COPR[citation:28]</li>
+<li>Спящий режим — иногда требует настройки</li>
+</ul>
+<div class="links">
+<a href="distros/fedora.html">О Fedora →</a>
+<a href="guides/first-setup-fedora.html">Первые настройки →</a>
+<a href="guides/install-arch.html">Установка (похожая логика) →</a>
+</div>
+</div>
+
+<!-- Linux Mint -->
+<div class="distro-check">
+<h2>Linux Mint 22 <span class="badge">Проверено</span></h2>
+<p><strong>Что это:</strong> Ubuntu-based дистрибутив с Cinnamon. Всё из коробки, дружелюбный.</p>
+<div class="why">
+Пользователь из Японии поставил Linux Mint 22 на MacBook Pro Retina 13" Mid 2014. Wi-Fi драйвер <strong>был в установщике Mint 22</strong> — не пришлось подключать кабель. Звук работал без настройки, японская раскладка тоже. PyCharm и Sublime Text работают без проблем[citation:33]. Плюс есть специальный скрипт <strong>mintbook</strong> для MacBook Pro 2013–2015 — автоматизирует создание флешки и установку[citation:21].
+</div>
+<h3>Что работает</h3>
+<ul>
+<li>Wi-Fi (в Mint 22 драйвер уже в ISO!)</li>
+<li>Звук, клавиатура, тачпад</li>
+<li>Японская/русская раскладка</li>
+<li>VNC, IDE, браузеры</li>
+</ul>
+<h3>Что может не работать</h3>
+<ul>
+<li>Камера — иногда требует настройки</li>
+<li>Bluetooth — может отваливаться</li>
+</ul>
+<div class="links">
+<a href="distros/mint.html">О Mint →</a>
+<a href="guides/first-setup-mint.html">Первые настройки →</a>
+<a href="https://github.com/ksylvan/mintbook" target="_blank">Скрипт mintbook →</a>
+</div>
+</div>
+
+<!-- Ubuntu -->
+<div class="distro-check">
+<h2>Ubuntu 24.04 / 25.10 <span class="badge">Проверено</span></h2>
+<p><strong>Что это:</strong> Самый популярный Linux. GNOME, LTS, огромное сообщество.</p>
+<div class="why">
+Пользователь на Zenn поставил Ubuntu 25.10 на Intel MacBook Pro Mid 2014. Установка прошла без проблем, система работала «резво». Wi-Fi заработал после <code>broadcom-sta-dkms</code>. Японский ввод через <code>fcitx5-mozc</code>[citation:36]. Ubuntu Help содержит официальную страницу установки на MacBookPro11,1 (2014) с настройками efibootmgr и GRUB[citation:30].
+</div>
+<h3>Что работает</h3>
+<ul>
+<li>Wi-Fi (после <code>sudo apt install broadcom-sta-dkms</code>)</li>
+<li>Звук, клавиатура, тачпад</li>
+<li>Русский/японский ввод</li>
+<li>Спящий режим (с настройкой)</li>
+</ul>
+<h3>Что может не работать</h3>
+<ul>
+<li>Камера — нужен <code>facetimehd</code></li>
+<li>Автоматическая яркость клавиатуры</li>
+<li>Спящий режим — иногда требует маскировки systemd targets</li>
+</ul>
+<div class="links">
+<a href="distros/ubuntu.html">Об Ubuntu →</a>
+<a href="guides/first-setup-ubuntu.html">Первые настройки →</a>
+<a href="https://help.ubuntu.com/community/MacBookPro11-1/utopic" target="_blank">Официальный гайд →</a>
+</div>
+</div>
+
+<!-- Arch -->
+<div class="distro-check">
+<h2>Arch Linux <span class="badge">Для опытных</span></h2>
+<p><strong>Что это:</strong> Rolling release, полный контроль, легендарная вики.</p>
+<div class="why">
+Arch Wiki содержит отдельную страницу для MacBookPro11,x (включая твою модель). Там описаны все проблемы: Broadcom Wi-Fi, тачпад, HiDPI экран, звук, управление питанием[citation:29]. Xakep.ru публиковал гайд по установке Arch на MacBook Pro Retina 2014 с dual-boot, шифрованием LUKS и оптимизацией батареи[citation:35].
+</div>
+<h3>Что работает</h3>
+<ul>
+<li>Wi-Fi (через <code>broadcom-wl</code> или <code>b43-firmware</code>)</li>
+<li>Тачпад (через <code>xf86-input-synaptics</code> или <code>mtrack</code>)</li>
+<li>HiDPI (Retina) — настраивается</li>
+<li>Звук, клавиатура</li>
+</ul>
+<h3>Что может не работать</h3>
+<ul>
+<li>Камера — <code>facetimehd</code> из AUR</li>
+<li>Некоторые функции требуют ручной настройки</li>
+<li>Установка занимает время</li>
+</ul>
+<div class="links">
+<a href="distros/arch.html">Об Arch →</a>
+<a href="guides/first-setup-arch.html">Первые настройки →</a>
+<a href="https://wiki.archlinux.org/title/MacBookPro11,x" target="_blank">Arch Wiki для твоей модели →</a>
+</div>
+</div>
+
+<h2>Что я рекомендую</h2>
+<p>Если хочешь <strong>просто чтобы работало</strong> — ставь <strong>Linux Mint 22</strong>. Драйвер Wi-Fi в ISO, всё из коробки, скрипт mintbook автоматизирует установку.</p>
+<p>Если хочешь <strong>свежие пакеты и KDE</strong> — ставь <strong>Fedora KDE Plasma</strong>. Проверено на такой же машине, работает быстрее macOS.</p>
+<p>Если хочешь <strong>хардкор и контроль</strong> — ставь <strong>Arch</strong>. Arch Wiki для твоей модели всё расскажет.</p>
+
+<div class="warn-mac">
+<strong>Перед установкой:</strong> сделай бэкап macOS через Time Machine. Установка Linux <strong>уничтожит</strong> всё на диске, если выберешь «Стереть диск». Для dual-boot нужно сначала сжать раздел macOS через <code>diskutil</code>.
+</div>
+
+<h2>Ключевые шаги для любого дистрибутива</h2>
+<ol>
+<li><strong>Скачай ISO</strong> нужного дистрибутива</li>
+<li><strong>Запиши на флешку</strong> через balenaEtcher (на Mac или Ubuntu)</li>
+<li><strong>Выключи Mac</strong>, вставь флешку, включи с зажатой клавишей <strong>Option (⌥)</strong></li>
+<li><strong>Выбери EFI Boot</strong> с флешки</li>
+<li><strong>Загрузись в Live-режим</strong> (Try without installing) — проверь Wi-Fi, звук, тачпад</li>
+<li><strong>Подключи интернет</strong> через кабель/телефон (Wi-Fi не работает до установки драйвера)</li>
+<li><strong>Установи систему</strong> (выбери «Стереть диск» для Linux-only, или «Рядом с macOS»)</li>
+<li><strong>После установки</strong> — поставь драйвер Wi-Fi</li>
+</ol>
+
+<h2>Драйвер Wi-Fi для каждой системы</h2>
+<table class="data">
+<thead><tr><th>Дистрибутив</th><th>Команда для Wi-Fi</th></tr></thead>
+<tbody>
+<tr><td>Ubuntu / Mint</td><td><code>sudo apt install broadcom-sta-dkms</code></td></tr>
+<tr><td>Fedora</td><td><code>sudo dnf install akmod-wl</code></td></tr>
+<tr><td>Arch</td><td><code>sudo pacman -S broadcom-wl-dkms</code></td></tr>
+<tr><td>Debian</td><td><code>sudo apt install broadcom-sta-dkms</code> (нужен offline-пакет)[citation:26]</td></tr>
+</tbody>
+</table>
+
+<h2>Драйвер камеры (FaceTime HD)</h2>
+<table class="data">
+<thead><tr><th>Дистрибутив</th><th>Команда</th></tr></thead>
+<tbody>
+<tr><td>Ubuntu / Mint</td><td><code>sudo apt install facetimehd-dkms</code> (может быть не в репо)</td></tr>
+<tr><td>Fedora</td><td><code>sudo dnf copr enable mulderje/facetimehd-kmod</code> + <code>sudo dnf install facetimehd-kmod</code>[citation:28]</td></tr>
+<tr><td>Arch</td><td><code>yay -S facetimehd-dkms</code></td></tr>
+</tbody>
+</table>
+
+<p style="color: var(--muted); margin-top: 2rem;">— Monadei, MacBook Pro 2014 Mid, Fedora KDE</p>
+</main>
+
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/glass-clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Процессы и система — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Процессы и система</h1>
+<p class="lead">ps, top, kill, systemctl.</p>
+<section class="kali-section"><h2>Список процессов</h2><pre><code>ps aux
+ps aux | grep firefox
+pgrep firefox
+top
+htop
+btop</code></pre></section>
+<section class="kali-section"><h2>Убить процесс</h2><pre><code>kill PID
+kill -9 PID
+killall firefox
+pkill -f "python script.py"</code></pre></section>
+<section class="kali-section"><h2>systemd</h2><pre><code>systemctl status nginx
+systemctl start nginx
+systemctl stop nginx
+systemctl restart nginx
+systemctl enable nginx
+systemctl disable nginx
+systemctl list-units --failed</code></pre></section>
+<section class="kali-section"><h2>Ресурсы</h2><pre><code>free -h
+df -h
+du -sh папка/
+uptime
+w</code></pre></section>
+<section class="kali-section"><h2>Логи</h2><pre><code>journalctl -xe
+journalctl -u nginx
+journalctl -b
+journalctl -f</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

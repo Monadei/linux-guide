@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KVM + QEMU — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>KVM + QEMU</h1>
+<p class="lead">Нативная виртуализация Linux.</p>
+<section class="kali-section"><h2>Что это</h2><p>KVM — модуль ядра для виртуализации. QEMU — эмулятор. Вместе дают быстрые виртуалки.</p></section>
+<section class="kali-section"><h2>Проверка поддержки</h2><pre><code>egrep -c "(vmx|svm)" /proc/cpuinfo</code></pre></section>
+<section class="kali-section"><h2>Установка</h2><pre><code>sudo apt install qemu-kvm libvirt-daemon-system virt-manager
+sudo usermod -aG libvirt,kvm $USER
+# Перелогинься</code></pre></section>
+<section class="kali-section"><h2>GUI</h2><pre><code>virt-manager</code></pre></section>
+<section class="kali-section"><h2>CLI</h2><pre><code>sudo virt-install --name ubuntu-vm --ram 4096 --vcpus 2 --disk path=/var/lib/libvirt/images/ubuntu.qcow2,size=40 --cdrom ubuntu.iso</code></pre></section>
+<section class="kali-section"><h2>Управление</h2><pre><code>virsh list --all
+virsh start ubuntu-vm
+virsh shutdown ubuntu-vm</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

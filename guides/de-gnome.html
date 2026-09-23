@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GNOME — подробно — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>GNOME — подробно</h1>
+<p class="lead">Самый популярный DE в Linux.</p>
+<section class="kali-section"><h2>Что это</h2><p>GNOME — минималистичный DE с фокусом на задачи. По умолчанию в Ubuntu, Fedora, Debian.</p></section>
+<section class="kali-section"><h2>Установка</h2><pre><code>sudo apt install gnome-shell gnome-tweaks gnome-shell-extensions</code></pre></section>
+<section class="kali-section"><h2>Расширения</h2><ul><li><strong>AppIndicator</strong> — иконки в трее</li><li><strong>Dash to Dock</strong> — док</li><li><strong>Blur My Shell</strong> — размытие</li><li><strong>Just Perfection</strong> — тонкая настройка</li><li><strong>Clipboard Indicator</strong> — история буфера</li></ul><p>Установка: extensions.gnome.org</p></section>
+<section class="kali-section"><h2>Горячие клавиши</h2><ul><li><code>Super</code> — Activities</li><li><code>Super+Tab</code> — переключение окон</li><li><code>Super+1..9</code> — запуск приложений из дока</li><li><code>Super+←/→</code> — окно влево/вправо</li><li><code>Alt+F2</code> — запуск команд</li></ul></section>
+<section class="kali-section"><h2>Настройка через терминал</h2><pre><code># Тема
+gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Modern-Ice"
+
+# Тёмный режим
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

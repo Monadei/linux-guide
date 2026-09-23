@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пользователи и группы — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Пользователи и группы</h1>
+<p class="lead">useradd, usermod, chown, sudo.</p>
+<section class="kali-section"><h2>Информация</h2><pre><code>whoami
+id
+who
+w
+last
+cat /etc/passwd</code></pre></section>
+<section class="kali-section"><h2>Создание</h2><pre><code>sudo adduser monadei
+sudo useradd -m -s /bin/bash -G sudo,wheel monadei
+sudo passwd monadei</code></pre></section>
+<section class="kali-section"><h2>Изменение</h2><pre><code>sudo usermod -L monadei   # блокировать
+sudo usermod -U monadei   # разблокировать
+sudo usermod -aG docker monadei
+sudo usermod -s /bin/zsh monadei</code></pre></section>
+<section class="kali-section"><h2>Удаление</h2><pre><code>sudo userdel monadei
+sudo userdel -r monadei</code></pre></section>
+<section class="kali-section"><h2>Группы и sudo</h2><pre><code>groups monadei
+sudo groupadd developers
+cat /etc/group
+sudo visudo</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

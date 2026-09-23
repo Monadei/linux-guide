@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гайды по Linux — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Гайды по Linux</h1>
+
+<p class="lead">Всё, что нужно знать про Linux — от установки до тонкой настройки.</p>
+
+<style>
+.guides-cat { margin: 2rem 0; }
+.guides-cat h2 {
+  color: var(--accent);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+}
+.guides-cat h2::before { content: ""; }
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.7rem;
+}
+.guide-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  padding: 0.9rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.guide-card:hover {
+  border-left-color: var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.guide-card .gi { font-size: 1.3rem; flex-shrink: 0; }
+.guide-card .gt { font-size: 0.92rem; font-weight: 600; }
+</style>
+
+<div class="guides-cat">
+<h2>Установка</h2>
+<div class="guides-grid">
+<a class="guide-card" href="install-arch.html"><span class="gi">⚡</span><span class="gt">Установка Arch Linux</span></a>
+<a class="guide-card" href="install-gentoo.html"><span class="gi">🐧</span><span class="gt">Установка Gentoo</span></a>
+<a class="guide-card" href="install-nixos.html"><span class="gi">❄️</span><span class="gt">Установка NixOS</span></a>
+<a class="guide-card" href="install-alpine.html"><span class="gi">🏔️</span><span class="gt">Установка Alpine</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Первые настройки</h2>
+<div class="guides-grid">
+<a class="guide-card" href="first-setup-ubuntu.html"><span class="gi">🟠</span><span class="gt">Ubuntu — после установки</span></a>
+<a class="guide-card" href="first-setup-fedora.html"><span class="gi">🎩</span><span class="gt">Fedora — после установки</span></a>
+<a class="guide-card" href="first-setup-arch.html"><span class="gi">⚡</span><span class="gt">Arch — после установки</span></a>
+<a class="guide-card" href="first-setup-mint.html"><span class="gi">🌿</span><span class="gt">Mint — после установки</span></a>
+<a class="guide-card" href="first-setup-kali.html"><span class="gi">🔐</span><span class="gt">Kali — после установки</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Пакетные менеджеры</h2>
+<div class="guides-grid">
+<a class="guide-card" href="pkg-apt.html"><span class="gi">📦</span><span class="gt">apt — Debian/Ubuntu</span></a>
+<a class="guide-card" href="pkg-dnf.html"><span class="gi">📦</span><span class="gt">dnf — Fedora</span></a>
+<a class="guide-card" href="pkg-pacman.html"><span class="gi">📦</span><span class="gt">pacman — Arch</span></a>
+<a class="guide-card" href="pkg-zypper.html"><span class="gi">📦</span><span class="gt">zypper — openSUSE</span></a>
+<a class="guide-card" href="pkg-xbps.html"><span class="gi">📦</span><span class="gt">xbps — Void</span></a>
+<a class="guide-card" href="pkg-nix.html"><span class="gi">📦</span><span class="gt">nix — NixOS</span></a>
+<a class="guide-card" href="pkg-apk.html"><span class="gi">📦</span><span class="gt">apk — Alpine</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Рабочие столы</h2>
+<div class="guides-grid">
+<a class="guide-card" href="de-gnome.html"><span class="gi">🖥️</span><span class="gt">GNOME</span></a>
+<a class="guide-card" href="de-kde.html"><span class="gi">🎨</span><span class="gt">KDE Plasma</span></a>
+<a class="guide-card" href="de-xfce.html"><span class="gi">🐭</span><span class="gt">Xfce</span></a>
+<a class="guide-card" href="de-hyprland.html"><span class="gi">💎</span><span class="gt">Hyprland</span></a>
+<a class="guide-card" href="de-i3.html"><span class="gi">🔲</span><span class="gt">i3</span></a>
+<a class="guide-card" href="de-sway.html"><span class="gi">🌊</span><span class="gt">Sway</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Ядро и файловые системы</h2>
+<div class="guides-grid">
+<a class="guide-card" href="kernel-deep.html"><span class="gi">⚛️</span><span class="gt">Ядро Linux</span></a>
+<a class="guide-card" href="fs-ext4.html"><span class="gi">💾</span><span class="gt">ext4</span></a>
+<a class="guide-card" href="fs-btrfs.html"><span class="gi">🌳</span><span class="gt">Btrfs</span></a>
+<a class="guide-card" href="fs-xfs.html"><span class="gi">📊</span><span class="gt">XFS</span></a>
+<a class="guide-card" href="fs-zfs.html"><span class="gi">🗄️</span><span class="gt">ZFS</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Загрузка</h2>
+<div class="guides-grid">
+<a class="guide-card" href="boot-bios-uefi.html"><span class="gi">🔧</span><span class="gt">BIOS vs UEFI</span></a>
+<a class="guide-card" href="boot-mbr-gpt.html"><span class="gi">📐</span><span class="gt">MBR vs GPT</span></a>
+<a class="guide-card" href="boot-systemd-boot.html"><span class="gi">🚀</span><span class="gt">systemd-boot</span></a>
+<a class="guide-card" href="boot-refind.html"><span class="gi">🎯</span><span class="gt">rEFInd</span></a>
+<a class="guide-card" href="boot-recovery.html"><span class="gi">🆘</span><span class="gt">Восстановление</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Права и безопасность</h2>
+<div class="guides-grid">
+<a class="guide-card" href="perms-chmod.html"><span class="gi">🔒</span><span class="gt">chmod</span></a>
+<a class="guide-card" href="perms-sudoers.html"><span class="gi">⚡</span><span class="gt">sudo и sudoers</span></a>
+<a class="guide-card" href="perms-selinux.html"><span class="gi">🛡️</span><span class="gt">SELinux</span></a>
+<a class="guide-card" href="perms-apparmor.html"><span class="gi">🛡️</span><span class="gt">AppArmor</span></a>
+<a class="guide-card" href="perms-firewall.html"><span class="gi">🔥</span><span class="gt">Firewall</span></a>
+<a class="guide-card" href="perms-fail2ban.html"><span class="gi">🚫</span><span class="gt">fail2ban</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Скрипты и автоматизация</h2>
+<div class="guides-grid">
+<a class="guide-card" href="scripts-bash.html"><span class="gi">🐚</span><span class="gt">Bash-скрипты</span></a>
+<a class="guide-card" href="scripts-systemd.html"><span class="gi">⚙️</span><span class="gt">systemd units</span></a>
+<a class="guide-card" href="scripts-timers.html"><span class="gi">⏰</span><span class="gt">systemd timers</span></a>
+<a class="guide-card" href="scripts-cron.html"><span class="gi">🕐</span><span class="gt">Cron</span></a>
+<a class="guide-card" href="scripts-autostart.html"><span class="gi">🚀</span><span class="gt">Автозапуск</span></a>
+</div>
+</div>
+
+<div class="guides-cat">
+<h2>Виртуализация</h2>
+<div class="guides-grid">
+<a class="guide-card" href="virt-kvm.html"><span class="gi">⚡</span><span class="gt">KVM + QEMU</span></a>
+<a class="guide-card" href="virt-virtualbox.html"><span class="gi">📦</span><span class="gt">VirtualBox</span></a>
+<a class="guide-card" href="virt-docker.html"><span class="gi">🐳</span><span class="gt">Docker</span></a>
+<a class="guide-card" href="virt-podman.html"><span class="gi">🦭</span><span class="gt">Podman</span></a>
+<a class="guide-card" href="virt-lxc.html"><span class="gi">📦</span><span class="gt">LXC / LXD</span></a>
+<a class="guide-card" href="virt-proxmox.html"><span class="gi">🏢</span><span class="gt">Proxmox VE</span></a>
+</div>
+</div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

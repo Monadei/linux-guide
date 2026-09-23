@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proxmox VE — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Proxmox VE</h1>
+<p class="lead">Серверная виртуализация.</p>
+<section class="kali-section"><h2>Что это</h2><p>Proxmox VE — платформа виртуализации на базе Debian. KVM + LXC. Бесплатная.</p></section>
+<section class="kali-section"><h2>Установка</h2><p>Скачай ISO с proxmox.com. Установи как обычный Linux. Веб-интерфейс на порту 8006.</p></section>
+<section class="kali-section"><h2>Возможности</h2><ul><li>KVM-виртуалки</li><li>LXC-контейнеры</li><li>Кластеризация</li><li>HA (высокая доступность)</li><li>ZFS, Ceph, LVM</li><li>Резервные копии</li></ul></section>
+<section class="kali-section"><h2>Установка на Debian</h2><pre><code>echo "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve.list
+wget https://enterprise.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg
+apt update
+apt install proxmox-ve postfix open-iscsi</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

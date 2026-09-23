@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Установка Alpine — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Установка Alpine</h1>
+<p class="lead">Крошечная система для контейнеров и встраиваемых устройств.</p>
+
+<section class="kali-section">
+<h2>Загрузка и вход</h2>
+<p>Загрузись с ISO Alpine (standard или extended). Войди как <code>root</code> (без пароля).</p>
+</section>
+
+<section class="kali-section">
+<h2>Запуск установщика</h2>
+<pre><code>setup-alpine</code></pre>
+<p>Отвечай на вопросы:</p>
+<ul>
+<li>Раскладка: <code>us ru</code></li>
+<li>Имя хоста: <code>alpine-pc</code></li>
+<li>Интерфейс: <code>eth0</code></li>
+<li>IP: <code>dhcp</code></li>
+<li>Пароль root — задай</li>
+<li>Часовой пояс: <code>Europe/Moscow</code></li>
+<li>Зеркало: выбери ближайшее</li>
+<li>SSH: <code>openssh</code></li>
+<li>Диск: <code>sda</code>, схема <code>sys</code></li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>После установки</h2>
+<pre><code>apk update
+apk upgrade
+
+apk add sudo vim bash bash-completion
+
+adduser monadei
+adduser monadei wheel
+visudo  # раскомментировать %wheel</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Особенности</h2>
+<ul>
+<li>Менеджер пакетов: <code>apk</code></li>
+<li>Init: OpenRC (не systemd)</li>
+<li>Управление сервисами: <code>rc-service nginx start</code></li>
+<li>Автозапуск: <code>rc-update add nginx default</code></li>
+</ul>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шрифты — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Шрифты</h1>
+<p class="lead">Установка и настройка.</p>
+<section class="kali-section"><h2>Установка из репозитория</h2><pre><code>sudo apt install fonts-jetbrains-mono fonts-firacode
+sudo apt install fonts-ibm-plex fonts-hack</code></pre></section>
+<section class="kali-section"><h2>Вручную</h2><pre><code>mkdir -p ~/.local/share/fonts
+cp ~/Downloads/font.ttf ~/.local/share/fonts/
+fc-cache -fv</code></pre></section>
+<section class="kali-section"><h2>Настройка</h2><pre><code>sudo apt install gnome-tweaks
+gnome-tweaks  # Fonts → выбрать шрифт</code></pre></section>
+<section class="kali-section"><h2>Подробнее</h2><p><a href="../fonts.html">Шрифты в Linux</a> — полный гайд.</p></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SELinux — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../choose/index.html">Что выбрать</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>SELinux</h1>
+<p class="lead">Мандатный доступ в Fedora/RHEL.</p>
+<section class="kali-section"><h2>Что это</h2><p>SELinux — мандатный доступ. Даже если программу взломают, она не сможет делать то, что не разрешено.</p></section>
+<section class="kali-section"><h2>Режимы</h2><ul><li><strong>Enforcing</strong> — блокирует</li><li><strong>Permissive</strong> — только логирует</li><li><strong>Disabled</strong> — выключен</li></ul></section>
+<section class="kali-section"><h2>Проверка</h2><pre><code>getenforce
+sestatus</code></pre></section>
+<section class="kali-section"><h2>Смена режима</h2><pre><code>sudo setenforce 0   # Permissive
+sudo setenforce 1   # Enforcing
+# Постоянно — /etc/selinux/config</code></pre></section>
+<section class="kali-section"><h2>Контексты</h2><pre><code>ls -Z /var/www/
+sudo chcon -t httpd_sys_content_t /var/www/html/file.html
+sudo restorecon -Rv /var/www/</code></pre></section>
+<section class="kali-section"><h2>Логи</h2><pre><code>sudo ausearch -m avc -ts recent
+sudo sealert -a /var/log/audit/audit.log</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/glass-clock.js"></script>
+</body>
+</html>
