@@ -68,36 +68,8 @@
       }
     });
 
-    // Выбор шрифта
-    if (header) {
-      var fonts = [
-        { v: 'default', n: 'Шрифт' },
-        { v: 'jetbrains', n: 'JetBrains Mono' },
-        { v: 'fira', n: 'Fira Code' },
-        { v: 'iosevka', n: 'Iosevka' },
-        { v: 'hack', n: 'Hack' },
-        { v: 'cascadia', n: 'Cascadia' },
-        { v: 'ibm', n: 'IBM Plex' }
-      ];
-      var savedFont = localStorage.getItem('font-family') || 'default';
-      if (savedFont !== 'default') document.body.style.fontFamily = getFontStack(savedFont);
-      var fontBox = document.createElement('div');
-      fontBox.className = 'theme-switcher';
-      var fsel = document.createElement('select');
-      fonts.forEach(function(f) {
-        var o = document.createElement('option');
-        o.value = f.v; o.textContent = f.n;
-        if (f.v === savedFont) o.selected = true;
-        fsel.appendChild(o);
-      });
-      fsel.addEventListener('change', function() {
-        var v = this.value;
-        document.body.style.fontFamily = v === 'default' ? '' : getFontStack(v);
-        localStorage.setItem('font-family', v);
-      });
-      fontBox.appendChild(fsel);
-      header.appendChild(fontBox);
-    }
+    // Шрифт: только JetBrains Mono
+    // (переключатель убран)
 
     // Пасхалка sandwich
     var si = document.querySelector('.search-box input');

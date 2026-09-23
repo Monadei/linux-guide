@@ -8,7 +8,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
   font-size: 15px; background: var(--bg); color: var(--text);
   line-height: 1.65; letter-spacing: 0.2px;
   background-attachment: fixed;

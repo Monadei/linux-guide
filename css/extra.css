@@ -33,13 +33,9 @@
 .search-results .empty { padding: 0.8rem; color: var(--muted); font-size: 0.85rem; }
 
 /* ===== Размер шрифта ===== */
-.font-ctrl { display: inline-flex; gap: 0.3rem; margin-left: 0.5rem; }
-.font-ctrl button {
-  background: var(--panel); color: var(--text);
-  border: 1px solid var(--border); padding: 0.35rem 0.6rem;
-  font-family: inherit; font-size: 0.8rem; cursor: pointer; min-width: 32px;
-}
-.font-ctrl button:hover { border-color: var(--accent); color: var(--accent); }
+
+
+
 
 /* ===== Кнопка Наверх ===== */
 .to-top {
@@ -147,7 +143,7 @@ table.data td a { color: var(--accent); }
 @media (max-width: 900px) {
   .search-box input { width: 110px; }
   .search-box input:focus { width: 160px; }
-  .font-ctrl { display: none; }
+  
 }
 
 /* ===== About ===== */
@@ -877,9 +873,7 @@ h1 img.page-icon {
 
   /* Скрыть кнопки A- / A+ */
   .font-ctrl,
-  body .font-ctrl {
-    display: none !important;
-  }
+  body 
 
   /* Скрыть кнопку контраста ◐ */
   .header-inner > button:not(.menu-toggle),
