@@ -1623,8 +1623,9 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
   }
 }
 
+
 /* ============================================
-   BOOT SCREEN — анимация при заходе
+   BOOT SCREEN — пиксельный Tux
    ============================================ */
 .boot-screen {
   position: fixed;
@@ -1633,69 +1634,73 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
   width: 100%;
   height: 100%;
   background: #000;
-  color: #ffb000;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 16px;
-  line-height: 1.6;
   z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1;
-  transition: opacity 0.7s ease-out;
+  transition: opacity 0.4s ease-out;
 }
 
 .boot-screen.boot-fade {
   opacity: 0;
 }
 
-.boot-content {
-  width: 90%;
-  max-width: 700px;
-  padding: 2rem;
+.boot-screen.boot-flash::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #ffb000;
+  opacity: 0;
+  animation: boot-flash-anim 0.3s ease-out;
+  pointer-events: none;
 }
 
-.boot-output {
-  margin: 0;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-family: inherit;
-  font-size: inherit;
+@keyframes boot-flash-anim {
+  0% { opacity: 0; }
+  30% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+.boot-tux-wrap {
+  text-align: center;
+}
+
+.boot-tux {
+  display: grid;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+  width: min(240px, 55vw);
+  height: min(240px, 55vw);
+  margin: 0 auto;
+  filter: drop-shadow(0 0 15px rgba(255, 176, 0, 0.5));
+}
+
+.boot-px {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.boot-text {
   color: #ffb000;
-  text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
-}
-
-.boot-output > div {
-  margin: 0;
-  padding: 0;
-  min-height: 1.6em;
-}
-
-.boot-accent {
-  color: #fff;
-  text-shadow: 0 0 15px #ffb000;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: clamp(1.3rem, 5vw, 2.2rem);
   font-weight: 700;
-  margin-top: 0.5rem !important;
+  letter-spacing: 0.08em;
+  margin-top: 1.5rem;
+  text-shadow: 0 0 20px rgba(255, 176, 0, 0.7);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
-.boot-cursor {
-  color: #ffb000;
-  animation: boot-blink 0.8s step-end infinite;
-  font-family: inherit;
-  text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+.boot-text-show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@keyframes boot-blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-/* Мобильный — меньше шрифт */
 @media (max-width: 768px) {
-  .boot-screen {
-    font-size: 13px;
-  }
-  .boot-content {
-    padding: 1rem;
+  .boot-text {
+    margin-top: 1rem;
   }
 }
