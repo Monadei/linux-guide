@@ -626,6 +626,91 @@
 </div>
 
 <!-- ПАНЕЛЬ 4: РЕКОМЕНДАЦИИ -->
+<style>
+.video-section {
+  margin: 2rem 0 1rem;
+  padding: 1.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+}
+.video-section h2 {
+  margin-top: 0;
+  color: var(--accent);
+  border: none;
+  padding: 0;
+  font-size: 1.2rem;
+}
+.video-section h2::before { content: ""; }
+.video-section .video-intro {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 1.2rem;
+}
+.video-cat {
+  margin: 1.5rem 0 0.5rem;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 700;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px dashed var(--border);
+}
+.video-cat::before { content: "» "; color: var(--accent-dim); }
+.video-card {
+  display: flex;
+  gap: 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  margin: 0.6rem 0;
+  transition: 0.2s;
+  text-decoration: none;
+  color: var(--text);
+}
+.video-card:hover {
+  border-left: 3px solid var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.video-card .vc-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.video-card .vc-info {
+  flex: 1;
+  min-width: 0;
+}
+.video-card .vc-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--accent);
+  margin-bottom: 0.2rem;
+  line-height: 1.35;
+}
+.video-card .vc-desc {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+.video-card .vc-source {
+  display: inline-block;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 0.68rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  margin-top: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+@media (max-width: 768px) {
+  .video-card { flex-direction: column; gap: 0.4rem; padding: 0.8rem; }
+  .video-card .vc-icon { font-size: 1.3rem; }
+}
+</style>
 <div class="about-panel" data-panel="recommendations">
 <div class="about-block">
 <h2>5 дистрибутивов, которые советую</h2>
@@ -636,6 +721,114 @@
 <h3>Arch Linux</h3>
 <p class="rec-why">Для тех, кто хочет понять, как всё устроено. Даже если не останешься — узнаешь Linux в разы лучше после нескольких установок. Arch Wiki — лучший учебник в мире Linux.</p>
 <a href="distros/arch.html">Подробнее →</a>
+
+<div class="video-section">
+<h2>📺 Видео-гайды по дистрибутивам</h2>
+<p class="video-intro">Собрал видео, которые сам смотрел или которые советуют. Все на русском. Rutube — работает без VPN.</p>
+
+<div class="video-cat">Arch Linux</div>
+
+<a class="video-card" href="https://rutube.ru/video/593be3147fea0dd240bea75a7e58a09f/" target="_blank" rel="noopener">
+<span class="vc-icon">⚡</span>
+<span class="vc-info">
+<div class="vc-title">Самая простая установка Arch Linux и KDE Plasma (archinstall, rufus)</div>
+<div class="vc-desc">Пошагово: скачивание ISO, запись через Rufus, разметка диска, archinstall, настройка KDE, pacman, yay, AUR.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/87de0cc7dcfa322946c0a9563a877e38/" target="_blank" rel="noopener">
+<span class="vc-icon">⚡</span>
+<span class="vc-info">
+<div class="vc-title">How to Install Arch Linux (Guided Installer) from Start to Finish + Basic Configurations [2025]</div>
+<div class="vc-desc">Подробный разбор archinstall с объяснением каждой опции: шифрование, загрузчик, подкачка, профили, ядро.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">Fedora</div>
+
+<a class="video-card" href="https://rutube.ru/video/1a21b7f35e4ddb907b39dda9c2f72b11/" target="_blank" rel="noopener">
+<span class="vc-icon">🎩</span>
+<span class="vc-info">
+<div class="vc-title">FEDORA LINUX: Большой разбор и установка</div>
+<div class="vc-desc">История, обзор, установка, интерфейс GNOME, расширения.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/af876297fcc28c86ef27506a4e0355ec/" target="_blank" rel="noopener">
+<span class="vc-icon">🎩</span>
+<span class="vc-info">
+<div class="vc-title">Install Fedora 40 with Btrfs, Snapper, and Grub-Btrfs</div>
+<div class="vc-desc">Установка Fedora с Btrfs и снапшотами. Для откатов системы после сломанных обновлений.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">Ubuntu</div>
+
+<a class="video-card" href="https://rutube.ru/video/302eb263e263b9b030389fb75964ee6e/" target="_blank" rel="noopener">
+<span class="vc-icon">🟠</span>
+<span class="vc-info">
+<div class="vc-title">Установка Ubuntu Server 20.04 LTS + настройка программного RAID1 в режиме UEFI</div>
+<div class="vc-desc">Для серверного варианта. Настройка BIOS, разметка, RAID1, монтирование.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">NixOS</div>
+
+<a class="video-card" href="https://rutube.ru/video/8c80fa484d290f32ebb4b567c3a314ae/" target="_blank" rel="noopener">
+<span class="vc-icon">❄️</span>
+<span class="vc-info">
+<div class="vc-title">Установите NixOS. Базовое РУКОВОДСТВО</div>
+<div class="vc-desc">Установка NixOS с Qtile. Объяснение декларативной конфигурации, атомарных обновлений и откатов.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/53289ff8c179cf7cb682efcfa60e2da7/" target="_blank" rel="noopener">
+<span class="vc-icon">❄️</span>
+<span class="vc-info">
+<div class="vc-title">NixOS - Полный Разбор: Nixpkgs, Flakes, home-manager</div>
+<div class="vc-desc">Глубокий разбор: flakes, home-manager, язык Nix. Для тех, кто хочет понять NixOS изнутри.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">Debian</div>
+
+<a class="video-card" href="https://rutube.ru/video/292ed5faea918c0d5ca0e082391cab4b/" target="_blank" rel="noopener">
+<span class="vc-icon">🌀</span>
+<span class="vc-info">
+<div class="vc-title">Установка Debian 12</div>
+<div class="vc-desc">Пошагово: скачивание, запись, настройки BIOS, установка, выбор окружения, первичные настройки.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/b0c1d7be58dd0d098f838f5be4618626/" target="_blank" rel="noopener">
+<span class="vc-icon">🌀</span>
+<span class="vc-info">
+<div class="vc-title">Установка Debian 12.06 графическая/консольная</div>
+<div class="vc-desc">Два способа установки: графический и консольный.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div style="margin-top: 1.5rem; padding: 1rem; background: var(--panel-2); border-left: 3px solid var(--accent-dim); border-radius: 0 4px 4px 0;">
+<strong style="color: var(--accent);">🔍 Ищи больше на YouTube:</strong>
+<ul style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.88rem;">
+<li><a href="https://www.youtube.com/results?search_query=установка+arch+linux+на+русском" target="_blank" rel="noopener">Arch Linux — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+fedora+linux+на+русском" target="_blank" rel="noopener">Fedora — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+ubuntu+на+русском" target="_blank" rel="noopener">Ubuntu — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+nixos+на+русском" target="_blank" rel="noopener">NixOS — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+debian+на+русском" target="_blank" rel="noopener">Debian — установка на русском</a></li>
+</ul>
+</div>
+</div>
+
 </div>
 <div class="rec-card">
 <span class="rec-num">2</span>
