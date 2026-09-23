@@ -1,6 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
 <rect width="1200" height="630" fill="#0a0a0a"/>
-<text x="600" y="240" font-family="monospace" font-size="60" fill="#ffb000" text-anchor="middle">&gt;_ Linux Guide</text>
-<text x="600" y="320" font-family="monospace" font-size="36" fill="#d6d6d6" text-anchor="middle">Руководство по дистрибутивам Linux</text>
-<text x="600" y="400" font-family="monospace" font-size="24" fill="#7a7a7a" text-anchor="middle">130+ дистрибутивов · 30 тем · Made by Monadei</text>
+<defs>
+  <radialGradient id="glow" cx="50%" cy="50%">
+    <stop offset="0%" stop-color="#ffb000" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#ffb000" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<circle cx="600" cy="315" r="400" fill="url(#glow)"/>
+<text x="600" y="240" font-family="JetBrains Mono, monospace" font-size="80" font-weight="700" fill="#ffb000" text-anchor="middle">&gt;_ Monade OS</text>
+<text x="600" y="320" font-family="JetBrains Mono, monospace" font-size="32" fill="#d6d6d6" text-anchor="middle">Руководство по дистрибутивам Linux</text>
+<text x="600" y="400" font-family="JetBrains Mono, monospace" font-size="22" fill="#7a7a7a" text-anchor="middle">200+ дистрибутивов · 30 тем · Made by Monadei</text>
+<line x1="350" y1="450" x2="850" y2="450" stroke="#ffb000" stroke-opacity="0.3" stroke-width="1"/>
+<text x="600" y="500" font-family="JetBrains Mono, monospace" font-size="20" fill="#ffb000" text-anchor="middle">monadei.github.io/linux-guide</text>
 </svg>

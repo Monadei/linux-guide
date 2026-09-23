@@ -1,13 +1,18 @@
 {
-  "name": "Linux Guide",
-  "short_name": "Linux Guide",
-  "description": "Руководство по дистрибутивам Linux",
+  "name": "Monade OS",
+  "short_name": "Monade OS",
+  "description": "Руководство по дистрибутивам Linux от Monadei",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#ffb000",
   "lang": "ru",
   "icons": [
-    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
   ]
 }
