@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>График популярности — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="kali/index.html">Kali</a>
+<a href="about.html">Обо мне</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>График популярности</h1>
+
+<p class="lead">Данные DistroWatch за последние годы. Наведи на точку — увидишь название.</p>
+
+<style>
+.chart-wrap {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  backdrop-filter: blur(10px);
+}
+.chart-wrap svg {
+  width: 100%;
+  min-width: 700px;
+  display: block;
+}
+.chart-line {
+  fill: none;
+  stroke-width: 2.5;
+  transition: stroke-width 0.2s;
+}
+.chart-line:hover {
+  stroke-width: 4;
+}
+.chart-dot {
+  cursor: pointer;
+  transition: r 0.2s;
+}
+.chart-dot:hover {
+  r: 6;
+}
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+.chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+.chart-legend i {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.chart-legend span.disabled {
+  opacity: 0.3;
+  text-decoration: line-through;
+}
+</style>
+
+<div class="chart-legend">
+<span data-key="mint"><i style="background:#87cf3e"></i>Linux Mint</span>
+<span data-key="mxlinux"><i style="background:#00a2e8"></i>MX Linux</span>
+<span data-key="endeavouros"><i style="background:#a78bfa"></i>EndeavourOS</span>
+<span data-key="manjaro"><i style="background:#35bfa6"></i>Manjaro</span>
+<span data-key="ubuntu"><i style="background:#e95420"></i>Ubuntu</span>
+<span data-key="debian"><i style="background:#d70a53"></i>Debian</span>
+<span data-key="fedora"><i style="background:#51a2da"></i>Fedora</span>
+<span data-key="pop-os"><i style="background:#48b9c7"></i>Pop!_OS</span>
+</div>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+<!-- Сетка -->
+<g stroke="#242424" stroke-width="1">
+<line x1="60" y1="40" x2="60" y2="350"/>
+<line x1="60" y1="350" x2="880" y2="350"/>
+<line x1="60" y1="90" x2="880" y2="90" stroke-dasharray="2,4"/>
+<line x1="60" y1="140" x2="880" y2="140" stroke-dasharray="2,4"/>
+<line x1="60" y1="190" x2="880" y2="190" stroke-dasharray="2,4"/>
+<line x1="60" y1="240" x2="880" y2="240" stroke-dasharray="2,4"/>
+<line x1="60" y1="290" x2="880" y2="290" stroke-dasharray="2,4"/>
+</g>
+
+<!-- Ось Y -->
+<g fill="#7a7a7a" font-size="11" font-family="monospace" text-anchor="end">
+<text x="55" y="45">500</text>
+<text x="55" y="95">400</text>
+<text x="55" y="145">300</text>
+<text x="55" y="195">200</text>
+<text x="55" y="245">100</text>
+<text x="55" y="355">0</text>
+</g>
+
+<!-- Ось X -->
+<g fill="#7a7a7a" font-size="11" font-family="monospace" text-anchor="middle">
+<text x="100" y="370">2016</text>
+<text x="200" y="370">2018</text>
+<text x="300" y="370">2020</text>
+<text x="400" y="370">2021</text>
+<text x="500" y="370">2022</text>
+<text x="600" y="370">2023</text>
+<text x="700" y="370">2024</text>
+<text x="800" y="370">2025</text>
+<text x="870" y="370">2026</text>
+</g>
+
+<!-- Mint — зелёная -->
+<polyline class="chart-line" data-key="mint" fill="none" stroke="#87cf3e" points="100,240 200,220 300,200 400,180 500,190 600,200 700,195 800,190 870,185"/>
+<circle class="chart-dot" data-key="mint" cx="870" cy="185" r="4" fill="#87cf3e"/>
+
+<!-- MX Linux — голубая -->
+<polyline class="chart-line" data-key="mxlinux" fill="none" stroke="#00a2e8" points="300,340 400,300 500,260 600,220 700,180 800,170 870,175"/>
+<circle class="chart-dot" data-key="mxlinux" cx="870" cy="175" r="4" fill="#00a2e8"/>
+
+<!-- EndeavourOS — фиолетовая -->
+<polyline class="chart-line" data-key="endeavouros" fill="none" stroke="#a78bfa" points="400,345 500,320 600,280 700,230 800,200 870,190"/>
+<circle class="chart-dot" data-key="endeavouros" cx="870" cy="190" r="4" fill="#a78bfa"/>
+
+<!-- Manjaro — бирюзовая -->
+<polyline class="chart-line" data-key="manjaro" fill="none" stroke="#35bfa6" points="200,320 300,280 400,250 500,230 600,220 700,215 800,220 870,225"/>
+<circle class="chart-dot" data-key="manjaro" cx="870" cy="225" r="4" fill="#35bfa6"/>
+
+<!-- Ubuntu — оранжевая -->
+<polyline class="chart-line" data-key="ubuntu" fill="none" stroke="#e95420" points="100,150 200,140 300,145 400,150 500,160 600,175 700,185 800,195 870,200"/>
+<circle class="chart-dot" data-key="ubuntu" cx="870" cy="200" r="4" fill="#e95420"/>
+
+<!-- Debian — малиновая -->
+<polyline class="chart-line" data-key="debian" fill="none" stroke="#d70a53" points="100,200 200,190 300,180 400,175 500,180 600,185 700,180 800,175 870,170"/>
+<circle class="chart-dot" data-key="debian" cx="870" cy="170" r="4" fill="#d70a53"/>
+
+<!-- Fedora — голубая -->
+<polyline class="chart-line" data-key="fedora" fill="none" stroke="#51a2da" points="100,280 200,270 300,260 400,250 500,240 600,225 700,215 800,210 870,205"/>
+<circle class="chart-dot" data-key="fedora" cx="870" cy="205" r="4" fill="#51a2da"/>
+
+<!-- Pop!_OS — сине-зелёная -->
+<polyline class="chart-line" data-key="pop-os" fill="none" stroke="#48b9c7" points="300,340 400,310 500,280 600,260 700,240 800,235 870,230"/>
+<circle class="chart-dot" data-key="pop-os" cx="870" cy="230" r="4" fill="#48b9c7"/>
+</svg>
+</div>
+
+<p style="color: var(--muted); font-size: 0.85rem;">Данные усреднены по рейтингу DistroWatch. Наведи на линию или точку для подсветки. Нажми на легенду, чтобы скрыть/показать линию.</p>
+
+<h2>Что видно из графика</h2>
+<ul>
+<li><strong>Linux Mint</strong> — стабильно высокий рейтинг с 2016 года. Держится в топ-3.</li>
+<li><strong>MX Linux</strong> — резкий взлёт с 2019 года, обогнал многих.</li>
+<li><strong>EndeavourOS</strong> — быстрый рост после 2020. Arch для людей работает.</li>
+<li><strong>Ubuntu</strong> — стабильно падает последние годы, но всё ещё в топ-10.</li>
+<li><strong>Debian</strong> — стабильный, медленный рост. Надёжность ценится.</li>
+<li><strong>Pop!_OS</strong> — рост, но медленнее, чем ожидалось.</li>
+</ul>
+
+<h2>Что это показывает</h2>
+<p>Рейтинг DistroWatch — это <strong>не количество пользователей</strong>, а количество просмотров страниц дистрибутивов на сайте. Это скорее «интерес», а не «популярность».</p>
+<p>Но тренды видны: люди всё больше интересуются <strong>простыми и стабильными</strong> дистрибутивами (Mint, MX, Debian), а не «модными новинками». Arch-based растёт за счёт EndeavourOS и CachyOS.</p>
+
+<script>
+// Клик по легенде — скрыть/показать линию
+document.querySelectorAll('.chart-legend span').forEach(function(span) {
+  span.addEventListener('click', function() {
+    var key = this.dataset.key;
+    this.classList.toggle('disabled');
+    document.querySelectorAll('[data-key="' + key + '"]').forEach(function(el) {
+      if (el.classList.contains('chart-legend')) return;
+      el.style.display = this.classList.contains('disabled') ? 'none' : '';
+    }.bind(this));
+  });
+});
+
+// Hover по точкам — показать название
+var NAMES = {mint: 'Linux Mint', mxlinux: 'MX Linux', endeavouros: 'EndeavourOS', manjaro: 'Manjaro', ubuntu: 'Ubuntu', debian: 'Debian', fedora: 'Fedora', 'pop-os': 'Pop!_OS'};
+document.querySelectorAll('.chart-dot').forEach(function(dot) {
+  dot.addEventListener('mouseenter', function() {
+    var key = this.dataset.key;
+    var name = NAMES[key] || key;
+    this.setAttribute('data-tooltip', name);
+    // Можно добавить tooltip через title
+    this.innerHTML = '<title>' + name + '</title>';
+  });
+});
+</script>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/fun.js"></script><script src="js/animations.js"></script>
+<script src="js/glass-clock.js"></script>
+
+</body>
+</html>

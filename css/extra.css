@@ -340,7 +340,7 @@ table.data td a { color: var(--accent); }
 /* ===== Печать ===== */
 @media print {
   .site-header, .site-footer, .to-top, .read-progress, .theme-switcher,
-  .font-ctrl, .search-box, .page-toc, .tux, .mini-term, .breadcrumbs { display:none !important; }
+  
   body { background:#fff; color:#000; font-size:11pt; }
   a { color:#000; text-decoration:underline; }
   .card, .de-card { border:1px solid #000; }
@@ -413,7 +413,7 @@ body.theme-anotterkiosk    { --accent: #5e81ac; --accent-dim: #3e5a7a; }
   }
   .nav.open { display: flex; }
   .nav a { padding: 0.4rem 0; font-size: 1rem; }
-  .theme-switcher, .font-ctrl, .search-box { margin-left: 0 !important; margin-top: 0.5rem; }
+  .theme-switcher, 
   .header-inner { flex-wrap: wrap; }
 }
 
@@ -480,7 +480,7 @@ body.contrast-mode a { text-decoration: underline; }
   }
   .nav.open { display: flex; }
   .nav a { padding: 0.4rem 0; font-size: 1rem; }
-  .theme-switcher, .font-ctrl, .search-box { margin-left: 0 !important; margin-top: 0.5rem; }
+  .theme-switcher, 
   .header-inner { flex-wrap: wrap; }
 }
 
@@ -547,7 +547,7 @@ body.contrast-mode a { text-decoration: underline; }
   }
   .nav.open { display: flex; }
   .nav a { padding: 0.4rem 0; font-size: 1rem; }
-  .theme-switcher, .font-ctrl, .search-box { margin-left: 0 !important; margin-top: 0.5rem; }
+  .theme-switcher, 
   .header-inner { flex-wrap: wrap; }
 }
 
@@ -872,14 +872,7 @@ h1 img.page-icon {
   }
 
   /* Скрыть кнопки A- / A+ */
-  .font-ctrl,
-  body 
-
-  /* Скрыть кнопку контраста ◐ */
-  .header-inner > button:not(.menu-toggle),
-  body .header-inner > button:nth-of-type(n+2) {
-    display: none !important;
-  }
+  
 
   /* Оставить только гамбургер */
   .menu-toggle {

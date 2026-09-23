@@ -1,0 +1,204 @@
+/* ============================================
+   LIQUID GLASS — стеклянные элементы
+   Все цвета через var(--accent)
+   ============================================ */
+
+/* ===== Шапка ===== */
+.site-header {
+  background: color-mix(in srgb, var(--bg) 55%, transparent) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 15%, transparent) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ===== Карточки ===== */
+.card,
+.distro-tile,
+.learn-card,
+.sys-card,
+.rec-card,
+.kali-section,
+.about-section,
+.hist-section,
+.person,
+.impact,
+.hist-stat,
+.test-q,
+.test-result {
+  background: color-mix(in srgb, var(--panel) 45%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ===== Кнопки — используют цвет темы ===== */
+.btn {
+  background: color-mix(in srgb, var(--accent) 10%, transparent) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent) !important;
+  color: var(--accent) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+.btn:hover {
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+  border-style: solid !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent) !important;
+}
+.btn::before,
+.btn::after {
+  color: var(--accent-dim) !important;
+}
+.btn:hover::before,
+.btn:hover::after {
+  color: var(--bg) !important;
+}
+
+/* ===== Переключатели и поиск ===== */
+.theme-switcher select,
+.search-box input {
+  background: color-mix(in srgb, var(--panel) 50%, transparent) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.theme-switcher select:hover,
+.search-box input:focus {
+  background: color-mix(in srgb, var(--panel) 70%, transparent) !important;
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent) !important;
+}
+
+/* ===== Футер ===== */
+.site-footer {
+  background: color-mix(in srgb, var(--bg) 40%, transparent) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ===== Мини-терминал ===== */
+.mini-term {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent) !important;
+}
+
+/* ===== Оглавление ===== */
+.page-toc {
+  background: color-mix(in srgb, var(--panel) 55%, transparent) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ===== Кнопка наверх ===== */
+.to-top {
+  background: color-mix(in srgb, var(--panel) 60%, transparent) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ===== Блик на карточках при hover ===== */
+.card,
+.distro-tile,
+.learn-card,
+.sys-card {
+  position: relative;
+  overflow: hidden;
+}
+.card::before,
+.distro-tile::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.card:hover::before,
+.distro-tile:hover::before {
+  opacity: 1;
+}
+
+/* ===== Часы ===== */
+.glass-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--panel) 50%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  margin-left: 0.5rem;
+  user-select: none;
+  white-space: nowrap;
+}
+.glass-clock::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: clock-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--accent);
+}
+@keyframes clock-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ===== Мобильный ===== */
+@media (max-width: 768px) {
+  .site-header,
+  .card,
+  .distro-tile,
+  .btn {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  
+  .glass-clock {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.3rem;
+  }
+  .glass-clock::before {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* ===== Fallback для старых браузеров ===== */
+@supports not (backdrop-filter: blur(10px)) {
+  .site-header,
+  .card,
+  .distro-tile,
+  .btn,
+  .glass-clock {
+    background: color-mix(in srgb, var(--panel) 90%, transparent) !important;
+  }
+}

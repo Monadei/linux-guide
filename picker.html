@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подбор дистрибутива от Monadei — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a><a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a><a href="kali/index.html">Kali</a>
+<a href="about.html">Обо мне</a><a href="faq.html">FAQ</a><a href="sitemap.html">Карта сайта</a>
+</nav></div></header>
+<main class="container page">
+<h1>Подбор дистрибутива от Monadei</h1>
+
+<p class="lead">Отвечай на вопросы — я подберу тебе дистрибутив. Как я делал, когда выбирал себе.</p>
+
+<style>
+.picker-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(12px);
+}
+.picker-question {
+  margin: 1.5rem 0;
+}
+.picker-question h3 {
+  color: var(--accent);
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+}
+.picker-question h3::before {
+  content: "> ";
+  color: var(--accent-dim);
+}
+.picker-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+.picker-option {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+  text-align: left;
+}
+.picker-option:hover {
+  border-color: var(--accent);
+  background: var(--panel-2);
+}
+.picker-option.selected {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.picker-result {
+  background: var(--panel-2);
+  border: 1px solid var(--accent);
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(12px);
+}
+.picker-result h2 {
+  color: var(--accent);
+  margin-top: 0;
+  border: none;
+}
+.picker-result h2::before { content: ""; }
+.picker-personal {
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+}
+.picker-personal::before {
+  content: "Мнение Monadei: ";
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.picker-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+</style>
+
+<div class="picker-box">
+
+<div class="picker-question" data-q="1">
+<h3>1. Какой у тебя опыт с Linux?</h3>
+<div class="picker-options">
+<button class="picker-option" data-v="new">Первый раз слышу</button>
+<button class="picker-option" data-v="some">Пробовал пару раз</button>
+<button class="picker-option" data-v="exp">Уверенный пользователь</button>
+<button class="picker-option" data-v="pro">Профи, хочу полный контроль</button>
+</div>
+</div>
+
+<div class="picker-question" data-q="2">
+<h3>2. Для чего нужен Linux?</h3>
+<div class="picker-options">
+<button class="picker-option" data-v="desktop">Домашний десктоп</button>
+<button class="picker-option" data-v="games">Игры</button>
+<button class="picker-option" data-v="dev">Разработка</button>
+<button class="picker-option" data-v="security">Кибербезопасность</button>
+<button class="picker-option" data-v="server">Сервер</button>
+<button class="picker-option" data-v="old">Оживить старое железо</button>
+</div>
+</div>
+
+<div class="picker-question" data-q="3">
+<h3>3. Какой интерфейс ближе?</h3>
+<div class="picker-options">
+<button class="picker-option" data-v="windows">Как в Windows</button>
+<button class="picker-option" data-v="mac">Как в macOS</button>
+<button class="picker-option" data-v="classic">Классика (панель + меню)</button>
+<button class="picker-option" data-v="tiling">Тайловый (i3, Hyprland)</button>
+<button class="picker-option" data-v="any">Без разницы</button>
+</div>
+</div>
+
+<div class="picker-question" data-q="4">
+<h3>4. Что важнее?</h3>
+<div class="picker-options">
+<button class="picker-option" data-v="stability">Стабильность</button>
+<button class="picker-option" data-v="fresh">Свежие пакеты</button>
+<button class="picker-option" data-v="control">Контроль</button>
+<button class="picker-option" data-v="easy">Простота</button>
+</div>
+</div>
+
+<div class="picker-question" data-q="5">
+<h3>5. Какое железо?</h3>
+<div class="picker-options">
+<button class="picker-option" data-v="new">Новое, мощное</button>
+<button class="picker-option" data-v="mid">Среднее (3-7 лет)</button>
+<button class="picker-option" data-v="old">Старое (7-12 лет)</button>
+<button class="picker-option" data-v="ancient">Древнее (12+ лет)</button>
+</div>
+</div>
+
+</div>
+
+<div id="picker-result"></div>
+
+<script>
+var ANSWERS = {};
+var PICKER_DATA = {
+  // Ключ: имя | Значения: [семейство, DE, релизы, сложность, для кого, slug]
+  'ubuntu':    { name: 'Ubuntu',          tags: 'новичок популярное десктоп', desc: 'Самый узнаваемый Linux. Идеален для первого знакомства.', personal: 'Я сам сижу на Ubuntu 26.04 на основном ПК. Всё работает из коробки, драйверы NVIDIA ставятся в один клик. Минус — Snap-пакеты и телеметрия, но это отключается.' },
+  'mint':      { name: 'Linux Mint',      tags: 'новичок десктоп windows мигрант', desc: 'Уютный десктоп как Windows 7. Cinnamon, всё готово из коробки.', personal: 'Ставил Mint на старый MacBook 2014 — работал отлично. Cinnamon — идеален для тех, кто мигрирует с Windows. Тяжеловат для очень старого железа, но для среднего — топ.' },
+  'pop-os':    { name: 'Pop!_OS',         tags: 'десктоп разработка nvidia', desc: 'Ubuntu от System76. Отличная поддержка NVIDIA, тайлирование из коробки.', personal: 'Если у тебя ноутбук с NVIDIA — бери Pop!_OS. Драйверы уже в ISO, не придётся возиться. COSMIC сейчас в разработке, но GNOME-версия стабильна.' },
+  'fedora':    { name: 'Fedora',          tags: 'разработка свежее десктоп', desc: 'Полигон новых технологий Red Hat. Свежий GNOME, Wayland по умолчанию.', personal: 'Мой первый Linux на MacBook. Всё работало из коробки, кроме Wi-Fi Broadcom — пришлось ставить драйвер. Свежее всех: Wayland, PipeWire, rpm-ostree раньше других.' },
+  'arch':      { name: 'Arch Linux',      tags: 'профи контроль свежее', desc: 'Rolling release, минимализм, легендарная вики. Собираешь всё сам.', personal: 'Не для новичков. Но если хочешь понять Linux изнутри — Arch даст больше, чем любой курс. Arch Wiki — лучший учебник в мире Linux.' },
+  'kali':      { name: 'Kali Linux',      tags: 'безопасность пентест', desc: 'Инструменты пентеста. От Offensive Security.', personal: 'Я учусь на ИБ и пользуюсь Kali каждый день. Для новичка в безопасности — идеальный старт. Ставь в виртуалке, не как основную систему.' },
+  'blackarch': { name: 'BlackArch',       tags: 'безопасность пентест arch профи', desc: 'Arch + 3000+ инструментов пентеста. Для тех, кто уже на Arch.', personal: 'Мой второй дистрибутив для безопасности. Kali + BlackArch = закрывают всё. Но это для тех, кто не боится Arch.' },
+  'parrot':    { name: 'Parrot OS',       tags: 'безопасность анонимность', desc: 'Безопасность + анонимность. Альтернатива Kali с фокусом на приватность.', personal: 'Если Kali кажется перегруженным — попробуй Parrot. Легче, эстетичнее, есть режим «домашний десктоп». Но инструментов меньше.' },
+  'debian':    { name: 'Debian',          tags: 'стабильность сервер десктоп', desc: 'Отец-основатель. Один раз поставил — работает годами.', personal: 'Если тебе нужна система, которая не подведёт — Debian. Ставлю его родителям и на серверы. Пакеты старые, но стабильность — эталон.' },
+  'lmde':      { name: 'LMDE',            tags: 'стабильность десктоп mint', desc: 'Linux Mint на базе Debian. Без Ubuntu.', personal: 'Для тех, кто любит Mint, но не хочет зависеть от Canonical. Тот же Cinnamon, та же простота — но Debian под капотом.' },
+  'zorin':     { name: 'Zorin OS',        tags: 'новичок windows мигрант', desc: 'Максимально дружелюбен к мигрантам с Windows. Знакомый интерфейс.', personal: 'Если родители или друзья хотят Linux, но боятся — Zorin. Интерфейс как Windows 11, но Linux внутри. Переключение одним кликом.' },
+  'elementary':{ name: 'elementary OS',   tags: 'дизайн mac десктоп', desc: 'Дизайнерский десктоп в стиле macOS. Красиво из коробки.', personal: 'Самый красивый Linux, что я видел. Если ты дизайнер или любишь macOS — бери. Минус — медленнее развивается, чем Ubuntu.' },
+  'opensuse':  { name: 'openSUSE',        tags: 'стабильность сервер десктоп свежее', desc: 'Leap (стабильно) или Tumbleweed (rolling). Мощный YaST.', personal: 'YaST — уникальный инструмент, нигде такого нет. Tumbleweed — один из лучших rolling-релизов. Немецкое качество.' },
+  'gentoo':    { name: 'Gentoo',          tags: 'профи контроль сложно', desc: 'Сборка из исходников. Максимальный контроль, максимальная оптимизация.', personal: 'Хардкор в чистом виде. Установка занимает часы, иногда дни. Но ты узнаешь про Linux больше, чем за год на Ubuntu.' },
+  'void':      { name: 'Void Linux',      tags: 'профи контроль минимализм', desc: 'Без systemd. Собственный XBPS и runit. Минимализм.', personal: 'Для тех, кто не любит systemd. Работает быстро, минималистично. Но экосистема меньше, чем у Arch — иногда придётся собирать из исходников.' },
+  'nixos':     { name: 'NixOS',           tags: 'профи devops декларативный', desc: 'Вся система в одном конфиге. Атомарные обновления, откаты.', personal: 'Если ты разработчик и устал от «настраивал полгода назад, забыл как» — NixOS. Конфиг в git, клонировал на новом ПК — та же система. Кривая обучения крутая.' },
+  'alpine':    { name: 'Alpine Linux',    tags: 'сервер контейнеры минимализм', desc: 'Крошечный, для контейнеров и встраиваемых систем. 5-10 МБ.', personal: 'Если делаешь Docker — Alpine везде. Ставил на роутер, работает. Но не для десктопа.' },
+  'cachyos':   { name: 'CachyOS',         tags: 'игры свежее arch производительность', desc: 'Arch с оптимизацией под новое железо. Для игр и скорости.', personal: 'Если у тебя свежий Ryzen и NVIDIA — CachyOS даст +10-15% производительности в играх. Пакеты собраны с флагами v3/v4.' },
+  'nobara':    { name: 'Nobara',          tags: 'игры fedora геймер', desc: 'Fedora для геймеров от создателя Proton-GE.', personal: 'Если хочешь Fedora + игры из коробки — Nobara. Proton, драйверы, кодеки, OBS, MangoHud — всё готово. От создателя Proton-GE, шарит.' },
+  'bazzite':   { name: 'Bazzite',         tags: 'игры иммутабельный fedora', desc: 'Игровая Fedora Atomic. Steam Deck-подобный режим на ПК.', personal: 'Хочешь превратить ПК в консоль? Bazzite. Иммутабельный, атомарные обновления, Steam Gaming Mode. Для Steam Deck-подобного опыта.' },
+  'steamos':   { name: 'SteamOS',         tags: 'игры steam deck arch', desc: 'Игровая ОС Valve. Сердце Steam Deck.', personal: 'Если у тебя Steam Deck — это уже стоит. На обычный ПК ставится, но с нюансами. Для гейминга — топ.' },
+  'garuda':    { name: 'Garuda Linux',    tags: 'игры дизайн arch брутальный', desc: 'Arch с брутальным дизайном. Драконы, неон, геймерский стиль.', personal: 'Любишь яркое и необычное? Garuda. KDE Dr460nized — самая красивая тема, что я видел. Но требователен к железу.' },
+  'mxlinux':   { name: 'MX Linux',        tags: 'стабильность старое железо debian', desc: 'Debian + свои утилиты. Быстрый, стабильный, экономичный.', personal: 'Если железо среднее, но RAM мало — MX Linux. Свои утилиты MX Tools упрощают всё. Работает на 2 ГБ RAM.' },
+  'lubuntu':   { name: 'Lubuntu',         tags: 'старое железо минимализм ubuntu', desc: 'Ubuntu с лёгким LXQt. Для слабых машин.', personal: 'Для 4 ГБ RAM — Lubuntu. Лёгкий, но современный. Знакомый apt, знакомая экосистема Ubuntu.' },
+  'xubuntu':   { name: 'Xubuntu',         tags: 'старое железо классика ubuntu', desc: 'Ubuntu с классическим Xfce.', personal: 'Для тех, кто хочет классику с Xfce и совместимость с Ubuntu. Стабильно, проверено.' },
+  'antix':     { name: 'antiX',           tags: 'старое железо минимализм debian', desc: 'Ультралёгкий. Работает на 256 МБ RAM.', personal: 'Для совсем старого железа — antiX. У меня работал на Pentium III. Серьёзно.' },
+  'puppy':     { name: 'Puppy Linux',     tags: 'старое железо live usb спасение', desc: 'Микроскопический. Грузится целиком в RAM.', personal: 'Для спасения данных или Live USB — Puppy. 300 МБ образ, всё в RAM, летает.' },
+  'arcolinux': { name: 'ArcoLinux',       tags: 'arch обучение профи', desc: 'Arch с фокусом на обучение. Несколько уровней сложности.', personal: 'Если хочешь Arch, но с рельсами — ArcoLinux. Есть версии для новичков, средних и продвинутых. Хорошая школа.' },
+  'endeavouros':{ name: 'EndeavourOS',   tags: 'arch мост профи', desc: 'Почти чистый Arch, но с графическим установщиком.', personal: 'Мой рекомендация для перехода с Ubuntu на Arch. Установщик Calamares, чистый Arch внутри. Через месяц ты знаешь Arch.' },
+  'manjaro':   { name: 'Manjaro',         tags: 'arch мост новичок', desc: 'Arch с задержкой обновлений. Графический установщик.', personal: 'Более дружелюбный, чем чистый Arch. Обновления с задержкой 1-2 недели — меньше шансов сломать систему. Хороший мост.' },
+}
+
+document.querySelectorAll('.picker-option').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var q = this.closest('.picker-question').dataset.q;
+    this.closest('.picker-question').querySelectorAll('.picker-option').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    this.classList.add('selected');
+    ANSWERS[q] = this.dataset.v;
+    
+    if (Object.keys(ANSWERS).length === 5) {
+      showResult();
+    }
+  });
+});
+
+function showResult() {
+  var rec = 'ubuntu'; // default
+  
+  // Логика подбора
+  if (ANSWERS[5] === 'ancient') rec = 'antix';
+  else if (ANSWERS[5] === 'old' && ANSWERS[2] === 'desktop') rec = 'mxlinux';
+  else if (ANSWERS[2] === 'security') {
+    if (ANSWERS[1] === 'pro') rec = 'blackarch';
+    else if (ANSWERS[1] === 'exp') rec = 'kali';
+    else rec = 'parrot';
+  }
+  else if (ANSWERS[2] === 'games') {
+    if (ANSWERS[3] === 'fresh' && ANSWERS[1] !== 'new') rec = 'cachyos';
+    else if (ANSWERS[1] === 'new') rec = 'bazzite';
+    else rec = 'nobara';
+  }
+  else if (ANSWERS[2] === 'server') {
+    if (ANSWERS[1] === 'pro') rec = 'alpine';
+    else rec = 'debian';
+  }
+  else if (ANSWERS[2] === 'dev' && ANSWERS[3] === 'control') rec = 'nixos';
+  else if (ANSWERS[2] === 'old') rec = 'antix';
+  else if (ANSWERS[1] === 'new' && ANSWERS[3] === 'easy') {
+    if (ANSWERS[3] === 'windows') rec = 'zorin';
+    else rec = 'mint';
+  }
+  else if (ANSWERS[1] === 'pro' && ANSWERS[3] === 'control') rec = 'gentoo';
+  else if (ANSWERS[3] === 'fresh' && ANSWERS[1] !== 'new') rec = 'arch';
+  else if (ANSWERS[3] === 'fresh' && ANSWERS[1] === 'new') rec = 'fedora';
+  else if (ANSWERS[3] === 'stability' && ANSWERS[4] === 'new') rec = 'debian';
+  else if (ANSWERS[3] === 'mac') rec = 'elementary';
+  else if (ANSWERS[1] === 'new') rec = 'ubuntu';
+  else rec = 'fedora';
+  
+  var d = PICKER_DATA[rec];
+  if (!d) {
+    d = PICKER_DATA['ubuntu'];
+    rec = 'ubuntu';
+  }
+  
+  var html = '<div class="picker-result">';
+  html += '<h2>Тебе подойдёт: ' + d.name + '</h2>';
+  html += '<p>' + d.desc + '</p>';
+  html += '<div class="picker-personal">' + d.personal + '</div>';
+  html += '<div class="picker-actions">';
+  html += '<a href="distros/' + rec + '.html" class="btn">Открыть ' + d.name + ' →</a>';
+  html += '<button class="btn" onclick="resetPicker()">Пройти заново</button>';
+  html += '</div>';
+  html += '</div>';
+  
+  var result = document.getElementById('picker-result');
+  result.innerHTML = html;
+  result.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetPicker() {
+  ANSWERS = {};
+  document.querySelectorAll('.picker-option').forEach(function(b) {
+    b.classList.remove('selected');
+  });
+  document.getElementById('picker-result').innerHTML = '';
+  document.querySelector('.picker-box').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+<h2>Почему я это сделал</h2>
+<div style="background: var(--panel); border-left: 3px solid var(--accent); padding: 1rem 1.2rem; border-radius: 0 4px 4px 0; margin: 1rem 0;">
+<p>Когда я начинал, я не знал, что выбрать. Форумов много, мнений ещё больше. Все советуют Ubuntu, но иногда это не то, что нужно. Я сделал этот опросник, чтобы ты не потратил год, как я, на перебор дистрибутивов.</p>
+<p>Алгоритм простой, но логичный. Отвечай честно — я не обижусь, если ты выберешь не Ubuntu.</p>
+<p style="color: var(--muted); margin-bottom: 0;"><strong>— Monadei,</strong> Ubuntu 26.04 на ПК, Fedora KDE на MacBook, Kali для практики</p>
+</div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026. <a href="feed.xml" title="RSS-подписка" style="color: var(--accent);">📡 RSS</a></p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/fun.js"></script><script src="js/animations.js"></script>
+<script src="js/glass-clock.js"></script>
+
+</body>
+</html>

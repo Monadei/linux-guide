@@ -133,23 +133,8 @@
 
     // Кнопки A-/A+
     var sz = parseInt(localStorage.getItem('font-size') || '15', 10);
-    document.body.style.fontSize = sz + 'px';
-    var fctrl = document.createElement('div');
-    fctrl.className = 'font-ctrl';
-    var bM = document.createElement('button'); bM.textContent = 'A−';
-    var bP = document.createElement('button'); bP.textContent = 'A+';
-    bM.onclick = function() {
-      sz = Math.max(12, sz-1);
-      document.body.style.fontSize = sz+'px';
-      try { localStorage.setItem('font-size', sz); } catch(e){}
-    };
-    bP.onclick = function() {
-      sz = Math.min(22, sz+1);
-      document.body.style.fontSize = sz+'px';
-      try { localStorage.setItem('font-size', sz); } catch(e){}
-    };
-    fctrl.appendChild(bM); fctrl.appendChild(bP);
-    header.appendChild(fctrl);
+    
+    
 
     // Наверх
     var tt = document.createElement('button');

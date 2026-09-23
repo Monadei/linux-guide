@@ -2,14 +2,29 @@
 <rss version="2.0">
 <channel>
 <title>Monade OS</title>
-<link>https://example.org/linux-guide/</link>
-<description>Руководство по дистрибутивам Linux</description>
+<link>https://monadei.github.io/linux-guide/</link>
+<description>Руководство по дистрибутивам Linux от Monadei</description>
 <language>ru</language>
+<lastBuildDate>Wed, 23 Sep 2026 00:00:00 +0300</lastBuildDate>
 <item>
-<title>Как я делал этот сайт</title>
-<link>blog-post-1.html</link>
-<description>Devlog о создании сайта Linux Guide</description>
-<pubDate>Sat, 19 Sep 2026 00:00:00 +0300</pubDate>
+<title>Подбор дистрибутива от Monadei</title>
+<link>https://monadei.github.io/linux-guide/picker.html</link>
+<description>Интерактивный подбор дистрибутива по предпочтениям</description>
+</item>
+<item>
+<title>Сравнить два дистрибутива</title>
+<link>https://monadei.github.io/linux-guide/compare-two.html</link>
+<description>Таблица различий между любыми двумя дистрибутивами</description>
+</item>
+<item>
+<title>Календарь релизов</title>
+<link>https://monadei.github.io/linux-guide/release-calendar.html</link>
+<description>Когда выходят Ubuntu, Fedora, Arch и другие</description>
+</item>
+<item>
+<title>Кали для начинающих</title>
+<link>https://monadei.github.io/linux-guide/kali/index.html</link>
+<description>Путь в кибербезопасность от Monadei</description>
 </item>
 </channel>
 </rss>

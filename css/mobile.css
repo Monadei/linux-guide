@@ -25,7 +25,7 @@
 
   /* СКРЫВАЕМ ВСЁ ЛИШНЕЕ */
   .theme-switcher { display: none !important; }
-  .font-ctrl { display: none !important; }
+  
 
   /* Скрываем кнопку контраста (вторая menu-toggle) */
   .header-inner > button.menu-toggle ~ button.menu-toggle {
