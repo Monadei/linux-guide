@@ -210,3 +210,75 @@
   .quick-links a { font-size: 0.8rem; padding: 0.4rem 0.7rem; }
   .distros-grid { grid-template-columns: 1fr; gap: 0.7rem; }
 }
+
+/* ============================================
+   МОБИЛЬНАЯ ЗАЩИТА ОТ АНИМАЦИЙ
+   Перебивает animations.css на телефонах
+   ============================================ */
+
+@media (max-width: 768px) {
+
+  /* 1. Reveal — блоки видны сразу, без ожидания скролла */
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* 2. Анимация body — убираем (может лагать на слабых телефонах) */
+  body {
+    animation: none !important;
+  }
+
+  /* 3. Hover-эффекты — отключаем (на тач не работают как надо) */
+  .card:hover,
+  .distro-tile:hover,
+  .learn-card:hover,
+  .sys-card:hover,
+  .btn:hover,
+  .card:hover .distro-icon,
+  .distro-tile:hover .distro-icon {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* 4. Hero-логотип — простая анимация появления */
+  .hero-logo {
+    animation: hero-appear-mobile 0.4s ease-out !important;
+  }
+
+  /* 5. Числа — сразу финальные, без подсчёта */
+  .hist-stat .num,
+  .impact .num {
+    opacity: 1 !important;
+  }
+
+  /* 6. Ускоряем transition темы */
+  body,
+  .card,
+  .btn,
+  a,
+  code {
+    transition-duration: 0.15s !important;
+  }
+
+  /* 7. Пингвин скрыт (дублируем для надёжности) */
+  .tux,
+  .tux-walk {
+    display: none !important;
+  }
+}
+
+@keyframes hero-appear-mobile {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
