@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Где практиковаться в ИБ — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a>
+<a href="../history.html">История</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="index.html" class="active">Kali</a>
+<a href="../about.html">Обо мне</a>
+<a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+
+<main class="container page">
+<h1>Где практиковаться в ИБ</h1>
+<p class="lead">TryHackMe, Hack The Box, PortSwigger — что выбрать и в каком порядке.</p>
+
+<style>
+.kali-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0.8rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-nav a {
+  padding: 0.4rem 0.9rem;
+  border: 1px dashed var(--accent-dim);
+  color: var(--accent);
+  font-size: 0.85rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.kali-nav a:hover, .kali-nav a.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-style: solid;
+}
+.kali-section {
+  margin: 2rem 0;
+  padding: 1.3rem 1.5rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-section h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.kali-section h2::before { content: ""; }
+.kali-section h3 {
+  color: var(--accent);
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+.kali-section h3::before { content: "» "; color: var(--accent-dim); }
+.personal-note {
+  background: var(--panel-2);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--text);
+  border-radius: 0 4px 4px 0;
+}
+.personal-note::before {
+  content: "Личный опыт: ";
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.warn-block {
+  background: var(--panel-2);
+  border-left: 3px solid #ff5555;
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.warn-block::before {
+  content: "⚠ ";
+  color: #ff5555;
+  font-weight: 700;
+}
+</style>
+
+<div class="kali-nav">
+<a href="index.html">Обзор</a>
+<a href="kali-start.html">С чего начать</a>
+<a href="kali-tools.html">Инструменты</a>
+<a href="kali-practice.html">Практика</a>
+<a href="kali-defend.html">Защита Linux</a>
+</div>
+<div class="kali-section">
+
+<h2>Зачем практика</h2>
+<p>Можно прочитать 10 книг по пентесту и не уметь ничего. Только практика на реальных (легальных) площадках даёт навык. Без неё теория — мёртвый груз.</p>
+
+<div class="personal-note">
+Первые 3 месяца я смотрел видео и думал «я всё понимаю». Потом зашёл на первую HTB-машину и понял, что не знаю ничего. Это был полезный урок.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>TryHackMe — для начала</h2>
+<p><strong>tryhackme.com</strong> — самый дружелюбный вариант для новичков. Комнаты с теорией + практикой, пошаговые подсказки, если застрял.</p>
+
+<h3>Что проходить</h3>
+<ol>
+<li><strong>Pre Security</strong> — базовая сеть, Linux, веб</li>
+<li><strong>Introduction to Cyber Security</strong> — обзор специальностей</li>
+<li><strong>Jr Penetration Tester</strong> — путь пентестера</li>
+<li><strong>Complete Beginner</strong> — общий курс для старта</li>
+</ol>
+
+<h3>Плюсы</h3>
+<ul>
+<li>Всё в браузере — не нужно настраивать окружение</li>
+<li>Пошаговые подсказки — не бросаешь на полпути</li>
+<li>Бесплатные комнаты (часть), премиум ~$14/мес</li>
+<li>Хорошо для понимания основ</li>
+</ul>
+
+<h3>Минусы</h3>
+<ul>
+<li>Слишком «по рельсам» — не развивает самостоятельность</li>
+<li>После прохождения — сложно переходить на реальные машины</li>
+</ul>
+
+</div>
+<div class="kali-section">
+
+<h2>Hack The Box — для серьёзных</h2>
+<p><strong>hackthebox.com</strong> — площадка для тех, кто уже понял базу. Реальные машины, никаких подсказок. Каждая — мини-проект на несколько часов.</p>
+
+<h3>С чего начать</h3>
+<ol>
+<li><strong>Starting Point</strong> — специальные лёгкие машины с гайдами</li>
+<li>Потом — <strong>Easy</strong> машины</li>
+<li>Потом <strong>Medium</strong> — там начинается боль</li>
+<li><strong>Hard</strong> и <strong>Insane</strong> — для опытных</li>
+</ol>
+
+<h3>Как работать с машиной</h3>
+<ol>
+<li>Подключаешься к VPN (OpenVPN)</li>
+<li>Получаешь IP машины</li>
+<li>Сканируешь (nmap)</li>
+<li>Ищешь уязвимости</li>
+<li>Получаешь user.txt (первый флаг)</li>
+<li>Повышаешь привилегии</li>
+<li>Получаешь root.txt (второй флаг)</li>
+</ol>
+
+<h3>Что делать, если застрял</h3>
+<ul>
+<li>Не смотри write-up сразу</li>
+<li>Дай себе 2–3 часа. Пробуй разные подходы</li>
+<li>Если совсем никак — смотри подсказку (не решение)</li>
+<li>Если и это не помогло — смотри write-up IppSec на YouTube</li>
+<li>Главное — понять, что ты упустил</li>
+</ul>
+
+<div class="personal-note">
+Первая HTB-машина заняла у меня 6 часов. Я не получил флаг, но понял, как работает SMB. Через 2 недели эта же машина заняла 40 минут. Прогресс есть, просто он не сразу виден.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Другие площадки</h2>
+
+<h3>VulnHub</h3>
+<p><strong>vulnhub.com</strong> — бесплатные виртуалки для скачивания. Ставишь локально, ломаешь. Минус — устаревшие, меньше подсказок.</p>
+
+<h3>PortSwigger Web Security Academy</h3>
+<p><strong>portswigger.net/web-security</strong> — бесплатные лаборатории по веб-уязвимостям. Лучший ресурс для веб-пентеста. Всё в браузере.</p>
+
+<h3>PentesterLab</h3>
+<p><strong>pentesterlab.com</strong> — фокус на веб, много упражнений на конкретные уязвимости.</p>
+
+<h3>OverTheWire</h3>
+<p><strong>overthewire.org</strong> — старые добрые wargames. Bandit — отличный старт для командной строки.</p>
+
+<h3>PicoCTF</h3>
+<p><strong>picoctf.org</strong> — CTF для новичков. Обычно весной проходит соревнование, но задания остаются.</p>
+
+<h3>Локальные лаборатории</h3>
+<ul>
+<li><strong>DVWA</strong> — уязвимое веб-приложение для практики</li>
+<li><strong>OWASP Juice Shop</strong> — современное уязвимое приложение</li>
+<li><strong>Metasploitable 2/3</strong> — намеренно уязвимые VM</li>
+<li><strong>VulnHub</strong> — сотни VM для скачивания</li>
+</ul>
+
+</div>
+<div class="kali-section">
+
+<h2>Как построить план</h2>
+
+<h3>Месяц 1–2: основы</h3>
+<ul>
+<li>TryHackMe: Pre Security + Complete Beginner</li>
+<li>OverTheWire: Bandit (все уровни)</li>
+<li>Linux: команды, файлы, права, процессы</li>
+<li>Сеть: OSI, TCP/IP, DNS, HTTP</li>
+</ul>
+
+<h3>Месяц 3–4: веб</h3>
+<ul>
+<li>PortSwigger Academy: все лаборатории по OWASP Top 10</li>
+<li>TryHackMe: Jr Penetration Tester путь</li>
+<li>DVWA + Juice Shop локально</li>
+<li>Burp Suite — уверенное использование</li>
+</ul>
+
+<h3>Месяц 5–6: HTB</h3>
+<ul>
+<li>HTB: Starting Point (все машины)</li>
+<li>HTB: 10+ Easy-машин</li>
+<li>Смотреть write-up'ы IppSec после решения</li>
+<li>Начать вести свой блокнот с техниками</li>
+</ul>
+
+<h3>Месяц 7–12: углубление</h3>
+<ul>
+<li>HTB: Medium-машины</li>
+<li>Active Directory: HTB Pro Labs</li>
+<li>Специализация: веб, сеть, облака, IoT</li>
+<li>Подготовка к сертификации (eJPT, OSCP)</li>
+</ul>
+
+<div class="personal-note">
+Не гонись за скоростью. У меня ушло 8 месяцев до первой уверенной Medium-машины. У кого-то получается за 4, у кого-то за год. У каждого свой темп. Главное — не бросать.
+</div>
+
+<div class="warn-block">
+Все практики — только на легальных площадках. Не пытайся «потренироваться» на чужих сайтах, Wi-Fi соседа или рабочей сети. Это статья, и это не шутка.
+</div>
+
+</div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/fun.js"></script>
+<script src="../js/logo-anim.js"></script>
+</body>
+</html>

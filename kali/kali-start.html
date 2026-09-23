@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>С чего начать в ИБ — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a>
+<a href="../history.html">История</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="index.html" class="active">Kali</a>
+<a href="../about.html">Обо мне</a>
+<a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+
+<main class="container page">
+<h1>С чего начать в ИБ</h1>
+<p class="lead">Мой путь от нуля: что учить, в каком порядке, что не работает.</p>
+
+<style>
+.kali-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0.8rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-nav a {
+  padding: 0.4rem 0.9rem;
+  border: 1px dashed var(--accent-dim);
+  color: var(--accent);
+  font-size: 0.85rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.kali-nav a:hover, .kali-nav a.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-style: solid;
+}
+.kali-section {
+  margin: 2rem 0;
+  padding: 1.3rem 1.5rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-section h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.kali-section h2::before { content: ""; }
+.kali-section h3 {
+  color: var(--accent);
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+.kali-section h3::before { content: "» "; color: var(--accent-dim); }
+.personal-note {
+  background: var(--panel-2);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--text);
+  border-radius: 0 4px 4px 0;
+}
+.personal-note::before {
+  content: "Личный опыт: ";
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.warn-block {
+  background: var(--panel-2);
+  border-left: 3px solid #ff5555;
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.warn-block::before {
+  content: "⚠ ";
+  color: #ff5555;
+  font-weight: 700;
+}
+</style>
+
+<div class="kali-nav">
+<a href="index.html">Обзор</a>
+<a href="kali-start.html">С чего начать</a>
+<a href="kali-tools.html">Инструменты</a>
+<a href="kali-practice.html">Практика</a>
+<a href="kali-defend.html">Защита Linux</a>
+</div>
+<div class="kali-section">
+
+<h2>Что нужно понять в начале</h2>
+<p>Пентест — это не «взломать за 5 минут». Это методичная работа: разведка, анализ, поиск уязвимостей, эксплуатация, отчёт. Инструменты — только 20% успеха. Остальное — понимание, как всё работает.</p>
+
+<div class="personal-note">
+Я потратил первые 3 месяца на «смотрю видео и повторяю команды». Это была трата времени. Работает только когда понимаешь, что происходит под капотом. Начни с теории.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>База, без которой некуда</h2>
+
+<h3>1. Linux</h3>
+<p>Kali — это Linux. Без базы ты просто копируешь команды. Нужно понимать: файловую систему, права, процессы, сеть, bash-скрипты.</p>
+<ul>
+<li><a href="../terminal-cheatsheet.html">Шпаргалка по терминалу</a></li>
+<li><a href="../bash-basics.html">Основы Bash</a></li>
+<li><a href="../filesystem.html">Файловая система</a></li>
+<li><a href="../network.html">Сетевые команды</a></li>
+</ul>
+
+<h3>2. Сети</h3>
+<p>OSI-модель, TCP/IP, DNS, HTTP, порты. Что такое пакет, как он идёт, как читать Wireshark.</p>
+<ul>
+<li>Как работает TCP handshake (SYN, SYN-ACK, ACK)</li>
+<li>Что такое DNS и как работают запросы</li>
+<li>Разница между HTTP и HTTPS</li>
+<li>Что такое CIDR и как считать подсети</li>
+</ul>
+
+<h3>3. Веб</h3>
+<p>Большинство атак — на веб. Нужно понимать: HTML, HTTP-заголовки, cookies, сессии, SQL.</p>
+<ul>
+<li>Как работает форма логина</li>
+<li>Что такое SQL и как устроены базы</li>
+<li>Разница между GET и POST</li>
+<li>Как работают cookies и сессии</li>
+</ul>
+
+</div>
+<div class="kali-section">
+
+<h2>Установка Kali</h2>
+
+<h3>Вариант 1: Виртуалка (рекомендую)</h3>
+<p>Так ты не сломаешь основную систему. VirtualBox или VMware, 4 ГБ RAM, 40 ГБ диск. Скачиваешь ISO с kali.org, ставишь как обычную систему.</p>
+<pre><code>sudo apt install virtualbox
+# Скачай kali-linux-2024.x-installer-amd64.iso с kali.org
+# Создай VM: 4 ГБ RAM, 40 ГБ диск, 2 ядра CPU
+# Установи как обычный Linux</code></pre>
+
+<h3>Вариант 2: Live USB</h3>
+<p>Для быстрых задач. Загружаешься с флешки, ничего не устанавливаешь. Минус — изменения не сохраняются (если не настроить persistence).</p>
+
+<h3>Вариант 3: WSL2 (Windows)</h3>
+<p>Если ты на Windows. Не всё работает, но база — да.</p>
+<pre><code>wsl --install -d kali-linux</code></pre>
+
+<div class="personal-note">
+У меня Kali стоит в VirtualBox на основном ПК и в отдельном разделе на MacBook. Виртуалка — идеально для экспериментов. Если сломаешь — снёс и создал заново.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Первые шаги в Kali</h2>
+
+<h3>Обнови систему</h3>
+<pre><code>sudo apt update && sudo apt full-upgrade -y</code></pre>
+
+<h3>Посмотри, что установлено</h3>
+<pre><code># Список всех инструментов
+ls /usr/share/kali-menu/
+
+# Метапакеты по категориям
+apt list --installed | grep kali-linux</code></pre>
+
+<h3>Базовые команды для ориентира</h3>
+<pre><code>ip a                    # сетевые интерфейсы
+ip r                    # таблица маршрутов
+ss -tulpn               # открытые порты
+whoami                  # кто я
+id                      # UID, GID, группы
+uname -a                # инфа о ядре</code></pre>
+
+<h3>Первый инструмент — nmap</h3>
+<p>Простой скан своей локальной сети:</p>
+<pre><code># Найди свой IP
+ip a
+
+# Сканируй подсеть
+sudo nmap -sn 192.168.1.0/24
+
+# Скан конкретного хоста
+sudo nmap -sV -sC 192.168.1.1</code></pre>
+
+<div class="warn-block">
+Сканировать можно только свои устройства или те, на которые есть разрешение. Скан чужой сети без разрешения = преступление.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Что делать дальше</h2>
+
+<h3>План на первые 3 месяца</h3>
+<ol>
+<li><strong>Месяц 1:</strong> Linux + сеть. Читать, практиковать команды. Установить Kali в виртуалке, разобраться с базой.</li>
+<li><strong>Месяц 2:</strong> Начать TryHackMe. Пройти комнаты для новичков (Pre Security, Intro to Cyber Security).</li>
+<li><strong>Месяц 3:</strong> Параллельно читать про веб-уязвимости (OWASP Top 10). Начать HTB — самые лёгкие машины (Starting Point).</li>
+</ol>
+
+<h3>Что читать</h3>
+<ul>
+<li><strong>«Web Application Hacker's Handbook»</strong> — библия веб-безопасности</li>
+<li><strong>«The Hacker Playbook 3»</strong> — практика пентеста</li>
+<li><strong>OWASP Top 10</strong> — список главных веб-уязвимостей</li>
+<li><strong>HackTricks</strong> (hacktricks.xyz) — справочник техник</li>
+<li><strong>PayloadsAllTheThings</strong> (GitHub) — шпаргалки по payload'ам</li>
+</ul>
+
+<h3>Что смотреть</h3>
+<ul>
+<li>IppSec (YouTube) — разборы HTB-машин</li>
+<li>John Hammond (YouTube) — CTF и малварь</li>
+<li>NetworkChuck — для новичков</li>
+</ul>
+
+<div class="personal-note">
+Не гонись за «сертификатами за месяц». Я вначале завидовал тем, кто сдавал OSCP. Понял: торопиться некуда. Лучше медленно, но с пониманием.
+</div>
+
+</div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/fun.js"></script>
+<script src="../js/logo-anim.js"></script>
+</body>
+</html>

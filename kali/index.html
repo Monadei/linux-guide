@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kali Linux — раздел о кибербезопасности — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a>
+<a href="../history.html">История</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="index.html" class="active">Kali</a>
+<a href="../about.html">Обо мне</a>
+<a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+
+<main class="container page">
+<h1>Kali Linux — раздел о кибербезопасности</h1>
+<p class="lead">Мой путь в ИБ: от «что такое сеть» до практики на HTB. Без воды, без пафоса, от первого лица.</p>
+
+<style>
+.kali-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0.8rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-nav a {
+  padding: 0.4rem 0.9rem;
+  border: 1px dashed var(--accent-dim);
+  color: var(--accent);
+  font-size: 0.85rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.kali-nav a:hover, .kali-nav a.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-style: solid;
+}
+.kali-section {
+  margin: 2rem 0;
+  padding: 1.3rem 1.5rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-section h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.kali-section h2::before { content: ""; }
+.kali-section h3 {
+  color: var(--accent);
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+.kali-section h3::before { content: "» "; color: var(--accent-dim); }
+.personal-note {
+  background: var(--panel-2);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--text);
+  border-radius: 0 4px 4px 0;
+}
+.personal-note::before {
+  content: "Личный опыт: ";
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.warn-block {
+  background: var(--panel-2);
+  border-left: 3px solid #ff5555;
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.warn-block::before {
+  content: "⚠ ";
+  color: #ff5555;
+  font-weight: 700;
+}
+</style>
+
+<div class="kali-nav">
+<a href="index.html">Обзор</a>
+<a href="kali-start.html">С чего начать</a>
+<a href="kali-tools.html">Инструменты</a>
+<a href="kali-practice.html">Практика</a>
+<a href="kali-defend.html">Защита Linux</a>
+</div>
+<div class="kali-section">
+
+<h2>Что здесь</h2>
+<p>Раздел про кибербезопасность — от моего лица. Я не эксперт, я учусь. Но то, что уже прошёл, могу объяснить проще, чем написано в учебниках. Здесь — мой путь, мои ошибки, мои находки.</p>
+
+<h3>Для кого этот раздел</h3>
+<ul>
+<li>Тем, кто только начинает в ИБ и не знает, с чего взяться</li>
+<li>Тем, кто уже смотрел курсы, но не понимает, как применять</li>
+<li>Тем, кто хочет защитить свои системы, а не только ломать чужие</li>
+</ul>
+
+<h3>Что внутри</h3>
+<ul>
+<li><a href="kali-start.html">С чего начать</a> — установка, сеть, Linux-база, первые шаги</li>
+<li><a href="kali-tools.html">Инструменты</a> — nmap, Metasploit, Burp, Wireshark</li>
+<li><a href="kali-practice.html">Практика</a> — HTB, TryHackMe, VulnHub</li>
+<li><a href="kali-defend.html">Защита Linux</a> — как сделать свою систему безопасной</li>
+</ul>
+
+<div class="personal-note">
+Я начинал с нуля: не знал, что такое сеть, путал IP с MAC, думал что «пентест» — это что-то из фильмов. Через год практики я понимаю базу. Этот раздел — то, что я хотел бы прочитать, когда начинал.
+</div>
+
+<h3>Важно</h3>
+<div class="warn-block">
+Все инструменты и техники — только для своих систем или для легальных площадок (HTB, TryHackMe, VulnHub). Использовать их против чужих систем без разрешения — это преступление. Статья 272 УК РФ и аналоги в других странах. Это не шутка.
+</div>
+
+</div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/fun.js"></script>
+<script src="../js/logo-anim.js"></script>
+</body>
+</html>

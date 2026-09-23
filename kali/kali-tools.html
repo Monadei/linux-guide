@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Инструменты Kali — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a>
+<a href="../history.html">История</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="index.html" class="active">Kali</a>
+<a href="../about.html">Обо мне</a>
+<a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+
+<main class="container page">
+<h1>Инструменты Kali</h1>
+<p class="lead">Nmap, Metasploit, Burp Suite, Wireshark — что для чего и как начать.</p>
+
+<style>
+.kali-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0.8rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-nav a {
+  padding: 0.4rem 0.9rem;
+  border: 1px dashed var(--accent-dim);
+  color: var(--accent);
+  font-size: 0.85rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.kali-nav a:hover, .kali-nav a.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-style: solid;
+}
+.kali-section {
+  margin: 2rem 0;
+  padding: 1.3rem 1.5rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-section h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.kali-section h2::before { content: ""; }
+.kali-section h3 {
+  color: var(--accent);
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+.kali-section h3::before { content: "» "; color: var(--accent-dim); }
+.personal-note {
+  background: var(--panel-2);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--text);
+  border-radius: 0 4px 4px 0;
+}
+.personal-note::before {
+  content: "Личный опыт: ";
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.warn-block {
+  background: var(--panel-2);
+  border-left: 3px solid #ff5555;
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.warn-block::before {
+  content: "⚠ ";
+  color: #ff5555;
+  font-weight: 700;
+}
+</style>
+
+<div class="kali-nav">
+<a href="index.html">Обзор</a>
+<a href="kali-start.html">С чего начать</a>
+<a href="kali-tools.html">Инструменты</a>
+<a href="kali-practice.html">Практика</a>
+<a href="kali-defend.html">Защита Linux</a>
+</div>
+<div class="kali-section">
+
+<h2>Nmap — сканер сети</h2>
+<p>Первый инструмент, который надо освоить. Показывает открытые порты, сервисы, версии.</p>
+
+<h3>Основные команды</h3>
+<pre><code># Быстрый скан
+nmap 192.168.1.1
+
+# Скан портов + сервисы + версии
+nmap -sV -sC 192.168.1.1
+
+# Скан всех портов
+nmap -p- 192.168.1.1
+
+# Определить ОС
+nmap -O 192.168.1.1
+
+# Скан подсети
+nmap -sn 192.168.1.0/24
+
+# Сохранить результат
+nmap -sV -oN scan.txt 192.168.1.1</code></pre>
+
+<h3>Полезные флаги</h3>
+<ul>
+<li><code>-sS</code> — SYN-скан (быстрый, «полуоткрытый»)</li>
+<li><code>-sT</code> — TCP connect (работает без root)</li>
+<li><code>-sU</code> — UDP-скан</li>
+<li><code>-A</code> — агрессивный (всё сразу)</li>
+<li><code>-T4</code> — быстрее (T0–T5, где T5 самый быстрый)</li>
+</ul>
+
+<div class="personal-note">
+Я начинал с `nmap -sV 192.168.1.1` на свой роутер. Понял, что вижу все порты, все сервисы. Это был «вау-момент» — как будто подсмотрел за кулисы.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Metasploit — фреймворк эксплуатации</h2>
+<p>Огромная база эксплойтов, payload'ов и модулей. Не «взлом в один клик», а платформа для работы.</p>
+
+<h3>Запуск</h3>
+<pre><code>sudo msfconsole</code></pre>
+
+<h3>Базовый воркфлоу</h3>
+<pre><code># Поиск модуля
+search eternalblue
+
+# Использовать модуль
+use exploit/windows/smb/ms17_010_eternalblue
+
+# Посмотреть опции
+show options
+
+# Настроить
+set RHOSTS 192.168.1.10
+set LHOST 192.168.1.5
+
+# Проверить, уязвима ли цель
+check
+
+# Запустить
+run</code></pre>
+
+<h3>Полезные команды</h3>
+<pre><code>help                    # справка
+search тип:exploit имя  # поиск по типу
+info                    # инфо о модуле
+sessions -l             # список сессий
+sessions -i 1           # войти в сессию
+background              # свернуть сессию</code></pre>
+
+<div class="warn-block">
+Metasploit — мощный инструмент. Использовать только на своих системах или на легальных площадках (HTB, TryHackMe). Запуск эксплойта против чужой системы — уголовная ответственность.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Burp Suite — для веб-атак</h2>
+<p>Главный инструмент веб-пентестера. Перехватывает трафик между браузером и сервером, позволяет менять запросы, искать уязвимости.</p>
+
+<h3>Что умеет</h3>
+<ul>
+<li><strong>Proxy</strong> — перехват и изменение HTTP-запросов</li>
+<li><strong>Repeater</strong> — повторная отправка запросов с изменениями</li>
+<li><strong>Intruder</strong> — автоматический перебор (пароли, ID, параметры)</li>
+<li><strong>Scanner</strong> — автоматический поиск уязвимостей (только в Pro)</li>
+<li><strong>Decoder</strong> — работа с Base64, URL, hex</li>
+</ul>
+
+<h3>Настройка</h3>
+<ol>
+<li>Запусти Burp</li>
+<li>В браузере поставь прокси: 127.0.0.1:8080</li>
+<li>Установи сертификат Burp в браузер (для HTTPS)</li>
+<li>Включи перехват в Proxy → Intercept → On</li>
+</ol>
+
+<h3>Типичный сценарий</h3>
+<ol>
+<li>Логинишься в тестовое приложение</li>
+<li>Перехватываешь запрос в Proxy</li>
+<li>Отправляешь в Repeater (Ctrl+R)</li>
+<li>Меняешь параметры, смотришь ответы</li>
+<li>Ищешь SQL-инъекции, XSS, IDOR</li>
+</ol>
+
+<div class="personal-note">
+Burp — то, что отличает «я посмотрел курс» от «я умею». Именно в Repeater'е приходит понимание, как работают веб-приложения.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Wireshark — анализ трафика</h2>
+<p>Показывает все пакеты, которые идут через интерфейс. Незаменим для анализа сети, отладки и поиска утечек.</p>
+
+<h3>Запуск</h3>
+<pre><code>sudo wireshark</code></pre>
+
+<h3>Фильтры</h3>
+<pre><code>ip.addr == 192.168.1.1          # по IP
+tcp.port == 80                   # по порту
+http                             # только HTTP
+dns                              # только DNS
+tcp.flags.syn == 1               # SYN-пакеты
+http.request.method == "POST"    # POST-запросы</code></pre>
+
+<h3>Что искать</h3>
+<ul>
+<li><strong>Логины и пароли в открытом виде</strong> — HTTP, FTP, Telnet</li>
+<li><strong>Незашифрованные сессии</strong> — cookies без Secure-флага</li>
+<li><strong>Аномалии в трафике</strong> — странные запросы, необычные порты</li>
+<li><strong>Утечки данных</strong> — что уходит наружу</li>
+</ul>
+
+<h3>Follow TCP Stream</h3>
+<p>Правый клик на пакете → Follow → TCP Stream. Показывает всю переписку целиком, как читаемый текст.</p>
+
+<div class="personal-note">
+Я нашёл дома «умную лампочку», которая каждые 30 секунд слала данные на китайский сервер. Wireshark показал это за 5 минут. С тех пор — все IoT-устройства у меня в отдельной сети.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Что ещё стоит знать</h2>
+
+<h3>Для веб-пентеста</h3>
+<ul>
+<li><strong>ffuf</strong> / <strong>gobuster</strong> — перебор директорий и параметров</li>
+<li><strong>sqlmap</strong> — автоматический поиск SQL-инъекций</li>
+<li><strong>nikto</strong> — быстрый скан веб-сервера на известные уязвимости</li>
+<li><strong>wfuzz</strong> — фаззинг параметров</li>
+</ul>
+
+<h3>Для сетевого пентеста</h3>
+<ul>
+<li><strong>Responder</strong> — перехват NTLM-хешей в локальной сети</li>
+<li><strong>CrackMapExec</strong> / <strong>NetExec</strong> — работа с Active Directory</li>
+<li><strong>Impacket</strong> — набор Python-скриптов для SMB, Kerberos и т.д.</li>
+</ul>
+
+<h3>Для пассивной разведки</h3>
+<ul>
+<li><strong>theHarvester</strong> — сбор email, доменов, имён</li>
+<li><strong>Amass</strong> — карта поддоменов организации</li>
+<li><strong>Shodan</strong> (shodan.io) — поисковик по открытым устройствам</li>
+</ul>
+
+<h3>Для паролей</h3>
+<ul>
+<li><strong>John the Ripper</strong> — взлом хешей</li>
+<li><strong>Hashcat</strong> — быстрый взлом через GPU</li>
+<li><strong>Hydra</strong> — брутфорс логинов (SSH, FTP, HTTP)</li>
+</ul>
+
+<div class="personal-note">
+Не пытайся выучить всё сразу. Я знаю 5 инструментов хорошо и 20 — поверхностно. Лучше глубина, чем ширина.
+</div>
+
+</div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/fun.js"></script>
+<script src="../js/logo-anim.js"></script>
+</body>
+</html>

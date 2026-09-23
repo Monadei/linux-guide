@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Защита Linux — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../download.html">Как скачать</a>
+<a href="../install.html">Как установить</a>
+<a href="../history.html">История</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="index.html" class="active">Kali</a>
+<a href="../about.html">Обо мне</a>
+<a href="../faq.html">FAQ</a>
+<a href="../sitemap.html">Карта сайта</a>
+</nav></div></header>
+
+<main class="container page">
+<h1>Защита Linux</h1>
+<p class="lead">Как защитить свою систему: firewall, SSH, SELinux, fail2ban. Чек-лист.</p>
+
+<style>
+.kali-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0.8rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-nav a {
+  padding: 0.4rem 0.9rem;
+  border: 1px dashed var(--accent-dim);
+  color: var(--accent);
+  font-size: 0.85rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.kali-nav a:hover, .kali-nav a.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-style: solid;
+}
+.kali-section {
+  margin: 2rem 0;
+  padding: 1.3rem 1.5rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+.kali-section h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.kali-section h2::before { content: ""; }
+.kali-section h3 {
+  color: var(--accent);
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+.kali-section h3::before { content: "» "; color: var(--accent-dim); }
+.personal-note {
+  background: var(--panel-2);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--text);
+  border-radius: 0 4px 4px 0;
+}
+.personal-note::before {
+  content: "Личный опыт: ";
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+.warn-block {
+  background: var(--panel-2);
+  border-left: 3px solid #ff5555;
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.warn-block::before {
+  content: "⚠ ";
+  color: #ff5555;
+  font-weight: 700;
+}
+</style>
+
+<div class="kali-nav">
+<a href="index.html">Обзор</a>
+<a href="kali-start.html">С чего начать</a>
+<a href="kali-tools.html">Инструменты</a>
+<a href="kali-practice.html">Практика</a>
+<a href="kali-defend.html">Защита Linux</a>
+</div>
+<div class="kali-section">
+
+<h2>Зачем это знать</h2>
+<p>Пентест без понимания защиты — половина дела. Чтобы найти уязвимость, надо понимать, как её закрывают. Плюс — это твоя собственная система, её тоже надо защищать.</p>
+
+<div class="personal-note">
+Я первым делом настроил защиту своего Ubuntu и MacBook. Понял: одно дело — уметь ломать, другое — не быть сломанным самому. Второе важнее.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Базовая гигиена</h2>
+
+<h3>1. Обновления</h3>
+<pre><code># Ubuntu/Debian
+sudo apt update && sudo apt upgrade -y
+
+# Fedora
+sudo dnf upgrade --refresh
+
+# Автоматические обновления безопасности
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades</code></pre>
+
+<h3>2. Firewall</h3>
+<pre><code># UFW (Ubuntu)
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw enable
+sudo ufw status verbose</code></pre>
+
+<h3>3. SSH — самое важное</h3>
+<pre><code># Отключить вход по паролю
+sudo nano /etc/ssh/sshd_config
+# PasswordAuthentication no
+# PermitRootLogin no
+# Port 2222  # сменить порт
+
+sudo systemctl restart ssh</code></pre>
+
+<p>Использовать только ключи ed25519:</p>
+<pre><code>ssh-keygen -t ed25519 -C "monadei@ubuntu"
+ssh-copy-id user@server</code></pre>
+
+<h3>4. fail2ban</h3>
+<p>Блокирует IP после нескольких неудачных попыток входа.</p>
+<pre><code>sudo apt install fail2ban
+sudo systemctl enable --now fail2ban
+sudo fail2ban-client status sshd</code></pre>
+
+</div>
+<div class="kali-section">
+
+<h2>Продвинутая защита</h2>
+
+<h3>1. SELinux / AppArmor</h3>
+<p>Мандатный доступ — ограничивает, что может делать программа, даже если её взломали.</p>
+<pre><code># AppArmor (Ubuntu)
+sudo aa-status
+sudo apt install apparmor-utils
+
+# SELinux (Fedora, RHEL)
+sestatus
+sudo setenforce 1  # Enforcing</code></pre>
+
+<h3>2. Аудит системы</h3>
+<pre><code># Lynis — аудит безопасности
+sudo apt install lynis
+sudo lynis audit system
+
+# Покажет, что не так, и даст рекомендации</code></pre>
+
+<h3>3. Мониторинг логов</h3>
+<pre><code># Подозрительные входы
+journalctl -u ssh --since "1 hour ago" | grep -i failed
+
+# Все sudo-команды
+journalctl -t sudo
+
+# Мониторинг в реальном времени
+journalctl -f</code></pre>
+
+<h3>4. Проверка портов</h3>
+<pre><code># Что слушает наружу
+sudo ss -tulpn
+
+# Проверить снаружи
+nmap -sV localhost
+
+# Закрыть ненужное
+sudo systemctl stop ненужный_сервис
+sudo systemctl disable ненужный_сервис</code></pre>
+
+<h3>5. Шифрование</h3>
+<p>LUKS для диска при установке. Если система уже стоит — можно зашифровать только /home:</p>
+<pre><code>sudo apt install ecryptfs-utils
+ecryptfs-migrate-home -u $USER</code></pre>
+
+</div>
+<div class="kali-section">
+
+<h2>Особые случаи</h2>
+
+<h3>Если ты на ноутбуке и часто в чужих Wi-Fi</h3>
+<ul>
+<li><strong>VPN</strong> — всегда. Mullvad, ProtonVPN, WireGuard</li>
+<li><strong>Firewall</strong> — deny incoming по умолчанию</li>
+<li><strong>Отключи автоподключение</strong> к открытым сетям</li>
+<li><strong>DNS over HTTPS</strong> — Cloudflare 1.1.1.1 или Quad9</li>
+</ul>
+
+<h3>Если ты хостишь что-то публично</h3>
+<ul>
+<li><strong>Reverse proxy</strong> — nginx/caddy перед приложением</li>
+<li><strong>HTTPS</strong> — Let's Encrypt, обязательно</li>
+<li><strong>Rate limiting</strong> — защита от брутфорса</li>
+<li><strong>WAF</strong> — ModSecurity или Cloudflare</li>
+<li><strong>Резервные копии</strong> — регулярно, на отдельный диск</li>
+<li><strong>Мониторинг</strong> — Netdata, Grafana</li>
+</ul>
+
+<h3>Если у тебя сервер с SSH</h3>
+<pre><code># Дополнительно к базовому:
+# - Сменить порт с 22
+# - Только ключи, никаких паролей
+# - fail2ban с агрессивными настройками
+# - SSH через WireGuard VPN (порт вообще закрыт наружу)
+# - Port knocking (опционально)</code></pre>
+
+<div class="personal-note">
+На моём сервере порт 22 закрыт вообще. SSH работает только через WireGuard. За 6 месяцев — ни одной попытки брутфорса, потому что некуда стучаться.
+</div>
+
+</div>
+<div class="kali-section">
+
+<h2>Чек-лист безопасности</h2>
+<p>Проверь свою систему по этому списку:</p>
+
+<h3>Обязательное</h3>
+<ul>
+<li>☐ Все обновления установлены</li>
+<li>☐ Firewall включён, deny incoming</li>
+<li>☐ SSH: ключи вместо паролей, root отключён</li>
+<li>☐ fail2ban работает</li>
+<li>☐ Пароли в менеджере (KeePassXC, Bitwarden)</li>
+<li>☐ 2FA на важных аккаунтах</li>
+<li>☐ Резервные копии настроены</li>
+<li>☐ Диск зашифрован (хотя бы /home)</li>
+</ul>
+
+<h3>Хорошо иметь</h3>
+<ul>
+<li>☐ SELinux или AppArmor включён</li>
+<li>☐ Lynis аудит проведён</li>
+<li>☐ Логи мониторятся</li>
+<li>☐ VPN для публичных Wi-Fi</li>
+<li>☐ DNS over HTTPS</li>
+<li>☐ Отдельная сеть для IoT</li>
+</ul>
+
+<h3>Продвинутое</h3>
+<ul>
+<li>☐ SSH через VPN</li>
+<li>☐ Port knocking</li>
+<li>☐ IDS/IPS (Suricata, Snort)</li>
+<li>☐ Мониторинг (Netdata, Wazuh)</li>
+<li>☐ Регулярный пентест своих систем</li>
+</ul>
+
+<div class="personal-note">
+Не пытайся сделать всё сразу. Начни с обновлений, firewall и SSH-ключей. Это 80% защиты. Остальное — по мере необходимости.
+</div>
+
+<h2>Полезные ссылки</h2>
+<ul>
+<li><a href="https://www.cisecurity.org/cis-benchmarks" target="_blank" rel="noopener">CIS Benchmarks</a> — стандарты безопасной настройки</li>
+<li><a href="https://www.kali.org/docs/" target="_blank" rel="noopener">Kali Docs</a> — официальная документация</li>
+<li><a href="https://linux-audit.com/" target="_blank" rel="noopener">Linux Audit</a> — блог про безопасность Linux</li>
+<li><a href="https://github.com/imthenachoman/How-To-Secure-A-Linux-Server" target="_blank" rel="noopener">How To Secure A Linux Server</a> — подробный гайд</li>
+</ul>
+
+</div>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a> · <a href="../faq.html">FAQ</a></p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/fun.js"></script>
+<script src="../js/logo-anim.js"></script>
+</body>
+</html>
