@@ -1,185 +1,320 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.org/linux-guide/about.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/achievements.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/all-distros.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/apps.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/backups.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/bash-basics.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/bashrc-gen.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/blog.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/blog-post-1.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/build-distro.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/communities.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/compare-des.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/compare-packages.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/compare-two.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/countdown.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/de-gallery.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/de-overview.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/disk-calc.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/docker.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/download.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/faq.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/filesystem.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/first-commands.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/gaming.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/gitconfig-gen.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/glossary.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/guess-distro.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/hardware.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/hardware-picker.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/history.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/history-sudo.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/index.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/install.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/kernel.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/levels.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/man-pages.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/map.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/memes.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/mistakes.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/mnemonics.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/my-linux-path.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/my-macbook.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/my-setup.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/my-ubuntu-install.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/my-windows-story.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/name-origins.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/nvidia.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/quiz.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/releases.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/screenshots.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/sitemap.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/swap-calc.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/terminal-cheatsheet.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/test.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/themes.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/timeline.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/tree.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/what-if.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/write-iso.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/4mlinux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/aerynos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/agarimos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/almalinux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/alpine.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/alt.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/anduinos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/anotterkiosk.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/antix.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/archcraft.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/arch.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/artix.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/asahi.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/astra.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/avlinux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/batocera.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/bazzite.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/bedrock.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/blackarch.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/blendos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/bodhi.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/cachyos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/calculate.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/centos-stream.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/chimera.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/chimeraos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/clear.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/debian.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/deepin.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/dragora.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/easynas.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/elementary.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/elysiaos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/endeavouros.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/enux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/exe.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/fedora-coreos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/fedora.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/fedora-kinoite.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/fedora-silverblue.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/floppinux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/garuda.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/gentoo.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/gobolinux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/homeassistant.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/hummingbird.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/index.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ipfire.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/kaisen.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/kali.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/kazeta.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/kde-linux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/kde-neon.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/kubuntu.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/libreelec.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/linuxlite.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/lmde.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/loss32.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/lubuntu.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/makulu-lindoz.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/manjaro.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/matrixos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/microos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/mint.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/mxlinux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/mx-moksha.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/nawaos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/nebios.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/nitrux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/nixos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/nobara.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/noid.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/omega.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/openmediavault.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/opensuse.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/openwrt.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/opnsense.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/oracle-linux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/origami.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ovios.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/parabola.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/parrot.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/pclinuxos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/pfsense.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/photon.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/porteus.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/postmarketos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/proxmox.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/puppy.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/pureos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/qubes.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/raspberry-pi-os.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/rebornos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/regolith.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/rhino.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/rockstor.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/rocky.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/rosa.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/shanios.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/slackware.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/slitaz.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/solus.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/steamos.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/tails.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/tinycore.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/trisquel.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/truenas-scale.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ubuntu-budgie.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ubuntu-core.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ubuntu.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ubuntu-mate.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ubuntu-studio.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ubuntu-touch.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/ultramarine.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/vanilla.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/vendefoul.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/vinari.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/void.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/vojtux.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/xigmanas.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/xubuntu.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/zorin.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://example.org/linux-guide/distros/zorinlite.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/about.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/all-distros.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/apps.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/backup-planner.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/backups.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/bash-basics.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/blog-post-1.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/blog.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/communities.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/compare-des.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/compare-packages.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/compare-two.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/countdown.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/cron.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/de-gallery.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/de-overview.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/disk-calc.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/icons-themes.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/index.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/install.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/kernel.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/levels.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/logs.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/man-pages.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/map.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/mistakes.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/mnemonics.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/my-linux-path.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/my-mac.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/my-macbook.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/my-recommendations.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/my-setup.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/my-ubuntu-install.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/my-windows-story.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/name-origins.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/network.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/nvidia.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/picker.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/popularity-chart.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/quiz.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/raid-calc.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/release-calendar.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/releases.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/docker.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/download.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/faq.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/filesystem.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/filesystems-deep.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/first-commands.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/fonts.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/gaming.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/glossary.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/google971267c540536d45.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/grub.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/hardware-picker.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/hardware.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/history-sudo.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/history.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/screenshots.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/sitemap.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/ssh-guide.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/swap-calc.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/terminal-cheatsheet.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/themes.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/timeline.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/tree-interactive.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/tree.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/users-guide.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/virtualization.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/wallpapers.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/what-if.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/write-iso.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/yandex_b41091ced16d0116.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/kali/index.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/kali/kali-defend.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/kali/kali-practice.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/kali/kali-start.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/kali/kali-tools.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/boot-bios-uefi.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/boot-mbr-gpt.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/boot-recovery.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/boot-refind.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/boot-systemd-boot.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/commands-disks.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/commands-files.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/commands-network.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/commands-processes.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/commands-users.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/de-gnome.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/de-hyprland.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/de-i3.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/de-kde.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/de-sway.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/de-xfce.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/diag-dmesg.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/hw-sound.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/hw-wifi.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/index.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/install-alpine.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/install-arch.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/install-gentoo.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/install-nixos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/kernel-deep.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/perms-apparmor.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/perms-chmod.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/perms-fail2ban.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/perms-firewall.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/perms-selinux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/perms-sudoers.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/pkg-apk.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/pkg-apt.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/pkg-dnf.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/diag-iotop.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/diag-journalctl.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/diag-nethogs.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/diag-strace.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/first-setup-arch.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/first-setup-fedora.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/first-setup-kali.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/first-setup-mint.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/first-setup-ubuntu.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/fs-btrfs.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/fs-ext4.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/fs-xfs.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/fs-zfs.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/hw-amd.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/hw-bluetooth.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/hw-nvidia.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/hw-printers.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/diag-htop.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/hw-scanners.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/pkg-nix.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/pkg-pacman.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/pkg-xbps.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/pkg-zypper.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/scripts-autostart.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/scripts-bash.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/scripts-cron.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/scripts-systemd.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/scripts-timers.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/shell-bash.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/shell-fish.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/shell-nushell.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/shell-zsh.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/term-files.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/term-navigation.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/term-network.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/term-processes.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/term-text.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/tweak-conky.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/tweak-cursors.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/tweak-dotfiles.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/tweak-fonts.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/tweak-themes.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/tweak-wallpapers.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/virt-docker.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/virt-kvm.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/virt-lxc.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/virt-podman.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/virt-proxmox.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/guides/virt-virtualbox.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/openwrt.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/opnsense.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/oracle-linux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/orchis.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/origami.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ovios.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/parabola.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/parrot.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/pclinuxos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/peppermint.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/pfsense.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/photon.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/pika-os.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/pop-os.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/porteus.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/postmarketos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/proxmox.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/puppy.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/4mlinux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/aerynos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/agarimos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/almalinux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/alpine.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/alt.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/anduinos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/anotterkiosk.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/antix.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/arch.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/archcraft.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/artix.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/asahi.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/astra.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/aurora.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/avlinux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/batocera.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/bazzite.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ultramarine-linux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ultramarine.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/vanilla-os.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/vanilla.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/vendefoul.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/vinari.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/void.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/vojtux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/xigmanas.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/xubuntu.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/zenwalk.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/zorin.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/zorinlite.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/blackarch.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/blendos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/bodhi.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/bunsenlabs.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/cachyos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/calculate.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/centos-stream.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/chimera.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/chimeraos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/clear.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/crystal-linux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/cuteos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/debian.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/deepin.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/desert.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/dragora.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/easynas.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/elementary.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/elysiaos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/endeavouros.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/enux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/exe.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/fedora-coreos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/fedora-kinoite.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/fedora-silverblue.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/bedrock.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/fedora.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/libreelec.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/opensuse.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/pureos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ubuntu.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/lignux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/linuxconsole.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/linuxlite.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/lmde.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/loss32.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/lubuntu.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/makulu-lindoz.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/manjaro.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/matrixos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/microos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/mint.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/mocaccino.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/mx-moksha.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/mxlinux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/nawaos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/nebios.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/nitrux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/nixos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/nobara.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/noid.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/omarchy.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/omega.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/openmediavault.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/opensuse-aeon.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/opensuse-kalpa.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/floppinux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/garuda.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/gentoo.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/gobolinux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/grml.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/guideos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/holo.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/homeassistant.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/hummingbird.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/index.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ipfire.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/kaisen.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/kali.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/kaos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/kazeta.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/kde-linux.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/kde-neon.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/kubuntu.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/q4os.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/qubes.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/raspberry-pi-os.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/rebornos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/redcore.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/regata-os.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/regolith.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/rhino.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/rockstor.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/rocky.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/rosa.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/securityonion.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/shanios.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/slackware.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/slitaz.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/snalix.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/sodalite.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/solus.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/soplos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/steamos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/stormos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/tails.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/talos.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/tensq.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/tinycore.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/trisquel.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/truenas-scale.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/tuxedo.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ubuntu-budgie.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ubuntu-core.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ubuntu-mate.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ubuntu-studio.html</loc><changefreq>weekly</changefreq></url>
+<url><loc>https://monadei.github.io/linux-guide/distros/ubuntu-touch.html</loc><changefreq>weekly</changefreq></url>
 </urlset>
