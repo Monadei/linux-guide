@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как устроен systemd — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Как устроен systemd</h1>
+
+<p class="lead">Что такое systemd, из чего состоит, почему его критикуют.</p>
+
+<section class="kali-section">
+<h2>Что это</h2>
+<p>systemd — система инициализации (init). Первая программа, которую запускает ядро после загрузки. Дальше systemd запускает всё остальное: сервисы, таймеры, устройства.</p>
+</section>
+
+<section class="kali-section">
+<h2>Что входит в systemd</h2>
+<ul>
+<li><strong>systemd</strong> — основной init (PID 1)</li>
+<li><strong>journald</strong> — логи (journalctl)</li>
+<li><strong>logind</strong> — управление сессиями</li>
+<li><strong>networkd</strong> — сеть</li>
+<li><strong>resolved</strong> — DNS</li>
+<li><strong>timedated</strong> — время и дата</li>
+<li><strong>udevd</strong> — устройства</li>
+<li><strong>bootctl</strong> — загрузчик systemd-boot</li>
+<li><strong>coredump</strong> — дампы падений</li>
+<li><strong>tmpfiles</strong> — временные файлы</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Юниты</h2>
+<p>Юнит — единица конфигурации. Типы:</p>
+<ul>
+<li><code>.service</code> — сервис</li>
+<li><code>.timer</code> — таймер</li>
+<li><code>.socket</code> — сокет</li>
+<li><code>.target</code> — группа юнитов</li>
+<li><code>.mount</code> — точка монтирования</li>
+<li><code>.device</code> — устройство</li>
+<li><code>.path</code> — путь</li>
+</ul>
+
+<h3>Где лежат</h3>
+<pre><code>/usr/lib/systemd/system/       # системные
+/etc/systemd/system/           # пользовательские (перебивают системные)
+~/.config/systemd/user/        # для текущего пользователя</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Targets</h2>
+<p>Target — цель загрузки. Как runlevel в старых системах.</p>
+<pre><code>multi-user.target      # обычная система (без GUI)
+graphical.target       # с графическим интерфейсом
+rescue.target          # режим восстановления
+emergency.target       # минимальный режим
+reboot.target          # перезагрузка
+poweroff.target        # выключение</code></pre>
+<pre><code>systemctl get-default
+sudo systemctl set-default multi-user.target</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Основные команды</h2>
+<pre><code>systemctl status сервис
+systemctl start сервис
+systemctl stop сервис
+systemctl restart сервис
+systemctl reload сервис
+systemctl enable сервис
+systemctl disable сервис
+systemctl mask сервис              # запретить даже запуск
+systemctl unmask сервис
+systemctl list-units
+systemctl list-units --failed
+systemctl list-dependencies сервис</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Свой сервис</h2>
+<pre><code># /etc/systemd/system/myapp.service
+[Unit]
+Description=My Application
+After=network.target
+
+[Service]
+Type=simple
+User=monadei
+WorkingDirectory=/home/monadei/myapp
+ExecStart=/usr/bin/python3 /home/monadei/myapp/main.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<pre><code>sudo systemctl daemon-reload
+sudo systemctl enable --now myapp
+sudo systemctl status myapp
+journalctl -u myapp -f</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Почему критикуют</h2>
+<ul>
+<li><strong>Монолитность</strong> — делает слишком много всего</li>
+<li><strong>Не UNIX-way</strong> — «одна программа — одно дело» не соблюдается</li>
+<li><strong>Бинарные логи</strong> — journald хранит не в текстовом виде</li>
+<li><strong>Сложность</strong> — много концепций для новичка</li>
+<li><strong>Спорный лидер</strong> — Леннарт Поттеринг, автор systemd, не всем нравится</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Альтернативы</h2>
+<ul>
+<li><strong>OpenRC</strong> — Gentoo, Alpine, Artix</li>
+<li><strong>runit</strong> — Void Linux</li>
+<li><strong>s6</strong> — Artix, некоторые embedded</li>
+<li><strong>dinit</strong> — Chimera Linux</li>
+<li><strong>sysvinit</strong> — Slackware, Devuan</li>
+</ul>
+<p>Но: <strong>systemd победил</strong>. Fedora, Ubuntu, Debian, Arch, openSUSE, RHEL — все на нём. Если хочешь без systemd — Artix, Void, Alpine, Devuan.</p>
+</section>
+
+<section class="kali-section">
+<h2>Полезные команды</h2>
+<pre><code>systemd-analyze                      # время загрузки
+systemd-analyze blame                # что долго грузится
+systemd-analyze critical-chain       # цепочка зависимостей
+systemctl list-timers                # таймеры
+systemd-cgls                         # дерево cgroups
+loginctl list-sessions               # сессии
+hostnamectl                          # инфо о системе
+timedatectl                          # время
+localectl                            # локаль</code></pre>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

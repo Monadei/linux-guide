@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Команды для системы — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Команды для системы</h1>
+
+<p class="lead">systemctl, journalctl, dmesg, htop — управление системой.</p>
+
+<section class="kali-section">
+<h2>systemctl — сервисы</h2>
+<pre><code>systemctl status nginx                  # статус
+systemctl start nginx                   # запустить
+systemctl stop nginx                    # остановить
+systemctl restart nginx                 # перезапустить
+systemctl reload nginx                  # перечитать конфиг
+systemctl enable nginx                  # автозапуск
+systemctl disable nginx                 # убрать автозапуск
+systemctl is-enabled nginx
+systemctl list-units --failed           # что упало
+systemctl list-units --type=service
+systemctl list-timers                   # таймеры</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>journalctl — логи systemd</h2>
+<pre><code>journalctl                              # все логи
+journalctl -b                           # с последней загрузки
+journalctl -b -1                        # предыдущая загрузка
+journalctl -xe                          # ошибки
+journalctl -f                           # следить
+journalctl -n 50                        # последние 50 строк
+journalctl -p err                       # только ошибки
+journalctl --since "1 hour ago"
+journalctl --since today
+journalctl -u nginx                     # по юниту
+journalctl -u nginx -f
+journalctl --disk-usage
+sudo journalctl --vacuum-size=500M</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>dmesg — сообщения ядра</h2>
+<pre><code>dmesg                                   # все
+dmesg | tail -50                        # последние
+dmesg | grep -i error                   # ошибки
+dmesg -w                                # следить
+dmesg -l err                            # только ошибки
+dmesg | grep -i usb
+dmesg | grep -i wifi</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>htop, btop, top</h2>
+<pre><code>top                                     # классика
+htop                                    # удобнее
+btop                                    # красивее
+
+# В htop:
+F1 — помощь
+F3 — поиск
+F4 — фильтр
+F5 — дерево
+F6 — сортировка
+F9 — kill
+F10 — выход</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Ресурсы</h2>
+<pre><code>free -h                                 # память
+df -h                                   # место на дисках
+du -sh папка/                           # размер папки
+uptime                                  # время работы
+w                                       # кто в системе
+who                                     # то же
+last                                    # история входов
+
+# Аппаратное
+lscpu                                   # процессор
+lsblk                                   # диски
+lspci                                   # PCI-устройства
+lsusb                                   # USB-устройства
+lsmod                                   # модули ядра
+uname -a                                # инфо о ядре</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Загрузка</h2>
+<pre><code>systemd-analyze                         # время загрузки
+systemd-analyze blame                   # что долго грузится
+systemd-analyze critical-chain          # цепочка
+systemd-analyze plot > boot.svg         # график</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Питание</h2>
+<pre><code>systemctl suspend                        # сон
+systemctl hibernate                      # гибернация
+systemctl reboot                         # перезагрузка
+systemctl poweroff                       # выключение
+
+# Узнать, что блокирует сон
+systemd-inhibit --list</code></pre>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

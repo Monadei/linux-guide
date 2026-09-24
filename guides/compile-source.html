@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Компиляция из исходников — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Компиляция из исходников</h1>
+
+<p class="lead">./configure, make, make install — как собрать программу самому.</p>
+
+<section class="kali-section">
+<h2>Когда это нужно</h2>
+<ul>
+<li>Пакета нет в репозитории</li>
+<li>Нужна свежая версия</li>
+<li>Нужны особые флаги компиляции</li>
+<li>Хочешь понять, как устроена сборка</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Что понадобится</h2>
+<pre><code># Debian/Ubuntu
+sudo apt install build-essential
+
+# Fedora
+sudo dnf groupinstall "Development Tools"
+
+# Arch
+sudo pacman -S base-devel</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Классические шаги</h2>
+<pre><code># 1. Скачать исходники
+wget https://example.com/program-1.0.tar.gz
+tar -xzf program-1.0.tar.gz
+cd program-1.0
+
+# 2. Прочитать README и INSTALL
+cat README
+cat INSTALL
+
+# 3. Конфигурация
+./configure --prefix=/usr/local
+# Или с опциями:
+./configure --prefix=/usr/local --enable-feature --disable-other
+
+# 4. Сборка
+make -j$(nproc)                   # использует все ядра
+
+# 5. Установка
+sudo make install
+
+# 6. Проверка
+which program
+program --version</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Если нет ./configure</h2>
+<p>Некоторые проекты используют другие системы сборки:</p>
+<pre><code># CMake
+mkdir build && cd build
+cmake ..
+make -j$(nproc)
+sudo make install
+
+# Meson
+meson setup build
+cd build
+ninja
+sudo ninja install
+
+# Rust
+cargo build --release
+sudo cp target/release/program /usr/local/bin/
+
+# Go
+go build
+sudo cp program /usr/local/bin/</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Типичные проблемы</h2>
+
+<h3>Нет зависимости</h3>
+<pre><code>configure: error: library X not found
+# Решение: установить dev-пакет
+sudo apt install libX-dev
+sudo dnf install X-devel
+sudo pacman -S x</code></pre>
+
+<h3>Нет компилятора</h3>
+<pre><code>configure: error: C compiler not found
+sudo apt install gcc g++</code></pre>
+
+<h3>Ошибка make</h3>
+<p>Читай последние 10 строк — там обычно сказано, чего не хватает.</p>
+
+<h3>Хочешь удалить</h3>
+<pre><code># Если в исходниках осталось
+sudo make uninstall
+
+# Иначе вручную
+sudo rm /usr/local/bin/program
+sudo rm -rf /usr/local/share/program</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Правило хорошего тона</h2>
+<ul>
+<li>Сначала ищи в репозитории — <code>apt search программу</code></li>
+<li>Потом Flatpak — <code>flatpak search программу</code></li>
+<li>Потом AppImage — скачай и запусти</li>
+<li>И только потом — компиляция из исходников</li>
+</ul>
+<p><strong>Причина:</strong> пакеты из репозитория обновляются автоматически. Скомпилированные вручную — нет, придётся обновлять руками.</p>
+</section>
+
+<section class="kali-section">
+<h2>Установка в /usr/local</h2>
+<p>Если собираешь из исходников — ставь в <code>/usr/local</code>, не в <code>/usr</code>. Это не перезапишет системные пакеты.</p>
+<pre><code>./configure --prefix=/usr/local
+make
+sudo make install
+
+# Программа будет в /usr/local/bin/
+which program
+# /usr/local/bin/program</code></pre>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

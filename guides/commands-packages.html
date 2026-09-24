@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Команды для пакетов — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Команды для пакетов</h1>
+
+<p class="lead">apt, dnf, pacman, zypper — шпаргалка по пакетным менеджерам.</p>
+
+<section class="kali-section">
+<h2>Сравнительная таблица</h2>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Действие</th><th>apt</th><th>dnf</th><th>pacman</th><th>zypper</th></tr></thead>
+<tbody>
+<tr><td>Обновить индексы</td><td><code>apt update</code></td><td><code>dnf check-update</code></td><td><code>pacman -Sy</code></td><td><code>zypper refresh</code></td></tr>
+<tr><td>Обновить всё</td><td><code>apt upgrade</code></td><td><code>dnf upgrade</code></td><td><code>pacman -Syu</code></td><td><code>zypper update</code></td></tr>
+<tr><td>Установить</td><td><code>apt install</code></td><td><code>dnf install</code></td><td><code>pacman -S</code></td><td><code>zypper install</code></td></tr>
+<tr><td>Удалить</td><td><code>apt remove</code></td><td><code>dnf remove</code></td><td><code>pacman -R</code></td><td><code>zypper remove</code></td></tr>
+<tr><td>Поиск</td><td><code>apt search</code></td><td><code>dnf search</code></td><td><code>pacman -Ss</code></td><td><code>zypper search</code></td></tr>
+<tr><td>Инфо о пакете</td><td><code>apt show</code></td><td><code>dnf info</code></td><td><code>pacman -Si</code></td><td><code>zypper info</code></td></tr>
+<tr><td>Список установленных</td><td><code>apt list --installed</code></td><td><code>dnf list installed</code></td><td><code>pacman -Q</code></td><td><code>zypper se -i</code></td></tr>
+<tr><td>Очистить кеш</td><td><code>apt clean</code></td><td><code>dnf clean all</code></td><td><code>pacman -Sc</code></td><td><code>zypper clean</code></td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section class="kali-section">
+<h2>apt — подробно</h2>
+<pre><code>sudo apt update                         # обновить индексы
+sudo apt upgrade                        # обновить пакеты
+sudo apt full-upgrade                   # с удалением конфликтов
+sudo apt install имя
+sudo apt remove имя
+sudo apt purge имя                      # с конфигами
+sudo apt autoremove                     # убрать ненужное
+sudo apt search запрос
+apt show имя
+apt list --installed
+sudo apt install --reinstall имя
+sudo apt --fix-broken install</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>dnf — подробно</h2>
+<pre><code>sudo dnf upgrade --refresh
+sudo dnf install имя
+sudo dnf remove имя
+sudo dnf search запрос
+dnf info имя
+dnf list installed
+sudo dnf clean all
+dnf history
+sudo dnf history undo ID</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>pacman — подробно</h2>
+<pre><code>sudo pacman -Syu                        # обновить всё
+sudo pacman -S имя                      # установить
+sudo pacman -R имя                      # удалить
+sudo pacman -Rns имя                    # с зависимостями
+pacman -Ss запрос                       # поиск
+pacman -Si имя                          # инфо
+pacman -Q                               # установленные
+sudo pacman -Sc                         # очистить кеш
+yay -S имя                              # AUR</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Универсальные</h2>
+<pre><code># Flatpak — работает везде
+flatpak install flathub org.example.App
+flatpak list
+flatpak update
+flatpak uninstall org.example.App
+
+# Snap — на Ubuntu
+snap install имя
+snap list
+snap remove имя</code></pre>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

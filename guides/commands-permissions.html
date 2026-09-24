@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Команды для прав — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Команды для прав</h1>
+
+<p class="lead">chmod, chown, umask, ACL, sudo — управление правами.</p>
+
+<section class="kali-section">
+<h2>chmod — права доступа</h2>
+<pre><code># Числовая запись
+chmod 755 file          # rwxr-xr-x
+chmod 644 file          # rw-r--r--
+chmod 600 file          # rw------- (SSH-ключи)
+chmod 700 папка/        # rwx------
+
+# Буквенная запись
+chmod +x file           # добавить выполнение
+chmod -x file           # убрать выполнение
+chmod u+w file          # владельцу — запись
+chmod g+r file          # группе — чтение
+chmod o-r file          # остальным — убрать чтение
+
+# Рекурсивно
+chmod -R 755 папка/</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>chown — владелец</h2>
+<pre><code>sudo chown user file
+sudo chown user:group file
+sudo chown -R user:group папка/
+sudo chown --reference=file1 file2      # как у file1</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>umask — маска прав</h2>
+<p>Определяет права по умолчанию для новых файлов.</p>
+<pre><code>umask                   # показать (обычно 022)
+umask 077               # новые файлы только для меня
+
+# В ~/.bashrc или ~/.profile:
+umask 022</code></pre>
+<p>При umask 022: новые файлы получают 644, папки — 755.</p>
+</section>
+
+<section class="kali-section">
+<h2>ACL — расширенные права</h2>
+<pre><code># Установка
+sudo apt install acl
+
+# Дать доступ конкретному пользователю
+sudo setfacl -m u:monadei:rwx /var/www/
+
+# Показать ACL
+getfacl /var/www/
+
+# Удалить ACL
+setfacl -b /var/www/
+
+# По умолчанию для новых файлов в папке
+setfacl -d -m u:monadei:rwx /var/www/</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>sudo и sudoers</h2>
+<pre><code>sudo команда                        # выполнить от root
+sudo -i                             # root-shell
+sudo -u monadei команда             # от имени другого
+sudo -l                             # что я могу
+
+# Редактирование sudoers
+sudo visudo
+
+# Примеры правил в /etc/sudoers:
+monadei ALL=(ALL) ALL               # полный sudo с паролем
+monadei ALL=(ALL) NOPASSWD: ALL     # без пароля
+monadei ALL=(ALL) /usr/bin/apt      # только apt
+%admins ALL=(ALL) ALL               # вся группа</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Специальные биты</h2>
+<pre><code>chmod 4755 file         # SUID — выполнить от владельца
+chmod 2755 file         # SGID — выполнить от группы
+chmod 1777 папка/       # Sticky — удалять только свои файлы
+
+# Найти все SUID-файлы в системе
+sudo find / -perm -4000 -type f 2>/dev/null</code></pre>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

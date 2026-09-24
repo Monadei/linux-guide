@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Команды для текста — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Команды для текста</h1>
+
+<p class="lead">grep, sed, awk, cut, sort, uniq — работа с текстом.</p>
+
+<section class="kali-section">
+<h2>grep — поиск</h2>
+<pre><code>grep "текст" file.txt
+grep -r "текст" .              # рекурсивно
+grep -i "текст" file.txt       # игнорировать регистр
+grep -v "текст" file.txt       # инвертировать
+grep -c "текст" file.txt       # количество совпадений
+grep -n "текст" file.txt       # с номерами строк
+grep -E "regex" file.txt       # расширенные regex
+grep -A 3 "текст" file.txt     # 3 строки после
+grep -B 3 "текст" file.txt     # 3 строки до</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>sed — замена</h2>
+<pre><code>sed 's/старое/новое/' file.txt          # первое в строке
+sed 's/старое/новое/g' file.txt         # все вхождения
+sed -i 's/старое/новое/g' file.txt      # прямо в файле
+sed -n '5,10p' file.txt                  # строки 5-10
+sed '/шаблон/d' file.txt                # удалить строки
+sed '1d' file.txt                        # удалить первую
+sed '$d' file.txt                        # удалить последнюю
+sed 's/^/  /' file.txt                  # отступ всем строкам</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>awk — обработка колонок</h2>
+<pre><code>awk '{print $1}' file.txt               # первая колонка
+awk -F: '{print $1}' /etc/passwd        # с разделителем :
+awk '{print $1, $3}' file.txt           # две колонки
+awk '$3 > 100' file.txt                 # фильтр
+awk 'NR > 1' file.txt                   # пропустить первую
+awk '{sum += $1} END {print sum}' file.txt  # сумма
+awk 'length > 80' file.txt              # строки > 80 символов</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>cut — вырезать колонки</h2>
+<pre><code>cut -d: -f1 /etc/passwd                 # 1-я колонка
+cut -d: -f1,3 /etc/passwd               # 1-я и 3-я
+cut -c1-10 file.txt                     # символы 1-10
+cut -c1,5,10 file.txt                   # конкретные символы</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>sort и uniq</h2>
+<pre><code>sort file.txt                           # алфавитно
+sort -n file.txt                        # численно
+sort -r file.txt                        # обратный
+sort -u file.txt                        # без дублей
+sort -k2 file.txt                       # по 2-й колонке
+
+uniq file.txt                           # удалить подряд идущие дубли
+uniq -c file.txt                        # с подсчётом
+uniq -d file.txt                        # только дубли
+sort file.txt | uniq -c | sort -rn      # топ по частоте</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>wc — подсчёт</h2>
+<pre><code>wc file.txt                             # строки, слова, символы
+wc -l file.txt                          # только строки
+wc -w file.txt                          # только слова
+wc -c file.txt                          # только байты</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Полезные сочетания</h2>
+<pre><code># Топ-10 самых частых слов в файле
+cat file.txt | tr ' ' '\n' | sort | uniq -c | sort -rn | head -10
+
+# Найти все IP в логе
+grep -oE '\b[0-9]{1,3}(\.[0-9]{1,3}){3}\b' access.log | sort -u
+
+# Заменить во всех файлах
+grep -rl "старое" . | xargs sed -i 's/старое/новое/g'
+
+# Удалить пустые строки
+sed '/^$/d' file.txt
+
+# Убрать дубли строк, сохранив порядок
+awk '!seen[$0]++' file.txt</code></pre>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

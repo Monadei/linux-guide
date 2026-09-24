@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Команды для архивов — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Команды для архивов</h1>
+
+<p class="lead">tar, gzip, zip, 7z, rsync — архивы и синхронизация.</p>
+
+<section class="kali-section">
+<h2>tar — основной инструмент</h2>
+<pre><code># Создать архив
+tar -czf archive.tar.gz папка/          # gzip
+tar -cjf archive.tar.bz2 папка/         # bzip2
+tar -cJf archive.tar.xz папка/          # xz
+
+# Распаковать
+tar -xzf archive.tar.gz
+tar -xjf archive.tar.bz2
+tar -xJf archive.tar.xz
+
+# Посмотреть содержимое без распаковки
+tar -tzf archive.tar.gz
+
+# Распаковать в другую папку
+tar -xzf archive.tar.gz -C /path/to/
+
+# Исключить файлы
+tar -czf backup.tar.gz --exclude='*.log' папка/</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>gzip, bzip2, xz</h2>
+<pre><code>gzip file.txt                    # file.txt → file.txt.gz
+gunzip file.txt.gz
+bzip2 file.txt
+bunzip2 file.txt.bz2
+xz file.txt
+unxz file.txt.xz</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>zip и unzip</h2>
+<pre><code>zip archive.zip file1 file2
+zip -r archive.zip папка/
+zip -e archive.zip file.txt      # с паролем
+
+unzip archive.zip
+unzip archive.zip -d /path/
+unzip -l archive.zip             # список
+unzip -p archive.zip file.txt    # в stdout</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>7z — максимальное сжатие</h2>
+<pre><code>sudo apt install p7zip-full
+
+7z a archive.7z папка/
+7z x archive.7z
+7z l archive.7z
+7z a -p archive.7z папка/        # с паролем</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>rsync — синхронизация</h2>
+<pre><code># Основное
+rsync -avh источник/ назначение/
+rsync -avh --progress источник/ назначение/
+rsync -avh --delete источник/ назначение/    # удалить лишнее
+
+# На удалённый сервер
+rsync -avh -e ssh ~/Documents/ user@server:/backup/
+
+# С сервера
+rsync -avh user@server:/data/ ~/local/
+
+# Исключить файлы
+rsync -avh --exclude='*.log' источник/ назначение/
+
+# Только список изменений (dry-run)
+rsync -avhn источник/ назначение/</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Флаги rsync</h2>
+<ul>
+<li><code>-a</code> — архивный режим (права, время, симлинки)</li>
+<li><code>-v</code> — verbose</li>
+<li><code>-h</code> — human-readable</li>
+<li><code>-z</code> — сжатие при передаче</li>
+<li><code>-P</code> — прогресс + продолжить</li>
+<li><code>--delete</code> — удалять файлы, которых нет в источнике</li>
+<li><code>--exclude</code> — исключить по шаблону</li>
+<li><code>-n</code> — dry-run (не делать, только показать)</li>
+</ul>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

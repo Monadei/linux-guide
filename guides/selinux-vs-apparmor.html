@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SELinux vs AppArmor — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>SELinux vs AppArmor</h1>
+
+<p class="lead">Мандатный доступ в Linux — что выбрать и почему.</p>
+
+<section class="kali-section">
+<h2>Что общего</h2>
+<ul>
+<li>Оба — системы мандатного доступа (MAC)</li>
+<li>Ограничивают, что может делать программа, даже если её взломали</li>
+<li>Работают поверх обычных прав (chmod/chown)</li>
+<li>Включены по умолчанию в большинстве дистрибутивов</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Ключевое различие</h2>
+<table class="data">
+<thead><tr><th></th><th>SELinux</th><th>AppArmor</th></tr></thead>
+<tbody>
+<tr><td>Подход</td><td>По меткам (labels)</td><td>По путям (paths)</td></tr>
+<tr><td>Сложность</td><td>Высокая</td><td>Средняя</td></tr>
+<tr><td>Где по умолчанию</td><td>Fedora, RHEL, CentOS</td><td>Ubuntu, SUSE, Debian</td></tr>
+<tr><td>Гибкость</td><td>Очень гибкий</td><td>Проще настроить</td></tr>
+<tr><td>Документация</td><td>Огромная, но сложная</td><td>Проще</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="kali-section">
+<h2>SELinux — подробнее</h2>
+<p><strong>Как работает:</strong> каждому файлу и процессу присваивается метка (контекст). Процесс может обратиться к файлу, только если его метка разрешена.</p>
+<pre><code># Проверка
+getenforce
+sestatus
+
+# Режимы
+sudo setenforce 0   # Permissive
+sudo setenforce 1   # Enforcing
+
+# Контексты
+ls -Z /var/www/
+sudo chcon -t httpd_sys_content_t /var/www/html/file.html
+sudo restorecon -Rv /var/www/
+
+# Булевы значения
+getsebool -a | grep httpd
+sudo setsebool -P httpd_can_network_connect on
+
+# Логи
+sudo ausearch -m avc -ts recent
+sudo sealert -a /var/log/audit/audit.log</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>AppArmor — подробнее</h2>
+<p><strong>Как работает:</strong> каждому приложению — свой профиль. Профиль описывает, к каким путям и с какими правами приложение может обращаться.</p>
+<pre><code># Проверка
+sudo aa-status
+
+# Профили
+ls /etc/apparmor.d/
+
+# Режимы
+sudo aa-complain /usr/bin/firefox   # только логирует
+sudo aa-enforce /usr/bin/firefox    # блокирует
+sudo aa-disable /usr/bin/firefox    # отключить
+
+# Логи
+sudo journalctl -k | grep apparmor
+sudo dmesg | grep apparmor</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Когда что использовать</h2>
+<ul>
+<li><strong>Fedora / RHEL / AlmaLinux / Rocky</strong> — SELinux. Он там по умолчанию, не трогай.</li>
+<li><strong>Ubuntu / Debian / SUSE</strong> — AppArmor. Тоже по умолчанию.</li>
+<li><strong>Свой сервер</strong> — что установлено в дистрибутиве.</li>
+<li><strong>Пентест</strong> — на Kali AppArmor, на RHEL — SELinux.</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Что делать, если блокирует</h2>
+<h3>AppArmor</h3>
+<pre><code># Временно — complain-режим
+sudo aa-complain /usr/bin/программа
+
+# Логи
+sudo journalctl -k | grep apparmor</code></pre>
+
+<h3>SELinux</h3>
+<pre><code># Временно — permissive
+sudo setenforce 0
+
+# Найти проблему
+sudo ausearch -m avc -ts recent
+
+# Логи
+sudo sealert -a /var/log/audit/audit.log</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Не отключай полностью</h2>
+<p>Многие отключают SELinux или AppArmor, когда что-то не работает. <strong>Это плохая идея.</strong> Лучше:</p>
+<ol>
+<li>Понять, что блокируется (логи)</li>
+<li>Разрешить конкретное действие (правило, булево значение)</li>
+<li>Или перевести в permissive-режим (логирует, но не блокирует)</li>
+</ol>
+<p>Мандатный доступ — важная часть безопасности. Отключать его ради «чтобы работало» — как снимать замок с двери, потому что потерял ключ.</p>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>

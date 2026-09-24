@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wayland vs X11 — Monade OS</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="../index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="../index.html">Главная</a>
+<a href="../distros/index.html">Дистрибутивы</a>
+<a href="../guides/index.html" class="active">Гайды</a>
+<a href="../problems/index.html">Проблемы</a>
+<a href="../kali/index.html">Kali</a>
+<a href="../about.html">Обо мне</a>
+</nav></div></header>
+<main class="container page">
+<h1>Wayland vs X11</h1>
+
+<p class="lead">Что такое Wayland и X11, в чём разница, что выбрать.</p>
+
+<section class="kali-section">
+<h2>Коротко</h2>
+<ul>
+<li><strong>X11</strong> — старый протокол графики (1984). Работает, но устарел.</li>
+<li><strong>Wayland</strong> — современный протокол (2008). Заменяет X11.</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Почему X11 устарел</h2>
+<ul>
+<li>Задержки при вводе (input lag) — из-за трёх процессов: сервер, композитор, приложение</li>
+<li>Проблемы с HiDPI и разными мониторами</li>
+<li>Нет нормальной изоляции приложений</li>
+<li>Теряется плавность при 144+ Гц</li>
+<li>Код огромный и запутанный</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Что даёт Wayland</h2>
+<ul>
+<li>Плавнее, быстрее, меньше лагов</li>
+<li>Отличная поддержка HiDPI и нескольких мониторов</li>
+<li>Изоляция приложений (нет доступа к чужим окнам)</li>
+<li>Нормальная работа 144+ Гц</li>
+<li>Жесты тачпада</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Минусы Wayland</h2>
+<ul>
+<li>NVIDIA — долго был плохо, сейчас лучше с драйвером 495+</li>
+<li>Некоторые приложения не работают нативно (XWayland спасает)</li>
+<li>Скриншотеры типа Flameshot могут глючить</li>
+<li>Запись экрана через OBS — иногда нужно настраивать</li>
+<li>Терминальные мультиплексоры типа tmux — ок, но есть нюансы</li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>Что где по умолчанию</h2>
+<table class="data">
+<thead><tr><th>Система</th><th>Протокол</th></tr></thead>
+<tbody>
+<tr><td>Ubuntu 22.04+</td><td>Wayland (кроме NVIDIA — X11)</td></tr>
+<tr><td>Fedora 40+</td><td>Wayland (включая NVIDIA)</td></tr>
+<tr><td>KDE Plasma 6</td><td>Wayland</td></tr>
+<tr><td>GNOME 45+</td><td>Wayland</td></tr>
+<tr><td>Xfce</td><td>X11 (Wayland в разработке)</td></tr>
+<tr><td>Cinnamon</td><td>X11</td></tr>
+<tr><td>MATE</td><td>X11</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="kali-section">
+<h2>Как узнать, что у тебя</h2>
+<pre><code>echo $XDG_SESSION_TYPE
+# Выведет "wayland" или "x11"
+
+loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Как переключиться</h2>
+<h3>Ubuntu / GNOME</h3>
+<p>На экране входа нажми на шестерёнку → выбери «GNOME on Xorg».</p>
+
+<h3>Fedora / KDE</h3>
+<p>На экране входа внизу справа выбери «Plasma (X11)».</p>
+
+<h3>Постоянно — через GDM</h3>
+<pre><code>sudo nano /etc/gdm3/custom.conf
+# Раскомментируй:
+# WaylandEnable=false
+sudo systemctl restart gdm3</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>NVIDIA + Wayland</h2>
+<p>С драйвером 495+ работает. Нужно включить:</p>
+<pre><code>sudo nano /etc/default/grub
+# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nvidia-drm.modeset=1"
+sudo update-grub
+sudo reboot</code></pre>
+<p>Проверка:</p>
+<pre><code>nvidia-smi
+echo $XDG_SESSION_TYPE</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Итог</h2>
+<ul>
+<li><strong>Intel / AMD GPU</strong> — смело на Wayland</li>
+<li><strong>NVIDIA 495+</strong> — Wayland работает, но иногда с нюансами</li>
+<li><strong>Старые NVIDIA</strong> — сиди на X11</li>
+<li><strong>Xfce / MATE / Cinnamon</strong> — пока X11</li>
+<li><strong>Нужен Flameshot / старые приложения</strong> — X11</li>
+</ul>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+</body>
+</html>
