@@ -831,8 +831,9 @@
 <ul style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.88rem;">
 <li><strong>Mint 22:</strong> драйвер уже в ISO</li>
 <li><strong>Fedora:</strong> <code>sudo dnf install akmod-wl</code> (может не собраться на новых ядрах)</li>
-<li><strong>Arch/CachyOS:</strong> <code>sudo pacman -S broadcom-wl-dkms</code></li>
-<li><strong>Ubuntu/Mint/Debian:</strong> <code>sudo apt install broadcom-sta-dkms</code></li>
+<li><strong>Arch / Omarchy / CachyOS:</strong> <code>sudo pacman -S broadcom-wl-dkms</code></li>
+<li><strong>Ubuntu / Mint / Debian / Zorin / Pop!_OS:</strong> <code>sudo apt install broadcom-sta-dkms</code></li>
+<li><strong>Если akmod-wl не работает:</strong> USB Wi-Fi dongle или телефонный tethering</li>
 </ul>
 </div>
 
@@ -841,6 +842,35 @@
 
 
 <div class="video-section">
+<div class="video-cat">🎥 Установка Linux на MacBook Pro 2014</div>
+
+<a class="video-card" href="https://www.youtube.com/watch?v=D7wOcIvWdxc" target="_blank" rel="noopener">
+<span class="vc-icon">🍎</span>
+<span class="vc-info">
+<div class="vc-title">Linux Mint 21 на 10-летнем Mac! (Veronica Explains)</div>
+<div class="vc-desc">Полный разбор: почему Mint, загрузка с USB, установка, первые шаги, настройка панели, установка приложений. Отличное видео для новичков.</div>
+<span class="vc-source">YouTube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://www.youtube.com/watch?v=x4nbafBOB4Y" target="_blank" rel="noopener">
+<span class="vc-icon">🍎</span>
+<span class="vc-info">
+<div class="vc-title">Noob Guide to Installing Linux Mint on 2014 MacBook Air</div>
+<div class="vc-desc">Пошаговый гайд для новичков. Работает на любом Intel Mac до 2018 (без T2 чипа). Показано как создать USB, загрузиться, установить.</div>
+<span class="vc-source">YouTube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://www.youtube.com/results?search_query=install+linux+macbook+pro+2014" target="_blank" rel="noopener">
+<span class="vc-icon">🔍</span>
+<span class="vc-info">
+<div class="vc-title">Ищи больше: установка Linux на MacBook Pro 2014</div>
+<div class="vc-desc">Поиск на YouTube по запросу. Много видео на английском, но с субтитрами понятно.</div>
+<span class="vc-source">YouTube Search</span>
+</span>
+</a>
+
 <h2>📺 Видео-гайды по дистрибутивам</h2>
 <p class="video-intro">Собрал видео, которые сам смотрел. Все на русском. Rutube — работает без VPN.</p>
 
@@ -944,6 +974,48 @@
 <li><a href="https://www.youtube.com/results?search_query=установка+nixos+на+русском" target="_blank" rel="noopener">NixOS — установка на русском</a></li>
 <li><a href="https://www.youtube.com/results?search_query=установка+debian+на+русском" target="_blank" rel="noopener">Debian — установка на русском</a></li>
 </ul>
+
+<div class="rec-card" style="border-left-color: #8b5cf6;">
+<span class="rec-num" style="background: #8b5cf6;">✓</span>
+<h3>Omarchy</h3>
+<p class="rec-why"><strong>Проверено.</strong> Автор блога DeepakNess поставил Omarchy на свой десятилетний MacBook Pro после Fedora и Mint. «Установился чисто, загрузился быстро, всё просто работало». Arch-based, Hyprland, всё из коробки. Wi-Fi Broadcom лечится через AUR.</p>
+<a href="distros/omarchy.html">Об Omarchy →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #8b5cf6;">
+<span class="rec-num" style="background: #8b5cf6;">✓</span>
+<h3>Arch Linux</h3>
+<p class="rec-why"><strong>Проверено.</strong> Arch Wiki содержит отдельную страницу для MacBookPro11,x (твоя модель). Там всё: Broadcom Wi-Fi (<code>broadcom-wl-dkms</code>), тачпад, HiDPI, звук, спящий режим. Загрузчик — systemd-boot или GRUB.</p>
+<a href="distros/arch.html">Об Arch →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #3b82f6;">
+<span class="rec-num" style="background: #3b82f6;">✓</span>
+<h3>Debian</h3>
+<p class="rec-why"><strong>Проверено.</strong> Пользователь на Debian Wiki установил Debian 13 Trixie на MacBookPro11,2 (15" Mid 2014). Wi-Fi работает через offline .deb пакет Broadcom. GNOME работает лучше, чем KDE.</p>
+<a href="distros/debian.html">О Debian →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #3b82f6;">
+<span class="rec-num" style="background: #3b82f6;">✓</span>
+<h3>Zorin OS</h3>
+<p class="rec-why"><strong>Проверено.</strong> Пользователь на feddit.fr поставил Zorin на MacBook Pro 2015. «Zorin и Mint работают лучше всего при первой установке». Самый macOS-подобный интерфейс, лёгкий. Wi-Fi: broadcom-sta-dkms.</p>
+<a href="distros/zorin.html">О Zorin →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #ff9800;">
+<span class="rec-num" style="background: #ff9800;">⚠</span>
+<h3>Ubuntu 22.04.5 LTS</h3>
+<p class="rec-why">На MacBook 2012–2017 Ubuntu 24.04 работает, но если проблемы — 22.04.5 LTS может быть стабильнее. Внимание: Ubuntu 25.04 имеет баг с загрузкой на Intel Mac (чёрный экран). Wi-Fi: broadcom-sta-dkms.</p>
+<a href="distros/ubuntu.html">Об Ubuntu →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #2196f3;">
+<span class="rec-num" style="background: #2196f3;">AI</span>
+<h3>Pop!_OS</h3>
+<p class="rec-why">Рекомендуется для AI-задач на старых Mac. Отдельный ISO для NVIDIA. Тот же Ubuntu, но удобнее. Wi-Fi: broadcom-sta-dkms.</p>
+<a href="distros/pop-os.html">О Pop!_OS →</a>
+</div>
 </div>
 </div>
 
