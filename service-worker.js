@@ -1,4 +1,4 @@
-const CACHE = 'monade-os-v31';
+const CACHE = 'monade-os-v41';
 const ASSETS = [
   './',
   './index.html',
