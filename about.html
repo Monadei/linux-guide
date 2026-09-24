@@ -720,16 +720,129 @@
 <div class="about-block">
 <h2>5 дистрибутивов, которые советую</h2>
 <p style="color:var(--muted);">Не топ-5 вообще, а мои личные. Те, что сам ставил или ставлю.</p>
+
 <div class="rec-grid">
+
 <div class="rec-card">
 <span class="rec-num">1</span>
 <h3>Arch Linux</h3>
 <p class="rec-why">Для тех, кто хочет понять, как всё устроено. Даже если не останешься — узнаешь Linux в разы лучше после нескольких установок. Arch Wiki — лучший учебник в мире Linux.</p>
 <a href="distros/arch.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">2</span>
+<h3>Fedora</h3>
+<p class="rec-why">Мой первый Linux на MacBook. Свежие пакеты, GNOME на Wayland, современные технологии быстрее всех. На моём MacBook 2014 работала быстрее macOS.</p>
+<a href="distros/fedora.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">3</span>
+<h3>Ubuntu</h3>
+<p class="rec-why">С него начинают все, и не зря. Огромное сообщество, ответ на любой вопрос гуглится за минуту. Именно Ubuntu я использую как основную систему.</p>
+<a href="distros/ubuntu.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">4</span>
+<h3>NixOS</h3>
+<p class="rec-why">Если однажды надоест «настраивать систему заново». Вся система в одном конфиге, атомарные обновления, откаты. Кривая обучения крутая, но потом не захочется возвращаться.</p>
+<a href="distros/nixos.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">5</span>
+<h3>Debian</h3>
+<p class="rec-why">Фундамент, на котором стоит пол-Linux. Один раз поставил — работает годами. Если нужна система, которая не подведёт — сервер, домашний ПК родителям.</p>
+<a href="distros/debian.html">Подробнее →</a>
+</div>
+
+</div>
+</div>
+
+<div class="about-block">
+<h2>Кому что</h2>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Если ты…</th><th>Попробуй</th></tr></thead>
+<tbody>
+<tr><td>Первый раз ставишь Linux</td><td><a href="distros/ubuntu.html">Ubuntu</a> или <a href="distros/mint.html">Linux Mint</a></td></tr>
+<tr><td>Хочешь свежие технологии</td><td><a href="distros/fedora.html">Fedora</a></td></tr>
+<tr><td>Хочешь понять Linux изнутри</td><td><a href="distros/arch.html">Arch</a></td></tr>
+<tr><td>Хочешь «поставил и забыл»</td><td><a href="distros/debian.html">Debian</a></td></tr>
+<tr><td>Хочешь декларативную систему</td><td><a href="distros/nixos.html">NixOS</a></td></tr>
+<tr><td>MacBook старый</td><td><a href="my-mac.html">Смотри страницу про мак</a></td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="about-block" style="border-left-color: #a78bfa;">
+<h2>🖥️ Дистрибутивы для MacBook Pro 2014</h2>
+<p style="color:var(--muted); margin-bottom: 1rem;">Что реально встаёт на MacBookPro11,x. По опыту пользователей и моему.</p>
+
+<div class="rec-grid">
+
+<div class="rec-card" style="border-left-color: #4caf50;">
+<span class="rec-num" style="background: #4caf50;">✓</span>
+<h3>Linux Mint</h3>
+<p class="rec-why"><strong>Проверено.</strong> Есть скрипт <a href="https://github.com/ksylvan/mintbook" target="_blank">mintbook</a> для MacBook Pro 2013–2015 — решает Wi-Fi Broadcom BCM4360, создаёт USB, ведёт по шагам. Cinnamon, всё из коробки. Wi-Fi драйвер в ISO Mint 22.</p>
+<a href="distros/mint.html">О Mint →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #4caf50;">
+<span class="rec-num" style="background: #4caf50;">✓</span>
+<h3>Fedora KDE</h3>
+<p class="rec-why"><strong>Проверено.</strong> Пользователь использовал 30 дней на точно такой же модели. Wi-Fi лечится: <code>sudo dnf install akmod-wl</code>. Работает быстрее macOS. Камера — facetimehd.</p>
+<a href="distros/fedora.html">О Fedora →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #ff9800;">
+<span class="rec-num" style="background: #ff9800;">⚠</span>
+<h3>Ultramarine Linux</h3>
+<p class="rec-why">Fedora-based, дружелюбнее к железу. На MacBook 2014 работал. Wi-Fi та же проблема, нужен dongle или akmod-wl.</p>
+<a href="distros/ultramarine.html">Об Ultramarine →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #ff9800;">
+<span class="rec-num" style="background: #ff9800;">⚠</span>
+<h3>CachyOS</h3>
+<p class="rec-why">Arch-based с оптимизацией. Ставили на MacBook Pro Mid-2014. Wi-Fi: <code>sudo pacman -S broadcom-wl-dkms</code>. Есть нюансы с загрузчиком — выбирай GRUB.</p>
+<a href="distros/cachyos.html">О CachyOS →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #2196f3;">
+<span class="rec-num" style="background: #2196f3;">AI</span>
+<h3>Pop!_OS</h3>
+<p class="rec-why">Рекомендуется для AI-задач на старых Mac. Отдельный ISO для NVIDIA. Тот же Ubuntu, но удобнее.</p>
+<a href="distros/pop-os.html">О Pop!_OS →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #2196f3;">
+<span class="rec-num" style="background: #2196f3;">✓</span>
+<h3>Ubuntu</h3>
+<p class="rec-why">Работает, но на слабых CPU может тормозить. Ubuntu 22.04.5 LTS может быть отзывчивее, чем 24.04. Wi-Fi: <code>broadcom-sta-dkms</code>.</p>
+<a href="distros/ubuntu.html">Об Ubuntu →</a>
+</div>
+
+</div>
+
+<div style="margin-top: 1.5rem; padding: 1rem; background: var(--panel-2); border-left: 3px solid #ff5555; border-radius: 0 4px 4px 0;">
+<strong style="color: #ff5555;">⚠ Wi-Fi Broadcom BCM4360</strong> — главная проблема на всех дистрибутивах. Решение:
+<ul style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.88rem;">
+<li><strong>Mint 22:</strong> драйвер уже в ISO</li>
+<li><strong>Fedora:</strong> <code>sudo dnf install akmod-wl</code> (может не собраться на новых ядрах)</li>
+<li><strong>Arch/CachyOS:</strong> <code>sudo pacman -S broadcom-wl-dkms</code></li>
+<li><strong>Ubuntu/Mint/Debian:</strong> <code>sudo apt install broadcom-sta-dkms</code></li>
+</ul>
+</div>
+
+<p style="margin-top: 1rem;"><a href="my-mac.html" class="btn">Подробнее про MacBook →</a></p>
+</div>
+
 
 <div class="video-section">
 <h2>📺 Видео-гайды по дистрибутивам</h2>
-<p class="video-intro">Собрал видео, которые сам смотрел или которые советуют. Все на русском. Rutube — работает без VPN.</p>
+<p class="video-intro">Собрал видео, которые сам смотрел. Все на русском. Rutube — работает без VPN.</p>
 
 <div class="video-cat">Arch Linux</div>
 
@@ -737,7 +850,7 @@
 <span class="vc-icon">⚡</span>
 <span class="vc-info">
 <div class="vc-title">Самая простая установка Arch Linux и KDE Plasma (archinstall, rufus)</div>
-<div class="vc-desc">Пошагово: скачивание ISO, запись через Rufus, разметка диска, archinstall, настройка KDE, pacman, yay, AUR.</div>
+<div class="vc-desc">Пошагово: скачивание ISO, запись через Rufus, разметка диска, archinstall, настройка KDE.</div>
 <span class="vc-source">Rutube</span>
 </span>
 </a>
@@ -835,50 +948,7 @@
 </div>
 
 </div>
-<div class="rec-card">
-<span class="rec-num">2</span>
-<h3>Fedora</h3>
-<p class="rec-why">Мой первый Linux на MacBook. Свежие пакеты, GNOME на Wayland, современные технологии быстрее всех. На моём MacBook 2014 работала быстрее macOS.</p>
-<a href="distros/fedora.html">Подробнее →</a>
-</div>
-<div class="rec-card">
-<span class="rec-num">3</span>
-<h3>Ubuntu</h3>
-<p class="rec-why">С него начинают все, и не зря. Огромное сообщество, ответ на любой вопрос гуглится за минуту. Именно Ubuntu я использую как основную систему.</p>
-<a href="distros/ubuntu.html">Подробнее →</a>
-</div>
-<div class="rec-card">
-<span class="rec-num">4</span>
-<h3>NixOS</h3>
-<p class="rec-why">Если однажды надоест «настраивать систему заново». Вся система в одном конфиге, атомарные обновления, откаты. Кривая обучения крутая, но потом не захочется возвращаться.</p>
-<a href="distros/nixos.html">Подробнее →</a>
-</div>
-<div class="rec-card">
-<span class="rec-num">5</span>
-<h3>Debian</h3>
-<p class="rec-why">Фундамент, на котором стоит пол-Linux. Один раз поставил — работает годами. Если нужна система, которая не подведёт — сервер, домашний ПК родителям.</p>
-<a href="distros/debian.html">Подробнее →</a>
-</div>
-</div>
-</div>
 
-<div class="about-block">
-<h2>Кому что</h2>
-<div class="table-wrap"><table class="data">
-<thead><tr><th>Если ты…</th><th>Попробуй</th></tr></thead>
-<tbody>
-<tr><td>Первый раз ставишь Linux</td><td><a href="distros/ubuntu.html">Ubuntu</a> или <a href="distros/mint.html">Linux Mint</a></td></tr>
-<tr><td>Хочешь свежие технологии</td><td><a href="distros/fedora.html">Fedora</a></td></tr>
-<tr><td>Хочешь понять Linux изнутри</td><td><a href="distros/arch.html">Arch</a></td></tr>
-<tr><td>Хочешь «поставил и забыл»</td><td><a href="distros/debian.html">Debian</a></td></tr>
-<tr><td>Хочешь декларативную систему</td><td><a href="distros/nixos.html">NixOS</a></td></tr>
-<tr><td>MacBook старый</td><td><a href="my-mac.html">Смотри страницу про мак</a></td></tr>
-</tbody>
-</table></div>
-</div>
-</div>
-
-<!-- ПАНЕЛЬ 5: БЛОГ -->
 <div class="about-panel" data-panel="blog">
 <div class="about-block">
 <h2>Блог</h2>
