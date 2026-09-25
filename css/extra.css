@@ -2044,3 +2044,228 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
   transform: scale(0);
   transition: opacity 0.1s, transform 0.1s;
 }
+
+
+/* ============================================
+   ХЛЕБНЫЕ КРОШКИ
+   ============================================ */
+.breadcrumbs-nav {
+  padding: 0.5rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.breadcrumbs-nav a {
+  color: var(--muted);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  transition: 0.15s;
+}
+.breadcrumbs-nav a:hover {
+  color: var(--accent);
+  background: var(--panel);
+  text-decoration: none;
+}
+.breadcrumbs-nav .bc-sep {
+  color: var(--border);
+}
+.breadcrumbs-nav span:not(.bc-sep) {
+  color: var(--accent);
+}
+
+/* ============================================
+   КНОПКА НАЗАД
+   ============================================ */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  transition: 0.15s;
+}
+.back-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.back-btn:active {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ============================================
+   ПОХОЖИЕ ДИСТРИБУТИВЫ
+   ============================================ */
+.related-section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border);
+}
+.related-section h2 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.1rem;
+  border: none;
+  padding: 0;
+}
+.related-section h2::before { content: ""; }
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+.related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.9rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: 0.15s;
+}
+.related-card:hover {
+  border-left-color: var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.related-card strong {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.related-card span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ============================================
+   СТРЕЛКИ ← → МЕЖДУ СТРАНИЦАМИ
+   ============================================ */
+.page-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border);
+  flex-wrap: wrap;
+}
+.page-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: 0.15s;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.page-nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+.page-nav a.pn-home {
+  background: transparent;
+  color: var(--accent);
+  border-style: dashed;
+}
+.page-nav .pn-disabled {
+  color: var(--border);
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   МОБИЛЬНАЯ ВЕРСИЯ — все элементы
+   ============================================ */
+@media (max-width: 768px) {
+  /* Крошки — компактные */
+  .breadcrumbs-nav {
+    font-size: 0.78rem;
+    padding: 0.4rem 0 0.8rem;
+    gap: 0.2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .breadcrumbs-nav::-webkit-scrollbar { display: none; }
+  .breadcrumbs-nav a,
+  .breadcrumbs-nav span {
+    flex-shrink: 0;
+  }
+  
+  /* Кнопка назад — крупная */
+  .back-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    min-height: 48px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Похожие — 1 колонка */
+  .related-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .related-card {
+    padding: 1rem;
+    min-height: 70px;
+    border-radius: 6px;
+  }
+  .related-card:active {
+    background: var(--panel-2);
+    transform: scale(0.98);
+  }
+  
+  /* Стрелки — вертикально */
+  .page-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .page-nav a,
+  .page-nav .pn-disabled {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    min-height: 48px;
+    border-radius: 6px;
+  }
+  .page-nav a:active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .page-nav a.pn-home {
+    order: 2;
+  }
+  .page-nav .pn-prev { order: 1; }
+  .page-nav .pn-next { order: 3; }
+}
