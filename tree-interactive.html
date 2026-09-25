@@ -1,638 +1,459 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Генеалогическое древо — Monade OS</title>
+<title>Древо дистрибутивов — Monade OS</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/extra.css">
 <link rel="stylesheet" href="css/mobile.css">
 <link rel="stylesheet" href="css/animations.css">
 <link rel="stylesheet" href="css/liquid-glass.css">
 <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-<meta name="yandex-verification" content="b41091ced16d0116" />
-<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
-<script data-goatcounter="https://monadeos.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header class="site-header"><div class="container header-inner">
 <a href="index.html" class="logo">Monade OS</a>
 <nav class="nav">
-<a href="index.html">Главная</a><a href="download.html">Как скачать</a>
-<a href="install.html">Как установить</a><a href="history.html">История</a>
-<a href="distros/index.html">Дистрибутивы</a><a href="guides/index.html">Гайды</a>
-<a href="choose/index.html">Что выбрать</a><a href="kali/index.html">Kali</a>
+<a href="index.html">Главная</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="guides/index.html">Гайды</a>
+<a href="problems/index.html">Проблемы</a>
+<a href="kali/index.html">Kali</a>
 <a href="about.html">Обо мне</a>
 </nav></div></header>
 
 <main class="container page">
-<h1>Генеалогическое древо дистрибутивов</h1>
-<p class="lead">Кто от кого произошёл. Кликай на узлы — перейдёшь на страницу. Тяни мышью — двигай. Колёсиком — зум.</p>
+<h1>Генеалогическое древо</h1>
+<p class="lead">Все дистрибутивы на сайте в виде дерева. С годами выпуска. Кликай по стрелкам — раскрывай ветви.</p>
 
 <style>
-.tree-container {
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  min-height: 600px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 1.5rem 0;
-  backdrop-filter: blur(10px);
-}
-
-#tree-svg {
-  width: 100%;
-  height: 100%;
-  cursor: grab;
-  user-select: none;
-}
-#tree-svg:active { cursor: grabbing; }
-
-.tree-controls {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  z-index: 10;
-}
-.tree-btn {
-  background: color-mix(in srgb, var(--panel) 85%, transparent);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
-  color: var(--text);
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.15s;
-}
-.tree-btn:hover {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
-}
-
-.tree-legend {
+.tree-toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem 0;
-  font-size: 0.85rem;
-}
-.tree-legend span {
-  display: inline-flex;
+  gap: 0.5rem;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.7rem;
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 6px;
+}
+.tree-toolbar input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.8rem;
+  font-family: inherit;
+  border-radius: 4px;
+}
+.tree-toolbar input:focus { outline: none; border-color: var(--accent); }
+.tree-toolbar button {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem;
+  font-family: inherit;
+  font-size: 0.85rem;
   cursor: pointer;
+  border-radius: 4px;
+}
+.tree-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+
+.tree-list {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  overflow-x: auto;
+}
+
+.tree-item { position: relative; }
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.1rem 0;
+  border-radius: 3px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.tree-row:hover { background: var(--panel-2); }
+
+.tree-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform 0.15s, color 0.15s;
+}
+.tree-toggle:hover { color: var(--accent); }
+.tree-toggle.expanded { transform: rotate(90deg); }
+.tree-toggle.empty { visibility: hidden; }
+
+.tree-name {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
   transition: 0.15s;
 }
-.tree-legend span:hover { border-color: var(--accent); }
-.tree-legend span.disabled { opacity: 0.35; text-decoration: line-through; }
-.tree-legend i {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
+.tree-name:hover {
+  color: var(--accent);
+  background: var(--bg);
+  text-decoration: none;
+}
+.tree-name.no-link { color: var(--muted); cursor: default; }
+.tree-name.no-link:hover { color: var(--muted); background: transparent; }
+.tree-name.search-match {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
 }
 
-.node rect {
-  transition: 0.2s;
-  cursor: pointer;
-}
-.node:hover rect {
-  filter: brightness(1.3);
-  stroke-width: 3;
-}
-.node:hover text {
-  fill: #fff;
-}
-.node text {
-  pointer-events: none;
-  font-family: "JetBrains Mono", monospace;
+.tree-year {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-left: 0.3rem;
 }
 
-.link {
-  stroke: #444;
-  stroke-width: 1.5;
-  fill: none;
-  transition: 0.2s;
+.tree-children {
+  margin-left: 1rem;
+  border-left: 1px dashed var(--border);
+  padding-left: 0.8rem;
 }
-.link.highlighted {
-  stroke: var(--accent);
-  stroke-width: 3;
-}
+.tree-children.collapsed { display: none; }
 
-.tooltip {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.9);
-  color: var(--text);
-  padding: 0.5rem 0.8rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  pointer-events: none;
-  z-index: 100;
-  opacity: 0;
-  transition: opacity 0.15s;
-  border: 1px solid var(--accent);
-  font-family: "JetBrains Mono", monospace;
+.tree-count {
+  color: var(--accent-dim);
+  font-size: 0.75rem;
+  margin-left: 0.3rem;
 }
-.tooltip.show { opacity: 1; }
 
 @media (max-width: 768px) {
-  .tree-container { height: 60vh; min-height: 400px; }
-  .tree-controls { top: 0.5rem; right: 0.5rem; }
-  .tree-btn { width: 36px; height: 36px; font-size: 0.9rem; }
-  .tree-legend { font-size: 0.75rem; gap: 0.5rem; }
-  .tree-legend span { padding: 0.25rem 0.5rem; }
+  .tree-list { padding: 1rem; font-size: 0.82rem; }
+  .tree-children { margin-left: 0.5rem; padding-left: 0.5rem; }
 }
 </style>
 
-<div class="tree-legend" id="legend">
-<span data-family="debian"><i style="background:#d70a53"></i>Debian</span>
-<span data-family="redhat"><i style="background:#c74634"></i>Red Hat</span>
-<span data-family="arch"><i style="background:#1793d1"></i>Arch</span>
-<span data-family="suse"><i style="background:#73ba25"></i>SUSE</span>
-<span data-family="independent"><i style="background:#7c6f64"></i>Независимые</span>
-<span data-family="security"><i style="background:#8b5cf6"></i>Безопасность</span>
-<span data-family="games"><i style="background:#c92a2a"></i>Игровые</span>
+<div class="tree-toolbar">
+<input type="search" id="tree-search" placeholder="🔍 Найти дистрибутив...">
+<button onclick="expandAll()">Раскрыть всё</button>
+<button onclick="collapseAll()">Свернуть всё</button>
 </div>
 
-<div class="tree-container" id="tree-container">
-  <div class="tree-controls">
-    <button class="tree-btn" onclick="zoomIn()" title="Приблизить">+</button>
-    <button class="tree-btn" onclick="zoomOut()" title="Отдалить">−</button>
-    <button class="tree-btn" onclick="resetView()" title="Сбросить вид">⟲</button>
-    <button class="tree-btn" onclick="fitView()" title="Вписать">⛶</button>
-  </div>
-  <svg id="tree-svg"></svg>
-  <div class="tooltip" id="tooltip"></div>
-</div>
+<div class="tree-list" id="tree-root"></div>
 
-<h2>Как читать древо</h2>
+<h2>Как читать</h2>
 <ul>
-<li><strong>Корень</strong> — ядро Linux (1991)</li>
-<li><strong>Четыре главных ствола</strong> — Debian, Red Hat, Arch, SUSE</li>
-<li><strong>Независимые</strong> — Gentoo, Void, NixOS, Slackware, Alpine</li>
-<li><strong>Специализированные</strong> — безопасность, игры, серверы, NAS</li>
+<li><strong>▸ / ▾</strong> — раскрыть/свернуть ветвь</li>
+<li><strong>Клик на название</strong> — переход на страницу</li>
+<li><strong>Год в скобках</strong> — когда вышел</li>
+<li><strong>[N]</strong> — сколько производных</li>
+<li><strong>Поиск</strong> — подсвечивает совпадения</li>
 </ul>
 
-<h2>Что это показывает</h2>
-<p>Linux — не хаос из 200+ дистрибутивов. Это <strong>семья</strong>. Пять крупных стволов, от которых произошло всё остальное. Даже самые непохожие дистрибутивы связаны родством.</p>
-<p><strong>Пример:</strong> Kali (для пентеста) и elementary (для дизайна) — оба из Debian. SteamOS (игры) и Omarchy (разработка) — оба из Arch. Понимание родства помогает выбрать правильный дистрибутив.</p>
-
 <script>
-// === ДАННЫЕ ДЕРЕВА ===
-var NODES = [
-  // Корень
-  { id: 'linux', name: 'Ядро Linux', x: 800, y: 50, w: 180, h: 50, family: 'root', year: 1991, url: 'history.html' },
-  
-  // Debian
-  { id: 'debian', name: 'Debian', x: 200, y: 180, w: 160, h: 45, family: 'debian', year: 1993, url: 'distros/debian.html' },
-  { id: 'ubuntu', name: 'Ubuntu', x: 100, y: 320, w: 140, h: 40, family: 'debian', year: 2004, url: 'distros/ubuntu.html' },
-  { id: 'mint', name: 'Linux Mint', x: 260, y: 320, w: 140, h: 40, family: 'debian', year: 2006, url: 'distros/mint.html' },
-  { id: 'kali', name: 'Kali Linux', x: 420, y: 320, w: 140, h: 40, family: 'debian', year: 2013, url: 'distros/kali.html' },
-  { id: 'pop-os', name: 'Pop!_OS', x: 50, y: 450, w: 130, h: 38, family: 'debian', year: 2017, url: 'distros/pop-os.html' },
-  { id: 'zorin', name: 'Zorin OS', x: 195, y: 450, w: 120, h: 38, family: 'debian', year: 2008, url: 'distros/zorin.html' },
-  { id: 'elementary', name: 'elementary', x: 330, y: 450, w: 130, h: 38, family: 'debian', year: 2011, url: 'distros/elementary.html' },
-  { id: 'lmde', name: 'LMDE', x: 470, y: 450, w: 100, h: 38, family: 'debian', year: 2010, url: 'distros/lmde.html' },
-  { id: 'parrot', name: 'Parrot OS', x: 580, y: 450, w: 120, h: 38, family: 'debian', year: 2013, url: 'distros/parrot.html' },
-  { id: 'mxlinux', name: 'MX Linux', x: 580, y: 320, w: 120, h: 40, family: 'debian', year: 2014, url: 'distros/mxlinux.html' },
-  { id: 'deepin', name: 'Deepin', x: 260, y: 570, w: 100, h: 38, family: 'debian', year: 2004, url: 'distros/deepin.html' },
-  { id: 'tails', name: 'Tails', x: 720, y: 450, w: 100, h: 38, family: 'security', year: 2009, url: 'distros/tails.html' },
-  { id: 'qubes', name: 'Qubes OS', x: 830, y: 450, w: 120, h: 38, family: 'security', year: 2010, url: 'distros/qubes.html' },
-  { id: 'raspberry-pi-os', name: 'Raspberry Pi OS', x: 100, y: 570, w: 150, h: 38, family: 'debian', year: 2012, url: 'distros/raspberry-pi-os.html' },
-  { id: 'antix', name: 'antiX', x: 470, y: 320, w: 100, h: 40, family: 'debian', year: 2007, url: 'distros/antix.html' },
-  { id: 'lubuntu', name: 'Lubuntu', x: 50, y: 680, w: 110, h: 36, family: 'debian', year: 2009, url: 'distros/lubuntu.html' },
-  { id: 'xubuntu', name: 'Xubuntu', x: 170, y: 680, w: 110, h: 36, family: 'debian', year: 2006, url: 'distros/xubuntu.html' },
-  { id: 'kubuntu', name: 'Kubuntu', x: 290, y: 680, w: 110, h: 36, family: 'debian', year: 2005, url: 'distros/kubuntu.html' },
-  { id: 'ubuntu-mate', name: 'Ubuntu MATE', x: 410, y: 680, w: 130, h: 36, family: 'debian', year: 2014, url: 'distros/ubuntu-mate.html' },
-  { id: 'ubuntu-budgie', name: 'Ubuntu Budgie', x: 550, y: 680, w: 140, h: 36, family: 'debian', year: 2016, url: 'distros/ubuntu-budgie.html' },
-  
-  // Red Hat
-  { id: 'redhat', name: 'Red Hat', x: 800, y: 180, w: 160, h: 45, family: 'redhat', year: 1994, url: 'history.html#redhat' },
-  { id: 'fedora', name: 'Fedora', x: 650, y: 320, w: 130, h: 40, family: 'redhat', year: 2003, url: 'distros/fedora.html' },
-  { id: 'rhel', name: 'RHEL', x: 800, y: 320, w: 100, h: 40, family: 'redhat', year: 2000, url: 'history.html#rhel' },
-  { id: 'almalinux', name: 'AlmaLinux', x: 920, y: 450, w: 120, h: 38, family: 'redhat', year: 2021, url: 'distros/almalinux.html' },
-  { id: 'rocky', name: 'Rocky Linux', x: 1050, y: 450, w: 130, h: 38, family: 'redhat', year: 2021, url: 'distros/rocky.html' },
-  { id: 'centos', name: 'CentOS Stream', x: 920, y: 320, w: 140, h: 40, family: 'redhat', year: 2004, url: 'distros/centos-stream.html' },
-  { id: 'oracle-linux', name: 'Oracle Linux', x: 1070, y: 320, w: 130, h: 40, family: 'redhat', year: 2006, url: 'distros/oracle-linux.html' },
-  { id: 'nobara', name: 'Nobara', x: 650, y: 450, w: 100, h: 38, family: 'games', year: 2022, url: 'distros/nobara.html' },
-  { id: 'bazzite', name: 'Bazzite', x: 760, y: 570, w: 100, h: 38, family: 'games', year: 2023, url: 'distros/bazzite.html' },
-  { id: 'silverblue', name: 'Silverblue', x: 1050, y: 570, w: 120, h: 38, family: 'redhat', year: 2018, url: 'distros/fedora-silverblue.html' },
-  { id: 'asahi', name: 'Asahi Remix', x: 1180, y: 570, w: 120, h: 38, family: 'redhat', year: 2023, url: 'distros/asahi.html' },
-  
-  // Arch
-  { id: 'arch', name: 'Arch Linux', x: 1400, y: 180, w: 160, h: 45, family: 'arch', year: 2002, url: 'distros/arch.html' },
-  { id: 'manjaro', name: 'Manjaro', x: 1290, y: 320, w: 120, h: 40, family: 'arch', year: 2011, url: 'distros/manjaro.html' },
-  { id: 'endeavouros', name: 'EndeavourOS', x: 1420, y: 320, w: 130, h: 40, family: 'arch', year: 2019, url: 'distros/endeavouros.html' },
-  { id: 'cachyos', name: 'CachyOS', x: 1290, y: 450, w: 110, h: 38, family: 'arch', year: 2021, url: 'distros/cachyos.html' },
-  { id: 'garuda', name: 'Garuda', x: 1410, y: 450, w: 100, h: 38, family: 'games', year: 2020, url: 'distros/garuda.html' },
-  { id: 'steamos', name: 'SteamOS', x: 1520, y: 450, w: 110, h: 38, family: 'games', year: 2022, url: 'distros/steamos.html' },
-  { id: 'blackarch', name: 'BlackArch', x: 1290, y: 570, w: 120, h: 38, family: 'security', year: 2013, url: 'distros/blackarch.html' },
-  { id: 'archcraft', name: 'Archcraft', x: 1420, y: 570, w: 120, h: 38, family: 'arch', year: 2020, url: 'distros/archcraft.html' },
-  { id: 'artix', name: 'Artix', x: 1550, y: 570, w: 100, h: 38, family: 'arch', year: 2017, url: 'distros/artix.html' },
-  
-  // SUSE
-  { id: 'suse', name: 'SUSE', x: 1800, y: 180, w: 140, h: 45, family: 'suse', year: 1992, url: 'history.html#suse' },
-  { id: 'opensuse', name: 'openSUSE', x: 1750, y: 320, w: 140, h: 40, family: 'suse', year: 2005, url: 'distros/opensuse.html' },
-  { id: 'microos', name: 'MicroOS', x: 1700, y: 450, w: 110, h: 38, family: 'suse', year: 2020, url: 'distros/microos.html' },
-  { id: 'aeon', name: 'Aeon', x: 1820, y: 450, w: 100, h: 38, family: 'suse', year: 2024, url: 'distros/opensuse-aeon.html' },
-  { id: 'kalpa', name: 'Kalpa', x: 1920, y: 450, w: 100, h: 38, family: 'suse', year: 2024, url: 'distros/opensuse-kalpa.html' },
-  
-  // Независимые
-  { id: 'gentoo', name: 'Gentoo', x: 100, y: 250, w: 120, h: 42, family: 'independent', year: 2000, url: 'distros/gentoo.html' },
-  { id: 'slackware', name: 'Slackware', x: 100, y: 350, w: 120, h: 42, family: 'independent', year: 1993, url: 'distros/slackware.html' },
-  { id: 'void', name: 'Void Linux', x: 100, y: 450, w: 120, h: 42, family: 'independent', year: 2008, url: 'distros/void.html' },
-  { id: 'nixos', name: 'NixOS', x: 100, y: 550, w: 100, h: 42, family: 'independent', year: 2013, url: 'distros/nixos.html' },
-  { id: 'alpine', name: 'Alpine', x: 100, y: 650, w: 100, h: 42, family: 'independent', year: 2005, url: 'distros/alpine.html' },
-  { id: 'solus', name: 'Solus', x: 230, y: 550, w: 100, h: 42, family: 'independent', year: 2015, url: 'distros/solus.html' },
-  { id: 'clear', name: 'Clear Linux', x: 230, y: 650, w: 120, h: 42, family: 'independent', year: 2015, url: 'distros/clear.html' },
-  { id: 'pclinuxos', name: 'PCLinuxOS', x: 230, y: 350, w: 120, h: 42, family: 'independent', year: 2003, url: 'distros/pclinuxos.html' },
-  
-  // Игровые
-  { id: 'chimeraos', name: 'ChimeraOS', x: 1650, y: 570, w: 120, h: 38, family: 'games', year: 2018, url: 'distros/chimeraos.html' },
-  { id: 'batocera', name: 'Batocera', x: 1780, y: 570, w: 110, h: 38, family: 'games', year: 2016, url: 'distros/batocera.html' },
-  { id: 'libreelec', name: 'LibreELEC', x: 1910, y: 570, w: 120, h: 38, family: 'games', year: 2016, url: 'distros/libreelec.html' },
-  
-  // Русские
-  { id: 'rosa', name: 'ROSA', x: 250, y: 780, w: 100, h: 38, family: 'russian', year: 2010, url: 'distros/rosa.html' },
-  { id: 'alt', name: 'ALT Linux', x: 370, y: 780, w: 120, h: 38, family: 'russian', year: 2001, url: 'distros/alt.html' },
-  { id: 'astra', name: 'Astra Linux', x: 500, y: 780, w: 120, h: 38, family: 'russian', year: 2008, url: 'distros/astra.html' },
-  { id: 'calculate', name: 'Calculate', x: 630, y: 780, w: 120, h: 38, family: 'russian', year: 2007, url: 'distros/calculate.html' },
+var TREE = [
+  { n: 'Ядро Linux', y: 1991, u: 'history.html', c: [
+    { n: 'Debian', y: 1993, u: 'distros/debian.html', c: [
+      { n: 'Ubuntu', y: 2004, u: 'distros/ubuntu.html', c: [
+        { n: 'Linux Mint', y: 2006, u: 'distros/mint.html', c: [
+          { n: 'LMDE', y: 2010, u: 'distros/lmde.html' }
+        ]},
+        { n: 'Pop!_OS', y: 2017, u: 'distros/pop-os.html' },
+        { n: 'elementary OS', y: 2011, u: 'distros/elementary.html' },
+        { n: 'Zorin OS', y: 2008, u: 'distros/zorin.html', c: [
+          { n: 'Zorin OS Lite', y: 2009, u: 'distros/zorinlite.html' }
+        ]},
+        { n: 'KDE Neon', y: 2016, u: 'distros/kde-neon.html' },
+        { n: 'Lubuntu', y: 2009, u: 'distros/lubuntu.html' },
+        { n: 'Xubuntu', y: 2006, u: 'distros/xubuntu.html' },
+        { n: 'Kubuntu', y: 2005, u: 'distros/kubuntu.html' },
+        { n: 'Ubuntu MATE', y: 2014, u: 'distros/ubuntu-mate.html' },
+        { n: 'Ubuntu Budgie', y: 2016, u: 'distros/ubuntu-budgie.html' },
+        { n: 'Ubuntu Studio', y: 2007, u: 'distros/ubuntu-studio.html' },
+        { n: 'Rhino Linux', y: 2023, u: 'distros/rhino.html' },
+        { n: 'AnduinOS', y: 2024, u: 'distros/anduinos.html' },
+        { n: 'NebiOS', y: 2025, u: 'distros/nebios.html' },
+        { n: 'Vanilla OS', y: 2022, u: 'distros/vanilla.html' },
+        { n: 'Ubuntu Core', y: 2016, u: 'distros/ubuntu-core.html' },
+        { n: 'Ubuntu Touch', y: 2013, u: 'distros/ubuntu-touch.html' }
+      ]},
+      { n: 'Kali Linux', y: 2013, u: 'distros/kali.html' },
+      { n: 'Parrot OS', y: 2013, u: 'distros/parrot.html' },
+      { n: 'MX Linux', y: 2014, u: 'distros/mxlinux.html', c: [
+        { n: 'MX Moksha', y: 2025, u: 'distros/mx-moksha.html' },
+        { n: 'AV Linux', y: 2009, u: 'distros/avlinux.html' }
+      ]},
+      { n: 'antiX', y: 2007, u: 'distros/antix.html' },
+      { n: 'Puppy Linux', y: 2003, u: 'distros/puppy.html' },
+      { n: 'Deepin', y: 2004, u: 'distros/deepin.html' },
+      { n: 'Raspberry Pi OS', y: 2012, u: 'distros/raspberry-pi-os.html' },
+      { n: 'Tails', y: 2009, u: 'distros/tails.html' },
+      { n: 'Qubes OS', y: 2010, u: 'distros/qubes.html' },
+      { n: 'Bodhi Linux', y: 2011, u: 'distros/bodhi.html' },
+      { n: 'Regolith Linux', y: 2019, u: 'distros/regolith.html' },
+      { n: 'Kaisen Linux', y: 2020, u: 'distros/kaisen.html' },
+      { n: 'Nitrux', y: 2017, u: 'distros/nitrux.html' },
+      { n: 'MakuluLinux LinDoz', y: 2014, u: 'distros/makulu-lindoz.html' },
+      { n: 'Peppermint OS', y: 2010, u: 'distros/peppermint.html' },
+      { n: 'Q4OS', y: 2013, u: 'distros/q4os.html' },
+      { n: 'PureOS', y: 2017, u: 'distros/pureos.html' },
+      { n: 'Linux Lite', y: 2012, u: 'distros/linuxlite.html' },
+      { n: 'Vinari OS', y: 2022, u: 'distros/vinari.html' },
+      { n: 'EXE GNU/Linux', y: 2013, u: 'distros/exe.html' },
+      { n: 'GoboLinux', y: 2002, u: 'distros/gobolinux.html' },
+      { n: '4MLinux', y: 2010, u: 'distros/4mlinux.html' },
+      { n: 'Trisquel', y: 2004, u: 'distros/trisquel.html' },
+      { n: 'Grml', y: 2005, u: 'distros/grml.html' },
+      { n: 'TUXEDO OS', y: 2020, u: 'distros/tuxedo.html' },
+      { n: 'PikaOS', y: 2023, u: 'distros/pika-os.html' },
+      { n: 'Aurora', y: 2024, u: 'distros/aurora.html' },
+      { n: 'BunsenLabs', y: 2015, u: 'distros/bunsenlabs.html' },
+      { n: 'CuteOS', y: 2024, u: 'distros/cuteos.html' },
+      { n: 'Desert', y: 2020, u: 'distros/desert.html' },
+      { n: 'GuideOS', y: 2025, u: 'distros/guideos.html' },
+      { n: 'Holo Linux', y: 2023, u: 'distros/holo.html' },
+      { n: 'Lignux', y: 2020, u: 'distros/lignux.html' },
+      { n: 'LinuxConsole', y: 2004, u: 'distros/linuxconsole.html' },
+      { n: 'Orchis', y: 2023, u: 'distros/orchis.html' },
+      { n: 'Soplos Linux', y: 2025, u: 'distros/soplos.html' },
+      { n: 'StormOS', y: 2024, u: 'distros/stormos.html' },
+      { n: 'Tensq', y: 2024, u: 'distros/tensq.html' },
+      { n: 'Zenwalk', y: 2004, u: 'distros/zenwalk.html' },
+      { n: 'Snalix', y: 2018, u: 'distros/snalix.html' },
+      { n: 'Sodalite', y: 2023, u: 'distros/sodalite.html' },
+      { n: 'MocaccinoOS', y: 2021, u: 'distros/mocaccino.html' }
+    ]},
+    { n: 'Red Hat', y: 1994, u: '', c: [
+      { n: 'Fedora', y: 2003, u: 'distros/fedora.html', c: [
+        { n: 'Fedora Silverblue', y: 2018, u: 'distros/fedora-silverblue.html' },
+        { n: 'Fedora Kinoite', y: 2021, u: 'distros/fedora-kinoite.html' },
+        { n: 'Fedora CoreOS', y: 2019, u: 'distros/fedora-coreos.html' },
+        { n: 'Asahi Remix', y: 2023, u: 'distros/asahi.html' },
+        { n: 'Hummingbird', y: 2026, u: 'distros/hummingbird.html' },
+        { n: 'Nobara', y: 2022, u: 'distros/nobara.html' },
+        { n: 'Bazzite', y: 2023, u: 'distros/bazzite.html' },
+        { n: 'Ultramarine Linux', y: 2018, u: 'distros/ultramarine.html' },
+        { n: 'Vojtux', y: 2022, u: 'distros/vojtux.html' }
+      ]},
+      { n: 'RHEL', y: 2000, u: '', c: [
+        { n: 'AlmaLinux', y: 2021, u: 'distros/almalinux.html' },
+        { n: 'Rocky Linux', y: 2021, u: 'distros/rocky.html' },
+        { n: 'CentOS Stream', y: 2004, u: 'distros/centos-stream.html' },
+        { n: 'Oracle Linux', y: 2006, u: 'distros/oracle-linux.html' }
+      ]}
+    ]},
+    { n: 'Arch Linux', y: 2002, u: 'distros/arch.html', c: [
+      { n: 'Manjaro', y: 2011, u: 'distros/manjaro.html' },
+      { n: 'EndeavourOS', y: 2019, u: 'distros/endeavouros.html' },
+      { n: 'Omarchy', y: 2024, u: 'distros/omarchy.html' },
+      { n: 'CachyOS', y: 2021, u: 'distros/cachyos.html' },
+      { n: 'Garuda Linux', y: 2020, u: 'distros/garuda.html' },
+      { n: 'SteamOS', y: 2022, u: 'distros/steamos.html' },
+      { n: 'BlackArch', y: 2013, u: 'distros/blackarch.html' },
+      { n: 'Artix', y: 2017, u: 'distros/artix.html' },
+      { n: 'Archcraft', y: 2020, u: 'distros/archcraft.html' },
+      { n: 'RebornOS', y: 2017, u: 'distros/rebornos.html' },
+      { n: 'blendOS', y: 2022, u: 'distros/blendos.html' },
+      { n: 'Noid Linux', y: 2019, u: 'distros/noid.html' },
+      { n: 'AgarimOS', y: 2020, u: 'distros/agarimos.html' },
+      { n: 'ShaniOS', y: 2024, u: 'distros/shanios.html' },
+      { n: 'Omega Linux', y: 2020, u: 'distros/omega.html' },
+      { n: 'ElysiaOS', y: 2024, u: 'distros/elysiaos.html' },
+      { n: 'Kazeta', y: 2025, u: 'distros/kazeta.html' },
+      { n: 'Porteus', y: 2010, u: 'distros/porteus.html' },
+      { n: 'Chimera Linux', y: 2022, u: 'distros/chimera.html' },
+      { n: 'ChimeraOS', y: 2018, u: 'distros/chimeraos.html' },
+      { n: 'Parabola', y: 2009, u: 'distros/parabola.html' },
+      { n: 'Batocera', y: 2016, u: 'distros/batocera.html' },
+      { n: 'LibreELEC', y: 2016, u: 'distros/libreelec.html' },
+      { n: 'NawaOS', y: 2023, u: 'distros/nawaos.html' }
+    ]},
+    { n: 'SUSE', y: 1992, u: '', c: [
+      { n: 'openSUSE', y: 2005, u: 'distros/opensuse.html', c: [
+        { n: 'openSUSE MicroOS', y: 2020, u: 'distros/microos.html' },
+        { n: 'openSUSE Aeon', y: 2024, u: 'distros/opensuse-aeon.html' },
+        { n: 'openSUSE Kalpa', y: 2024, u: 'distros/opensuse-kalpa.html' }
+      ]}
+    ]},
+    { n: 'Независимые', y: null, u: '', c: [
+      { n: 'Gentoo', y: 2000, u: 'distros/gentoo.html' },
+      { n: 'Slackware', y: 1993, u: 'distros/slackware.html' },
+      { n: 'Void Linux', y: 2008, u: 'distros/void.html' },
+      { n: 'NixOS', y: 2013, u: 'distros/nixos.html' },
+      { n: 'Alpine Linux', y: 2005, u: 'distros/alpine.html' },
+      { n: 'Solus', y: 2015, u: 'distros/solus.html' },
+      { n: 'Clear Linux', y: 2015, u: 'distros/clear.html' },
+      { n: 'PCLinuxOS', y: 2003, u: 'distros/pclinuxos.html' },
+      { n: 'AerynOS', y: 2024, u: 'distros/aerynos.html' },
+      { n: 'KDE Linux', y: 2025, u: 'distros/kde-linux.html' },
+      { n: 'Bedrock Linux', y: 2011, u: 'distros/bedrock.html' },
+      { n: 'Dragora', y: 2008, u: 'distros/dragora.html' },
+      { n: 'Vendefoul Wolf', y: 2022, u: 'distros/vendefoul.html' },
+      { n: 'Loss32', y: 2020, u: 'distros/loss32.html' },
+      { n: 'matrixOS', y: 2025, u: 'distros/matrixos.html' },
+      { n: 'ENux', y: 2023, u: 'distros/enux.html' },
+      { n: 'Origami Linux', y: 2025, u: 'distros/origami.html' },
+      { n: 'FLOPPINUX', y: 2020, u: 'distros/floppinux.html' },
+      { n: 'Tiny Core Linux', y: 2009, u: 'distros/tinycore.html' },
+      { n: 'SliTaz', y: 2006, u: 'distros/slitaz.html' },
+      { n: 'Talos Linux', y: 2018, u: 'distros/talos.html' },
+      { n: 'Crystal Linux', y: 2023, u: 'distros/crystal-linux.html' },
+      { n: 'KaOS', y: 2013, u: 'distros/kaos.html' },
+      { n: 'Redcore Linux', y: 2016, u: 'distros/redcore.html' },
+      { n: 'Regata OS', y: 2005, u: 'distros/regata-os.html' }
+    ]},
+    { n: 'Безопасность', y: null, u: '', c: [
+      { n: 'Tails', y: 2009, u: 'distros/tails.html' },
+      { n: 'Qubes OS', y: 2010, u: 'distros/qubes.html' },
+      { n: 'Security Onion', y: 2012, u: 'distros/securityonion.html' }
+    ]},
+    { n: 'Русские', y: null, u: '', c: [
+      { n: 'ROSA Linux', y: 2010, u: 'distros/rosa.html' },
+      { n: 'ALT Linux', y: 2001, u: 'distros/alt.html' },
+      { n: 'Astra Linux', y: 2008, u: 'distros/astra.html' },
+      { n: 'Calculate Linux', y: 2007, u: 'distros/calculate.html' }
+    ]},
+    { n: 'NAS и серверы', y: null, u: '', c: [
+      { n: 'TrueNAS SCALE', y: 2022, u: 'distros/truenas-scale.html' },
+      { n: 'OpenMediaVault', y: 2011, u: 'distros/openmediavault.html' },
+      { n: 'Proxmox VE', y: 2008, u: 'distros/proxmox.html' },
+      { n: 'EasyNAS', y: 2014, u: 'distros/easynas.html' },
+      { n: 'Rockstor', y: 2012, u: 'distros/rockstor.html' },
+      { n: 'XigmaNAS', y: 2011, u: 'distros/xigmanas.html' },
+      { n: 'OviOS Linux', y: 2015, u: 'distros/ovios.html' }
+    ]},
+    { n: 'Роутеры и firewall', y: null, u: '', c: [
+      { n: 'OpenWrt', y: 2004, u: 'distros/openwrt.html' },
+      { n: 'OPNsense', y: 2014, u: 'distros/opnsense.html' },
+      { n: 'pfSense', y: 2004, u: 'distros/pfsense.html' },
+      { n: 'IPFire', y: 2005, u: 'distros/ipfire.html' }
+    ]},
+    { n: 'IoT и специальные', y: null, u: '', c: [
+      { n: 'Home Assistant OS', y: 2019, u: 'distros/homeassistant.html' },
+      { n: 'AnotterKiosk', y: 2024, u: 'distros/anotterkiosk.html' },
+      { n: 'Photon OS', y: 2015, u: 'distros/photon.html' },
+      { n: 'postmarketOS', y: 2017, u: 'distros/postmarketos.html' }
+    ]}
+  ]}
 ];
 
-// Связи: [родитель, ребёнок]
-var LINKS = [
-  ['linux', 'debian'],
-  ['linux', 'redhat'],
-  ['linux', 'arch'],
-  ['linux', 'suse'],
-  ['linux', 'gentoo'],
-  ['linux', 'slackware'],
-  ['linux', 'void'],
-  ['linux', 'nixos'],
-  ['linux', 'alpine'],
-  ['linux', 'solus'],
-  ['linux', 'clear'],
-  ['linux', 'pclinuxos'],
-  
-  // Debian
-  ['debian', 'ubuntu'],
-  ['debian', 'mint'],
-  ['debian', 'kali'],
-  ['debian', 'mxlinux'],
-  ['debian', 'antix'],
-  ['debian', 'deepin'],
-  ['debian', 'tails'],
-  ['debian', 'qubes'],
-  ['debian', 'raspberry-pi-os'],
-  ['ubuntu', 'pop-os'],
-  ['ubuntu', 'zorin'],
-  ['ubuntu', 'elementary'],
-  ['ubuntu', 'lubuntu'],
-  ['ubuntu', 'xubuntu'],
-  ['ubuntu', 'kubuntu'],
-  ['ubuntu', 'ubuntu-mate'],
-  ['ubuntu', 'ubuntu-budgie'],
-  ['mint', 'lmde'],
-  ['kali', 'parrot'],
-  
-  // Red Hat
-  ['redhat', 'fedora'],
-  ['redhat', 'rhel'],
-  ['fedora', 'nobara'],
-  ['fedora', 'silverblue'],
-  ['fedora', 'asahi'],
-  ['fedora', 'bazzite'],
-  ['rhel', 'almalinux'],
-  ['rhel', 'rocky'],
-  ['rhel', 'centos'],
-  ['rhel', 'oracle-linux'],
-  
-  // Arch
-  ['arch', 'manjaro'],
-  ['arch', 'endeavouros'],
-  ['arch', 'cachyos'],
-  ['arch', 'garuda'],
-  ['arch', 'steamos'],
-  ['arch', 'blackarch'],
-  ['arch', 'archcraft'],
-  ['arch', 'artix'],
-  ['steamos', 'chimeraos'],
-  
-  // SUSE
-  ['suse', 'opensuse'],
-  ['opensuse', 'microos'],
-  ['microos', 'aeon'],
-  ['microos', 'kalpa'],
-  
-  // Игровые
-  ['arch', 'batocera'],
-  ['arch', 'libreelec'],
-  
-  // Независимые
-  ['gentoo', 'calculate'],
-  ['slackware', 'porteus'],
-  
-  // Русские
-  ['debian', 'rosa'],
-  ['debian', 'alt'],
-  ['debian', 'astra'],
-];
+var list = document.getElementById('tree-root');
 
-var COLORS = {
-  'root': '#ffb000',
-  'debian': '#d70a53',
-  'redhat': '#c74634',
-  'arch': '#1793d1',
-  'suse': '#73ba25',
-  'independent': '#7c6f64',
-  'security': '#8b5cf6',
-  'games': '#c92a2a',
-  'russian': '#ff3d3d'
-};
-
-// === SVG РЕНДЕР ===
-var svg = document.getElementById('tree-svg');
-var container = document.getElementById('tree-container');
-var tooltip = document.getElementById('tooltip');
-
-var viewBox = { x: 0, y: 0, w: 2200, h: 900 };
-var hiddenFamilies = new Set();
-
-// Создаём группы
-var linksGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-var nodesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-svg.appendChild(linksGroup);
-svg.appendChild(nodesGroup);
-
-// Функция получения узла
-function getNode(id) {
-  return NODES.find(function(n) { return n.id === id; });
-}
-
-// Рисуем связи
-function drawLinks() {
-  linksGroup.innerHTML = '';
-  LINKS.forEach(function(link) {
-    var from = getNode(link[0]);
-    var to = getNode(link[1]);
-    if (!from || !to) return;
-    if (hiddenFamilies.has(from.family) || hiddenFamilies.has(to.family)) return;
+function renderNodes(nodes, isLastArray) {
+  var html = '';
+  nodes.forEach(function(node, idx) {
+    var isLast = idx === nodes.length - 1;
+    var hasChildren = node.c && node.c.length > 0;
+    var prefix = '';
     
-    var line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    var x1 = from.x + from.w / 2;
-    var y1 = from.y + from.h;
-    var x2 = to.x + to.w / 2;
-    var y2 = to.y;
-    // Кубическая кривая
-    var midY = (y1 + y2) / 2;
-    var d = 'M ' + x1 + ' ' + y1 + ' C ' + x1 + ' ' + midY + ', ' + x2 + ' ' + midY + ', ' + x2 + ' ' + y2;
-    line.setAttribute('d', d);
-    line.setAttribute('class', 'link');
-    line.setAttribute('data-from', link[0]);
-    line.setAttribute('data-to', link[1]);
-    linksGroup.appendChild(line);
-  });
-}
-
-// Рисуем узлы
-function drawNodes() {
-  nodesGroup.innerHTML = '';
-  NODES.forEach(function(node) {
-    if (hiddenFamilies.has(node.family)) return;
-    
-    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('class', 'node');
-    g.setAttribute('data-id', node.id);
-    g.setAttribute('data-family', node.family);
-    
-    var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    rect.setAttribute('x', node.x);
-    rect.setAttribute('y', node.y);
-    rect.setAttribute('width', node.w);
-    rect.setAttribute('height', node.h);
-    rect.setAttribute('rx', 6);
-    rect.setAttribute('fill', COLORS[node.family] || '#333');
-    rect.setAttribute('stroke', COLORS[node.family] || '#333');
-    rect.setAttribute('stroke-width', 2);
-    rect.setAttribute('opacity', node.family === 'root' ? '1' : '0.9');
-    g.appendChild(rect);
-    
-    var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    text.setAttribute('x', node.x + node.w / 2);
-    text.setAttribute('y', node.y + node.h / 2 + 5);
-    text.setAttribute('text-anchor', 'middle');
-    text.setAttribute('fill', '#fff');
-    text.setAttribute('font-size', node.h >= 44 ? '14' : '12');
-    text.setAttribute('font-weight', node.family === 'root' ? '700' : '600');
-    text.textContent = node.name;
-    g.appendChild(text);
-    
-    // События
-    g.addEventListener('click', function() {
-      if (node.url) window.location.href = node.url;
-    });
-    
-    g.addEventListener('mouseenter', function(e) {
-      // Подсветить связанные
-      document.querySelectorAll('.link').forEach(function(l) {
-        var from = l.getAttribute('data-from');
-        var to = l.getAttribute('data-to');
-        if (from === node.id || to === node.id) {
-          l.classList.add('highlighted');
-        }
-      });
-      
-      // Tooltip
-      tooltip.textContent = node.name + ' · ' + node.year;
-      tooltip.classList.add('show');
-    });
-    
-    g.addEventListener('mousemove', function(e) {
-      var rect = container.getBoundingClientRect();
-      tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
-      tooltip.style.top = (e.clientY - rect.top + 15) + 'px';
-    });
-    
-    g.addEventListener('mouseleave', function() {
-      document.querySelectorAll('.link').forEach(function(l) {
-        l.classList.remove('highlighted');
-      });
-      tooltip.classList.remove('show');
-    });
-    
-    nodesGroup.appendChild(g);
-  });
-}
-
-function render() {
-  drawLinks();
-  drawNodes();
-}
-
-// === ПЕРЕТАСКИВАНИЕ И ЗУМ ===
-var isDragging = false;
-var startX = 0, startY = 0;
-
-svg.addEventListener('mousedown', function(e) {
-  isDragging = true;
-  startX = e.clientX;
-  startY = e.clientY;
-});
-
-document.addEventListener('mousemove', function(e) {
-  if (!isDragging) return;
-  var dx = e.clientX - startX;
-  var dy = e.clientY - startY;
-  viewBox.x -= dx * viewBox.w / svg.clientWidth;
-  viewBox.y -= dy * viewBox.h / svg.clientHeight;
-  startX = e.clientX;
-  startY = e.clientY;
-  updateViewBox();
-});
-
-document.addEventListener('mouseup', function() {
-  isDragging = false;
-});
-
-svg.addEventListener('wheel', function(e) {
-  e.preventDefault();
-  var factor = e.deltaY > 0 ? 1.1 : 0.9;
-  var newW = viewBox.w * factor;
-  var newH = viewBox.h * factor;
-  // Зум в центр курсора
-  var rect = svg.getBoundingClientRect();
-  var mx = (e.clientX - rect.left) / rect.width;
-  var my = (e.clientY - rect.top) / rect.height;
-  viewBox.x += (viewBox.w - newW) * mx;
-  viewBox.y += (viewBox.h - newH) * my;
-  viewBox.w = newW;
-  viewBox.h = newH;
-  updateViewBox();
-}, { passive: false });
-
-// Тач-события
-var touchStartDist = 0;
-svg.addEventListener('touchstart', function(e) {
-  if (e.touches.length === 1) {
-    isDragging = true;
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-  } else if (e.touches.length === 2) {
-    touchStartDist = Math.hypot(
-      e.touches[0].clientX - e.touches[1].clientX,
-      e.touches[0].clientY - e.touches[1].clientY
-    );
-  }
-}, { passive: false });
-
-svg.addEventListener('touchmove', function(e) {
-  e.preventDefault();
-  if (e.touches.length === 1 && isDragging) {
-    var dx = e.touches[0].clientX - startX;
-    var dy = e.touches[0].clientY - startY;
-    viewBox.x -= dx * viewBox.w / svg.clientWidth;
-    viewBox.y -= dy * viewBox.h / svg.clientHeight;
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    updateViewBox();
-  } else if (e.touches.length === 2) {
-    var dist = Math.hypot(
-      e.touches[0].clientX - e.touches[1].clientX,
-      e.touches[0].clientY - e.touches[1].clientY
-    );
-    var factor = touchStartDist / dist;
-    viewBox.w *= factor;
-    viewBox.h *= factor;
-    touchStartDist = dist;
-    updateViewBox();
-  }
-}, { passive: false });
-
-svg.addEventListener('touchend', function() {
-  isDragging = false;
-});
-
-function updateViewBox() {
-  svg.setAttribute('viewBox', viewBox.x + ' ' + viewBox.y + ' ' + viewBox.w + ' ' + viewBox.h);
-}
-
-function zoomIn() {
-  viewBox.w *= 0.8;
-  viewBox.h *= 0.8;
-  viewBox.x += viewBox.w * 0.1;
-  viewBox.y += viewBox.h * 0.1;
-  updateViewBox();
-}
-
-function zoomOut() {
-  viewBox.w *= 1.25;
-  viewBox.h *= 1.25;
-  updateViewBox();
-}
-
-function resetView() {
-  viewBox = { x: 0, y: 0, w: 2200, h: 900 };
-  updateViewBox();
-}
-
-function fitView() {
-  // Вписать все узлы
-  var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  NODES.forEach(function(n) {
-    if (hiddenFamilies.has(n.family)) return;
-    minX = Math.min(minX, n.x);
-    minY = Math.min(minY, n.y);
-    maxX = Math.max(maxX, n.x + n.w);
-    maxY = Math.max(maxY, n.y + n.h);
-  });
-  var padding = 50;
-  viewBox.x = minX - padding;
-  viewBox.y = minY - padding;
-  viewBox.w = (maxX - minX) + padding * 2;
-  viewBox.h = (maxY - minY) + padding * 2;
-  updateViewBox();
-}
-
-// Легенда — фильтр по семействам
-document.querySelectorAll('#legend span').forEach(function(span) {
-  span.addEventListener('click', function() {
-    var family = this.dataset.family;
-    if (hiddenFamilies.has(family)) {
-      hiddenFamilies.delete(family);
-      this.classList.remove('disabled');
+    // Определяем префикс для этого узла
+    if (isLast) {
+      prefix = '└─ ';
     } else {
-      hiddenFamilies.add(family);
-      this.classList.add('disabled');
+      prefix = '├─ ';
     }
-    render();
+    
+    html += '<div class="tree-item">';
+    html += '<div class="tree-row">';
+    html += '<span style="color: var(--border); font-family: monospace; white-space: pre; user-select: none;">' + prefix + '</span>';
+    
+    if (hasChildren) {
+      html += '<button class="tree-toggle" onclick="toggleChildren(this)">▸</button>';
+    } else {
+      html += '<button class="tree-toggle empty">·</button>';
+    }
+    
+    if (node.u) {
+      html += '<a class="tree-name" href="' + node.u + '" data-name="' + node.n.toLowerCase() + '">' + node.n + '</a>';
+    } else {
+      html += '<span class="tree-name no-link" data-name="' + node.n.toLowerCase() + '">' + node.n + '</span>';
+    }
+    
+    if (node.y) {
+      html += '<span class="tree-year">(' + node.y + ')</span>';
+    }
+    
+    if (hasChildren) {
+      html += '<span class="tree-count">[' + node.c.length + ']</span>';
+    }
+    
+    html += '</div>';
+    
+    if (hasChildren) {
+      html += '<div class="tree-children collapsed">';
+      html += renderNodes(node.c);
+      html += '</div>';
+    }
+    
+    html += '</div>';
+  });
+  return html;
+}
+
+function toggleChildren(btn) {
+  btn.classList.toggle('expanded');
+  var children = btn.closest('.tree-item').querySelector('.tree-children');
+  if (children) children.classList.toggle('collapsed');
+}
+
+function expandAll() {
+  document.querySelectorAll('.tree-children').forEach(function(el) { el.classList.remove('collapsed'); });
+  document.querySelectorAll('.tree-toggle').forEach(function(el) { el.classList.add('expanded'); });
+}
+
+function collapseAll() {
+  document.querySelectorAll('.tree-children').forEach(function(el) { el.classList.add('collapsed'); });
+  document.querySelectorAll('.tree-toggle').forEach(function(el) { el.classList.remove('expanded'); });
+}
+
+list.innerHTML = renderNodes(TREE);
+
+// Поиск
+document.getElementById('tree-search').addEventListener('input', function() {
+  var q = this.value.toLowerCase().trim();
+  document.querySelectorAll('.tree-name').forEach(function(el) {
+    el.classList.remove('search-match');
+  });
+  if (!q) return;
+  document.querySelectorAll('.tree-name').forEach(function(el) {
+    if (el.getAttribute('data-name').indexOf(q) !== -1) {
+      el.classList.add('search-match');
+      var parent = el.closest('.tree-children');
+      while (parent) {
+        parent.classList.remove('collapsed');
+        var toggle = parent.previousElementSibling ? parent.previousElementSibling.querySelector('.tree-toggle') : null;
+        if (toggle) toggle.classList.add('expanded');
+        parent = parent.parentElement.closest('.tree-children');
+      }
+    }
   });
 });
-
-// Инициализация
-render();
-updateViewBox();
 </script>
 </main>
 
-<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026. <a href="feed.xml" style="color: var(--accent);">📡 RSS</a></p>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
 <p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
-<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
-<script src="js/search.js"></script><script src="js/extras.js"></script>
-<script src="js/logo-anim.js"></script>
-<script src="js/boot-screen.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/site-theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
 </body>
 </html>
