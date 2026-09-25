@@ -1,5 +1,4 @@
 (function() {
-  // Список тем с превью-цветами
   var THEMES = [
     { id: 'default', name: 'Amber', colors: ['#0a0a0a','#121212','#ffb000','#d6d6d6'] },
     { id: 'dracula', name: 'Dracula', colors: ['#282a36','#44475a','#bd93f9','#f8f8f2'] },
@@ -53,38 +52,53 @@
     }
     try { localStorage.setItem('site-theme', v); } catch(e) {}
     document.cookie = 'site-theme=' + encodeURIComponent(v) + ';path=/;max-age=31536000';
+    // Синхронизация с селектом, если он есть
+    var select = document.querySelector('.theme-switcher select');
+    if (select) select.value = v;
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    // Показываем только на мобиле
+  function init() {
+    // Проверяем ширину
     var isMobile = window.matchMedia('(max-width: 768px)').matches;
     if (!isMobile) return;
 
     var header = document.querySelector('.header-inner');
-    if (!header) return;
+    if (!header) {
+      console.log('[theme-picker] header-inner не найден');
+      return;
+    }
 
-    // ===== Кнопка-палитра =====
+    // Уже есть? Пропускаем
+    if (header.querySelector('.theme-picker-btn')) return;
+
+    // ===== Кнопка 🎨 =====
     var btn = document.createElement('button');
+    btn.type = 'button';
     btn.className = 'theme-picker-btn';
     btn.setAttribute('aria-label', 'Выбрать тему');
-    btn.innerHTML = '<span class="tp-icon">🎨</span>';
+    btn.innerHTML = '🎨';
 
-    // Вставляем рядом с гамбургером
+    // Пытаемся вставить рядом с гамбургером, иначе — в конец
     var menuToggle = header.querySelector('.menu-toggle');
     if (menuToggle) {
+      // Вставляем перед гамбургером
       menuToggle.parentNode.insertBefore(btn, menuToggle);
     } else {
+      // Иначе — последним элементом
       header.appendChild(btn);
     }
 
-    // ===== Модальное окно =====
+    console.log('[theme-picker] кнопка добавлена');
+
+    // ===== Модалка =====
     var modal = document.createElement('div');
     modal.className = 'theme-picker-modal';
-    modal.innerHTML = '<div class="theme-picker-overlay"></div>' +
+    modal.innerHTML =
+      '<div class="theme-picker-overlay"></div>' +
       '<div class="theme-picker-content">' +
         '<div class="theme-picker-head">' +
           '<h3>🎨 Выбери тему</h3>' +
-          '<button class="theme-picker-close" aria-label="Закрыть">✕</button>' +
+          '<button type="button" class="theme-picker-close" aria-label="Закрыть">✕</button>' +
         '</div>' +
         '<div class="theme-picker-grid"></div>' +
       '</div>';
@@ -95,9 +109,9 @@
 
     THEMES.forEach(function(t) {
       var card = document.createElement('button');
+      card.type = 'button';
       card.className = 'theme-picker-card';
       if (t.id === current) card.classList.add('active');
-      card.setAttribute('data-theme', t.id);
 
       var swatches = t.colors.map(function(c) {
         return '<span style="background:' + c + '"></span>';
@@ -112,14 +126,10 @@
           c.classList.remove('active');
         });
         card.classList.add('active');
-        // Обновляем селект в шапке если он есть
-        var select = document.querySelector('.theme-switcher select');
-        if (select) select.value = t.id;
-        // Закрываем с задержкой
         setTimeout(function() {
           modal.classList.remove('open');
           document.body.style.overflow = '';
-        }, 300);
+        }, 250);
       });
 
       grid.appendChild(card);
@@ -134,15 +144,29 @@
       document.body.style.overflow = '';
     }
 
-    btn.addEventListener('click', openModal);
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal();
+    });
+
     modal.querySelector('.theme-picker-overlay').addEventListener('click', closeModal);
     modal.querySelector('.theme-picker-close').addEventListener('click', closeModal);
 
-    // Esc закрывает
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && modal.classList.contains('open')) {
         closeModal();
       }
     });
-  });
+  }
+
+  // Запускаем когда DOM готов
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // И ещё раз через 500мс — на случай если header перестроился другими скриптами
+  setTimeout(init, 500);
 })();
