@@ -2,12 +2,12 @@
 <html lang="ru">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Карта сайта — Monade OS</title>
-<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/extra.css">
 <link rel="stylesheet" href="css/animations.css">
 <link rel="stylesheet" href="css/liquid-glass.css">
 <link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 </head>
 <body>
 <header class="site-header"><div class="container header-inner">
@@ -20,132 +20,332 @@
 <a href="kali/index.html">Kali</a>
 <a href="about.html">Обо мне</a>
 </nav></div></header>
+
 <main class="container page">
-<button class="back-btn" onclick="history.back()" aria-label="Назад">← Назад</button>
-<div class="breadcrumbs-nav"><a href="../index.html">Главная</a></div>
 <h1>Карта сайта</h1>
-<p class="lead">Всё, что есть на сайте.</p>
+<p class="lead">Всё, что есть на Monade OS. Ищи, фильтруй, переходи.</p>
 
-<section><h2>Основное</h2>
-<ul>
-<li><a href="index.html">Главная</a></li>
-<li><a href="about.html">Обо мне</a></li>
-<li><a href="blog/index.html">Блог</a></li>
-<li><a href="faq.html">FAQ</a></li>
-<li><a href="sitemap.html">Карта сайта</a></li>
-</ul></section>
+<style>
+.sm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+}
+.sm-toolbar input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border-radius: 4px;
+}
+.sm-toolbar input:focus { outline: none; border-color: var(--accent); }
+.sm-toolbar .sm-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.sm-toolbar .sm-count strong { color: var(--accent); }
 
-<section><h2>Дистрибутивы</h2>
-<ul>
-<li><a href="distros/index.html">Каталог дистрибутивов</a></li>
-<li><a href="all-distros.html">Все дистрибутивы (таблица)</a></li>
-<li><a href="tree-interactive.html">Генеалогическое древо</a></li>
-<li><a href="popularity-chart.html">График популярности</a></li>
-<li><a href="release-calendar.html">Календарь релизов</a></li>
-<li></li>
-<li><a href="map.html">Карта мира</a></li>
-</ul></section>
+.sm-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.8rem 0 1.5rem;
+}
+.sm-filter {
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: 0.15s;
+}
+.sm-filter:hover { color: var(--accent); border-color: var(--accent-dim); }
+.sm-filter.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
 
-<section><h2>Гайды</h2>
-<ul>
-<li><a href="guides/index.html">Все гайды</a></li>
-<li><a href="guides/install-arch.html">Установка Arch</a></li>
-<li><a href="guides/install-gentoo.html">Установка Gentoo</a></li>
-<li><a href="guides/install-nixos.html">Установка NixOS</a></li>
-<li><a href="guides/install-alpine.html">Установка Alpine</a></li>
-<li><a href="guides/first-setup-ubuntu.html">Первые настройки Ubuntu</a></li>
-<li><a href="guides/first-setup-fedora.html">Первые настройки Fedora</a></li>
-<li><a href="guides/first-setup-arch.html">Первые настройки Arch</a></li>
-<li><a href="guides/pkg-apt.html">apt</a></li>
-<li><a href="guides/pkg-dnf.html">dnf</a></li>
-<li><a href="guides/pkg-pacman.html">pacman</a></li>
-<li><a href="guides/fs-btrfs.html">Btrfs</a></li>
-<li><a href="guides/fs-zfs.html">ZFS</a></li>
-<li><a href="guides/virt-docker.html">Docker</a></li>
-<li><a href="guides/virt-kvm.html">KVM</a></li>
-</ul></section>
+.sm-section {
+  margin: 2.5rem 0;
+  scroll-margin-top: 100px;
+}
+.sm-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--accent);
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed var(--border);
+}
+.sm-section-title .sm-icon { font-size: 1.5rem; }
+.sm-section-title .sm-badge {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-left: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 400;
+}
 
-<section><h2>Проблемы</h2>
-<ul>
-<li><a href="problems/index.html">Все проблемы</a></li>
-<li><a href="problems/no-wifi.html">Не работает Wi-Fi</a></li>
-<li><a href="problems/black-screen.html">Чёрный экран</a></li>
-<li><a href="problems/grub-broken.html">Сломался GRUB</a></li>
-<li><a href="problems/mac-problems.html">MacBook проблемы</a></li>
-</ul></section>
+.sm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.7rem;
+}
+.sm-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 4px;
+  transition: 0.15s;
+}
+.sm-card:hover {
+  border-left-color: var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.sm-card .sm-emoji { font-size: 1.3rem; flex-shrink: 0; }
+.sm-card .sm-info { min-width: 0; flex: 1; }
+.sm-card .sm-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sm-card .sm-desc {
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.1rem;
+}
+.sm-card.hidden { display: none; }
+.sm-section.hidden { display: none; }
 
-<section><h2>Kali и безопасность</h2>
-<ul>
-<li><a href="kali/index.html">Kali — обзор</a></li>
-<li><a href="kali/kali-start.html">С чего начать</a></li>
-<li><a href="kali/kali-tools.html">Инструменты</a></li>
-<li><a href="kali/kali-practice.html">Где практиковаться</a></li>
-<li><a href="kali/kali-defend.html">Защита Linux</a></li>
-</ul></section>
+@media (max-width: 768px) {
+  .sm-grid { grid-template-columns: 1fr; }
+  .sm-toolbar { padding: 0.8rem; }
+  .sm-toolbar input { min-width: 100%; font-size: 0.9rem; }
+  .sm-filter { font-size: 0.78rem; padding: 0.35rem 0.75rem; }
+  .sm-section-title { font-size: 1.1rem; }
+  .sm-card { padding: 0.9rem; min-height: 60px; }
+}
+</style>
 
-<section><h2>Команды и справочники</h2>
-<ul>
-<li><a href="terminal-cheatsheet.html">Шпаргалка по терминалу</a></li>
-<li><a href="bash-basics.html">Основы Bash</a></li>
-<li><a href="glossary.html">Словарь терминов</a></li>
-<li><a href="compare-packages.html">Пакетные менеджеры</a></li>
-<li><a href="compare-des.html">Рабочие столы</a></li>
-<li><a href="de-overview.html">Обзор DE</a></li>
-</ul></section>
+<!-- Поиск и счётчик -->
+<div class="sm-toolbar">
+<input type="search" id="sm-search" placeholder="🔍 Найти страницу..." autocomplete="off">
+<span class="sm-count">Показано: <strong id="sm-visible">0</strong> из <strong id="sm-total">0</strong></span>
+</div>
 
-<section><h2>Установка</h2>
-<ul>
-<li><a href="download.html">Как скачать Linux</a></li>
-<li><a href="write-iso.html">Как записать ISO</a></li>
-<li><a href="install.html">Как установить</a></li>
-<li><a href="first-commands.html">Первые 10 команд</a></li>
-<li><a href="hardware.html">Как узнать комплектующие</a></li>
-</ul></section>
+<!-- Фильтры -->
+<div class="sm-filters" id="sm-filters">
+<button class="sm-filter active" data-filter="all">Все</button>
+<button class="sm-filter" data-filter="main">🏠 Основное</button>
+<button class="sm-filter" data-filter="distros">📦 Дистрибутивы</button>
+<button class="sm-filter" data-filter="guides">📚 Гайды</button>
+<button class="sm-filter" data-filter="kali">🔐 Kali</button>
+<button class="sm-filter" data-filter="problems">🆘 Проблемы</button>
+<button class="sm-filter" data-filter="info">ℹ️ Информация</button>
+</div>
 
-<section><h2>История</h2>
-<ul>
-<li><a href="history.html">История Linux</a></li>
-<li><a href="timeline.html">Таймлайн</a></li>
-<li><a href="history-sudo.html">История sudo</a></li>
-<li><a href="tree.html">ASCII-древо</a></li>
-</ul></section>
+<!-- Секции -->
 
-<section><h2>Моё</h2>
-<ul>
-<li><a href="my-mac.html">MacBook Pro 2014</a></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li><a href="screenshots.html">Скриншоты</a></li>
-</ul></section>
+<!-- Основное -->
+<section class="sm-section" data-cat="main">
+<h2 class="sm-section-title"><span class="sm-icon">🏠</span>Основное<span class="sm-badge">8</span></h2>
+<div class="sm-grid">
+<a class="sm-card" href="index.html" data-name="главная"><span class="sm-emoji">🏠</span><span class="sm-info"><div class="sm-name">Главная</div><div class="sm-desc">Начало сайта</div></span></a>
+<a class="sm-card" href="about.html" data-name="обо мне monadei"><span class="sm-emoji">👤</span><span class="sm-info"><div class="sm-name">Обо мне</div><div class="sm-desc">Артём (Monadei)</div></span></a>
+<a class="sm-card" href="blog/index.html" data-name="блог devlog"><span class="sm-emoji">📝</span><span class="sm-info"><div class="sm-name">Блог</div><div class="sm-desc">Devlog и статьи</div></span></a>
+<a class="sm-card" href="faq.html" data-name="faq вопросы"><span class="sm-emoji">❓</span><span class="sm-info"><div class="sm-name">FAQ</div><div class="sm-desc">Частые вопросы</div></span></a>
+<a class="sm-card" href="communities.html" data-name="сообщества форумы"><span class="sm-emoji">🤝</span><span class="sm-info"><div class="sm-name">Сообщества</div><div class="sm-desc">Форумы и ресурсы</div></span></a>
+<a class="sm-card" href="my-mac.html" data-name="macbook мак"><span class="sm-emoji">💻</span><span class="sm-info"><div class="sm-name">MacBook Pro 2014</div><div class="sm-desc">Дистрибутивы для мака</div></span></a>
+<a class="sm-card" href="my-recommendations.html" data-name="рекомендации советую"><span class="sm-emoji">⭐</span><span class="sm-info"><div class="sm-name">Мои рекомендации</div><div class="sm-desc">5 дистрибутивов</div></span></a>
+<a class="sm-card" href="sitemap.html" data-name="карта сайта"><span class="sm-emoji">🗺️</span><span class="sm-info"><div class="sm-name">Карта сайта</div><div class="sm-desc">Эта страница</div></span></a>
+</div>
+</section>
 
-<section><h2>Прочее</h2>
-<ul>
-<li><a href="network.html">Сетевые команды</a></li>
-<li><a href="ssh-guide.html">SSH и ключи</a></li>
-<li><a href="users-guide.html">Пользователи</a></li>
-<li><a href="cron.html">Cron и таймеры</a></li>
-<li><a href="logs.html">Логи и journalctl</a></li>
-<li><a href="grub.html">GRUB</a></li>
-<li><a href="kernel.html">Ядро Linux</a></li>
-<li><a href="filesystem.html">Файловая система</a></li>
-<li><a href="filesystems-deep.html">Файловые системы</a></li>
-<li><a href="what-if.html">Что делать, если...</a></li>
-<li><a href="nvidia.html">Драйверы NVIDIA</a></li>
-<li><a href="gaming.html">Игры в Linux</a></li>
-<li><a href="docker.html">Docker</a></li>
-<li><a href="virtualization.html">Виртуализация</a></li>
-<li><a href="backups.html">Бэкапы</a></li>
-</ul></section>
+<!-- Дистрибутивы -->
+<section class="sm-section" data-cat="distros">
+<h2 class="sm-section-title"><span class="sm-icon">📦</span>Дистрибутивы<span class="sm-badge">6</span></h2>
+<div class="sm-grid">
+<a class="sm-card" href="distros/index.html" data-name="каталог дистрибутивы"><span class="sm-emoji">📦</span><span class="sm-info"><div class="sm-name">Каталог дистрибутивов</div><div class="sm-desc">163+ страниц с фильтрами</div></span></a>
+<a class="sm-card" href="tree-interactive.html" data-name="древо генеалогия"><span class="sm-emoji">🌳</span><span class="sm-info"><div class="sm-name">Генеалогическое древо</div><div class="sm-desc">Все дистрибутивы с годами</div></span></a>
+<a class="sm-card" href="all-distros.html" data-name="таблица все"><span class="sm-emoji">📊</span><span class="sm-info"><div class="sm-name">Все дистрибутивы</div><div class="sm-desc">Таблица</div></span></a>
+<a class="sm-card" href="popularity-chart.html" data-name="график популярность"><span class="sm-emoji">📈</span><span class="sm-info"><div class="sm-name">График популярности</div><div class="sm-desc">DistroWatch</div></span></a>
+<a class="sm-card" href="release-calendar.html" data-name="календарь релизы"><span class="sm-emoji">📅</span><span class="sm-info"><div class="sm-name">Календарь релизов</div><div class="sm-desc">Когда выходят</div></span></a>
+<a class="sm-card" href="map.html" data-name="карта мира"><span class="sm-emoji">🌍</span><span class="sm-info"><div class="sm-name">Карта мира</div><div class="sm-desc">Откуда родом</div></span></a>
+</div>
+</section>
+
+<!-- Гайды -->
+<section class="sm-section" data-cat="guides">
+<h2 class="sm-section-title"><span class="sm-icon">📚</span>Гайды<span class="sm-badge">6</span></h2>
+<div class="sm-grid">
+<a class="sm-card" href="guides/index.html" data-name="все гайды"><span class="sm-emoji">📚</span><span class="sm-info"><div class="sm-name">Все гайды</div><div class="sm-desc">Полный каталог</div></span></a>
+<a class="sm-card" href="guides/install-arch.html" data-name="установка arch"><span class="sm-emoji">⚡</span><span class="sm-info"><div class="sm-name">Установка Arch</div><div class="sm-desc">Пошагово</div></span></a>
+<a class="sm-card" href="guides/install-gentoo.html" data-name="установка gentoo"><span class="sm-emoji">🐧</span><span class="sm-info"><div class="sm-name">Установка Gentoo</div><div class="sm-desc">Из исходников</div></span></a>
+<a class="sm-card" href="guides/install-nixos.html" data-name="установка nixos"><span class="sm-emoji">❄️</span><span class="sm-info"><div class="sm-name">Установка NixOS</div><div class="sm-desc">Декларативно</div></span></a>
+<a class="sm-card" href="guides/first-setup-ubuntu.html" data-name="первые настройки ubuntu"><span class="sm-emoji">🟠</span><span class="sm-info"><div class="sm-name">Первые настройки Ubuntu</div><div class="sm-desc">Что делать</div></span></a>
+<a class="sm-card" href="guides/first-setup-fedora.html" data-name="первые настройки fedora"><span class="sm-emoji">🎩</span><span class="sm-info"><div class="sm-name">Первые настройки Fedora</div><div class="sm-desc">Что делать</div></span></a>
+<a class="sm-card" href="guides/wayland-vs-x11.html" data-name="wayland x11"><span class="sm-emoji">🖥️</span><span class="sm-info"><div class="sm-name">Wayland vs X11</div><div class="sm-desc">Что выбрать</div></span></a>
+<a class="sm-card" href="guides/systemd.html" data-name="systemd"><span class="sm-emoji">⚙️</span><span class="sm-info"><div class="sm-name">Как устроен systemd</div><div class="sm-desc">Подробно</div></span></a>
+<a class="sm-card" href="guides/selinux-vs-apparmor.html" data-name="selinux apparmor"><span class="sm-emoji">🛡️</span><span class="sm-info"><div class="sm-name">SELinux vs AppArmor</div><div class="sm-desc">Мандатный доступ</div></span></a>
+<a class="sm-card" href="guides/regex.html" data-name="regex"><span class="sm-emoji">🔍</span><span class="sm-info"><div class="sm-name">Шпаргалка regex</div><div class="sm-desc">grep/sed/awk</div></span></a>
+<a class="sm-card" href="guides/compile-source.html" data-name="компиляция исходники"><span class="sm-emoji">🔨</span><span class="sm-info"><div class="sm-name">Компиляция из исходников</div><div class="sm-desc">./configure && make</div></span></a>
+<a class="sm-card" href="guides/commands-text.html" data-name="команды текст"><span class="sm-emoji">📝</span><span class="sm-info"><div class="sm-name">Команды для текста</div><div class="sm-desc">grep, sed, awk</div></span></a>
+<a class="sm-card" href="guides/commands-system.html" data-name="команды система"><span class="sm-emoji">⚙️</span><span class="sm-info"><div class="sm-name">Команды для системы</div><div class="sm-desc">systemctl, journalctl</div></span></a>
+<a class="sm-card" href="guides/commands-packages.html" data-name="команды пакеты"><span class="sm-emoji">📦</span><span class="sm-info"><div class="sm-name">Команды для пакетов</div><div class="sm-desc">apt, dnf, pacman</div></span></a>
+<a class="sm-card" href="guides/commands-permissions.html" data-name="команды права"><span class="sm-emoji">🔒</span><span class="sm-info"><div class="sm-name">Команды для прав</div><div class="sm-desc">chmod, chown</div></span></a>
+<a class="sm-card" href="guides/commands-archive.html" data-name="команды архивы"><span class="sm-emoji">🗜️</span><span class="sm-info"><div class="sm-name">Команды для архивов</div><div class="sm-desc">tar, zip, rsync</div></span></a>
+</div>
+</section>
+
+<!-- Kali -->
+<section class="sm-section" data-cat="kali">
+<h2 class="sm-section-title"><span class="sm-icon">🔐</span>Kali и безопасность<span class="sm-badge">5</span></h2>
+<div class="sm-grid">
+<a class="sm-card" href="kali/index.html" data-name="kali обзор"><span class="sm-emoji">🔐</span><span class="sm-info"><div class="sm-name">Kali — обзор</div><div class="sm-desc">Раздел от Monadei</div></span></a>
+<a class="sm-card" href="kali/kali-start.html" data-name="с чего начать иб"><span class="sm-emoji">🚀</span><span class="sm-info"><div class="sm-name">С чего начать</div><div class="sm-desc">Путь в ИБ</div></span></a>
+<a class="sm-card" href="kali/kali-tools.html" data-name="инструменты kali nmap"><span class="sm-emoji">🛠️</span><span class="sm-info"><div class="sm-name">Инструменты</div><div class="sm-desc">nmap, Metasploit</div></span></a>
+<a class="sm-card" href="kali/kali-practice.html" data-name="практика htb tryhackme"><span class="sm-emoji">🎯</span><span class="sm-info"><div class="sm-name">Где практиковаться</div><div class="sm-desc">HTB, TryHackMe</div></span></a>
+<a class="sm-card" href="kali/kali-defend.html" data-name="защита linux"><span class="sm-emoji">🛡️</span><span class="sm-info"><div class="sm-name">Защита Linux</div><div class="sm-desc">Firewall, SSH</div></span></a>
+</div>
+</section>
+
+<!-- Проблемы -->
+<section class="sm-section" data-cat="problems">
+<h2 class="sm-section-title"><span class="sm-icon">🆘</span>Проблемы и решения<span class="sm-badge">6</span></h2>
+<div class="sm-grid">
+<a class="sm-card" href="problems/index.html" data-name="все проблемы"><span class="sm-emoji">🆘</span><span class="sm-info"><div class="sm-name">Все проблемы</div><div class="sm-desc">Каталог</div></span></a>
+<a class="sm-card" href="problems/no-wifi.html" data-name="wi-fi не работает"><span class="sm-emoji">📶</span><span class="sm-info"><div class="sm-name">Не работает Wi-Fi</div><div class="sm-desc">Broadcom, Intel</div></span></a>
+<a class="sm-card" href="problems/black-screen.html" data-name="чёрный экран"><span class="sm-emoji">⬛</span><span class="sm-info"><div class="sm-name">Чёрный экран</div><div class="sm-desc">После установки</div></span></a>
+<a class="sm-card" href="problems/grub-broken.html" data-name="grub сломался"><span class="sm-emoji">🔧</span><span class="sm-info"><div class="sm-name">Сломался GRUB</div><div class="sm-desc">Восстановление</div></span></a>
+<a class="sm-card" href="problems/no-sound.html" data-name="нет звука"><span class="sm-emoji">🔊</span><span class="sm-info"><div class="sm-name">Нет звука</div><div class="sm-desc">PulseAudio, PipeWire</div></span></a>
+<a class="sm-card" href="problems/mac-problems.html" data-name="macbook проблемы"><span class="sm-emoji">💻</span><span class="sm-info"><div class="sm-name">MacBook — проблемы</div><div class="sm-desc">Broadcom, камера</div></span></a>
+</div>
+</section>
+
+<!-- Информация -->
+<section class="sm-section" data-cat="info">
+<h2 class="sm-section-title"><span class="sm-icon">ℹ️</span>Информация и справочники<span class="sm-badge">12</span></h2>
+<div class="sm-grid">
+<a class="sm-card" href="history.html" data-name="история linux"><span class="sm-emoji">📜</span><span class="sm-info"><div class="sm-name">История Linux</div><div class="sm-desc">От Unix до сегодня</div></span></a>
+<a class="sm-card" href="timeline.html" data-name="таймлайн"><span class="sm-emoji">📅</span><span class="sm-info"><div class="sm-name">Таймлайн</div><div class="sm-desc">35 лет истории</div></span></a>
+<a class="sm-card" href="download.html" data-name="как скачать"><span class="sm-emoji">⬇️</span><span class="sm-info"><div class="sm-name">Как скачать Linux</div><div class="sm-desc">Источники</div></span></a>
+<a class="sm-card" href="write-iso.html" data-name="записать iso"><span class="sm-emoji">💿</span><span class="sm-info"><div class="sm-name">Как записать ISO</div><div class="sm-desc">dd, Etcher, Ventoy</div></span></a>
+<a class="sm-card" href="install.html" data-name="как установить"><span class="sm-emoji">⚙️</span><span class="sm-info"><div class="sm-name">Как установить Linux</div><div class="sm-desc">Пошагово</div></span></a>
+<a class="sm-card" href="terminal-cheatsheet.html" data-name="шпаргалка терминал"><span class="sm-emoji">⌨️</span><span class="sm-info"><div class="sm-name">Шпаргалка по терминалу</div><div class="sm-desc">50 команд</div></span></a>
+<a class="sm-card" href="glossary.html" data-name="словарь термины"><span class="sm-emoji">📖</span><span class="sm-info"><div class="sm-name">Словарь терминов</div><div class="sm-desc">Linux-жаргон</div></span></a>
+<a class="sm-card" href="compare-packages.html" data-name="пакетные менеджеры"><span class="sm-emoji">📦</span><span class="sm-info"><div class="sm-name">Пакетные менеджеры</div><div class="sm-desc">apt, dnf, pacman</div></span></a>
+<a class="sm-card" href="compare-des.html" data-name="рабочие столы de"><span class="sm-emoji">🖼️</span><span class="sm-info"><div class="sm-name">Рабочие столы</div><div class="sm-desc">GNOME, KDE, Xfce</div></span></a>
+<a class="sm-card" href="de-overview.html" data-name="обзор de"><span class="sm-emoji">🎨</span><span class="sm-info"><div class="sm-name">Обзор каждого DE</div><div class="sm-desc">Подробно</div></span></a>
+<a class="sm-card" href="network.html" data-name="сетевые команды"><span class="sm-emoji">🌐</span><span class="sm-info"><div class="sm-name">Сетевые команды</div><div class="sm-desc">ip, ss, dig</div></span></a>
+<a class="sm-card" href="nvidia.html" data-name="nvidia драйверы"><span class="sm-emoji">🎮</span><span class="sm-info"><div class="sm-name">Драйверы NVIDIA</div><div class="sm-desc">Установка</div></span></a>
+</div>
+</section>
+
+<script>
+(function() {
+  var cards = document.querySelectorAll('.sm-card');
+  var sections = document.querySelectorAll('.sm-section');
+  var total = cards.length;
+  var visible = total;
+  
+  document.getElementById('sm-total').textContent = total;
+  document.getElementById('sm-visible').textContent = total;
+
+  var search = document.getElementById('sm-search');
+  var activeFilter = 'all';
+
+  function applyFilters() {
+    var q = search.value.toLowerCase().trim();
+    var shown = 0;
+
+    cards.forEach(function(card) {
+      var section = card.closest('.sm-section');
+      var cat = section.dataset.cat;
+      var name = card.getAttribute('data-name') || '';
+      var text = card.textContent.toLowerCase();
+
+      var catMatch = (activeFilter === 'all') || (cat === activeFilter);
+      var searchMatch = !q || name.indexOf(q) !== -1 || text.indexOf(q) !== -1;
+
+      if (catMatch && searchMatch) {
+        card.classList.remove('hidden');
+        shown++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // Скрываем пустые секции
+    sections.forEach(function(section) {
+      var visibleInSection = section.querySelectorAll('.sm-card:not(.hidden)').length;
+      if (visibleInSection === 0) {
+        section.classList.add('hidden');
+      } else {
+        section.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('sm-visible').textContent = shown;
+  }
+
+  search.addEventListener('input', applyFilters);
+
+  document.querySelectorAll('.sm-filter').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.sm-filter').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      this.classList.add('active');
+      activeFilter = this.dataset.filter;
+      search.value = '';
+      applyFilters();
+    });
+  });
+})();
+</script>
 </main>
-<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026. <a href="feed.xml" style="color: var(--accent);">📡 RSS</a></p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
 <script src="js/theme.js"></script>
 <script src="js/site-theme.js"></script>
 <script src="js/search.js"></script>
 <script src="js/extras.js"></script>
-<script src="js/logo-anim.js"></script>
-<script src="js/boot-screen.js"></script>
 <script src="js/theme-picker.js"></script>
 </body>
 </html>
