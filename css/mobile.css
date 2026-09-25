@@ -96,7 +96,7 @@
   .search-results a { padding: 0.8rem; min-height: 44px; }
 
   /* Скрываем на мобиле */
-  .theme-switcher { display: none !important; }
+  
   .font-ctrl { display: none !important; }
   .tux, .tux-walk { display: none !important; }
   .page-toc { display: none !important; }
@@ -665,5 +665,44 @@
 @media (max-width: 360px) {
   .theme-picker-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================
+   СЕЛЕКТ ТЕМЫ НА МОБИЛЕ — компактный и рабочий
+   ============================================ */
+@media (max-width: 768px) {
+  .theme-switcher {
+    display: inline-flex !important;
+    order: 3;
+    margin: 0.4rem 0 0 0 !important;
+    width: auto;
+    max-width: 140px;
+    flex-shrink: 0;
+  }
+  .theme-switcher select {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    min-height: 40px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--accent-dim);
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3e%3cpath fill='%23ffb000' d='M5 7L1 3h8z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    padding-right: 1.6rem;
+  }
+  .theme-switcher select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .theme-switcher select:active {
+    background-color: var(--panel-2);
   }
 }
