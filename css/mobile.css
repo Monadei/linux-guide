@@ -511,3 +511,159 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================
+   КНОПКА ВЫБОРА ТЕМЫ — только на мобиле
+   ============================================ */
+.theme-picker-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .theme-picker-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    order: 1;
+    background: transparent;
+    border: 1px solid var(--accent-dim);
+    color: var(--accent);
+    width: 42px;
+    height: 38px;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 0.4rem;
+  }
+  .theme-picker-btn:active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  /* Модальное окно выбора темы */
+  .theme-picker-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 99999;
+  }
+  .theme-picker-modal.open {
+    display: block;
+  }
+
+  .theme-picker-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: tp-fade-in 0.2s ease-out;
+  }
+
+  .theme-picker-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 1rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: tp-slide-up 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0));
+  }
+
+  @keyframes tp-fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes tp-slide-up {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+  }
+
+  .theme-picker-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--border);
+  }
+  .theme-picker-head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+  .theme-picker-close {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-picker-close:active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .theme-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+  }
+
+  .theme-picker-card {
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    transition: 0.15s;
+    min-height: 70px;
+  }
+  .theme-picker-card.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .theme-picker-card:active {
+    transform: scale(0.97);
+  }
+
+  .tp-swatches {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 0.4rem;
+  }
+  .tp-swatches span {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tp-name {
+    font-size: 0.78rem;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .theme-picker-card.active .tp-name {
+    color: var(--accent);
+    font-weight: 700;
+  }
+}
+
+/* Узкие экраны — 2 колонки уже достаточно */
+@media (max-width: 360px) {
+  .theme-picker-grid {
+    grid-template-columns: 1fr;
+  }
+}
