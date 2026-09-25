@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSS-подписка — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="stylesheet" href="css/mobile.css">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="container header-inner">
+<a href="index.html" class="logo">Monade OS</a>
+<nav class="nav">
+<a href="index.html">Главная</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="guides/index.html">Гайды</a>
+<a href="problems/index.html">Проблемы</a>
+<a href="kali/index.html">Kali</a>
+<a href="about.html">Обо мне</a>
+</nav></div></header>
+
+<main class="container page">
+
+<style>
+.rss-hero {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+.rss-icon {
+  font-size: 3.5rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  display: block;
+  animation: rss-pulse 2s ease-in-out infinite;
+}
+@keyframes rss-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.rss-hero h1 {
+  margin: 0.5rem 0;
+  color: var(--accent);
+  font-size: 1.8rem;
+}
+.rss-hero h1::before { content: ""; }
+.rss-hero p {
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0.8rem auto 0;
+  font-size: 0.95rem;
+}
+.rss-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--accent-dim);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.rss-url:hover { border-color: var(--accent); }
+.rss-url:active { background: var(--panel-2); }
+
+.rss-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+.rss-block h2 {
+  margin-top: 0;
+  color: var(--accent);
+  border: none;
+  padding: 0;
+  font-size: 1.2rem;
+}
+.rss-block h2::before { content: ""; }
+
+.rss-readers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.rss-reader {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.15s;
+}
+.rss-reader:hover {
+  border-left-color: var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.rss-reader .rr-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.rss-reader .rr-info {
+  min-width: 0;
+  flex: 1;
+}
+.rss-reader .rr-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.rss-reader .rr-desc {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-top: 0.1rem;
+}
+
+.rss-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.rss-item {
+  display: block;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  padding: 1rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.15s;
+}
+.rss-item:hover {
+  border-left-color: var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.rss-item .ri-title {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+.rss-item .ri-desc {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.rss-copy {
+  background: var(--bg);
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+.rss-copy:hover { background: var(--accent); color: var(--bg); }
+.rss-copy:active { transform: scale(0.97); }
+
+@media (max-width: 768px) {
+  .rss-hero { padding: 1.5rem 0.8rem; }
+  .rss-icon { font-size: 2.5rem; }
+  .rss-hero h1 { font-size: 1.4rem; }
+  .rss-url {
+    font-size: 0.72rem;
+    padding: 0.5rem 0.8rem;
+    word-break: break-all;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .rss-readers { grid-template-columns: 1fr; }
+  .rss-reader { padding: 1rem; min-height: 64px; }
+  .rss-block { padding: 1rem; }
+  .rss-block h2 { font-size: 1.05rem; }
+  .rss-item { padding: 0.9rem 1rem; min-height: 60px; }
+}
+</style>
+
+<!-- HERO -->
+<div class="rss-hero">
+<span class="rss-icon">📡</span>
+<h1>RSS-подписка</h1>
+<p>Подпишись на обновления Monade OS. Новые статьи и дистрибутивы — прямо в твоём RSS-ридере. Без email, без рекламы, без алгоритмов.</p>
+<div class="rss-url" onclick="copyRss()" title="Клик — скопировать">
+<span>🔗</span>
+<span>https://monadei.github.io/linux-guide/feed.xml</span>
+</div>
+<button class="rss-copy" onclick="copyRss()">📋 Скопировать ссылку</button>
+</div>
+
+<!-- ЧТО ЭТО -->
+<div class="rss-block">
+<h2>Что такое RSS?</h2>
+<p><strong>RSS</strong> (Really Simple Syndication) — это способ подписаться на обновления сайта. Ты добавляешь ссылку в специальную программу-читалку, и она сама показывает новые статьи. Не нужно заходить на сайт и проверять «а что нового?».</p>
+<p>Это как <strong>подписка на Telegram-канал</strong>, только:</p>
+<ul>
+<li>Работает в любой программе, не только Telegram</li>
+<li>Не требует аккаунта на сайте</li>
+<li>Никто не собирает твои данные</li>
+<li>Нет рекламы и алгоритмов</li>
+</ul>
+</div>
+
+<!-- ЧЕМ ЧИТАТЬ -->
+<div class="rss-block">
+<h2>Чем читать</h2>
+<p>Выбирай любой — все бесплатные:</p>
+<div class="rss-readers">
+<a class="rss-reader" href="https://feedly.com/i/subscription/feed/https://monadei.github.io/linux-guide/feed.xml" target="_blank" rel="noopener">
+<span class="rr-icon">📰</span>
+<span class="rr-info">
+<div class="rr-name">Feedly</div>
+<div class="rr-desc">Самый популярный, веб + мобильный</div>
+</span>
+</a>
+<a class="rss-reader" href="https://www.inoreader.com/?add_feed=https://monadei.github.io/linux-guide/feed.xml" target="_blank" rel="noopener">
+<span class="rr-icon">📖</span>
+<span class="rr-info">
+<div class="rr-name">Inoreader</div>
+<div class="rr-desc">Мощный, много настроек</div>
+</span>
+</a>
+<a class="rss-reader" href="https://addons.mozilla.org/ru/firefox/addon/feedbroreader/" target="_blank" rel="noopener">
+<span class="rr-icon">🦊</span>
+<span class="rr-info">
+<div class="rr-name">Feedbro (Firefox)</div>
+<div class="rr-desc">Расширение для браузера</div>
+</span>
+</a>
+<a class="rss-reader" href="https://www.thunderbird.net/ru/" target="_blank" rel="noopener">
+<span class="rr-icon">🦅</span>
+<span class="rr-info">
+<div class="rr-name">Thunderbird</div>
+<div class="rr-desc">Почтовый клиент, умеет RSS</div>
+</span>
+</a>
+<a class="rss-reader" href="https://netnewswire.com" target="_blank" rel="noopener">
+<span class="rr-icon">🍎</span>
+<span class="rr-info">
+<div class="rr-name">NetNewsWire</div>
+<div class="rr-desc">Для macOS и iOS</div>
+</span>
+</a>
+<a class="rss-reader" href="https://play.google.com/store/apps/details?id=com.nononsenseapps.feeder.play" target="_blank" rel="noopener">
+<span class="rr-icon">🤖</span>
+<span class="rr-info">
+<div class="rr-name">Feeder (Android)</div>
+<div class="rr-desc">Открытый, без рекламы</div>
+</span>
+</a>
+</div>
+</div>
+
+<!-- КАК ПОДПИСАТЬСЯ -->
+<div class="rss-block">
+<h2>Как подписаться</h2>
+<ol>
+<li><strong>Скопируй ссылку:</strong> <code>https://monadei.github.io/linux-guide/feed.xml</code></li>
+<li><strong>Открой свой RSS-ридер</strong> (Feedly, Inoreader и т. д.)</li>
+<li><strong>Найди кнопку «Add feed» / «Добавить»</strong></li>
+<li><strong>Вставь ссылку</strong> и подтверди</li>
+<li><strong>Готово</strong> — новые статьи будут появляться автоматически</li>
+</ol>
+<p>Или нажми на одну из кнопок выше — Feedly и Inoreader сами добавят фид.</p>
+</div>
+
+<!-- ПОСЛЕДНИЕ СТАТЬИ -->
+<div class="rss-block">
+<h2>Последние на сайте</h2>
+<div class="rss-list">
+<a class="rss-item" href="distros/index.html">
+<div class="ri-title">Каталог дистрибутивов</div>
+<div class="ri-desc">163+ дистрибутива с фильтрами и статусами</div>
+</a>
+<a class="rss-item" href="tree-interactive.html">
+<div class="ri-title">Генеалогическое древо</div>
+<div class="ri-desc">Все дистрибутивы с годами выпуска</div>
+</a>
+<a class="rss-item" href="guides/index.html">
+<div class="ri-title">Гайды по Linux</div>
+<div class="ri-desc">Установка, настройка, команды, пакетные менеджеры</div>
+</a>
+<a class="rss-item" href="kali/index.html">
+<div class="ri-title">Kali и безопасность</div>
+<div class="ri-desc">С чего начать, инструменты, практика</div>
+</a>
+<a class="rss-item" href="problems/index.html">
+<div class="ri-title">Проблемы и решения</div>
+<div class="ri-desc">Wi-Fi, чёрный экран, GRUB, звук</div>
+</a>
+<a class="rss-item" href="about.html">
+<div class="ri-title">Обо мне</div>
+<div class="ri-desc">Monadei, мои системы, блог, рекомендации</div>
+</a>
+</div>
+</div>
+
+<!-- ПРО RSS -->
+<div class="rss-block" style="border-left-color: var(--accent-dim);">
+<h2>RSS в 2026 — зачем?</h2>
+<p>RSS придумали в 1999 году. Казалось, он умрёт с появлением Telegram и YouTube. Но нет:</p>
+<ul>
+<li><strong>Не зависит от корпораций</strong> — никто не может забанить RSS</li>
+<li><strong>Нет алгоритмов</strong> — ты видишь всё, что вышло</li>
+<li><strong>Нет рекламы</strong> — просто статьи</li>
+<li><strong>Работает везде</strong> — Linux, macOS, Windows, Android, iOS, даже в терминале</li>
+</ul>
+<p>Reddit, Hacker News, Stack Overflow, GitHub — все используют RSS. Именно поэтому он до сих пор жив.</p>
+</div>
+
+<script>
+function copyRss() {
+  var url = 'https://monadei.github.io/linux-guide/feed.xml';
+  navigator.clipboard.writeText(url).then(function() {
+    var btn = document.querySelector('.rss-copy');
+    var original = btn.textContent;
+    btn.textContent = '✓ Скопировано!';
+    setTimeout(function() {
+      btn.textContent = original;
+    }, 1500);
+  }).catch(function() {
+    alert('Скопируй вручную: ' + url);
+  });
+}
+</script>
+
+</main>
+
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026. <a href="rss.html" style="color: var(--accent);">📡 RSS</a></p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/site-theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/theme-picker.js"></script>
+</body>
+</html>
