@@ -1,14 +1,11 @@
 /* ============================================
-   MOBILE.CSS — Android и iPhone
-   Обновлён под новые блоки и дерево
+   MOBILE.CSS — единый файл для телефонов
+   Android и iPhone (≤768px)
    ============================================ */
 
-/* ============================================
-   ТЕЛЕФОНЫ — до 768px
-   ============================================ */
 @media (max-width: 768px) {
 
-  /* --- База --- */
+  /* ===== БАЗА ===== */
   html { font-size: 16px; -webkit-text-size-adjust: 100%; }
   body {
     line-height: 1.6;
@@ -17,15 +14,13 @@
   }
   .container { width: 94%; }
 
-  /* ============================================
-     ШАПКА
-     ============================================ */
+  /* ===== ШАПКА ===== */
   .site-header { padding: 0; }
   .header-inner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     padding: 0.6rem 0;
   }
   .logo { font-size: 0.95rem; }
@@ -39,15 +34,35 @@
     order: 2;
     margin-left: auto;
     background: transparent;
-    border: 1px solid var(--accent-dim);
+    border: 2px solid var(--accent-dim);
     color: var(--accent);
-    width: 42px;
-    height: 38px;
+    width: 44px;
+    height: 42px;
     font-size: 1.2rem;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    padding: 0;
   }
   .menu-toggle:active { background: var(--accent); color: var(--bg); }
+
+  /* Кнопка темы */
+  .theme-picker-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    order: 1;
+    background: transparent;
+    border: 2px solid var(--accent-dim);
+    color: var(--accent);
+    width: 44px;
+    height: 42px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 0.3rem;
+  }
+  .theme-picker-btn:active { background: var(--accent); color: var(--bg); }
 
   /* Меню */
   .nav {
@@ -56,8 +71,8 @@
     width: 100%;
     flex-direction: column;
     gap: 0;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
     border-top: 1px solid var(--border);
   }
   .nav.open { display: flex; }
@@ -65,12 +80,13 @@
     padding: 0.9rem 0.4rem;
     font-size: 1rem;
     border-bottom: 1px solid var(--border);
-    min-height: 48px;
+    min-height: 52px;
     display: flex;
     align-items: center;
   }
   .nav a:last-child { border-bottom: none; }
   .nav a::before, .nav a::after { content: ""; }
+  .nav a:active { background: var(--panel-2); color: var(--accent); }
 
   /* Поиск */
   .search-box {
@@ -83,7 +99,7 @@
     padding: 0.6rem 0.8rem;
     font-size: 0.95rem;
     min-height: 44px;
-    border-radius: 4px;
+    border-radius: 6px;
   }
   .search-results {
     min-width: 100%;
@@ -95,44 +111,91 @@
   }
   .search-results a { padding: 0.8rem; min-height: 44px; }
 
-  /* Скрываем на мобиле */
-  
-  .font-ctrl { display: none !important; }
-  .tux, .tux-walk { display: none !important; }
-  .page-toc { display: none !important; }
-  .breadcrumbs { display: none; }
+  /* Скрываем лишнее */
+  .theme-switcher,
+  .font-ctrl,
+  .tux, .tux-walk,
+  .page-toc,
+  .breadcrumbs { display: none !important; }
 
-  /* ============================================
-     HERO
-     ============================================ */
+  /* ===== HERO ===== */
   .hero { padding: 1.5rem 0 1rem; text-align: left; }
-  .hero h1 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    margin-bottom: 0.6rem;
-  }
+  .hero h1 { font-size: 1.5rem; line-height: 1.3; }
   .hero h1::before { content: ""; }
   .hero p { font-size: 1rem; }
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 0.85rem 1rem;
-    font-size: 1rem;
-    text-align: center;
-    min-height: 48px;
-    box-sizing: border-box;
-  }
-  .btn::before, .btn::after { content: ""; }
-
-  /* Hero-логотип Monade OS */
   .hero-logo, .pixel-logo {
     font-size: clamp(2rem, 12vw, 3rem) !important;
     margin: 1rem 0 0.8rem !important;
   }
 
-  /* ============================================
-     КАРТОЧКИ — 1 колонка
-     ============================================ */
+  /* ===== КНОПКИ ===== */
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    min-height: 52px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border-width: 2px;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 2px solid var(--accent-dim);
+    color: var(--accent);
+  }
+  .btn::before, .btn::after { content: ""; }
+  .btn:active {
+    transform: scale(0.97);
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .card a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    min-height: 44px;
+  }
+
+  /* ===== ХЛЕБНЫЕ КРОШКИ ===== */
+  .breadcrumbs-nav {
+    font-size: 0.78rem;
+    padding: 0.3rem 0 0.6rem;
+    gap: 0.2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .breadcrumbs-nav::-webkit-scrollbar { display: none; }
+  .breadcrumbs-nav a,
+  .breadcrumbs-nav span {
+    flex-shrink: 0;
+    padding: 0.2rem 0.3rem;
+  }
+
+  /* ===== КНОПКА НАЗАД ===== */
+  .back-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    min-height: 48px;
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+  }
+  .back-btn:active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  /* ===== КАРТОЧКИ ===== */
   .cards {
     grid-template-columns: 1fr;
     gap: 0.7rem;
@@ -140,23 +203,20 @@
   }
   .card {
     padding: 1rem;
-    border-radius: 6px;
-    transition: none;
+    border-radius: 8px;
+    min-height: 80px;
   }
   .card:active { transform: scale(0.98); }
   .card h2, .card h3 { font-size: 1rem; }
   .card p { font-size: 0.9rem; }
   .distro-icon { width: 36px; height: 36px; }
 
-  /* ============================================
-     СТРАНИЦЫ
-     ============================================ */
+  /* ===== СТРАНИЦЫ ===== */
   .page { padding: 1.2rem 0 2.5rem; }
   .page h1 { font-size: 1.4rem; line-height: 1.3; }
   .page h1::before { content: ""; }
   .page h2 { font-size: 1.1rem; margin-top: 1.5rem; }
   .page h2::before { content: ""; }
-  .page h3 { font-size: 1rem; }
   .lead { font-size: 0.95rem; }
   .lead::before { content: ""; }
 
@@ -164,17 +224,15 @@
   ul, ol { padding-left: 1.2rem; }
   li { margin: 0.3rem 0; font-size: 0.95rem; }
 
-  /* ============================================
-     КОД И ТАБЛИЦЫ
-     ============================================ */
+  /* ===== КОД И ТАБЛИЦЫ ===== */
   pre {
     padding: 0.7rem;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border-radius: 4px;
+    border-radius: 6px;
   }
-  pre code { font-size: 0.8rem; white-space: pre; word-break: normal; }
+  pre code { font-size: 0.78rem; white-space: pre; word-break: normal; }
   code { font-size: 0.85rem; padding: 0.1rem 0.3rem; }
 
   .table-wrap {
@@ -183,34 +241,18 @@
     margin: 1rem -3% 1rem 0;
     padding-right: 3%;
   }
-  table.data { font-size: 0.82rem; min-width: 500px; }
-  table.data th, table.data td {
-    padding: 0.5rem 0.6rem;
-    white-space: nowrap;
-  }
+  table.data { font-size: 0.8rem; min-width: 500px; }
+  table.data th, table.data td { padding: 0.5rem 0.6rem; white-space: nowrap; }
 
-  /* ============================================
-     KALI-СЕКЦИИ (используются везде)
-     ============================================ */
+  /* ===== KALI-СЕКЦИИ ===== */
   .kali-section {
     padding: 1rem;
     margin: 1rem 0;
-    border-radius: 4px;
+    border-radius: 6px;
   }
-  .kali-section h2 { font-size: 1.05rem; margin-bottom: 0.6rem; }
+  .kali-section h2 { font-size: 1.05rem; margin-bottom: 0.5rem; }
 
-  /* ============================================
-     БЛОК «ОБНОВЛЕНИЕ И СТАТУС»
-     ============================================ */
-  .kali-section strong[style*="color"] {
-    font-size: 1rem;
-    display: inline-block;
-    margin-bottom: 0.3rem;
-  }
-
-  /* ============================================
-     ДЕРЕВО — tree-interactive.html
-     ============================================ */
+  /* ===== ДЕРЕВО ===== */
   .tree-toolbar {
     flex-direction: column;
     gap: 0.5rem;
@@ -228,64 +270,48 @@
     padding: 0.6rem;
     font-size: 0.9rem;
     min-height: 44px;
+    border-radius: 6px;
   }
-
   .tree-list {
-    padding: 0.8rem;
-    font-size: 0.85rem;
-    line-height: 1.7;
+    padding: 0.7rem;
+    font-size: 0.82rem;
+    line-height: 1.65;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .tree-row {
-    flex-wrap: nowrap;
-    padding: 0.15rem 0;
-  }
+  .tree-row { flex-wrap: nowrap; padding: 0.1rem 0; }
   .tree-toggle {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     font-size: 0.8rem;
+    border-radius: 4px;
   }
-  .tree-name {
-    padding: 0.15rem 0.3rem;
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
-  .tree-year {
-    font-size: 0.72rem;
-    margin-left: 0.2rem;
-  }
-  .tree-count {
-    font-size: 0.7rem;
-  }
-  .tree-children {
-    margin-left: 0.6rem;
-    padding-left: 0.5rem;
-  }
+  .tree-name { padding: 0.1rem 0.3rem; font-size: 0.82rem; white-space: nowrap; }
+  .tree-year { font-size: 0.7rem; margin-left: 0.15rem; }
+  .tree-count { font-size: 0.68rem; }
+  .tree-children { margin-left: 0.5rem; padding-left: 0.4rem; }
 
-  /* ============================================
-     ТАБЫ НА СТРАНИЦЕ «ОБО МНЕ»
-     ============================================ */
+  /* ===== ТАБЫ В ABOUT ===== */
   .about-tabs {
     gap: 0;
     overflow-x: auto;
     flex-wrap: nowrap;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0.2rem;
-    margin: 1rem 0 1rem;
+    margin: 1rem 0;
     scrollbar-width: none;
   }
   .about-tabs::-webkit-scrollbar { display: none; }
   .about-tab {
-    padding: 0.7rem 1rem;
-    font-size: 0.88rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
     white-space: nowrap;
-    min-height: 44px;
+    min-height: 48px;
+    border-bottom-width: 4px;
   }
+  .about-tab:active { background: var(--panel-2); color: var(--accent); }
 
-  .about-hero {
-    padding: 1.5rem 0 1rem;
-  }
+  .about-hero { padding: 1.5rem 0 1rem; }
   .about-hero h1 { font-size: 1.6rem; }
   .about-avatar {
     width: 90px;
@@ -294,23 +320,17 @@
     margin-bottom: 0.8rem;
   }
   .about-hero .roles { gap: 0.3rem; }
-  .about-hero .role {
-    padding: 0.25rem 0.7rem;
-    font-size: 0.78rem;
-  }
+  .about-hero .role { padding: 0.25rem 0.7rem; font-size: 0.78rem; }
   .about-hero .intro { font-size: 0.92rem; line-height: 1.6; }
 
   .about-block {
     padding: 1rem;
     margin: 1rem 0;
-    border-radius: 4px;
+    border-radius: 6px;
   }
-  .about-block h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.7rem;
-  }
+  .about-block h2 { font-size: 1.1rem; margin-bottom: 0.6rem; }
 
-  /* Системы — 1 колонка */
+  /* Системы/рекомендации — 1 колонка */
   .sys-grid,
   .rec-grid,
   .learn-grid,
@@ -320,11 +340,10 @@
   }
   .sys-card, .rec-card, .learn-card {
     padding: 1rem;
-    border-radius: 4px;
+    border-radius: 6px;
   }
-  .rec-card .rec-icon { width: 36px; height: 36px; }
 
-  /* Таймлайн в about */
+  /* Таймлайн */
   .timeline-about { padding-left: 1.2rem; }
   .timeline-about::before { left: 0.3rem; }
   .tl-about { margin-bottom: 1.2rem; padding-left: 0.8rem; }
@@ -333,65 +352,78 @@
   .tl-about .tl-title { font-size: 0.95rem; }
   .tl-about .tl-desc { font-size: 0.85rem; }
 
-  /* Видео-карточки */
+  /* Видео */
   .video-card {
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.8rem;
+    border-radius: 8px;
   }
   .video-card .vc-icon { font-size: 1.5rem; }
   .video-card .vc-title { font-size: 0.9rem; }
   .video-card .vc-desc { font-size: 0.8rem; }
-  .video-cat { font-size: 0.95rem; margin: 1rem 0 0.5rem; }
 
-  /* ============================================
-     СРАВНЕНИЕ, ТАБЫ ДЕРЕВА
-     ============================================ */
+  /* Сравнение */
   .compare-grid { grid-template-columns: 1fr; }
   .compare-grid select { min-height: 44px; font-size: 0.9rem; }
   .compare-result { padding: 0.8rem; overflow-x: auto; }
   .compare-result table { font-size: 0.8rem; min-width: 400px; }
 
-  /* ============================================
-     РЕКОМЕНДАЦИИ (карточки)
-     ============================================ */
-  .rec-grid { grid-template-columns: 1fr; }
-  .rec-card .rec-num {
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    font-size: 0.8rem;
-  }
-  .rec-card h3 { font-size: 1rem; }
-  .rec-card .rec-why { font-size: 0.85rem; }
-
-  /* ============================================
-     ГАЛЕРЕЯ DE, ТЕМЫ
-     ============================================ */
+  /* Галерея DE */
   .de-card { padding: 1rem; }
-  .de-card .preview {
-    font-size: 0.65rem;
-    overflow-x: auto;
-    padding: 0.7rem;
-  }
+  .de-card .preview { font-size: 0.65rem; overflow-x: auto; padding: 0.7rem; }
 
+  /* Темы */
   .theme-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
   .theme-card { padding: 0.6rem; }
-  .theme-card .name { font-size: 0.78rem; }
 
-  /* ============================================
-     FAQ
-     ============================================ */
+  /* FAQ */
   .faq-item summary {
-    padding: 0.8rem 0;
+    padding: 0.9rem 0;
     font-size: 0.95rem;
-    min-height: 44px;
+    min-height: 52px;
   }
   .faq-item p { font-size: 0.88rem; }
 
-  /* ============================================
-     КНОПКА «НАВЕРХ»
-     ============================================ */
+  /* ===== ПОХОЖИЕ ===== */
+  .related-section { margin-top: 2rem; padding-top: 1.2rem; }
+  .related-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+  .related-card {
+    padding: 1rem;
+    min-height: 70px;
+    border-radius: 6px;
+  }
+  .related-card:active {
+    background: var(--panel-2);
+    transform: scale(0.98);
+  }
+
+  /* ===== СТРЕЛКИ ← → ===== */
+  .page-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 1.2rem;
+  }
+  .page-nav a,
+  .page-nav .pn-disabled {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    min-height: 48px;
+    border-radius: 6px;
+  }
+  .page-nav a:active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .page-nav a.pn-home { order: 2; }
+  .page-nav .pn-prev { order: 1; }
+  .page-nav .pn-next { order: 3; }
+
+  /* ===== КНОПКА «НАВЕРХ» ===== */
   .to-top {
     bottom: 1rem;
     right: 1rem;
@@ -403,9 +435,7 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
   }
 
-  /* ============================================
-     ФУТЕР
-     ============================================ */
+  /* ===== ФУТЕР ===== */
   .site-footer {
     padding: 1rem 0;
     font-size: 0.82rem;
@@ -419,8 +449,9 @@
     margin-top: 0.6rem;
   }
   .site-footer .footer-links a {
-    padding: 0.3rem 0;
-    min-height: 32px;
+    padding: 0.4rem 0.6rem;
+    min-height: 36px;
+    border-radius: 4px;
   }
 
   /* Мини-терминал */
@@ -430,37 +461,37 @@
   /* Автор-карточка */
   .author-card { flex-direction: column; padding: 1rem; gap: 0.8rem; }
   .author-avatar { font-size: 1.5rem; padding: 0.6rem 0.9rem; }
-  .author-info h2 { font-size: 1.2rem; }
+
+  /* Фильтры */
+  .filter-btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.82rem;
+    min-height: 44px;
+    border-radius: 22px;
+  }
+  .quick-links a {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    min-height: 44px;
+    border-radius: 22px;
+  }
 }
 
-/* ============================================
-   iPHONE — до 430px (узкие)
-   ============================================ */
-@media (max-width: 430px) {
+/* ===== УЗКИЕ ЭКРАНЫ (iPhone SE) ===== */
+@media (max-width: 380px) {
   html { font-size: 15px; }
   .container { width: 95%; }
-
-  .hero h1 { font-size: 1.35rem; }
-  .hero-logo, .pixel-logo { font-size: clamp(1.8rem, 14vw, 2.5rem) !important; }
-
-  .page h1 { font-size: 1.3rem; }
-  .page h2 { font-size: 1.05rem; }
-
-  .card h2, .card h3 { font-size: 0.95rem; }
-  .nav a { font-size: 0.95rem; padding: 0.75rem 0.3rem; }
-
+  .hero h1 { font-size: 1.3rem; }
+  .hero-logo, .pixel-logo { font-size: clamp(1.7rem, 14vw, 2.3rem) !important; }
+  .page h1 { font-size: 1.25rem; }
+  .page h2 { font-size: 1rem; }
+  .about-tab { padding: 0.6rem 0.8rem; font-size: 0.8rem; }
   .theme-grid { grid-template-columns: 1fr; }
-
-  .tree-list { font-size: 0.78rem; padding: 0.6rem; }
-  .tree-name { font-size: 0.78rem; }
-  .tree-year { font-size: 0.68rem; }
-
-  .about-tab { padding: 0.6rem 0.8rem; font-size: 0.82rem; }
+  .tree-list { font-size: 0.76rem; }
+  .tree-name { font-size: 0.76rem; }
 }
 
-/* ============================================
-   ТАЧ-УСТРОЙСТВА — активные состояния
-   ============================================ */
+/* ===== ТАЧ-УСТРОЙСТВА ===== */
 @media (hover: none) and (pointer: coarse) {
   .card:hover, .distro-tile:hover, .rec-card:hover,
   .sys-card:hover, .learn-card:hover {
@@ -468,653 +499,30 @@
     box-shadow: none;
   }
   .card:active, .distro-tile:active, .rec-card:active,
-  .sys-card:active, .learn-card:active, .nav a:active {
+  .sys-card:active, .learn-card:active {
     transform: scale(0.98);
-    background: var(--panel-2);
   }
-  .btn:hover { transform: none; }
-  .btn:active { transform: scale(0.97); }
 }
 
-/* ============================================
-   SAFE AREA — для iPhone с вырезом
-   ============================================ */
+/* ===== SAFE AREA (iPhone) ===== */
 @supports (padding: env(safe-area-inset-top)) {
-  .site-header {
-    padding-top: env(safe-area-inset-top);
-  }
-  .site-footer {
-    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
-  }
-  .to-top {
-    bottom: calc(1rem + env(safe-area-inset-bottom));
-    right: calc(1rem + env(safe-area-inset-right));
-  }
+  .site-header { padding-top: env(safe-area-inset-top); }
+  .site-footer { padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+  .to-top { bottom: calc(1rem + env(safe-area-inset-bottom)); }
 }
 
-/* ============================================
-   ЛАНДШАФТ на телефоне
-   ============================================ */
+/* ===== ЛАНДШАФТ ===== */
 @media (max-width: 900px) and (orientation: landscape) {
   .hero { padding: 1rem 0 0.8rem; }
   .hero-logo, .pixel-logo { font-size: clamp(1.5rem, 6vw, 2.5rem) !important; }
   .nav a { min-height: 40px; padding: 0.5rem 0.4rem; }
 }
 
-/* ============================================
-   Уважаем настройки пользователя
-   ============================================ */
+/* ===== УВАЖАЕМ НАСТРОЙКИ ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* ============================================
-   КНОПКА ВЫБОРА ТЕМЫ — только на мобиле
-   ============================================ */
-.theme-picker-btn {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .theme-picker-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    order: 1;
-    background: transparent;
-    border: 1px solid var(--accent-dim);
-    color: var(--accent);
-    width: 42px;
-    height: 38px;
-    font-size: 1.1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 0.4rem;
-  }
-  .theme-picker-btn:active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  /* Модальное окно выбора темы */
-  .theme-picker-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 99999;
-  }
-  .theme-picker-modal.open {
-    display: block;
-  }
-
-  .theme-picker-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    animation: tp-fade-in 0.2s ease-out;
-  }
-
-  .theme-picker-content {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: var(--panel);
-    border-top: 1px solid var(--border);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    padding: 1rem;
-    max-height: 80vh;
-    overflow-y: auto;
-    animation: tp-slide-up 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
-    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0));
-  }
-
-  @keyframes tp-fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  @keyframes tp-slide-up {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(0); }
-  }
-
-  .theme-picker-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px dashed var(--border);
-  }
-  .theme-picker-head h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: var(--accent);
-  }
-  .theme-picker-close {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .theme-picker-close:active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  .theme-picker-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.7rem;
-  }
-
-  .theme-picker-card {
-    background: var(--bg);
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    padding: 0.7rem;
-    cursor: pointer;
-    font-family: inherit;
-    text-align: left;
-    transition: 0.15s;
-    min-height: 70px;
-  }
-  .theme-picker-card.active {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
-  }
-  .theme-picker-card:active {
-    transform: scale(0.97);
-  }
-
-  .tp-swatches {
-    display: flex;
-    gap: 3px;
-    margin-bottom: 0.4rem;
-  }
-  .tp-swatches span {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .tp-name {
-    font-size: 0.78rem;
-    color: var(--text);
-    line-height: 1.2;
-  }
-  .theme-picker-card.active .tp-name {
-    color: var(--accent);
-    font-weight: 700;
-  }
-}
-
-/* Узкие экраны — 2 колонки уже достаточно */
-@media (max-width: 360px) {
-  .theme-picker-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* ============================================
-   СЕЛЕКТ ТЕМЫ НА МОБИЛЕ — компактный и рабочий
-   ============================================ */
-@media (max-width: 768px) {
-  .theme-switcher {
-    display: inline-flex !important;
-    order: 3;
-    margin: 0.4rem 0 0 0 !important;
-    width: auto;
-    max-width: 140px;
-    flex-shrink: 0;
-  }
-  .theme-switcher select {
-    width: 100%;
-    padding: 0.5rem 0.6rem;
-    font-size: 0.85rem;
-    font-family: inherit;
-    min-height: 40px;
-    background: var(--panel);
-    color: var(--text);
-    border: 1px solid var(--accent-dim);
-    border-radius: 4px;
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3e%3cpath fill='%23ffb000' d='M5 7L1 3h8z'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 0.5rem center;
-    padding-right: 1.6rem;
-  }
-  .theme-switcher select:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-  .theme-switcher select:active {
-    background-color: var(--panel-2);
-  }
-}
-
-/* ============================================
-   КНОПКИ НА МОБИЛЕ — все типы
-   Минимум 44×44 px (Apple/Google гайдлайн)
-   ============================================ */
-
-@media (max-width: 768px) {
-
-  /* ===== Основная кнопка .btn ===== */
-  .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 0.9rem 1.2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    min-height: 52px;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border-width: 2px;
-    transition: transform 0.15s, background 0.15s;
-    background: color-mix(in srgb, var(--accent) 8%, transparent);
-    border: 2px solid var(--accent-dim);
-    color: var(--accent);
-  }
-  .btn::before, .btn::after { content: ""; }
-  .btn:active {
-    transform: scale(0.97);
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
-
-  /* ===== Кнопки «Читать →» в карточках ===== */
-  .card a {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.6rem 0;
-    font-size: 0.95rem;
-    font-weight: 600;
-    min-height: 44px;
-  }
-  .card a:active { color: var(--accent); }
-
-  /* ===== Кнопки в шапке ===== */
-  .menu-toggle {
-    width: 46px !important;
-    height: 44px !important;
-    font-size: 1.3rem !important;
-    min-width: 46px;
-    min-height: 44px;
-    border-radius: 8px;
-    border-width: 2px;
-  }
-  .theme-picker-btn {
-    width: 46px !important;
-    height: 44px !important;
-    font-size: 1.2rem !important;
-    min-width: 46px;
-    min-height: 44px;
-    border-radius: 8px;
-    border-width: 2px;
-    margin-left: 0.3rem;
-  }
-
-  /* ===== Фильтры в каталоге ===== */
-  .filter-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.88rem;
-    min-height: 44px;
-    border-radius: 22px;
-    margin: 0.15rem;
-    border-width: 1.5px;
-  }
-  .filter-btn:active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-    transform: scale(0.96);
-  }
-
-  /* ===== Быстрые ссылки ===== */
-  .quick-links a {
-    padding: 0.7rem 1.1rem;
-    font-size: 0.88rem;
-    min-height: 44px;
-    border-radius: 22px;
-    border-width: 1.5px;
-    display: inline-flex;
-    align-items: center;
-  }
-  .quick-links a:active {
-    background: var(--accent);
-    color: var(--bg);
-    border-style: solid;
-    transform: scale(0.96);
-  }
-
-  /* ===== Кнопки в дереве ===== */
-  .tree-toggle {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 1rem !important;
-    min-width: 32px;
-    min-height: 32px;
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--accent) 6%, transparent);
-  }
-  .tree-toggle:active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  .tree-toolbar button {
-    padding: 0.75rem 1rem !important;
-    font-size: 0.95rem !important;
-    min-height: 48px !important;
-    border-radius: 8px;
-    font-weight: 600;
-    width: 100%;
-  }
-  .tree-toolbar button:active {
-    background: var(--accent);
-    color: var(--bg);
-    transform: scale(0.98);
-  }
-
-  /* ===== Табы в about.html ===== */
-  .about-tab {
-    padding: 0.85rem 1.2rem !important;
-    font-size: 0.92rem !important;
-    min-height: 48px !important;
-    border-bottom-width: 4px !important;
-    font-weight: 500;
-  }
-  .about-tab:active {
-    background: var(--panel-2);
-    color: var(--accent);
-  }
-  .about-tab.active {
-    font-weight: 700;
-  }
-
-  /* ===== Кнопки выбора темы в модалке ===== */
-  .theme-picker-card {
-    padding: 0.9rem 0.7rem !important;
-    min-height: 84px !important;
-    border-radius: 10px;
-    border-width: 2px;
-  }
-  .theme-picker-card:active {
-    transform: scale(0.96);
-    border-color: var(--accent);
-  }
-  .tp-swatches span {
-    width: 26px !important;
-    height: 26px !important;
-  }
-  .tp-name {
-    font-size: 0.85rem !important;
-  }
-  .theme-picker-close {
-    width: 44px !important;
-    height: 44px !important;
-    font-size: 1.2rem !important;
-  }
-  .theme-picker-close:active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  /* ===== Кнопка «Наверх» ===== */
-  .to-top {
-    width: 52px !important;
-    height: 52px !important;
-    font-size: 1.3rem !important;
-    border-radius: 50%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    border-width: 2px;
-  }
-  .to-top:active {
-    background: var(--accent);
-    color: var(--bg);
-    transform: scale(0.95);
-  }
-
-  /* ===== Ссылки в футере ===== */
-  .site-footer .footer-links a {
-    padding: 0.5rem 0.8rem !important;
-    min-height: 40px !important;
-    font-size: 0.85rem;
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-  }
-  .site-footer .footer-links a:active {
-    background: var(--panel-2);
-    color: var(--accent);
-  }
-
-  /* ===== Кнопки в FAQ ===== */
-  .faq-item summary {
-    padding: 1rem 0.3rem !important;
-    min-height: 52px !important;
-    font-size: 1rem !important;
-    font-weight: 600;
-  }
-  .faq-item summary:active {
-    color: var(--accent);
-  }
-
-  /* ===== Кнопки копирования кода ===== */
-  .copy-btn {
-    padding: 0.5rem 0.8rem !important;
-    min-height: 40px !important;
-    font-size: 0.8rem !important;
-    border-radius: 6px;
-  }
-  .copy-btn:active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  /* ===== Ссылки в видео-карточках ===== */
-  .video-card {
-    min-height: 80px;
-    border-radius: 10px;
-    border-width: 2px;
-  }
-  .video-card:active {
-    border-left-color: var(--accent);
-    background: var(--panel-2);
-    transform: scale(0.98);
-  }
-
-  /* ===== Ссылки в навигации (меню) ===== */
-  .nav a {
-    padding: 1rem 0.5rem !important;
-    font-size: 1.05rem !important;
-    min-height: 56px !important;
-    font-weight: 500;
-    border-bottom-width: 1px;
-  }
-  .nav a:active {
-    background: var(--panel-2);
-    color: var(--accent);
-    padding-left: 0.8rem !important;
-  }
-
-  /* ===== Ссылки в карточках дистрибутивов ===== */
-  .distro-tile,
-  .cards .card {
-    padding: 1.1rem !important;
-    border-radius: 10px;
-    min-height: 90px;
-  }
-  .distro-tile:active,
-  .cards .card:active {
-    transform: scale(0.98);
-    border-left-color: var(--accent);
-  }
-
-  /* ===== Кнопки в табах дерева/сравнения ===== */
-  .compare-swap .btn {
-    min-height: 52px;
-    font-size: 1rem;
-  }
-
-  /* ===== Кнопки «Начать с загрузки» и другие на главной ===== */
-  .hero .btn {
-    min-height: 56px;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-  .hero .btn:active {
-    background: var(--accent);
-    color: var(--bg);
-    transform: scale(0.97);
-  }
-
-  /* ===== Кнопки в разделе Kali ===== */
-  .kali-nav a {
-    padding: 0.75rem 1rem !important;
-    min-height: 48px !important;
-    font-size: 0.9rem !important;
-    border-radius: 8px;
-  }
-  .kali-nav a:active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  /* ===== Общий вид интерактивных элементов ===== */
-  button, a, select, input, .card, .btn {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* ===== Плавное нажатие ===== */
-  .btn, .filter-btn, .menu-toggle, .theme-picker-btn,
-  .about-tab, .video-card, .distro-tile, .card, .to-top {
-    transition: transform 0.1s ease-out, background 0.15s, border-color 0.15s;
-    will-change: transform;
-  }
-}
-
-/* ============================================
-   iPHONE — до 430px (узкие экраны)
-   ============================================ */
-@media (max-width: 430px) {
-  .btn {
-    font-size: 0.95rem;
-    min-height: 50px;
-    padding: 0.85rem 1rem;
-  }
-  .hero .btn {
-    min-height: 54px;
-    font-size: 1rem;
-  }
-  .menu-toggle, .theme-picker-btn {
-    width: 44px !important;
-    height: 42px !important;
-  }
-  .to-top {
-    width: 48px !important;
-    height: 48px !important;
-    font-size: 1.2rem !important;
-  }
-  .about-tab {
-    padding: 0.75rem 1rem !important;
-    font-size: 0.85rem !important;
-  }
-  .filter-btn {
-    padding: 0.55rem 0.85rem;
-    font-size: 0.82rem;
-  }
-}
-
-/* ============================================
-   КНОПКА ВЫБОРА ТЕМЫ НА МОБИЛЕ
-   ============================================ */
-.theme-picker-btn {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .theme-picker-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    order: 1;
-    background: transparent;
-    border: 2px solid var(--accent-dim);
-    color: var(--accent);
-    width: 46px;
-    height: 44px;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-left: 0.3rem;
-    padding: 0;
-    transition: transform 0.15s, background 0.15s, border-color 0.15s;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .theme-picker-btn:active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-    transform: scale(0.92);
-  }
-
-  /* Всплывашка с названием темы */
-  .theme-toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(0);
-    background: var(--panel);
-    color: var(--accent);
-    border: 2px solid var(--accent);
-    padding: 0.7rem 1.4rem;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 8px;
-    z-index: 99999;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    animation: theme-toast-in 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
-    pointer-events: none;
-  }
-  .theme-toast.fade {
-    opacity: 0;
-    transform: translateX(-50%) translateY(1rem);
-    transition: opacity 0.3s, transform 0.3s;
-  }
-  @keyframes theme-toast-in {
-    0% { opacity: 0; transform: translateX(-50%) translateY(2rem); }
-    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  }
-}
-
-/* iPHONE — узкие экраны */
-@media (max-width: 430px) {
-  .theme-picker-btn {
-    width: 44px;
-    height: 42px;
-    font-size: 1.1rem;
   }
 }
