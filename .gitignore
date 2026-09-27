@@ -155,3 +155,5 @@ lost+found/
 # Если какие-то файлы не хочешь публиковать — добавь их сюда:
 # secret-notes.md
 # private/
+audio/*.mp3
+audio/*.m4a
