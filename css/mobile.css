@@ -526,3 +526,152 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================
+   МОБИЛЬНАЯ ШАПКА — КОМПАКТНАЯ (v2)
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* Шапка — 2 ряда */
+  .site-header { padding: 0; }
+  .header-inner {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-areas:
+      "logo  search  icons"
+      "nav   nav     nav" !important;
+    gap: 0.5rem 0.4rem !important;
+    padding: 0.5rem 0 !important;
+    align-items: center !important;
+  }
+
+  /* ЛОГОТИП — компактнее */
+  .logo {
+    grid-area: logo !important;
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+  }
+  .logo-char {
+    animation: none !important;
+  }
+  .logo::after { display: none !important; }
+
+  /* ПОИСК — иконка вместо поля */
+  .search-wrap,
+  .search-form,
+  .search-box {
+    grid-area: search !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  .search-wrap input,
+  .search-form input,
+  .search-box input {
+    font-size: 0.85rem !important;
+    padding: 0.4rem 0.6rem !important;
+  }
+
+  /* ИКОНКИ (тема, музыка, гамбургер) — в один ряд */
+  .theme-picker,
+  .music-btn,
+  .menu-toggle {
+    grid-area: icons !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .theme-picker {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 2px solid var(--accent-dim) !important;
+    border-radius: 6px !important;
+    color: var(--accent) !important;
+    font-size: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+  .theme-picker::before {
+    content: "◐" !important;
+    font-size: 1rem !important;
+    line-height: 1 !important;
+    color: var(--accent) !important;
+  }
+  .theme-picker select {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .music-btn {
+    width: 40px !important;
+    height: 38px !important;
+    min-width: 40px !important;
+    margin: 0 !important;
+    font-size: 1rem !important;
+  }
+  .menu-toggle {
+    width: 40px !important;
+    height: 38px !important;
+    margin: 0 !important;
+    order: unset !important;
+  }
+
+  /* НАВИГАЦИЯ — под шапкой, скрыта до клика */
+  .nav {
+    grid-area: nav !important;
+    display: none !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0 !important;
+    margin-top: 0.3rem !important;
+    padding: 0.5rem 0 0 !important;
+    border-top: 1px dashed var(--border) !important;
+  }
+  .nav.open,
+  .nav.is-open {
+    display: flex !important;
+  }
+  .nav a {
+    padding: 0.7rem 0.8rem !important;
+    font-size: 0.9rem !important;
+    border-bottom: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+  .nav a:last-child { border-bottom: none !important; }
+  .nav a.active {
+    background: var(--panel-2) !important;
+    border-left: 3px solid var(--accent) !important;
+  }
+}
+
+/* Очень узкие экраны (360px и меньше) */
+@media (max-width: 380px) {
+  .logo {
+    font-size: 0.8rem !important;
+    max-width: 100px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .logo-cursor { display: none !important; }
+  .search-wrap input,
+  .search-form input,
+  .search-box input {
+    font-size: 0.8rem !important;
+    padding: 0.35rem 0.5rem !important;
+  }
+  .theme-picker,
+  .music-btn,
+  .menu-toggle {
+    width: 36px !important;
+    height: 34px !important;
+    min-width: 36px !important;
+  }
+}
