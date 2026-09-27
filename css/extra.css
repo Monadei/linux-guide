@@ -2597,3 +2597,107 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
   .mp-controls .mp-play { width: 56px; height: 56px; font-size: 1.2rem; }
   .mp-close { width: 36px; height: 36px; }
 }
+
+
+/* ============================================
+   ГРОМКОСТЬ В ПЛЕЕРЕ
+   ============================================ */
+.mp-volume {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 0.8rem;
+  border-top: 1px dashed var(--border);
+  margin-top: 0;
+}
+.mp-mute {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: 0.15s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.mp-mute:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.mp-mute.muted {
+  border-color: var(--danger, #ff5555);
+  color: var(--danger, #ff5555);
+}
+
+.mp-vol {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  min-width: 0;
+}
+.mp-vol::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--accent);
+}
+.mp-vol::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 6px var(--accent);
+}
+.mp-vol-val {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  min-width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .mp-volume {
+    padding: 0.6rem 1rem 1rem;
+  }
+  .mp-mute {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  .mp-vol {
+    height: 6px;
+  }
+  .mp-vol::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  .mp-vol::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  .mp-vol-val {
+    font-size: 0.8rem;
+    min-width: 32px;
+  }
+}

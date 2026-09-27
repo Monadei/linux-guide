@@ -64,6 +64,11 @@
         '<span class="mp-time-current">0:00</span>' +
         '<input type="range" class="mp-seek" min="0" max="100" value="0" step="0.1">' +
         '<span class="mp-time-total">0:00</span>' +
+      '</div>' +
+      '<div class="mp-volume">' +
+        '<button type="button" class="mp-mute" aria-label="Выключить звук">🔊</button>' +
+        '<input type="range" class="mp-vol" min="0" max="100" value="100" step="1" aria-label="Громкость">' +
+        '<span class="mp-vol-val">100</span>' +
       '</div>';
     document.body.appendChild(player);
 
@@ -109,6 +114,95 @@
     player.querySelector('.mp-prev').addEventListener('click', prevTrack);
     player.querySelector('.mp-next').addEventListener('click', nextTrack);
     player.querySelector('.mp-seek').addEventListener('input', seek);
+
+    // === ГРОМКОСТЬ ===
+    var volSlider = player.querySelector('.mp-vol');
+    var volVal = player.querySelector('.mp-vol-val');
+    var muteBtn = player.querySelector('.mp-mute');
+
+    // Загружаем сохранённую громкость
+    var savedVol = 1;
+    var savedMuted = false;
+    try {
+      var sv = localStorage.getItem('music-volume');
+      if (sv !== null) savedVol = parseFloat(sv);
+      var sm = localStorage.getItem('music-muted');
+      if (sm === '1') savedMuted = true;
+    } catch(e) {}
+
+    audio.volume = savedVol;
+    audio.muted = savedMuted;
+    volSlider.value = Math.round(savedVol * 100);
+    volVal.textContent = Math.round(savedVol * 100);
+    updateMuteIcon();
+
+    volSlider.addEventListener('input', function() {
+      var v = parseFloat(volSlider.value) / 100;
+      audio.volume = v;
+      audio.muted = false;
+      volVal.textContent = Math.round(v * 100);
+      saveVolume();
+      updateMuteIcon();
+    });
+
+    muteBtn.addEventListener('click', function() {
+      audio.muted = !audio.muted;
+      // Если включаем звук, а громкость 0 — поднимаем до 50
+      if (!audio.muted && audio.volume === 0) {
+        audio.volume = 0.5;
+        volSlider.value = 50;
+        volVal.textContent = 50;
+      }
+      saveVolume();
+      updateMuteIcon();
+    });
+
+    function updateMuteIcon() {
+      if (audio.muted || audio.volume === 0) {
+        muteBtn.textContent = '🔇';
+        muteBtn.classList.add('muted');
+      } else if (audio.volume < 0.5) {
+        muteBtn.textContent = '🔉';
+        muteBtn.classList.remove('muted');
+      } else {
+        muteBtn.textContent = '🔊';
+        muteBtn.classList.remove('muted');
+      }
+    }
+
+    function saveVolume() {
+      try {
+        localStorage.setItem('music-volume', audio.volume);
+        localStorage.setItem('music-muted', audio.muted ? '1' : '0');
+      } catch(e) {}
+    }
+
+    // === ГОРЯЧИЕ КЛАВИШИ ===
+    document.addEventListener('keydown', function(e) {
+      // Не перехватываем если фокус в поле ввода
+      var tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea') return;
+
+      if (e.key === 'ArrowUp' && player.classList.contains('open')) {
+        e.preventDefault();
+        audio.volume = Math.min(1, audio.volume + 0.05);
+        volSlider.value = Math.round(audio.volume * 100);
+        volVal.textContent = Math.round(audio.volume * 100);
+        audio.muted = false;
+        saveVolume();
+        updateMuteIcon();
+      } else if (e.key === 'ArrowDown' && player.classList.contains('open')) {
+        e.preventDefault();
+        audio.volume = Math.max(0, audio.volume - 0.05);
+        volSlider.value = Math.round(audio.volume * 100);
+        volVal.textContent = Math.round(audio.volume * 100);
+        audio.muted = false;
+        saveVolume();
+        updateMuteIcon();
+      } else if ((e.key === 'm' || e.key === 'M' || e.key === 'ь' || e.key === 'Ь') && player.classList.contains('open')) {
+        muteBtn.click();
+      }
+    });
 
     updateActiveTrack();
     updatePlayButton();
