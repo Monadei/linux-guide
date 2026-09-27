@@ -2701,3 +2701,60 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
     min-width: 32px;
   }
 }
+
+/* ============================================
+   СЧЁТЧИКИ НА ГЛАВНОЙ
+   ============================================ */
+.home-stats {
+  padding: 2.5rem 0;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+  background: linear-gradient(180deg, transparent, rgba(255, 176, 0, 0.02), transparent);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem;
+}
+.stat-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 20px rgba(255, 176, 0, 0.3);
+  transition: text-shadow 0.3s;
+}
+.stat-item:hover .stat-num {
+  text-shadow: 0 0 30px var(--accent);
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: "JetBrains Mono", monospace;
+}
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .stat-num {
+    font-size: 1.8rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+  }
+}
