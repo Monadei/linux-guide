@@ -2269,3 +2269,331 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
   .page-nav .pn-prev { order: 1; }
   .page-nav .pn-next { order: 3; }
 }
+
+
+/* ============================================
+   ЛОГОТИП-ПИНГВИН
+   ============================================ */
+.logo {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+.logo::before,
+.logo::after {
+  content: "" !important;
+}
+.logo:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 8px var(--accent));
+  text-decoration: none;
+}
+.logo:active {
+  transform: scale(0.95);
+}
+
+.logo-penguin {
+  width: 40px;
+  height: 44px;
+  display: block;
+  color: var(--accent);
+  animation: penguin-bob 3s ease-in-out infinite;
+}
+
+/* Покачивание — как будто пингвин стоит и переминается */
+@keyframes penguin-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-1px) rotate(-2deg); }
+  75% { transform: translateY(-1px) rotate(2deg); }
+}
+
+/* Зрачки — редкое мигание */
+.penguin-eye {
+  animation: penguin-blink 4s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes penguin-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+/* Маячок на макушке — пульсирует */
+.penguin-beacon {
+  animation: penguin-beacon-pulse 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes penguin-beacon-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* На мобиле — компактнее */
+@media (max-width: 768px) {
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+  .logo-penguin {
+    width: 36px;
+    height: 40px;
+  }
+}
+
+/* ============================================
+   МУЗЫКАЛЬНЫЙ ПЛЕЕР
+   ============================================ */
+.music-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  order: 0;
+  background: transparent;
+  border: 2px solid var(--accent-dim);
+  color: var(--accent);
+  width: 40px;
+  height: 38px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5rem;
+  transition: 0.15s;
+  flex-shrink: 0;
+}
+.music-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.music-btn:active {
+  transform: scale(0.92);
+}
+
+.music-player {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  width: 320px;
+  max-width: calc(100vw - 2rem);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  z-index: 9999;
+  display: none;
+  overflow: hidden;
+}
+.music-player.open {
+  display: block;
+  animation: mp-in 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+@keyframes mp-in {
+  0% { opacity: 0; transform: translateY(2rem); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.mp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px dashed var(--border);
+}
+.mp-title {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+.mp-close {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.mp-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.mp-tracks {
+  padding: 0.5rem 0;
+}
+.mp-track {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+}
+.mp-track:hover {
+  background: var(--panel-2);
+}
+.mp-track.active {
+  border-left-color: var(--accent);
+  background: var(--panel-2);
+}
+.mp-track.error {
+  opacity: 0.5;
+}
+.mp-track.error .mp-track-title::after {
+  content: " (файл не найден)";
+  color: var(--danger, #ff5555);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.mp-track-num {
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  width: 16px;
+  flex-shrink: 0;
+}
+.mp-track.active .mp-track-num { color: var(--accent); }
+
+.mp-track-info {
+  flex: 1;
+  min-width: 0;
+}
+.mp-track-title {
+  font-size: 0.88rem;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mp-track.active .mp-track-title { color: var(--accent); }
+.mp-track-artist {
+  font-size: 0.75rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mp-track-play {
+  color: var(--muted);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.mp-track.active .mp-track-play { color: var(--accent); }
+
+.mp-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-top: 1px dashed var(--border);
+}
+.mp-controls button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: 0.15s;
+}
+.mp-controls button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.mp-controls .mp-play {
+  width: 44px;
+  height: 44px;
+  font-size: 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.mp-controls .mp-play:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-dim);
+  color: var(--bg);
+}
+
+.mp-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem 0.8rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+}
+.mp-seek {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.mp-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.mp-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .music-btn {
+    width: 44px;
+    height: 42px;
+    font-size: 1.1rem;
+    margin-left: 0.3rem;
+    order: 0;
+  }
+  .music-player {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    border-left: none;
+    border-top: 4px solid var(--accent);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .mp-track { padding: 0.8rem 1rem; min-height: 60px; }
+  .mp-controls button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; }
+  .mp-controls .mp-play { width: 56px; height: 56px; font-size: 1.2rem; }
+  .mp-close { width: 36px; height: 36px; }
+}
