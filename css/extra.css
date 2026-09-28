@@ -2485,6 +2485,35 @@ svg.logo-penguin, .logo-penguin {
 /* ============================================
    ПОИСК — КОМПАКТНЫЙ
    ============================================ */
+
+
+.header-search input,
+.header-search .search-input,
+.header-search .search-box input {
+  display: block !important;
+  width: 100% !important;
+  max-width: 260px !important;
+  box-sizing: border-box !important;
+  font-size: 0.85rem !important;
+  padding: 0.4rem 0.7rem !important;
+  height: 36px !important;
+  border-radius: 6px !important;
+}
+
+@media (max-width: 768px) {
+  
+  .header-search input,
+  .header-search .search-input,
+  .header-search .search-box input {
+    max-width: 100% !important;
+    font-size: 0.85rem !important;
+    height: 38px !important;
+  }
+}
+
+/* ============================================
+   ПОИСК — КОМПАКТНЫЙ
+   ============================================ */
 .header-search {
   display: block !important;
   width: auto !important;
