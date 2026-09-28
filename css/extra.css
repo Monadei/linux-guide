@@ -2325,3 +2325,61 @@ svg.logo-penguin, .logo-penguin {
   .stat-num { font-size: 1.5rem !important; }
   .stat-label { font-size: 0.65rem !important; }
 }
+
+/* ============================================
+   ЦЕНТРОВКА HERO (на всех экранах)
+   ============================================ */
+.hero {
+  text-align: center !important;
+}
+.hero .container {
+  text-align: center !important;
+}
+.hero h1,
+.hero p,
+.hero .btn {
+  text-align: center !important;
+}
+.hero h1 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.hero p {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 700px !important;
+}
+.hero .btn {
+  display: inline-block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.hero-logo,
+.pixel-logo,
+.hero-logo-text {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Мобилка */
+@media (max-width: 768px) {
+  .hero {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .hero h1 {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+  }
+  .hero p {
+    font-size: 0.95rem !important;
+    text-align: center !important;
+  }
+  .hero .btn {
+    display: block !important;
+    margin: 1rem auto !important;
+    width: fit-content !important;
+    padding: 0.8rem 1.5rem !important;
+  }
+}
