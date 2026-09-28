@@ -2439,19 +2439,10 @@ svg.logo-penguin, .logo-penguin {
   cursor: pointer !important;
 }
 
-.header-search {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-}
+
 
 .header-search input,
-.header-search .search-input {
-  width: 100% !important;
-  box-sizing: border-box !important;
-  font-size: 0.95rem !important;
-  padding: 0.5rem 0.7rem !important;
-}
+
 
 .nav {
   display: flex !important;
@@ -2489,4 +2480,42 @@ svg.logo-penguin, .logo-penguin {
     text-align: left !important;
   }
   .nav a:last-child { border-bottom: none !important; }
+}
+
+/* ============================================
+   ПОИСК — КОМПАКТНЫЙ
+   ============================================ */
+.header-search {
+  display: block !important;
+  width: auto !important;
+  max-width: 260px !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+.header-search input,
+.header-search .search-input,
+.header-search .search-box input {
+  display: block !important;
+  width: 100% !important;
+  max-width: 260px !important;
+  box-sizing: border-box !important;
+  font-size: 0.85rem !important;
+  padding: 0.4rem 0.7rem !important;
+  height: 36px !important;
+  border-radius: 6px !important;
+}
+
+@media (max-width: 768px) {
+  .header-search {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .header-search input,
+  .header-search .search-input,
+  .header-search .search-box input {
+    max-width: 100% !important;
+    font-size: 0.85rem !important;
+    height: 38px !important;
+  }
 }
