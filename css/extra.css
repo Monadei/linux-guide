@@ -2271,490 +2271,98 @@ body.theme-labwc          { --accent: #a78bfa; --accent-dim: #6a55a8; }
 }
 
 
+
+
 /* ============================================
    ЛОГОТИП-ПИНГВИН
    ============================================ */
-.logo {
+a.logo, .logo {
   display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: var(--accent);
-  text-decoration: none;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  flex-shrink: 0;
-  position: relative;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: var(--accent, #ffb000) !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: none !important;
+  flex-shrink: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  transition: transform 0.2s ease, filter 0.2s ease !important;
 }
-.logo::before,
-.logo::after {
-  content: "" !important;
+a.logo::before, a.logo::after,
+.logo::before, .logo::after {
+  content: none !important;
+  display: none !important;
 }
-.logo:hover {
-  transform: scale(1.08);
-  filter: drop-shadow(0 0 8px var(--accent));
-  text-decoration: none;
+a.logo:hover, .logo:hover {
+  transform: scale(1.1) !important;
+  filter: drop-shadow(0 0 10px var(--accent, #ffb000)) !important;
 }
-.logo:active {
-  transform: scale(0.95);
+a.logo:active, .logo:active {
+  transform: scale(0.95) !important;
 }
-
-.logo-penguin {
-  width: 40px;
-  height: 44px;
-  display: block;
-  color: var(--accent);
-  animation: penguin-bob 3s ease-in-out infinite;
+svg.logo-penguin, .logo-penguin {
+  width: 40px !important;
+  height: 44px !important;
+  min-width: 40px !important;
+  min-height: 44px !important;
+  display: block !important;
+  color: var(--accent, #ffb000) !important;
+  animation: penguin-bob 3s ease-in-out infinite !important;
 }
-
-/* Покачивание — как будто пингвин стоит и переминается */
 @keyframes penguin-bob {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-1px) rotate(-2deg); }
-  75% { transform: translateY(-1px) rotate(2deg); }
+  25%      { transform: translateY(-1px) rotate(-2deg); }
+  75%      { transform: translateY(-1px) rotate(2deg); }
 }
-
-/* Зрачки — редкое мигание */
 .penguin-eye {
   animation: penguin-blink 4s ease-in-out infinite;
   transform-origin: center;
 }
 @keyframes penguin-blink {
   0%, 92%, 100% { transform: scaleY(1); }
-  95% { transform: scaleY(0.1); }
+  95%           { transform: scaleY(0.1); }
 }
-
-/* Маячок на макушке — пульсирует */
 .penguin-beacon {
   animation: penguin-beacon-pulse 1.5s ease-in-out infinite;
   transform-origin: center;
 }
 @keyframes penguin-beacon-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.7); }
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.7); }
 }
 
-/* На мобиле — компактнее */
 @media (max-width: 768px) {
-  .logo {
-    width: 40px;
-    height: 40px;
+  a.logo, .logo {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
   }
-  .logo-penguin {
-    width: 36px;
-    height: 40px;
-  }
-}
-
-/* ============================================
-   МУЗЫКАЛЬНЫЙ ПЛЕЕР
-   ============================================ */
-.music-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  order: 0;
-  background: transparent;
-  border: 2px solid var(--accent-dim);
-  color: var(--accent);
-  width: 40px;
-  height: 38px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 0;
-  margin-left: 0.5rem;
-  transition: 0.15s;
-  flex-shrink: 0;
-}
-.music-btn:hover {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
-}
-.music-btn:active {
-  transform: scale(0.92);
-}
-
-.music-player {
-  position: fixed;
-  bottom: 1rem;
-  left: 1rem;
-  width: 320px;
-  max-width: calc(100vw - 2rem);
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: 10px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-  z-index: 9999;
-  display: none;
-  overflow: hidden;
-}
-.music-player.open {
-  display: block;
-  animation: mp-in 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
-}
-@keyframes mp-in {
-  0% { opacity: 0; transform: translateY(2rem); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.mp-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.7rem 1rem;
-  border-bottom: 1px dashed var(--border);
-}
-.mp-title {
-  font-size: 0.9rem;
-  color: var(--accent);
-  font-weight: 700;
-}
-.mp-close {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-.mp-close:hover { border-color: var(--accent); color: var(--accent); }
-
-.mp-tracks {
-  padding: 0.5rem 0;
-}
-.mp-track {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.6rem 1rem;
-  cursor: pointer;
-  transition: background 0.15s;
-  border-left: 3px solid transparent;
-}
-.mp-track:hover {
-  background: var(--panel-2);
-}
-.mp-track.active {
-  border-left-color: var(--accent);
-  background: var(--panel-2);
-}
-.mp-track.error {
-  opacity: 0.5;
-}
-.mp-track.error .mp-track-title::after {
-  content: " (файл не найден)";
-  color: var(--danger, #ff5555);
-  font-size: 0.75rem;
-  font-weight: 400;
-}
-
-.mp-track-num {
-  color: var(--muted);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.8rem;
-  width: 16px;
-  flex-shrink: 0;
-}
-.mp-track.active .mp-track-num { color: var(--accent); }
-
-.mp-track-info {
-  flex: 1;
-  min-width: 0;
-}
-.mp-track-title {
-  font-size: 0.88rem;
-  color: var(--text);
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.mp-track.active .mp-track-title { color: var(--accent); }
-.mp-track-artist {
-  font-size: 0.75rem;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.mp-track-play {
-  color: var(--muted);
-  font-size: 0.8rem;
-  flex-shrink: 0;
-}
-.mp-track.active .mp-track-play { color: var(--accent); }
-
-.mp-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-top: 1px dashed var(--border);
-}
-.mp-controls button {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  transition: 0.15s;
-}
-.mp-controls button:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.mp-controls .mp-play {
-  width: 44px;
-  height: 44px;
-  font-size: 1rem;
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
-}
-.mp-controls .mp-play:hover {
-  background: var(--accent-dim);
-  border-color: var(--accent-dim);
-  color: var(--bg);
-}
-
-.mp-progress {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0 1rem 0.8rem;
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-family: "JetBrains Mono", monospace;
-}
-.mp-seek {
-  flex: 1;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-}
-.mp-seek::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-}
-.mp-seek::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-}
-
-/* Мобильная версия */
-@media (max-width: 768px) {
-  .music-btn {
-    width: 44px;
-    height: 42px;
-    font-size: 1.1rem;
-    margin-left: 0.3rem;
-    order: 0;
-  }
-  .music-player {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 16px 16px 0 0;
-    border-left: none;
-    border-top: 4px solid var(--accent);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .mp-track { padding: 0.8rem 1rem; min-height: 60px; }
-  .mp-controls button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; }
-  .mp-controls .mp-play { width: 56px; height: 56px; font-size: 1.2rem; }
-  .mp-close { width: 36px; height: 36px; }
-}
-
-
-/* ============================================
-   ГРОМКОСТЬ В ПЛЕЕРЕ
-   ============================================ */
-.mp-volume {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem 0.8rem;
-  border-top: 1px dashed var(--border);
-  margin-top: 0;
-}
-.mp-mute {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  transition: 0.15s;
-  flex-shrink: 0;
-  line-height: 1;
-}
-.mp-mute:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.mp-mute.muted {
-  border-color: var(--danger, #ff5555);
-  color: var(--danger, #ff5555);
-}
-
-.mp-vol {
-  flex: 1;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-  min-width: 0;
-}
-.mp-vol::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 6px var(--accent);
-}
-.mp-vol::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 0 6px var(--accent);
-}
-.mp-vol-val {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  color: var(--muted);
-  min-width: 28px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-/* Мобильная версия */
-@media (max-width: 768px) {
-  .mp-volume {
-    padding: 0.6rem 1rem 1rem;
-  }
-  .mp-mute {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-  .mp-vol {
-    height: 6px;
-  }
-  .mp-vol::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-  }
-  .mp-vol::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-  }
-  .mp-vol-val {
-    font-size: 0.8rem;
-    min-width: 32px;
+  svg.logo-penguin, .logo-penguin {
+    width: 34px !important;
+    height: 38px !important;
+    min-width: 34px !important;
+    min-height: 38px !important;
   }
 }
-
-/* ============================================
-   СЧЁТЧИКИ НА ГЛАВНОЙ
-   ============================================ */
-.home-stats {
-  padding: 2.5rem 0;
-  border-top: 1px dashed var(--border);
-  border-bottom: 1px dashed var(--border);
-  background: linear-gradient(180deg, transparent, rgba(255, 176, 0, 0.02), transparent);
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-}
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem;
-}
-.stat-num {
-  font-family: "JetBrains Mono", monospace;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-shadow: 0 0 20px rgba(255, 176, 0, 0.3);
-  transition: text-shadow 0.3s;
-}
-.stat-item:hover .stat-num {
-  text-shadow: 0 0 30px var(--accent);
-}
-.stat-label {
-  font-size: 0.85rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-family: "JetBrains Mono", monospace;
-}
-@media (max-width: 600px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+@media (max-width: 380px) {
+  a.logo, .logo {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
   }
-  .stat-num {
-    font-size: 1.8rem;
-  }
-  .stat-label {
-    font-size: 0.75rem;
+  svg.logo-penguin, .logo-penguin {
+    width: 30px !important;
+    height: 34px !important;
+    min-width: 30px !important;
+    min-height: 34px !important;
   }
 }
