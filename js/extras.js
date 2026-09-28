@@ -28,24 +28,35 @@
       toggle.setAttribute('aria-label', 'Меню');
       toggle.textContent = '☰';
       toggle.onclick = function() { nav.classList.toggle('open'); };
-      var logo = header.querySelector('.logo');
-      if (logo) logo.insertAdjacentElement('afterend', toggle);
+      // Вставляем в .header-icons (или в конец .header-top)
+      var icons = document.getElementById('headerIcons') || document.querySelector('.header-icons');
+      if (icons) {
+        icons.appendChild(toggle);
+      } else {
+        var top = document.querySelector('.header-top');
+        if (top) top.appendChild(toggle);
+        else header.appendChild(toggle);
+      }
     }
 
     // Контрастная тема — кнопка в шапке
-    if (header) {
-      var cc = document.createElement('button');
-      cc.className = 'menu-toggle';
-      cc.style.display = 'block';
-      cc.textContent = '◐';
-      cc.title = 'Контрастная тема';
-      cc.onclick = function() {
-        document.body.classList.toggle('contrast-mode');
-        localStorage.setItem('contrast', document.body.classList.contains('contrast-mode') ? '1' : '0');
-      };
+    var cc = document.createElement('button');
+    cc.className = 'contrast-toggle';
+    cc.type = 'button';
+    cc.setAttribute('aria-label', 'Контрастная тема');
+    cc.textContent = '◐';
+    cc.title = 'Контрастная тема';
+    cc.onclick = function() {
+      document.body.classList.toggle('contrast-mode');
+      localStorage.setItem('contrast', document.body.classList.contains('contrast-mode') ? '1' : '0');
+    };
+    var icons2 = document.getElementById('headerIcons') || document.querySelector('.header-icons');
+    if (icons2) {
+      icons2.appendChild(cc);
+    } else if (header) {
       header.appendChild(cc);
-      if (localStorage.getItem('contrast') === '1') document.body.classList.add('contrast-mode');
     }
+    if (localStorage.getItem('contrast') === '1') document.body.classList.add('contrast-mode');
 
     // Горячие клавиши
     document.addEventListener('keydown', function(e) {
