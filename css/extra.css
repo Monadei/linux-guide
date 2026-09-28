@@ -2466,16 +2466,7 @@ svg.logo-penguin, .logo-penguin {
   }
 
   /* ПЛЕЕР — компактный, не во весь экран */
-  .music-player {
-    bottom: 0.5rem !important;
-    left: 0.5rem !important;
-    right: 0.5rem !important;
-    width: auto !important;
-    max-width: calc(100vw - 1rem) !important;
-    border-radius: 12px !important;
-    max-height: 70vh !important;
-    overflow-y: auto !important;
-  }
+  
   .music-player .mp-head {
     position: sticky !important;
     top: 0 !important;
@@ -2505,5 +2496,67 @@ svg.logo-penguin, .logo-penguin {
   .mp-controls .mp-play {
     width: 52px !important;
     height: 52px !important;
+  }
+}
+
+/* ============================================
+   МУЗЫКАЛЬНЫЙ ПЛЕЕР — ОТКРЫВАЕТСЯ ПО КНОПКЕ
+   ============================================ */
+.music-player {
+  position: fixed !important;
+  bottom: 1rem !important;
+  left: 1rem !important;
+  width: 340px !important;
+  max-width: calc(100vw - 2rem) !important;
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-left: 4px solid var(--accent) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  z-index: 99999 !important;
+  display: none !important;   /* СКРЫТ по умолчанию */
+  overflow: hidden !important;
+}
+
+.music-player.open {
+  display: block !important;  /* ПОКАЗЫВАЕТСЯ когда .open */
+  animation: mp-in 0.25s ease-out !important;
+}
+
+@keyframes mp-in {
+  0%   { opacity: 0; transform: translateY(2rem) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Мобилка */
+@media (max-width: 768px) {
+  .music-player {
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 16px 16px 0 0 !important;
+    border-left: none !important;
+    border-top: 4px solid var(--accent) !important;
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+  }
+  .music-player .mp-head {
+    position: sticky !important;
+    top: 0 !important;
+    background: var(--panel) !important;
+    z-index: 2 !important;
+  }
+  .music-player .mp-close {
+    background: var(--accent) !important;
+    color: var(--bg) !important;
+    border: none !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    border-radius: 50% !important;
   }
 }
