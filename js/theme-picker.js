@@ -54,7 +54,9 @@
     // Только на мобиле
     if (!window.matchMedia('(max-width: 768px)').matches) return;
 
-    var header = document.querySelector('.header-inner');
+    var header = document.getElementById('headerIcons')
+                || document.querySelector('.header-icons')
+                || document.querySelector('.header-inner');
     if (!header) return;
 
     // Уже есть? Пропускаем

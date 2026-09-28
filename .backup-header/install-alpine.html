@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Установка Alpine — Monade OS</title>
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<script data-goatcounter="https://monadeos.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="stylesheet" href="../css/mobile.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+
+  <div class="header-top">
+    <a href="../index.html" class="logo">Monade OS</a>
+    <div class="header-icons" id="headerIcons"></div>
+  </div>
+
+  <div class="header-search" id="headerSearch"></div>
+
+  <nav class="nav" id="mainNav">
+    <a href="../index.html" class="active">Главная</a>
+    <a href="../download.html">Как скачать</a>
+    <a href="../install.html">Как установить</a>
+    <a href="../history.html">История</a>
+    <a href="../distros/index.html">Дистрибутивы</a>
+    <a href="../about.html">Обо мне</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../kali/index.html">Kali</a>
+    <a href="../sitemap.html">Карта сайта</a>
+  </nav>
+
+</div>
+</header>
+<main class="container page">
+<button class="back-btn" onclick="history.back()" aria-label="Назад">← Назад</button>
+<div class="breadcrumbs-nav"><a href="../index.html">Главная</a><span class="bc-sep">/</span><a href="index.html">Гайды</a><span class="bc-sep">/</span><span>Установка Alpine</span></div>
+<h1>Установка Alpine</h1>
+<p class="lead">Крошечная система для контейнеров и встраиваемых устройств.</p>
+
+<section class="kali-section">
+<h2>Загрузка и вход</h2>
+<p>Загрузись с ISO Alpine (standard или extended). Войди как <code>root</code> (без пароля).</p>
+</section>
+
+<section class="kali-section">
+<h2>Запуск установщика</h2>
+<pre><code>setup-alpine</code></pre>
+<p>Отвечай на вопросы:</p>
+<ul>
+<li>Раскладка: <code>us ru</code></li>
+<li>Имя хоста: <code>alpine-pc</code></li>
+<li>Интерфейс: <code>eth0</code></li>
+<li>IP: <code>dhcp</code></li>
+<li>Пароль root — задай</li>
+<li>Часовой пояс: <code>Europe/Moscow</code></li>
+<li>Зеркало: выбери ближайшее</li>
+<li>SSH: <code>openssh</code></li>
+<li>Диск: <code>sda</code>, схема <code>sys</code></li>
+</ul>
+</section>
+
+<section class="kali-section">
+<h2>После установки</h2>
+<pre><code>apk update
+apk upgrade
+
+apk add sudo vim bash bash-completion
+
+adduser monadei
+adduser monadei wheel
+visudo  # раскомментировать %wheel</code></pre>
+</section>
+
+<section class="kali-section">
+<h2>Особенности</h2>
+<ul>
+<li>Менеджер пакетов: <code>apk</code></li>
+<li>Init: OpenRC (не systemd)</li>
+<li>Управление сервисами: <code>rc-service nginx start</code></li>
+<li>Автозапуск: <code>rc-update add nginx default</code></li>
+</ul>
+</section>
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/logo-anim.js"></script>
+<script src="../js/boot-screen.js"></script>
+<script src="../js/theme-picker.js"></script>
+<script src="../js/music.js"></script>
+</body>
+</html>

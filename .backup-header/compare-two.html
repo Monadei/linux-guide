@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сравнить два дистрибутива — Monade OS</title>
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+<script data-goatcounter="https://monadeos.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+
+  <div class="header-top">
+    <a href="index.html" class="logo">Monade OS</a>
+    <div class="header-icons" id="headerIcons"></div>
+  </div>
+
+  <div class="header-search" id="headerSearch"></div>
+
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="active">Главная</a>
+    <a href="download.html">Как скачать</a>
+    <a href="install.html">Как установить</a>
+    <a href="history.html">История</a>
+    <a href="distros/index.html">Дистрибутивы</a>
+    <a href="about.html">Обо мне</a>
+    <a href="faq.html">FAQ</a>
+    <a href="kali/index.html">Kali</a>
+    <a href="sitemap.html">Карта сайта</a>
+  </nav>
+
+</div>
+</header>
+<main class="container page">
+<button class="back-btn" onclick="history.back()" aria-label="Назад">← Назад</button>
+<h1>Сравнить два дистрибутива</h1>
+
+<p class="lead">Выбери два дистрибутива — увидишь таблицу различий.</p>
+
+<style>
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.compare-slot {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1rem;
+  border-radius: 4px;
+}
+.compare-slot select {
+  width: 100%;
+  padding: 0.7rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-family: inherit;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+.compare-result {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.2rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  backdrop-filter: blur(10px);
+}
+.compare-result table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.compare-result th, .compare-result td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.compare-result th {
+  color: var(--accent);
+  font-weight: 700;
+}
+.compare-result .diff {
+  color: var(--accent);
+  font-weight: 600;
+}
+.compare-result .same {
+  color: var(--muted);
+}
+.compare-swap {
+  text-align: center;
+  margin: 1rem 0;
+}
+@media (max-width: 700px) {
+  .compare-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="compare-grid">
+<div class="compare-slot">
+<select id="distro-a"></select>
+</div>
+<div class="compare-slot">
+<select id="distro-b"></select>
+</div>
+</div>
+
+<div class="compare-swap">
+<button class="btn" onclick="swapDistros()">⇄ Поменять местами</button>
+</div>
+
+<div class="compare-result" id="result"></div>
+
+<script>
+var DATA = {
+  'debian': { name:'Debian', family:'Debian', base:'—', de:'любой', release:'фикс.', diff:'средне', for:'сервер/десктоп', pkg:'apt', init:'systemd' },
+  'ubuntu': { name:'Ubuntu', family:'Debian', base:'Debian', de:'GNOME', release:'6мес/LTS', diff:'легко', for:'новичок', pkg:'apt', init:'systemd' },
+  'mint': { name:'Linux Mint', family:'Debian', base:'Ubuntu', de:'Cinnamon', release:'фикс.', diff:'легко', for:'мигрант', pkg:'apt', init:'systemd' },
+  'lmde': { name:'LMDE', family:'Debian', base:'Debian', de:'Cinnamon', release:'фикс.', diff:'легко', for:'фанат Mint', pkg:'apt', init:'systemd' },
+  'pop-os': { name:'Pop!_OS', family:'Debian', base:'Ubuntu', de:'COSMIC', release:'6мес', diff:'легко', for:'разработчик', pkg:'apt', init:'systemd' },
+  'zorin': { name:'Zorin OS', family:'Debian', base:'Ubuntu LTS', de:'GNOME', release:'фикс.', diff:'легко', for:'мигрант', pkg:'apt', init:'systemd' },
+  'elementary': { name:'elementary OS', family:'Debian', base:'Ubuntu LTS', de:'Pantheon', release:'фикс.', diff:'легко', for:'дизайнер', pkg:'apt', init:'systemd' },
+  'kali': { name:'Kali Linux', family:'Debian', base:'Debian testing', de:'Xfce', release:'rolling', diff:'средне', for:'пентест', pkg:'apt', init:'systemd' },
+  'parrot': { name:'Parrot OS', family:'Debian', base:'Debian', de:'MATE', release:'rolling', diff:'средне', for:'пентест', pkg:'apt', init:'systemd' },
+  'mxlinux': { name:'MX Linux', family:'Debian', base:'Debian', de:'Xfce', release:'фикс.', diff:'легко', for:'старое железо', pkg:'apt', init:'systemd' },
+  'antix': { name:'antiX', family:'Debian', base:'Debian', de:'IceWM', release:'фикс.', diff:'средне', for:'древнее железо', pkg:'apt', init:'sysvinit' },
+  'deepin': { name:'Deepin', family:'Debian', base:'Debian', de:'DDE', release:'фикс.', diff:'легко', for:'дизайн', pkg:'apt', init:'systemd' },
+  'fedora': { name:'Fedora', family:'Red Hat', base:'—', de:'GNOME', release:'6мес', diff:'средне', for:'разработчик', pkg:'dnf', init:'systemd' },
+  'almalinux': { name:'AlmaLinux', family:'Red Hat', base:'RHEL', de:'GNOME', release:'фикс.', diff:'средне', for:'сервер', pkg:'dnf', init:'systemd' },
+  'rocky': { name:'Rocky Linux', family:'Red Hat', base:'RHEL', de:'GNOME', release:'фикс.', diff:'средне', for:'сервер', pkg:'dnf', init:'systemd' },
+  'arch': { name:'Arch Linux', family:'Arch', base:'—', de:'любой', release:'rolling', diff:'сложно', for:'энтузиаст', pkg:'pacman', init:'systemd' },
+  'manjaro': { name:'Manjaro', family:'Arch', base:'Arch', de:'Xfce/KDE', release:'rolling', diff:'легко', for:'мост', pkg:'pacman', init:'systemd' },
+  'endeavouros': { name:'EndeavourOS', family:'Arch', base:'Arch', de:'любой', release:'rolling', diff:'средне', for:'Arch', pkg:'pacman', init:'systemd' },
+  'cachyos': { name:'CachyOS', family:'Arch', base:'Arch', de:'любой', release:'rolling', diff:'средне', for:'геймер', pkg:'pacman', init:'systemd' },
+  'garuda': { name:'Garuda', family:'Arch', base:'Arch', de:'KDE Dr460nized', release:'rolling', diff:'средне', for:'геймер', pkg:'pacman', init:'systemd' },
+  'steamos': { name:'SteamOS', family:'Arch', base:'Arch', de:'KDE + Gamescope', release:'rolling', diff:'средне', for:'Steam Deck', pkg:'pacman', init:'systemd' },
+  'artix': { name:'Artix', family:'Arch', base:'Arch', de:'любой', release:'rolling', diff:'сложно', for:'без systemd', pkg:'pacman', init:'OpenRC/runit' },
+  'opensuse': { name:'openSUSE', family:'SUSE', base:'—', de:'KDE/GNOME', release:'Leap/Tumble', diff:'средне', for:'сервер/десктоп', pkg:'zypper', init:'systemd' },
+  'gentoo': { name:'Gentoo', family:'независимый', base:'—', de:'любой', release:'rolling', diff:'очень сложно', for:'профи', pkg:'portage', init:'OpenRC' },
+  'slackware': { name:'Slackware', family:'независимый', base:'—', de:'любой', release:'фикс.', diff:'сложно', for:'классика', pkg:'slackpkg', init:'sysvinit' },
+  'void': { name:'Void Linux', family:'независимый', base:'—', de:'любой', release:'rolling', diff:'средне', for:'без systemd', pkg:'xbps', init:'runit' },
+  'nixos': { name:'NixOS', family:'независимый', base:'—', de:'любой', release:'фикс.', diff:'сложно', for:'DevOps', pkg:'nix', init:'systemd' },
+  'alpine': { name:'Alpine', family:'независимый', base:'—', de:'—', release:'фикс.', diff:'средне', for:'контейнеры', pkg:'apk', init:'OpenRC' },
+  'tails': { name:'Tails', family:'Debian', base:'Debian', de:'GNOME', release:'фикс.', diff:'средне', for:'анонимность', pkg:'apt', init:'systemd' },
+  'qubes': { name:'Qubes OS', family:'независимый', base:'Xen', de:'Xfce', release:'фикс.', diff:'сложно', for:'макс. защита', pkg:'apt', init:'systemd' },
+  'nobara': { name:'Nobara', family:'Red Hat', base:'Fedora', de:'KDE/GNOME', release:'6мес', diff:'легко', for:'геймер', pkg:'dnf', init:'systemd' },
+  'bazzite': { name:'Bazzite', family:'Red Hat', base:'Fedora Atomic', de:'KDE/GNOME', release:'атомарн.', diff:'легко', for:'геймер', pkg:'rpm-ostree', init:'systemd' }
+};
+
+var aSel = document.getElementById('distro-a');
+var bSel = document.getElementById('distro-b');
+var keys = Object.keys(DATA).sort(function(x, y) {
+  return DATA[x].name.localeCompare(DATA[y].name);
+});
+
+keys.forEach(function(k) {
+  var optA = document.createElement('option');
+  optA.value = k;
+  optA.textContent = DATA[k].name;
+  aSel.appendChild(optA);
+  
+  var optB = document.createElement('option');
+  optB.value = k;
+  optB.textContent = DATA[k].name;
+  bSel.appendChild(optB);
+});
+
+aSel.value = 'ubuntu';
+bSel.value = 'fedora';
+
+aSel.addEventListener('change', compare);
+bSel.addEventListener('change', compare);
+
+function compare() {
+  var a = DATA[aSel.value];
+  var b = DATA[bSel.value];
+  if (!a || !b) return;
+  
+  var rows = [
+    ['Семейство', a.family, b.family],
+    ['Основа', a.base, b.base],
+    ['Рабочий стол', a.de, b.de],
+    ['Релизы', a.release, b.release],
+    ['Сложность', a.diff, b.diff],
+    ['Для кого', a.for, b.for],
+    ['Пакеты', a.pkg, b.pkg],
+    ['Init', a.init, b.init]
+  ];
+  
+  var html = '<table>';
+  html += '<thead><tr><th>Характеристика</th><th>' + a.name + '</th><th>' + b.name + '</th></tr></thead><tbody>';
+  
+  rows.forEach(function(r) {
+    var diff = r[1] !== r[2];
+    html += '<tr><td>' + r[0] + '</td>';
+    html += '<td class="' + (diff ? 'diff' : 'same') + '">' + r[1] + '</td>';
+    html += '<td class="' + (diff ? 'diff' : 'same') + '">' + r[2] + '</td>';
+    html += '</tr>';
+  });
+  
+  html += '</tbody></table>';
+  html += '<div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">';
+  html += '<a href="distros/' + aSel.value + '.html" class="btn">Открыть ' + a.name + ' →</a>';
+  html += '<a href="distros/' + bSel.value + '.html" class="btn">Открыть ' + b.name + ' →</a>';
+  html += '</div>';
+  
+  document.getElementById('result').innerHTML = html;
+}
+
+function swapDistros() {
+  var tmp = aSel.value;
+  aSel.value = bSel.value;
+  bSel.value = tmp;
+  compare();
+}
+
+compare();
+</script>
+
+<h2>Как читать таблицу</h2>
+<ul>
+<li><strong>Оранжевым</strong> — различия между дистрибутивами</li>
+<li><strong>Серым</strong> — совпадения</li>
+<li>Кнопки внизу — переход на страницы обоих дистрибутивов</li>
+</ul>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026. <a href="rss.html" title="RSS-подписка" style="color: var(--accent);">📡 RSS</a></p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script><script src="js/site-theme.js"></script>
+<script src="js/search.js"></script><script src="js/extras.js"></script>
+<script src="js/logo-anim.js"></script>
+<script src="js/boot-screen.js"></script>
+<script src="js/theme-picker.js"></script>
+<script src="js/music.js"></script>
+</body>
+</html>

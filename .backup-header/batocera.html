@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script src="../js/reset-font.js"></script>
+<meta charset="UTF-8">
+<meta property="og:title" content="Batocera — Monade OS">
+<meta property="og:description" content="Руководство по Linux от Monadei">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<script>
+(function() {
+  function getFromUrl() {
+    try {
+      var m = window.location.search.match(/[?&]theme=([^&]+)/);
+      if (m) return decodeURIComponent(m[1]);
+      var h = window.location.hash.match(/theme=([^&]+)/);
+      if (h) return decodeURIComponent(h[1]);
+    } catch(e) {}
+    return null;
+  }
+  function getFromStorage() {
+    try { var v = localStorage.getItem('site-theme'); if (v) return v; } catch(e) {}
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) return decodeURIComponent(m[1]);
+    } catch(e) {}
+    return null;
+  }
+  var theme = getFromUrl() || getFromStorage() || 'default';
+  if (theme && theme !== 'default') {
+    document.documentElement.setAttribute('data-site-theme', theme);
+  }
+  // Сохраняем для следующих страниц
+  try { localStorage.setItem('site-theme', theme); } catch(e) {}
+  try { document.cookie = 'site-theme=' + encodeURIComponent(theme) + ';path=/;max-age=31536000'; } catch(e) {}
+  window.__INITIAL_THEME = theme;
+})();
+</script>
+
+<title>Batocera — Monade OS</title>
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#ffb000">
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<meta property="og:image" content="../icons/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script data-goatcounter="https://monadeos.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="stylesheet" href="../css/mobile.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+
+  <div class="header-top">
+    <a href="../index.html" class="logo">Monade OS</a>
+    <div class="header-icons" id="headerIcons"></div>
+  </div>
+
+  <div class="header-search" id="headerSearch"></div>
+
+  <nav class="nav" id="mainNav">
+    <a href="../index.html" class="active">Главная</a>
+    <a href="../download.html">Как скачать</a>
+    <a href="../install.html">Как установить</a>
+    <a href="../history.html">История</a>
+    <a href="../distros/index.html">Дистрибутивы</a>
+    <a href="../about.html">Обо мне</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../kali/index.html">Kali</a>
+    <a href="../sitemap.html">Карта сайта</a>
+  </nav>
+
+</div>
+</header>
+<main class="container page">
+<button class="back-btn" onclick="history.back()" aria-label="Назад">← Назад</button>
+<div class="breadcrumbs-nav"><a href="../index.html">Главная</a><span class="bc-sep">/</span><a href="index.html">Дистрибутивы</a><span class="bc-sep">/</span><span>Batocera</span></div>
+<h1>Batocera</h1>
+<p class="lead">Ретро-консоль на базе Linux. Эмуляторы от Atari до PS3.</p>
+<section><h2>История</h2><p>Появился в 2016 году как форк Recalbox. Название — от Batorcera, персонажа из игр. Поддерживает десятки платформ.</p></section>
+<section><h2>Особенности</h2><ul><li>Эмуляция от Atari 2600 до PS3, Switch.</li><li>Загружается с флешки или ставится на диск.</li><li>Интерфейс EmulationStation.</li><li>Поддержка геймпадов из коробки.</li><li>Работает на Raspberry Pi, x86, Odroid.</li></ul></section>
+<section><h2>Кому подходит</h2><p>Ретро-геймерам, коллекционерам старых игр.</p></section>
+<section><h2>Как скачать</h2><p>Официальный сайт: <a href="https://batocera.org" target="_blank" rel="noopener">https://batocera.org</a>.</p></section>
+
+
+
+<section class="kali-section" style="border-left-color: #7a7a7a;">
+<h2>Обновление и статус</h2>
+<p><strong style="color: #7a7a7a;">❓ Не проверено</strong></p>
+<ul>
+<li><strong>Как обновляется:</strong> Не проверено</li>
+<li><strong>Последний релиз:</strong> —</li>
+</ul>
+</section>
+
+<section class="related-section"><h2>Смотрите также</h2><div class="related-grid"><a href="agarimos.html" class="related-card"><strong>AgarimOS</strong><span>Подробнее →</span></a><a href="arch.html" class="related-card"><strong>Arch Linux</strong><span>Подробнее →</span></a><a href="archbang.html" class="related-card"><strong>ArchBang</strong><span>Подробнее →</span></a><a href="archcraft.html" class="related-card"><strong>Archcraft</strong><span>Подробнее →</span></a></div></section>
+<nav class="page-nav"><a href="avlinux.html" class="pn-prev">← AV Linux</a><a href="index.html" class="pn-home">Каталог</a><a href="bazzite.html" class="pn-next">Bazzite →</a></nav>
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026. <a href="../feed.xml" title="RSS-подписка" style="color: var(--accent);">📡 RSS</a></p>
+<p class="footer-links"><a href="../sitemap.html">Карта сайта</a> · <a href="../404.html">404</a> · <a href="../about.html">Обо мне</a>
+· <a href="../faq.html">FAQ</a>
+<a href="../kali/index.html">Kali</a></p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/logo-anim.js"></script>
+<script src="../js/boot-screen.js"></script>
+<script src="../js/theme-picker.js"></script>
+<script src="../js/music.js"></script>
+</body>
+</html>

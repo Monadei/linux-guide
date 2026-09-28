@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script src="js/reset-font.js"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Обо мне — Monade OS</title>
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<meta property="og:image" content="icons/og.png">
+<meta property="og:type" content="website">
+<meta name="yandex-verification" content="b41091ced16d0116" />
+<meta name="google-site-verification" content="GYgt8LxDhCacPL2K74BOSbX6n91WC65mqFh1uU8MNfY" />
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('site-theme');
+    if (!t) {
+      var m = document.cookie.match(/(?:^|;\s*)site-theme=([^;]+)/);
+      if (m) t = decodeURIComponent(m[1]);
+    }
+    if (t && t !== 'default') document.documentElement.setAttribute('data-site-theme', t);
+  } catch(e){}
+})();
+</script>
+<script data-goatcounter="https://monadeos.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<style>
+/* Стили страницы about.html */
+
+/* Профиль-герой */
+.about-hero {
+  text-align: center;
+  padding: 2rem 0 1.5rem;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 2rem;
+}
+.about-avatar {
+  font-size: 4rem;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--accent);
+  background: var(--panel);
+  border: 2px dashed var(--accent-dim);
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  text-shadow: 0 0 20px var(--accent);
+}
+.about-hero h1 {
+  margin: 0 0 0.3rem;
+  font-size: 2.2rem;
+  color: var(--accent);
+}
+.about-hero h1::before { content: ""; }
+.about-hero .nick {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.about-hero .roles {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.about-hero .role {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.3rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 20px;
+}
+.about-hero .role.alt {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.about-hero .intro {
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  color: var(--text);
+  line-height: 1.7;
+  text-align: left;
+}
+
+/* Табы */
+.about-tabs {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin: 2rem 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+.about-tab {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 0.8rem 1.2rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: 0.2s;
+  margin-bottom: -1px;
+}
+.about-tab:hover {
+  color: var(--accent);
+}
+.about-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.about-panel {
+  display: none;
+  animation: about-fade-in 0.4s ease-out;
+}
+.about-panel.active {
+  display: block;
+}
+@keyframes about-fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Секции */
+.about-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  backdrop-filter: blur(12px);
+}
+.about-block h2 {
+  margin-top: 0;
+  color: var(--accent);
+  border: none;
+  padding: 0;
+  font-size: 1.3rem;
+}
+.about-block h2::before { content: ""; }
+
+/* Системы */
+.sys-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.sys-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: 1.2rem;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.sys-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.sys-card .sys-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.sys-card h3 {
+  margin: 0 0 0.3rem;
+  color: var(--accent);
+  font-size: 1rem;
+}
+.sys-card h3::before { content: ""; }
+.sys-card .sys-os {
+  color: var(--text);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+.sys-card .sys-desc {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Хронология */
+.timeline-about {
+  position: relative;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+.timeline-about::before {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--accent-dim), transparent);
+}
+.tl-about {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+}
+.tl-about::before {
+  content: "";
+  position: absolute;
+  left: -1.4rem;
+  top: 0.3rem;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent);
+}
+.tl-about .year {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.tl-about .tl-title {
+  font-weight: 600;
+  margin: 0.2rem 0;
+}
+.tl-about .tl-desc {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Рекомендации */
+.rec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.rec-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.2rem;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.rec-card:hover {
+  transform: translateY(-3px);
+  border-left-color: var(--accent);
+}
+.rec-card .rec-num {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+.rec-card h3 {
+  margin: 0.3rem 0 0.5rem;
+  color: var(--accent);
+  font-size: 1rem;
+}
+.rec-card h3::before { content: ""; }
+.rec-card .rec-why {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 0 0.7rem;
+}
+.rec-card a {
+  font-size: 0.85rem;
+}
+
+/* Блог */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.blog-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-dim);
+  padding: 1rem 1.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.2s;
+  display: block;
+}
+.blog-item:hover {
+  border-left-color: var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.blog-item h3 {
+  margin: 0 0 0.3rem;
+  color: var(--accent);
+  font-size: 1rem;
+}
+.blog-item h3::before { content: ""; }
+.blog-item .date {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-bottom: 0.3rem;
+}
+.blog-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Настройки */
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+.setup-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 0.7rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+.setup-item strong {
+  color: var(--accent);
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+}
+
+/* Скриншоты */
+.screenshot-slot {
+  background: linear-gradient(135deg, var(--panel), var(--panel-2));
+  border: 2px dashed var(--border);
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+/* Мобильный */
+@media (max-width: 768px) {
+  .about-hero h1 { font-size: 1.6rem; }
+  .about-avatar { width: 90px; height: 90px; font-size: 3rem; }
+  .about-tabs { gap: 0; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.3rem; }
+  .about-tab { padding: 0.6rem 0.9rem; font-size: 0.85rem; white-space: nowrap; }
+  .about-block { padding: 1rem; }
+  .sys-grid, .rec-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+
+  <div class="header-top">
+    <a href="index.html" class="logo">Monade OS</a>
+    <div class="header-icons" id="headerIcons"></div>
+  </div>
+
+  <div class="header-search" id="headerSearch"></div>
+
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="active">Главная</a>
+    <a href="download.html">Как скачать</a>
+    <a href="install.html">Как установить</a>
+    <a href="history.html">История</a>
+    <a href="distros/index.html">Дистрибутивы</a>
+    <a href="about.html">Обо мне</a>
+    <a href="faq.html">FAQ</a>
+    <a href="kali/index.html">Kali</a>
+    <a href="sitemap.html">Карта сайта</a>
+  </nav>
+
+</div>
+</header>
+
+<main class="container page">
+<button class="back-btn" onclick="history.back()" aria-label="Назад">← Назад</button>
+
+
+
+<!-- ГЕРОЙ -->
+<div class="about-hero">
+<div class="about-avatar">&gt;_</div>
+<h1>Артём</h1>
+<p class="nick">ник: <strong>Monadei</strong></p>
+<div class="roles">
+<span class="role">Веб-разработчик</span>
+<span class="role">Студент колледжа</span>
+<span class="role">Самоучка в ИБ</span>
+<span class="role alt">Linux-энтузиаст</span>
+</div>
+<p class="intro">
+Мне 18. Учусь в колледже на веб-разработчика. Параллельно сам изучаю кибербезопасность — читаю, практикуюсь, ломаю свои же системы. Использую <strong>Ubuntu</strong> на основном ПК, <strong>Fedora KDE</strong> на MacBook Pro 2014, <strong>Kali</strong> и <strong>BlackArch</strong> для практики в ИБ. Пишу на Python, учу Kotlin. Этот сайт — способ разобраться в Linux и поделиться тем, что узнал.
+</p>
+</div>
+
+<!-- ТАБЫ -->
+<div class="about-tabs">
+<button class="about-tab active" data-tab="me">Обо мне</button>
+<button class="about-tab" data-tab="path">Мой путь</button>
+<button class="about-tab" data-tab="systems">Мои системы</button>
+<button class="about-tab" data-tab="recommendations">Рекомендую</button>
+<button class="about-tab" data-tab="blog">Блог</button>
+</div>
+
+<!-- ПАНЕЛЬ 1: ОБО МНЕ -->
+<div class="about-panel active" data-panel="me">
+<div class="about-block">
+<h2>Чему учусь</h2>
+<div class="sys-grid">
+<div class="sys-card">
+<div class="sys-icon">🔐</div>
+<h3>Кибербезопасность</h3>
+<p class="sys-os">Основное направление</p>
+<p class="sys-desc">Самоучка. Читаю курсы по пентесту, практикуюсь на HackTheBox и TryHackMe. Цель — стать пентестером.</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">🌐</div>
+<h3>Веб-разработка</h3>
+<p class="sys-os">Учусь в колледже</p>
+<p class="sys-desc">HTML, CSS, JavaScript. Понимаю, как устроены сайты изнутри. Этот сайт — мой полигон.</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">🐍</div>
+<h3>Python</h3>
+<p class="sys-os">Базовый уровень</p>
+<p class="sys-desc">Пишу простые скрипты, парсеры. Работал с BeautifulSoup. Помогает в пентесте.</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">🤖</div>
+<h3>Kotlin / Android</h3>
+<p class="sys-os">Только начал</p>
+<p class="sys-desc">Открываю Android Studio, пытаюсь понять Compose. Пока на уровне «Hello, World».</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">🐧</div>
+<h3>Linux</h3>
+<p class="sys-os">Ежедневно</p>
+<p class="sys-desc">Ubuntu на ПК, Fedora KDE на MacBook, Kali для практики. Читаю Arch Wiki, ломаю и чиню систему.</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">💀</div>
+<h3>PHP</h3>
+<p class="sys-os">Не люблю, но надо</p>
+<p class="sys-desc">Колледж требует — я страдаю. Синтаксис странный, экосистема путаная.</p>
+</div>
+</div>
+</div>
+
+<div class="about-block">
+<h2>Технологии</h2>
+<h3 style="color: var(--accent); margin-top: 1rem;">Люблю и использую</h3>
+<div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.8rem 0;">
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Linux</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Ubuntu</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Fedora KDE</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Kali Linux</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">BlackArch</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">HTML</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">CSS</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">JavaScript</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Python</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">VS Code</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Bash</span>
+<span style="background:var(--bg);border:1px solid var(--border);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Git</span>
+</div>
+<h3 style="color: var(--accent); margin-top: 1rem;">Учу</h3>
+<div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.8rem 0;">
+<span style="background:var(--bg);border:1px dashed var(--accent);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Kotlin</span>
+<span style="background:var(--bg);border:1px dashed var(--accent);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Android Studio</span>
+<span style="background:var(--bg);border:1px dashed var(--accent);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Nmap</span>
+<span style="background:var(--bg);border:1px dashed var(--accent);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Metasploit</span>
+<span style="background:var(--bg);border:1px dashed var(--accent);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Burp Suite</span>
+<span style="background:var(--bg);border:1px dashed var(--accent);padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;">Wireshark</span>
+</div>
+<h3 style="color: var(--accent); margin-top: 1rem;">Не люблю</h3>
+<div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.8rem 0;">
+<span style="background:var(--bg);border:1px solid #ff5555;padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;text-decoration:line-through;opacity:0.7;">PHP</span>
+<span style="background:var(--bg);border:1px solid #ff5555;padding:0.3rem 0.8rem;border-radius:3px;font-size:0.85rem;text-decoration:line-through;opacity:0.7;">Windows</span>
+</div>
+</div>
+
+<div class="about-block">
+<h2>Мои цели</h2>
+<ul>
+<li>Закончить колледж по веб-разработке</li>
+<li>Пройти сертификацию по кибербезопасности (OSCP или аналог)</li>
+<li>Найти работу в ИБ или веб-разработке</li>
+<li>Настроить Fedora KDE на MacBook до идеала</li>
+<li>Учить Kotlin и сделать своё Android-приложение</li>
+<li>Победить свою неприязнь к PHP (шутка, это невозможно)</li>
+</ul>
+</div>
+</div>
+
+<!-- ПАНЕЛЬ 2: МОЙ ПУТЬ -->
+<div class="about-panel" data-panel="path">
+<div class="about-block">
+<h2>Как я пришёл в Linux</h2>
+<div class="timeline-about">
+<div class="tl-about">
+<span class="year">Лето 2026</span>
+<p class="tl-title">Первое знакомство с Linux</p>
+<p class="tl-desc">Летом 2026 впервые попробовал Linux. Скачал ISO, записал флешку, загрузился в Live-режиме. Понравилось, но сначала не решался ставить на постоянку.</p>
+</div>
+<div class="tl-about">
+<span class="year">Лето 2026</span>
+<p class="tl-title">Перепробовал ~7 дистрибутивов на MacBook</p>
+<p class="tl-desc">Взял старый MacBook Pro 2014 и начал экспериментировать. За лето попробовал почти 7 разных дистрибутивов: разные окружения, разные подходы. Что-то работало сразу, что-то требовало возни с драйверами.</p>
+</div>
+<div class="tl-about">
+<span class="year">Сентябрь 2026</span>
+<p class="tl-title">Ubuntu на основном ПК</p>
+<p class="tl-desc">В сентябре решился — поставил Ubuntu на свой основной ПК с RTX 3050. Настроил драйверы, темы, доку. С тех пор это моя основная система.</p>
+</div>
+<div class="tl-about">
+<span class="year">Сентябрь 2026</span>
+<p class="tl-title">Идея сайта</p>
+<p class="tl-desc">Когда перепробовал столько дистрибутивов, понял — информации много, но она разбросана. Форум тут, статья там, видео ещё где-то. Хотелось один сайт, где всё понятно и по-русски.</p>
+</div>
+<div class="tl-about">
+<span class="year">Сентябрь 2026</span>
+<p class="tl-title">3 дня планирования</p>
+<p class="tl-desc">Прежде чем писать код, 3 дня продумывал структуру: какие разделы, какие страницы, как всё связано. Хотел, чтобы сайт был не «сборник ссылок», а настоящий справочник.</p>
+</div>
+<div class="tl-about">
+<span class="year">Сентябрь 2026</span>
+<p class="tl-title">Неделя разработки</p>
+<p class="tl-desc">За неделю собрал сайт: дистрибутивы, гайды, Kali-раздел, инструменты, подбор. Всё на чистом HTML/CSS/JS, без фреймворков. Сайт живой — продолжаю добавлять и улучшать.</p>
+</div>
+</div>
+</div>
+
+<div class="about-block">
+<h2>Как я пришёл в Linux</h2>
+<p>Летом 2026 я впервые загрузился в Live-режиме Linux. Понравилось. Но главное — у меня был старый MacBook Pro 2014, который Apple перестала поддерживать. Я решил попробовать на нём Linux и за лето перебрал почти 7 дистрибутивов.</p>
+<p>Это был настоящий эксперимент: разные окружения, разные подходы, разные проблемы с драйверами. Что-то работало из коробки, что-то требовало ручной настройки. Именно тогда я понял, насколько дистрибутивы отличаются друг от друга.</p>
+<p>В сентябре 2026 поставил Ubuntu на основной ПК. С тех пор это моя основная система.</p>
+</div>
+
+<div class="about-block">
+<h2>Чему научился</h2>
+<ul>
+<li>Каждый дистрибутив — это не просто оболочка, а своя философия</li>
+<li>Проблемы с драйверами — нормально, особенно на старом железе</li>
+<li>Live USB — лучший способ попробовать, не рискуя системой</li>
+<li>Терминал быстрее и удобнее, чем кажется</li>
+<li>Когда перепробуешь много — начинаешь понимать, что тебе нужно на самом деле</li>
+</ul>
+</div>
+</div>
+
+<!-- ПАНЕЛЬ 3: МОИ СИСТЕМЫ -->
+<div class="about-panel" data-panel="systems">
+<div class="about-block">
+<h2>Мои системы</h2>
+<div class="sys-grid">
+<div class="sys-card">
+<div class="sys-icon">🖥️</div>
+<h3>Основной ПК «NEO»</h3>
+<p class="sys-os">Ubuntu 26.04.1 LTS</p>
+<p class="sys-desc">Intel Core i5-12400F, RTX 3050, 16 ГБ RAM, три монитора. Здесь я пишу код, учусь и делаю этот сайт.</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">💻</div>
+<h3>MacBook Pro 2014</h3>
+<p class="sys-os">Fedora KDE Plasma</p>
+<p class="sys-desc">Перешёл с Mint на Fedora. Работает быстрее, чем macOS. Wi-Fi Broadcom пришлось ставить вручную.</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">🔐</div>
+<h3>Kali в виртуалке</h3>
+<p class="sys-os">Kali Linux</p>
+<p class="sys-desc">Рабочая среда для пентеста. HTB, TryHackMe, тесты своих систем.</p>
+</div>
+<div class="sys-card">
+<div class="sys-icon">⚡</div>
+<h3>Эксперименты</h3>
+<p class="sys-os">BlackArch</p>
+<p class="sys-desc">Arch с 3000+ инструментами безопасности. Для глубокого изучения.</p>
+</div>
+</div>
+</div>
+
+<div class="about-block">
+<h2>Комплектующие ПК</h2>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Компонент</th><th>Модель</th></tr></thead>
+<tbody>
+<tr><td>ПК</td><td>NEO M137 (2.0)</td></tr>
+<tr><td>Процессор</td><td>Intel Core i5-12400F</td></tr>
+<tr><td>Видеокарта</td><td>NVIDIA RTX 3050 8 ГБ</td></tr>
+<tr><td>Память</td><td>16 ГБ</td></tr>
+<tr><td>Диск (система)</td><td>456 ГБ SSD, ext4</td></tr>
+<tr><td>Диск (данные)</td><td>239 ГБ, NTFS</td></tr>
+<tr><td>Монитор 1</td><td>27" 1920x1080, 240 Гц</td></tr>
+<tr><td>Монитор 2</td><td>24" 1080x1920, 75 Гц</td></tr>
+<tr><td>Окружение</td><td>GNOME 50.1 / Wayland</td></tr>
+<tr><td>Тема</td><td>Aura-Glass</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="about-block">
+<h2>MacBook Pro 2014</h2>
+<p>Старый мак, который Apple перестала поддерживать. Linux дал ему вторую жизнь. Подробнее — на <a href="my-mac.html">отдельной странице про MacBook</a>.</p>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Компонент</th><th>Значение</th></tr></thead>
+<tbody>
+<tr><td>Модель</td><td>MacBook Pro (Retina, 13", Mid 2014)</td></tr>
+<tr><td>ОС</td><td>Fedora KDE Plasma</td></tr>
+<tr><td>Процессор</td><td>Intel Core i5 (Haswell)</td></tr>
+<tr><td>Память</td><td>8 ГБ</td></tr>
+<tr><td>Диск</td><td>128 ГБ SSD</td></tr>
+<tr><td>Wi-Fi</td><td>Broadcom BCM4360 (нужен драйвер)</td></tr>
+</tbody>
+</table></div>
+</div>
+</div>
+
+<!-- ПАНЕЛЬ 4: РЕКОМЕНДАЦИИ -->
+<style>
+.video-section {
+  margin: 2rem 0 1rem;
+  padding: 1.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+}
+.video-section h2 {
+  margin-top: 0;
+  color: var(--accent);
+  border: none;
+  padding: 0;
+  font-size: 1.2rem;
+}
+.video-section h2::before { content: ""; }
+.video-section .video-intro {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 1.2rem;
+}
+.video-cat {
+  margin: 1.5rem 0 0.5rem;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 700;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px dashed var(--border);
+}
+.video-cat::before { content: "» "; color: var(--accent-dim); }
+.video-card {
+  display: flex;
+  gap: 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  margin: 0.6rem 0;
+  transition: 0.2s;
+  text-decoration: none;
+  color: var(--text);
+}
+.video-card:hover {
+  border-left: 3px solid var(--accent);
+  background: var(--panel-2);
+  transform: translateX(3px);
+  text-decoration: none;
+}
+.video-card .vc-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.video-card .vc-info {
+  flex: 1;
+  min-width: 0;
+}
+.video-card .vc-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--accent);
+  margin-bottom: 0.2rem;
+  line-height: 1.35;
+}
+.video-card .vc-desc {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+.video-card .vc-source {
+  display: inline-block;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 0.68rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  margin-top: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+@media (max-width: 768px) {
+  .video-card { flex-direction: column; gap: 0.4rem; padding: 0.8rem; }
+  .video-card .vc-icon { font-size: 1.3rem; }
+}
+</style>
+<div class="about-panel" data-panel="recommendations">
+<div class="about-block">
+<h2>5 дистрибутивов, которые советую</h2>
+<p style="color:var(--muted);">Не топ-5 вообще, а мои личные. Те, что сам ставил или ставлю.</p>
+
+<div class="rec-grid">
+
+<div class="rec-card">
+<span class="rec-num">1</span>
+<h3>Arch Linux</h3>
+<p class="rec-why">Для тех, кто хочет понять, как всё устроено. Даже если не останешься — узнаешь Linux в разы лучше после нескольких установок. Arch Wiki — лучший учебник в мире Linux.</p>
+<a href="distros/arch.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">2</span>
+<h3>Fedora</h3>
+<p class="rec-why">Мой первый Linux на MacBook. Свежие пакеты, GNOME на Wayland, современные технологии быстрее всех. На моём MacBook 2014 работала быстрее macOS.</p>
+<a href="distros/fedora.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">3</span>
+<h3>Ubuntu</h3>
+<p class="rec-why">С него начинают все, и не зря. Огромное сообщество, ответ на любой вопрос гуглится за минуту. Именно Ubuntu я использую как основную систему.</p>
+<a href="distros/ubuntu.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">4</span>
+<h3>NixOS</h3>
+<p class="rec-why">Если однажды надоест «настраивать систему заново». Вся система в одном конфиге, атомарные обновления, откаты. Кривая обучения крутая, но потом не захочется возвращаться.</p>
+<a href="distros/nixos.html">Подробнее →</a>
+</div>
+
+<div class="rec-card">
+<span class="rec-num">5</span>
+<h3>Debian</h3>
+<p class="rec-why">Фундамент, на котором стоит пол-Linux. Один раз поставил — работает годами. Если нужна система, которая не подведёт — сервер, домашний ПК родителям.</p>
+<a href="distros/debian.html">Подробнее →</a>
+</div>
+
+</div>
+</div>
+
+<div class="about-block">
+<h2>Кому что</h2>
+<div class="table-wrap"><table class="data">
+<thead><tr><th>Если ты…</th><th>Попробуй</th></tr></thead>
+<tbody>
+<tr><td>Первый раз ставишь Linux</td><td><a href="distros/ubuntu.html">Ubuntu</a> или <a href="distros/mint.html">Linux Mint</a></td></tr>
+<tr><td>Хочешь свежие технологии</td><td><a href="distros/fedora.html">Fedora</a></td></tr>
+<tr><td>Хочешь понять Linux изнутри</td><td><a href="distros/arch.html">Arch</a></td></tr>
+<tr><td>Хочешь «поставил и забыл»</td><td><a href="distros/debian.html">Debian</a></td></tr>
+<tr><td>Хочешь декларативную систему</td><td><a href="distros/nixos.html">NixOS</a></td></tr>
+<tr><td>MacBook старый</td><td><a href="my-mac.html">Смотри страницу про мак</a></td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="about-block" style="border-left-color: #a78bfa;">
+<h2>🖥️ Дистрибутивы для MacBook Pro 2014</h2>
+<p style="color:var(--muted); margin-bottom: 1rem;">Что реально встаёт на MacBookPro11,x. По опыту пользователей и моему.</p>
+
+<div class="rec-grid">
+
+<div class="rec-card" style="border-left-color: #4caf50;">
+<span class="rec-num" style="background: #4caf50;">✓</span>
+<h3>Linux Mint</h3>
+<p class="rec-why"><strong>Проверено.</strong> Есть скрипт <a href="https://github.com/ksylvan/mintbook" target="_blank">mintbook</a> для MacBook Pro 2013–2015 — решает Wi-Fi Broadcom BCM4360, создаёт USB, ведёт по шагам. Cinnamon, всё из коробки. Wi-Fi драйвер в ISO Mint 22.</p>
+<a href="distros/mint.html">О Mint →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #4caf50;">
+<span class="rec-num" style="background: #4caf50;">✓</span>
+<h3>Fedora KDE</h3>
+<p class="rec-why"><strong>Проверено.</strong> Пользователь использовал 30 дней на точно такой же модели. Wi-Fi лечится: <code>sudo dnf install akmod-wl</code>. Работает быстрее macOS. Камера — facetimehd.</p>
+<a href="distros/fedora.html">О Fedora →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #ff9800;">
+<span class="rec-num" style="background: #ff9800;">⚠</span>
+<h3>Ultramarine Linux</h3>
+<p class="rec-why">Fedora-based, дружелюбнее к железу. На MacBook 2014 работал. Wi-Fi та же проблема, нужен dongle или akmod-wl.</p>
+<a href="distros/ultramarine.html">Об Ultramarine →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #ff9800;">
+<span class="rec-num" style="background: #ff9800;">⚠</span>
+<h3>CachyOS</h3>
+<p class="rec-why">Arch-based с оптимизацией. Ставили на MacBook Pro Mid-2014. Wi-Fi: <code>sudo pacman -S broadcom-wl-dkms</code>. Есть нюансы с загрузчиком — выбирай GRUB.</p>
+<a href="distros/cachyos.html">О CachyOS →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #2196f3;">
+<span class="rec-num" style="background: #2196f3;">AI</span>
+<h3>Pop!_OS</h3>
+<p class="rec-why">Рекомендуется для AI-задач на старых Mac. Отдельный ISO для NVIDIA. Тот же Ubuntu, но удобнее.</p>
+<a href="distros/pop-os.html">О Pop!_OS →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #2196f3;">
+<span class="rec-num" style="background: #2196f3;">✓</span>
+<h3>Ubuntu</h3>
+<p class="rec-why">Работает, но на слабых CPU может тормозить. Ubuntu 22.04.5 LTS может быть отзывчивее, чем 24.04. Wi-Fi: <code>broadcom-sta-dkms</code>.</p>
+<a href="distros/ubuntu.html">Об Ubuntu →</a>
+</div>
+
+</div>
+
+<div style="margin-top: 1.5rem; padding: 1rem; background: var(--panel-2); border-left: 3px solid #ff5555; border-radius: 0 4px 4px 0;">
+<strong style="color: #ff5555;">⚠ Wi-Fi Broadcom BCM4360</strong> — главная проблема на всех дистрибутивах. Решение:
+<ul style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.88rem;">
+<li><strong>Mint 22:</strong> драйвер уже в ISO</li>
+<li><strong>Fedora:</strong> <code>sudo dnf install akmod-wl</code> (может не собраться на новых ядрах)</li>
+<li><strong>Arch / Omarchy / CachyOS:</strong> <code>sudo pacman -S broadcom-wl-dkms</code></li>
+<li><strong>Ubuntu / Mint / Debian / Zorin / Pop!_OS:</strong> <code>sudo apt install broadcom-sta-dkms</code></li>
+<li><strong>Если akmod-wl не работает:</strong> USB Wi-Fi dongle или телефонный tethering</li>
+</ul>
+</div>
+
+<p style="margin-top: 1rem;"><a href="my-mac.html" class="btn">Подробнее про MacBook →</a></p>
+</div>
+
+
+<div class="video-section">
+<div class="video-cat">🎥 Установка Linux на MacBook Pro 2014</div>
+
+<a class="video-card" href="https://www.youtube.com/watch?v=D7wOcIvWdxc" target="_blank" rel="noopener">
+<span class="vc-icon">🍎</span>
+<span class="vc-info">
+<div class="vc-title">Linux Mint 21 на 10-летнем Mac! (Veronica Explains)</div>
+<div class="vc-desc">Полный разбор: почему Mint, загрузка с USB, установка, первые шаги, настройка панели, установка приложений. Отличное видео для новичков.</div>
+<span class="vc-source">YouTube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://www.youtube.com/watch?v=x4nbafBOB4Y" target="_blank" rel="noopener">
+<span class="vc-icon">🍎</span>
+<span class="vc-info">
+<div class="vc-title">Noob Guide to Installing Linux Mint on 2014 MacBook Air</div>
+<div class="vc-desc">Пошаговый гайд для новичков. Работает на любом Intel Mac до 2018 (без T2 чипа). Показано как создать USB, загрузиться, установить.</div>
+<span class="vc-source">YouTube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://www.youtube.com/results?search_query=install+linux+macbook+pro+2014" target="_blank" rel="noopener">
+<span class="vc-icon">🔍</span>
+<span class="vc-info">
+<div class="vc-title">Ищи больше: установка Linux на MacBook Pro 2014</div>
+<div class="vc-desc">Поиск на YouTube по запросу. Много видео на английском, но с субтитрами понятно.</div>
+<span class="vc-source">YouTube Search</span>
+</span>
+</a>
+
+<h2>📺 Видео-гайды по дистрибутивам</h2>
+<p class="video-intro">Собрал видео, которые сам смотрел. Все на русском. Rutube — работает без VPN.</p>
+
+<div class="video-cat">Arch Linux</div>
+
+<a class="video-card" href="https://rutube.ru/video/593be3147fea0dd240bea75a7e58a09f/" target="_blank" rel="noopener">
+<span class="vc-icon">⚡</span>
+<span class="vc-info">
+<div class="vc-title">Самая простая установка Arch Linux и KDE Plasma (archinstall, rufus)</div>
+<div class="vc-desc">Пошагово: скачивание ISO, запись через Rufus, разметка диска, archinstall, настройка KDE.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/87de0cc7dcfa322946c0a9563a877e38/" target="_blank" rel="noopener">
+<span class="vc-icon">⚡</span>
+<span class="vc-info">
+<div class="vc-title">How to Install Arch Linux (Guided Installer) from Start to Finish + Basic Configurations [2025]</div>
+<div class="vc-desc">Подробный разбор archinstall с объяснением каждой опции: шифрование, загрузчик, подкачка, профили, ядро.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">Fedora</div>
+
+<a class="video-card" href="https://rutube.ru/video/1a21b7f35e4ddb907b39dda9c2f72b11/" target="_blank" rel="noopener">
+<span class="vc-icon">🎩</span>
+<span class="vc-info">
+<div class="vc-title">FEDORA LINUX: Большой разбор и установка</div>
+<div class="vc-desc">История, обзор, установка, интерфейс GNOME, расширения.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/af876297fcc28c86ef27506a4e0355ec/" target="_blank" rel="noopener">
+<span class="vc-icon">🎩</span>
+<span class="vc-info">
+<div class="vc-title">Install Fedora 40 with Btrfs, Snapper, and Grub-Btrfs</div>
+<div class="vc-desc">Установка Fedora с Btrfs и снапшотами. Для откатов системы после сломанных обновлений.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">Ubuntu</div>
+
+<a class="video-card" href="https://rutube.ru/video/302eb263e263b9b030389fb75964ee6e/" target="_blank" rel="noopener">
+<span class="vc-icon">🟠</span>
+<span class="vc-info">
+<div class="vc-title">Установка Ubuntu Server 20.04 LTS + настройка программного RAID1 в режиме UEFI</div>
+<div class="vc-desc">Для серверного варианта. Настройка BIOS, разметка, RAID1, монтирование.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">NixOS</div>
+
+<a class="video-card" href="https://rutube.ru/video/8c80fa484d290f32ebb4b567c3a314ae/" target="_blank" rel="noopener">
+<span class="vc-icon">❄️</span>
+<span class="vc-info">
+<div class="vc-title">Установите NixOS. Базовое РУКОВОДСТВО</div>
+<div class="vc-desc">Установка NixOS с Qtile. Объяснение декларативной конфигурации, атомарных обновлений и откатов.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/53289ff8c179cf7cb682efcfa60e2da7/" target="_blank" rel="noopener">
+<span class="vc-icon">❄️</span>
+<span class="vc-info">
+<div class="vc-title">NixOS - Полный Разбор: Nixpkgs, Flakes, home-manager</div>
+<div class="vc-desc">Глубокий разбор: flakes, home-manager, язык Nix. Для тех, кто хочет понять NixOS изнутри.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div class="video-cat">Debian</div>
+
+<a class="video-card" href="https://rutube.ru/video/292ed5faea918c0d5ca0e082391cab4b/" target="_blank" rel="noopener">
+<span class="vc-icon">🌀</span>
+<span class="vc-info">
+<div class="vc-title">Установка Debian 12</div>
+<div class="vc-desc">Пошагово: скачивание, запись, настройки BIOS, установка, выбор окружения, первичные настройки.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<a class="video-card" href="https://rutube.ru/video/b0c1d7be58dd0d098f838f5be4618626/" target="_blank" rel="noopener">
+<span class="vc-icon">🌀</span>
+<span class="vc-info">
+<div class="vc-title">Установка Debian 12.06 графическая/консольная</div>
+<div class="vc-desc">Два способа установки: графический и консольный.</div>
+<span class="vc-source">Rutube</span>
+</span>
+</a>
+
+<div style="margin-top: 1.5rem; padding: 1rem; background: var(--panel-2); border-left: 3px solid var(--accent-dim); border-radius: 0 4px 4px 0;">
+<strong style="color: var(--accent);">🔍 Ищи больше на YouTube:</strong>
+<ul style="margin-top: 0.5rem; margin-bottom: 0; font-size: 0.88rem;">
+<li><a href="https://www.youtube.com/results?search_query=установка+arch+linux+на+русском" target="_blank" rel="noopener">Arch Linux — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+fedora+linux+на+русском" target="_blank" rel="noopener">Fedora — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+ubuntu+на+русском" target="_blank" rel="noopener">Ubuntu — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+nixos+на+русском" target="_blank" rel="noopener">NixOS — установка на русском</a></li>
+<li><a href="https://www.youtube.com/results?search_query=установка+debian+на+русском" target="_blank" rel="noopener">Debian — установка на русском</a></li>
+</ul>
+
+<div class="rec-card" style="border-left-color: #8b5cf6;">
+<span class="rec-num" style="background: #8b5cf6;">✓</span>
+<h3>Omarchy</h3>
+<p class="rec-why"><strong>Проверено.</strong> Автор блога DeepakNess поставил Omarchy на свой десятилетний MacBook Pro после Fedora и Mint. «Установился чисто, загрузился быстро, всё просто работало». Arch-based, Hyprland, всё из коробки. Wi-Fi Broadcom лечится через AUR.</p>
+<a href="distros/omarchy.html">Об Omarchy →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #8b5cf6;">
+<span class="rec-num" style="background: #8b5cf6;">✓</span>
+<h3>Arch Linux</h3>
+<p class="rec-why"><strong>Проверено.</strong> Arch Wiki содержит отдельную страницу для MacBookPro11,x (твоя модель). Там всё: Broadcom Wi-Fi (<code>broadcom-wl-dkms</code>), тачпад, HiDPI, звук, спящий режим. Загрузчик — systemd-boot или GRUB.</p>
+<a href="distros/arch.html">Об Arch →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #3b82f6;">
+<span class="rec-num" style="background: #3b82f6;">✓</span>
+<h3>Debian</h3>
+<p class="rec-why"><strong>Проверено.</strong> Пользователь на Debian Wiki установил Debian 13 Trixie на MacBookPro11,2 (15" Mid 2014). Wi-Fi работает через offline .deb пакет Broadcom. GNOME работает лучше, чем KDE.</p>
+<a href="distros/debian.html">О Debian →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #3b82f6;">
+<span class="rec-num" style="background: #3b82f6;">✓</span>
+<h3>Zorin OS</h3>
+<p class="rec-why"><strong>Проверено.</strong> Пользователь на feddit.fr поставил Zorin на MacBook Pro 2015. «Zorin и Mint работают лучше всего при первой установке». Самый macOS-подобный интерфейс, лёгкий. Wi-Fi: broadcom-sta-dkms.</p>
+<a href="distros/zorin.html">О Zorin →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #ff9800;">
+<span class="rec-num" style="background: #ff9800;">⚠</span>
+<h3>Ubuntu 22.04.5 LTS</h3>
+<p class="rec-why">На MacBook 2012–2017 Ubuntu 24.04 работает, но если проблемы — 22.04.5 LTS может быть стабильнее. Внимание: Ubuntu 25.04 имеет баг с загрузкой на Intel Mac (чёрный экран). Wi-Fi: broadcom-sta-dkms.</p>
+<a href="distros/ubuntu.html">Об Ubuntu →</a>
+</div>
+
+<div class="rec-card" style="border-left-color: #2196f3;">
+<span class="rec-num" style="background: #2196f3;">AI</span>
+<h3>Pop!_OS</h3>
+<p class="rec-why">Рекомендуется для AI-задач на старых Mac. Отдельный ISO для NVIDIA. Тот же Ubuntu, но удобнее. Wi-Fi: broadcom-sta-dkms.</p>
+<a href="distros/pop-os.html">О Pop!_OS →</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="about-panel" data-panel="blog">
+<div class="about-block">
+<h2>Блог</h2>
+<p style="color:var(--muted);">Личные заметки о Linux, учёбе, ошибках и находках.</p>
+<div class="blog-list">
+<a class="blog-item" href="blog/how-i-switched.html">
+<h3>Как я перешёл с Windows на Linux</h3>
+<div class="date">15 сентября 2026</div>
+<p>Это была не любовь с первого взгляда. Скорее — постепенное осознание.</p>
+</a>
+<a class="blog-item" href="blog/my-linux-year.html">
+<h3>Что я узнал за год на Linux</h3>
+<div class="date">10 сентября 2026</div>
+<p>Год назад я с трудом гуглил «как установить драйвер NVIDIA».</p>
+</a>
+<a class="blog-item" href="blog/arch-mistakes.html">
+<h3>Мои ошибки при установке Arch</h3>
+<div class="date">5 сентября 2026</div>
+<p>Первая установка Arch заняла 8 часов. Вторая — час.</p>
+</a>
+<a class="blog-item" href="blog/how-i-made-site.html">
+<h3>Как я сделал этот сайт</h3>
+<div class="date">1 сентября 2026</div>
+<p>Идея пришла в голову спонтанно. Хотел собрать всё в одном месте.</p>
+</a>
+</div>
+</div>
+</div>
+
+<!-- ПАНЕЛЬ 6: СКРИНШОТЫ -->
+
+
+<script>
+// Табы
+document.querySelectorAll('.about-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    var target = this.dataset.tab;
+    
+    // Убираем active у всех табов
+    document.querySelectorAll('.about-tab').forEach(function(t) {
+      t.classList.remove('active');
+    });
+    this.classList.add('active');
+    
+    // Показываем нужную панель
+    document.querySelectorAll('.about-panel').forEach(function(p) {
+      p.classList.remove('active');
+    });
+    document.querySelector('.about-panel[data-panel="' + target + '"]').classList.add('active');
+    
+    // Скролл к табам
+    document.querySelector('.about-tabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Читаем hash из URL (#path, #systems и т.д.)
+if (window.location.hash) {
+  var hash = window.location.hash.substring(1);
+  var tab = document.querySelector('.about-tab[data-tab="' + hash + '"]');
+  if (tab) tab.click();
+}
+</script>
+
+</main>
+
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p>
+<p class="footer-links"><a href="sitemap.html">Карта сайта</a> · <a href="404.html">404</a> · <a href="about.html">Обо мне</a> · <a href="faq.html">FAQ</a></p></div></footer>
+<script src="js/theme.js"></script>
+<script src="js/site-theme.js"></script>
+<script src="js/search.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/logo-anim.js"></script>
+<script src="js/boot-screen.js"></script>
+<script src="js/theme-picker.js"></script>
+<script src="js/music.js"></script>
+</body>
+</html>

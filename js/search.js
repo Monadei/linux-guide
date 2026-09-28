@@ -58,7 +58,9 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    var header = document.querySelector('.header-inner');
+    var header = document.getElementById('headerSearch')
+              || document.querySelector('.header-search')
+              || document.querySelector('.header-inner');
     if (!header) return;
 
     var box = document.createElement('div');
@@ -77,8 +79,7 @@
     box.appendChild(results);
     
     var switcher = header.querySelector('.theme-switcher');
-    if (switcher) header.insertBefore(box, switcher);
-    else header.appendChild(box);
+    header.appendChild(box);
 
     input.addEventListener('focus', function() { loadIndex(function() {}); });
 

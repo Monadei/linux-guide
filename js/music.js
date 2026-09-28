@@ -39,7 +39,9 @@
     btn.setAttribute('aria-label', 'Музыка');
     btn.innerHTML = '🎵';
 
-    var header = document.querySelector('.header-inner');
+    var header = document.getElementById('headerIcons')
+                || document.querySelector('.header-icons')
+                || document.querySelector('.header-inner');
     if (header) {
       header.appendChild(btn);
     } else {

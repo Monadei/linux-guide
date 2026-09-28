@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ядро Linux — подробно — Monade OS</title>
+<link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+<script data-goatcounter="https://monadeos.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/extra.css">
+<link rel="stylesheet" href="../css/animations.css">
+<link rel="stylesheet" href="../css/liquid-glass.css">
+<link rel="stylesheet" href="../css/mobile.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+
+  <div class="header-top">
+    <a href="../index.html" class="logo">Monade OS</a>
+    <div class="header-icons" id="headerIcons"></div>
+  </div>
+
+  <div class="header-search" id="headerSearch"></div>
+
+  <nav class="nav" id="mainNav">
+    <a href="../index.html" class="active">Главная</a>
+    <a href="../download.html">Как скачать</a>
+    <a href="../install.html">Как установить</a>
+    <a href="../history.html">История</a>
+    <a href="../distros/index.html">Дистрибутивы</a>
+    <a href="../about.html">Обо мне</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../kali/index.html">Kali</a>
+    <a href="../sitemap.html">Карта сайта</a>
+  </nav>
+
+</div>
+</header>
+<main class="container page">
+<button class="back-btn" onclick="history.back()" aria-label="Назад">← Назад</button>
+<div class="breadcrumbs-nav"><a href="../index.html">Главная</a><span class="bc-sep">/</span><a href="index.html">Гайды</a><span class="bc-sep">/</span><span>Ядро Linux — подробно</span></div>
+<h1>Ядро Linux — подробно</h1>
+<p class="lead">Что это, как работает, как обновлять.</p>
+<section class="kali-section"><h2>Что такое ядро</h2><p>Ядро — посредник между программами и железом. Управляет:</p><ul><li>Процессором</li><li>Памятью</li><li>Дисками</li><li>Сетью</li><li>Устройствами</li></ul></section>
+<section class="kali-section"><h2>Версии ядра</h2><ul><li><strong>Mainline</strong> — самая свежая, для разработки</li><li><strong>Stable</strong> — стабильная</li><li><strong>LTS</strong> — долгосрочная, 2-6 лет поддержки</li><li><strong>Distro</strong> — ядро дистрибутива (с патчами)</li></ul></section>
+<section class="kali-section"><h2>Проверка версии</h2><pre><code>uname -r
+uname -a
+cat /proc/version</code></pre></section>
+<section class="kali-section"><h2>Типы ядер</h2><ul><li><strong>generic</strong> — стандартное</li><li><strong>low-latency</strong> — для аудио</li><li><strong>RT</strong> — реального времени</li><li><strong>hardened</strong> — безопасность</li><li><strong>zen</strong> — для десктопа и игр</li></ul></section>
+<section class="kali-section"><h2>Обновление</h2><pre><code># Ubuntu/Debian
+sudo apt update && sudo apt upgrade
+
+# Fedora
+sudo dnf upgrade --refresh
+
+# Arch
+sudo pacman -Syu</code></pre></section>
+
+</main>
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026.</p></div></footer>
+<script src="../js/theme.js"></script>
+<script src="../js/site-theme.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/extras.js"></script>
+<script src="../js/logo-anim.js"></script>
+<script src="../js/boot-screen.js"></script>
+<script src="../js/theme-picker.js"></script>
+<script src="../js/music.js"></script>
+</body>
+</html>
