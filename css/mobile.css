@@ -1,425 +1,150 @@
 /* ============================================
-   MOBILE.CSS — единый файл для телефонов
-   Android и iPhone (≤768px)
+   МОБИЛЬНАЯ ВЕРСИЯ
    ============================================ */
 
 @media (max-width: 768px) {
 
-  /* ===== БАЗА ===== */
-  html { font-size: 16px; -webkit-text-size-adjust: 100%; }
-  body {
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .container { width: 94%; }
-
-  /* ===== HERO ===== */
-  .hero { padding: 1.5rem 0 1rem; text-align: left; }
-  .hero h1 { font-size: 1.5rem; line-height: 1.3; }
-  .hero h1::before { content: ""; }
-  .hero p { font-size: 1rem; }
-  .hero-logo, .pixel-logo {
-    font-size: clamp(2rem, 12vw, 3rem) !important;
-    margin: 1rem 0 0.8rem !important;
+  .site-header {
+    padding: 0 !important;
+    background: var(--panel) !important;
+    border-bottom: 1px solid var(--border) !important;
   }
 
-  /* ===== КНОПКИ ===== */
-  .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 0.85rem 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    min-height: 52px;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border-width: 2px;
-    background: color-mix(in srgb, var(--accent) 8%, transparent);
-    border: 2px solid var(--accent-dim);
-    color: var(--accent);
-  }
-  .btn::before, .btn::after { content: ""; }
-  .btn:active {
-    transform: scale(0.97);
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
+  .header-inner {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas:
+      "logo    icons"
+      "search  search"
+      "nav     nav" !important;
+    gap: 0.45rem !important;
+    padding: 0.5rem 0.8rem !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  .card a {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    font-size: 0.95rem;
-    min-height: 44px;
+  .header-top { display: contents !important; }
+
+  a.logo, .logo {
+    grid-area: logo !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  svg.logo-penguin, .logo-penguin {
+    width: 34px !important;
+    height: 38px !important;
+    display: block !important;
   }
 
-  /* ===== ХЛЕБНЫЕ КРОШКИ ===== */
-  .breadcrumbs-nav {
-    font-size: 0.78rem;
-    padding: 0.3rem 0 0.6rem;
-    gap: 0.2rem;
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+  .header-icons {
+    grid-area: icons !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.35rem !important;
   }
-  .breadcrumbs-nav::-webkit-scrollbar { display: none; }
-  .breadcrumbs-nav a,
-  .breadcrumbs-nav span {
-    flex-shrink: 0;
-    padding: 0.2rem 0.3rem;
-  }
-
-  /* ===== КНОПКА НАЗАД ===== */
-  .back-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 0.7rem 1rem;
-    font-size: 0.95rem;
-    min-height: 48px;
-    border-radius: 6px;
-    margin-bottom: 0.8rem;
-  }
-  .back-btn:active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
+  .header-icons > * {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 2px solid var(--accent-dim) !important;
+    border-radius: 6px !important;
+    color: var(--accent) !important;
+    font-size: 1rem !important;
+    flex-shrink: 0 !important;
   }
 
-  /* ===== КАРТОЧКИ ===== */
-  .cards {
-    grid-template-columns: 1fr;
-    gap: 0.7rem;
-    padding-bottom: 1.5rem;
-  }
-  .card {
-    padding: 1rem;
-    border-radius: 8px;
-    min-height: 80px;
-  }
-  .card:active { transform: scale(0.98); }
-  .card h2, .card h3 { font-size: 1rem; }
-  .card p { font-size: 0.9rem; }
-  .distro-icon { width: 36px; height: 36px; }
+  .menu-toggle { display: inline-flex !important; }
 
-  /* ===== СТРАНИЦЫ ===== */
-  .page { padding: 1.2rem 0 2.5rem; }
-  .page h1 { font-size: 1.4rem; line-height: 1.3; }
-  .page h1::before { content: ""; }
-  .page h2 { font-size: 1.1rem; margin-top: 1.5rem; }
-  .page h2::before { content: ""; }
-  .lead { font-size: 0.95rem; }
-  .lead::before { content: ""; }
-
-  section { margin-bottom: 1.3rem; }
-  ul, ol { padding-left: 1.2rem; }
-  li { margin: 0.3rem 0; font-size: 0.95rem; }
-
-  /* ===== КОД И ТАБЛИЦЫ ===== */
-  pre {
-    padding: 0.7rem;
-    font-size: 0.78rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 6px;
+  .header-search {
+    grid-area: search !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
   }
-  pre code { font-size: 0.78rem; white-space: pre; word-break: normal; }
-  code { font-size: 0.85rem; padding: 0.1rem 0.3rem; }
-
-  .table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 1rem -3% 1rem 0;
-    padding-right: 3%;
-  }
-  table.data { font-size: 0.8rem; min-width: 500px; }
-  table.data th, table.data td { padding: 0.5rem 0.6rem; white-space: nowrap; }
-
-  /* ===== KALI-СЕКЦИИ ===== */
-  .kali-section {
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 6px;
-  }
-  .kali-section h2 { font-size: 1.05rem; margin-bottom: 0.5rem; }
-
-  /* ===== ДЕРЕВО ===== */
-  .tree-toolbar {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.7rem;
-  }
-  .tree-toolbar input {
-    width: 100%;
-    min-width: auto;
-    font-size: 0.9rem;
-    padding: 0.6rem 0.8rem;
-    min-height: 44px;
-  }
-  .tree-toolbar button {
-    width: 100%;
-    padding: 0.6rem;
-    font-size: 0.9rem;
-    min-height: 44px;
-    border-radius: 6px;
-  }
-  .tree-list {
-    padding: 0.7rem;
-    font-size: 0.82rem;
-    line-height: 1.65;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .tree-row { flex-wrap: nowrap; padding: 0.1rem 0; }
-  .tree-toggle {
-    width: 26px;
-    height: 26px;
-    font-size: 0.8rem;
-    border-radius: 4px;
-  }
-  .tree-name { padding: 0.1rem 0.3rem; font-size: 0.82rem; white-space: nowrap; }
-  .tree-year { font-size: 0.7rem; margin-left: 0.15rem; }
-  .tree-count { font-size: 0.68rem; }
-  .tree-children { margin-left: 0.5rem; padding-left: 0.4rem; }
-
-  /* ===== ТАБЫ В ABOUT ===== */
-  .about-tabs {
-    gap: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 0.2rem;
-    margin: 1rem 0;
-    scrollbar-width: none;
-  }
-  .about-tabs::-webkit-scrollbar { display: none; }
-  .about-tab {
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    min-height: 48px;
-    border-bottom-width: 4px;
-  }
-  .about-tab:active { background: var(--panel-2); color: var(--accent); }
-
-  .about-hero { padding: 1.5rem 0 1rem; }
-  .about-hero h1 { font-size: 1.6rem; }
-  .about-avatar {
-    width: 90px;
-    height: 90px;
-    font-size: 2.5rem;
-    margin-bottom: 0.8rem;
-  }
-  .about-hero .roles { gap: 0.3rem; }
-  .about-hero .role { padding: 0.25rem 0.7rem; font-size: 0.78rem; }
-  .about-hero .intro { font-size: 0.92rem; line-height: 1.6; }
-
-  .about-block {
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 6px;
-  }
-  .about-block h2 { font-size: 1.1rem; margin-bottom: 0.6rem; }
-
-  /* Системы/рекомендации — 1 колонка */
-  .sys-grid,
-  .rec-grid,
-  .learn-grid,
-  .about-panel .sys-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.7rem;
-  }
-  .sys-card, .rec-card, .learn-card {
-    padding: 1rem;
-    border-radius: 6px;
+  .header-search input,
+  .header-search .search-input,
+  .header-search .search-box input {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 0.9rem !important;
+    padding: 0.55rem 0.8rem !important;
+    height: 40px !important;
   }
 
-  /* Таймлайн */
-  .timeline-about { padding-left: 1.2rem; }
-  .timeline-about::before { left: 0.3rem; }
-  .tl-about { margin-bottom: 1.2rem; padding-left: 0.8rem; }
-  .tl-about::before { left: -1.1rem; width: 8px; height: 8px; }
-  .tl-about .year { font-size: 0.85rem; }
-  .tl-about .tl-title { font-size: 0.95rem; }
-  .tl-about .tl-desc { font-size: 0.85rem; }
-
-  /* Видео */
-  .video-card {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.8rem;
-    border-radius: 8px;
+  .nav {
+    grid-area: nav !important;
+    display: none !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--panel-2) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
   }
-  .video-card .vc-icon { font-size: 1.5rem; }
-  .video-card .vc-title { font-size: 0.9rem; }
-  .video-card .vc-desc { font-size: 0.8rem; }
+  .nav.open,
+  .nav.is-open,
+  .nav.active { display: flex !important; }
 
-  /* Сравнение */
-  .compare-grid { grid-template-columns: 1fr; }
-  .compare-grid select { min-height: 44px; font-size: 0.9rem; }
-  .compare-result { padding: 0.8rem; overflow-x: auto; }
-  .compare-result table { font-size: 0.8rem; min-width: 400px; }
-
-  /* Галерея DE */
-  .de-card { padding: 1rem; }
-  .de-card .preview { font-size: 0.65rem; overflow-x: auto; padding: 0.7rem; }
-
-  /* Темы */
-  .theme-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .theme-card { padding: 0.6rem; }
-
-  /* FAQ */
-  .faq-item summary {
-    padding: 0.9rem 0;
-    font-size: 0.95rem;
-    min-height: 52px;
+  .nav a {
+    display: block !important;
+    width: 100% !important;
+    padding: 0.8rem 1rem !important;
+    font-size: 0.95rem !important;
+    text-align: left !important;
+    border-bottom: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
   }
-  .faq-item p { font-size: 0.88rem; }
-
-  /* ===== ПОХОЖИЕ ===== */
-  .related-section { margin-top: 2rem; padding-top: 1.2rem; }
-  .related-grid { grid-template-columns: 1fr; gap: 0.6rem; }
-  .related-card {
-    padding: 1rem;
-    min-height: 70px;
-    border-radius: 6px;
-  }
-  .related-card:active {
-    background: var(--panel-2);
-    transform: scale(0.98);
+  .nav a:last-child { border-bottom: none !important; }
+  .nav a.active {
+    background: var(--panel) !important;
+    color: var(--accent) !important;
+    border-left: 3px solid var(--accent) !important;
   }
 
-  /* ===== СТРЕЛКИ ← → ===== */
-  .page-nav {
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 2rem;
-    padding-top: 1.2rem;
+  .hero { padding: 1.5rem 0 1rem !important; }
+  .hero-logo, .pixel-logo, .hero-logo-text {
+    font-size: clamp(1.8rem, 9vw, 2.6rem) !important;
   }
-  .page-nav a,
-  .page-nav .pn-disabled {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    padding: 0.8rem 1rem;
-    font-size: 0.9rem;
-    min-height: 48px;
-    border-radius: 6px;
-  }
-  .page-nav a:active {
-    background: var(--accent);
-    color: var(--bg);
-  }
-  .page-nav a.pn-home { order: 2; }
-  .page-nav .pn-prev { order: 1; }
-  .page-nav .pn-next { order: 3; }
+  .hero h1 { font-size: 1.35rem !important; line-height: 1.25 !important; }
 
-  /* ===== КНОПКА «НАВЕРХ» ===== */
-  .to-top {
-    bottom: 1rem;
-    right: 1rem;
-    width: 48px;
-    height: 48px;
-    padding: 0;
-    border-radius: 50%;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  }
+  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .stat-num { font-size: 1.6rem !important; }
+  .stat-label { font-size: 0.68rem !important; }
 
-  /* ===== ФУТЕР ===== */
-  .site-footer {
-    padding: 1rem 0;
-    font-size: 0.82rem;
-    text-align: center;
-  }
-  .site-footer .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-top: 0.6rem;
-  }
-  .site-footer .footer-links a {
-    padding: 0.4rem 0.6rem;
-    min-height: 36px;
-    border-radius: 4px;
-  }
+  .cards, .cards-grid, .card-grid { grid-template-columns: 1fr !important; }
+  .card { padding: 1rem 1.1rem !important; }
 
-  /* Мини-терминал */
-  .mini-term { font-size: 0.78rem; padding: 0.7rem; }
-  .mini-term input { width: 70%; font-size: 0.78rem; }
-
-  /* Автор-карточка */
-  .author-card { flex-direction: column; padding: 1rem; gap: 0.8rem; }
-  .author-avatar { font-size: 1.5rem; padding: 0.6rem 0.9rem; }
-
-  /* Фильтры */
-  .filter-btn {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.82rem;
-    min-height: 44px;
-    border-radius: 22px;
-  }
-  .quick-links a {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-    min-height: 44px;
-    border-radius: 22px;
-  }
+  body { font-size: 16px !important; line-height: 1.6 !important; }
+  pre { font-size: 0.78rem !important; overflow-x: auto !important; }
+  table { display: block !important; overflow-x: auto !important; }
+  .container { padding-left: 0.9rem !important; padding-right: 0.9rem !important; }
 }
 
-/* ===== УЗКИЕ ЭКРАНЫ (iPhone SE) ===== */
 @media (max-width: 380px) {
-  html { font-size: 15px; }
-  .container { width: 95%; }
-  .hero h1 { font-size: 1.3rem; }
-  .hero-logo, .pixel-logo { font-size: clamp(1.7rem, 14vw, 2.3rem) !important; }
-  .page h1 { font-size: 1.25rem; }
-  .page h2 { font-size: 1rem; }
-  .about-tab { padding: 0.6rem 0.8rem; font-size: 0.8rem; }
-  .theme-grid { grid-template-columns: 1fr; }
-  .tree-list { font-size: 0.76rem; }
-  .tree-name { font-size: 0.76rem; }
+  a.logo, .logo { width: 34px !important; height: 34px !important; }
+  svg.logo-penguin, .logo-penguin { width: 30px !important; height: 34px !important; }
+  .header-icons > * { width: 34px !important; height: 34px !important; }
 }
-
-/* ===== ТАЧ-УСТРОЙСТВА ===== */
-@media (hover: none) and (pointer: coarse) {
-  .card:hover, .distro-tile:hover, .rec-card:hover,
-  .sys-card:hover, .learn-card:hover {
-    transform: none;
-    box-shadow: none;
-  }
-  .card:active, .distro-tile:active, .rec-card:active,
-  .sys-card:active, .learn-card:active {
-    transform: scale(0.98);
-  }
-}
-
-/* ===== SAFE AREA (iPhone) ===== */
-@supports (padding: env(safe-area-inset-top)) {
-  
-  .site-footer { padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
-  .to-top { bottom: calc(1rem + env(safe-area-inset-bottom)); }
-}
-
-/* ===== ЛАНДШАФТ ===== */
-@media (max-width: 900px) and (orientation: landscape) {
-  .hero { padding: 1rem 0 0.8rem; }
-  .hero-logo, .pixel-logo { font-size: clamp(1.5rem, 6vw, 2.5rem) !important; }
-  
-}
-
-/* ===== УВАЖАЕМ НАСТРОЙКИ ===== */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
