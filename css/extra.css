@@ -2834,3 +2834,22 @@ svg.logo-penguin, .logo-penguin {
     height: 20px;
   }
 }
+
+/* УБРАН КУРСОР под hero-лого */
+.hero-cursor,
+.pixel-cursor,
+.hero-logo .hero-cursor,
+.hero-logo .pixel-cursor,
+.pixel-logo .hero-cursor {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.hero-logo::after,
+.pixel-logo::after,
+.hero-logo-text::after {
+  content: none !important;
+  display: none !important;
+}
