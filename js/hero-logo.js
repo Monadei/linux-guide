@@ -13,10 +13,10 @@
     container.className = 'hero-logo-text pixel-text';
     heroLogo.appendChild(container);
 
-    var cursor = document.createElement('span');
-    cursor.className = 'hero-cursor pixel-cursor';
-    cursor.textContent = '_';
-    heroLogo.appendChild(cursor);
+    // УБРАН КУРСОР: var cursor = document.createElement('span');
+    // УБРАН КУРСОР: cursor.className = 'hero-cursor pixel-cursor';
+    // УБРАН КУРСОР: cursor.textContent = '_';
+    // УБРАН КУРСОР: heroLogo.appendChild(cursor);
 
     // === Фаза 1: глитч-каша из символов ===
     var chars = [];
