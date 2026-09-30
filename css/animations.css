@@ -1,0 +1,142 @@
+/* ============================================
+   ANIMATIONS.CSS — простые и красивые анимации
+   ============================================ */
+
+/* ===== 1. Появление блоков при скролле ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 2. Плавная смена темы ===== */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.card, .btn, .nav a, a, code, pre {
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* ===== 3. Hover карточек ===== */
+.card, .distro-tile, .learn-card, .sys-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card:hover, .distro-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent);
+}
+
+/* ===== 4. Hover ссылок в навигации ===== */
+.nav a {
+  transition: color 0.2s ease;
+}
+
+/* ===== 5. Плавное появление страницы ===== */
+body {
+  animation: page-fade 0.3s ease-out;
+}
+@keyframes page-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* ===== 6. Гамбургер плавно ===== */
+.menu-toggle {
+  transition: transform 0.2s ease, background-color 0.2s;
+}
+
+/* ===== 7. Кнопка при наведении ===== */
+.btn {
+  transition: background-color 0.2s, color 0.2s, transform 0.15s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ===== 8. Плавное появление hero-логотипа ===== */
+.hero-logo {
+  animation: hero-appear 0.6s ease-out;
+}
+@keyframes hero-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== 9. Анимированные числа ===== */
+.animated-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== 10. Курсор в hero ===== */
+.hero-cursor {
+  animation: cursor-blink 1.1s step-end infinite;
+}
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
+
+/* ===== 11. Мягкое свечение акцента ===== */
+.logo, .page h1 {
+  transition: text-shadow 0.3s ease;
+}
+.logo:hover {
+  text-shadow: 0 0 12px var(--accent);
+}
+
+/* ===== 12. Пингвин в футере (замедлен, не мешает) ===== */
+.tux-walk {
+  position: fixed;
+  bottom: 5px;
+  left: -60px;
+  font-size: 1.2rem;
+  color: var(--accent);
+  pointer-events: none;
+  z-index: 1;
+  animation: tux-walk-anim 120s linear infinite;
+  opacity: 0.25;
+}
+@keyframes tux-walk-anim {
+  0% { left: -60px; }
+  100% { left: calc(100% + 60px); }
+}
+
+/* ===== 13. Мягкое появление иконок ===== */
+.distro-icon {
+  transition: transform 0.25s ease;
+}
+.card:hover .distro-icon,
+.distro-tile:hover .distro-icon {
+  transform: scale(1.08);
+}
+
+/* ===== Мобильные — убираем лишнее ===== */
+@media (max-width: 768px) {
+  .tux-walk { display: none; }
+}
+
+/* ===== Уважаем настройки пользователя ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
