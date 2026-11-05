@@ -2854,57 +2854,73 @@ svg.logo-penguin, .logo-penguin {
   display: none !important;
 }
 
+
 /* ============================================
-   ДИНАМИЧЕСКИЙ ФОН ПОД ТЕМУ (не переборщи)
+   АЗИАТСКИЙ ФОН (ИЕРОГЛИФЫ) ПОД ТЕМУ
    ============================================ */
 body {
   background-color: var(--bg) !important;
-  /* Едва заметная сетка */
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-attachment: fixed;
   position: relative;
+  /* Тонкая текстура бумаги для глубины */
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 20%, var(--bg) 100%);
+  background-attachment: fixed;
 }
 
-/* Мягкое свечение акцентным цветом темы в углах */
+/* Слой с иероглифами */
 body::before {
-  content: "";
+  content: "システム コード 端末 龍 力 ネットワーク データ 知恵 未来";
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
   z-index: -1;
-  background: 
-    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 40%),
-    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 40%);
-  transition: background 0.3s ease;
+  
+  /* Настройки шрифта */
+  font-family: "Noto Sans JP", "Noto Sans SC", "Yu Gothic", "Meiryo", "MS Gothic", sans-serif;
+  font-size: 8vw; /* Огромный размер */
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 1vw;
+  word-break: break-all;
+  text-align: justify;
+  
+  /* Цвет берется из темы, но очень прозрачный */
+  color: var(--accent);
+  opacity: 0.04; /* Едва заметный водяной знак */
+  
+  /* Легкий наклон для динамики */
+  transform: rotate(-15deg) scale(1.2);
+  transform-origin: center;
+  
+  /* Плавная смена цвета при переключении темы */
+  transition: color 0.4s ease, opacity 0.4s ease;
+  
+  /* Смешиваем с фоном для эффекта гравировки */
+  mix-blend-mode: overlay;
 }
 
-/* Чтобы контент был поверх свечения */
+/* Чтобы контент был поверх иероглифов */
 .site-header, main, footer {
   position: relative;
   z-index: 1;
 }
 
-/* На мобилке сетку делаем реже, чтобы не рябило */
+/* На мобилке иероглифы делаем мельче и прозрачнее, чтобы не мешать */
 @media (max-width: 768px) {
-  body {
-    background-size: 30px 30px;
-  }
   body::before {
-    background: 
-      radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 50%);
+    font-size: 14vw;
+    opacity: 0.03;
+    transform: rotate(-10deg) scale(1.5);
   }
 }
 
-/* Для светлых тем (если фон белый) — сетка должна быть темной */
-[data-site-theme="light"] body,
-[data-site-theme="github-light"] body {
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+/* Для светлых тем (если фон белый) делаем иероглифы темными */
+[data-site-theme="light"] body::before,
+[data-site-theme="github-light"] body::before {
+  color: var(--text);
+  mix-blend-mode: multiply;
+  opacity: 0.03;
 }
