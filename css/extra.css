@@ -2853,3 +2853,58 @@ svg.logo-penguin, .logo-penguin {
   content: none !important;
   display: none !important;
 }
+
+/* ============================================
+   ДИНАМИЧЕСКИЙ ФОН ПОД ТЕМУ (не переборщи)
+   ============================================ */
+body {
+  background-color: var(--bg) !important;
+  /* Едва заметная сетка */
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Мягкое свечение акцентным цветом темы в углах */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 40%);
+  transition: background 0.3s ease;
+}
+
+/* Чтобы контент был поверх свечения */
+.site-header, main, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* На мобилке сетку делаем реже, чтобы не рябило */
+@media (max-width: 768px) {
+  body {
+    background-size: 30px 30px;
+  }
+  body::before {
+    background: 
+      radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 50%);
+  }
+}
+
+/* Для светлых тем (если фон белый) — сетка должна быть темной */
+[data-site-theme="light"] body,
+[data-site-theme="github-light"] body {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
