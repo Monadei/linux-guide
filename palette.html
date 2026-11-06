@@ -45,9 +45,10 @@
 <script src="js/site-theme.js"></script>
 <script src="js/extras.js"></script>
 <script src="js/music.js"></script>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Полный список тем из твоего theme-picker.js
   var themes = [
     {id: 'default', name: 'Default (Amber)'},
     {id: 'dracula', name: 'Dracula'},
@@ -75,16 +76,14 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   var grid = document.getElementById('themes-grid');
-
-  // Получаем текущую тему
-  var currentTheme = document.documentElement.getAttribute('data-site-theme') || 'default';
+  
+  // Получаем текущую тему из localStorage (как это делает site-theme.js)
+  var currentTheme = localStorage.getItem('site-theme') || 'default';
 
   themes.forEach(function(theme) {
     var card = document.createElement('div');
     card.className = 'theme-card' + (theme.id === currentTheme ? ' active' : '');
     
-    // Создаем превью (3 квадратика: фон, панель, акцент)
-    // Чтобы цвета были правильными, применим data-site-theme к превью
     card.innerHTML = `
       <div class="theme-preview" data-site-theme="${theme.id}">
         <div class="tp-bg"></div>
@@ -95,24 +94,27 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
 
     card.addEventListener('click', function() {
-      // Убираем активный класс у всех
-      document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
-      // Добавляем текущей карточке
-      card.classList.add('active');
+      // Сохраняем в localStorage (как это делает твой site-theme.js)
+      localStorage.setItem('site-theme', theme.id);
       
-      // Применяем тему к HTML
+      // Применяем атрибут к HTML
       if (theme.id === 'default') {
         document.documentElement.removeAttribute('data-site-theme');
-        localStorage.setItem('site-theme', 'default');
       } else {
         document.documentElement.setAttribute('data-site-theme', theme.id);
-        localStorage.setItem('site-theme', theme.id);
       }
+      
+      // ПЕРЕЗАГРУЖАЕМ страницу, чтобы все скрипты (иконки, плеер) подхватили новые цвета
+      // Это самый надежный способ
+      setTimeout(function() {
+        window.location.reload();
+      }, 100);
     });
 
     grid.appendChild(card);
   });
 });
 </script>
+
 </body>
 </html>
