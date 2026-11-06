@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script src="js/reset-font.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Палитра тем — Monade OS</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/liquid-glass.css">
+<link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+<header class="site-header">
+<div class="container header-inner">
+<div class="header-top">
+<a href="index.html" class="logo" title="Monade OS — на главную"><svg class="logo-penguin" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg"><ellipse cx="20" cy="42" rx="10" ry="1.5" fill="currentColor" opacity="0.15"/><ellipse cx="20" cy="24" rx="12" ry="17" fill="#1a1a1a" stroke="currentColor" stroke-width="1.2"/><circle cx="20" cy="12" r="9" fill="#1a1a1a" stroke="currentColor" stroke-width="1.2"/><ellipse cx="20" cy="27" rx="7" ry="11" fill="#f0f0f0" opacity="0.9"/><path d="M17 14 L20 17 L23 14 Z" fill="#ffb000"/><circle cx="16" cy="11" r="1.8" fill="#fff"/><circle cx="24" cy="11" r="1.8" fill="#fff"/><circle class="penguin-eye" cx="16.3" cy="11.2" r="0.9" fill="#000"/><circle class="penguin-eye" cx="24.3" cy="11.2" r="0.9" fill="#000"/><path d="M8 20 Q6 26 9 32" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M32 20 Q34 26 31 32" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M15 39 L13 42 M15 39 L15 42 M15 39 L17 42" stroke="#ffb000" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M25 39 L23 42 M25 39 L25 42 M25 39 L27 42" stroke="#ffb000" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle class="penguin-beacon" cx="20" cy="3" r="1.5" fill="#ffb000"/></svg></a>
+<div class="header-icons" id="headerIcons"></div>
+</div>
+<div class="header-search" id="headerSearch"></div>
+<nav class="nav" id="mainNav">
+<a href="index.html">Главная</a>
+<a href="download.html">Как скачать</a>
+<a href="install.html">Как установить</a>
+<a href="history.html">История</a>
+<a href="distros/index.html">Дистрибутивы</a>
+<a href="about.html">Обо мне</a>
+<a href="faq.html">FAQ</a>
+<a href="kali/index.html">Kali</a>
+<a href="palette.html">🎨 Палитра тем</a> · <a href="sitemap.html">Карта сайта</a>
+</nav>
+</div>
+</header>
+
+<main class="container page">
+<h1>🎨 Палитра тем</h1>
+<p class="lead">Выбери цветовую схему, которая тебе больше нравится. Настройка сохранится в браузере.</p>
+
+<div id="themes-grid" class="themes-grid"></div>
+</main>
+
+<footer class="site-footer"><div class="container"><p>Monade OS — учебный проект. Создал Артём (Monadei), 2026. <a href="rss.html">📡 RSS</a></p></div></footer>
+
+<script src="js/site-theme.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/music.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Полный список тем из твоего theme-picker.js
+  var themes = [
+    {id: 'default', name: 'Default (Amber)'},
+    {id: 'dracula', name: 'Dracula'},
+    {id: 'nord', name: 'Nord'},
+    {id: 'gruvbox', name: 'Gruvbox'},
+    {id: 'tokyo-night', name: 'Tokyo Night'},
+    {id: 'catppuccin', name: 'Catppuccin'},
+    {id: 'solarized-dark', name: 'Solarized Dark'},
+    {id: 'solarized-light', name: 'Solarized Light'},
+    {id: 'monokai', name: 'Monokai'},
+    {id: 'one-dark', name: 'One Dark'},
+    {id: 'material', name: 'Material'},
+    {id: 'everforest', name: 'Everforest'},
+    {id: 'kanagawa', name: 'Kanagawa'},
+    {id: 'rose-pine', name: 'Rosé Pine'},
+    {id: 'ayu', name: 'Ayu'},
+    {id: 'nightfox', name: 'Nightfox'},
+    {id: 'vesper', name: 'Vesper'},
+    {id: 'oxocarbon', name: 'Oxocarbon'},
+    {id: 'moonfly', name: 'Moonfly'},
+    {id: 'sonokai', name: 'Sonokai'},
+    {id: 'iceberg', name: 'Iceberg'},
+    {id: 'light', name: 'Light'},
+    {id: 'github-light', name: 'GitHub Light'}
+  ];
+
+  var grid = document.getElementById('themes-grid');
+
+  // Получаем текущую тему
+  var currentTheme = document.documentElement.getAttribute('data-site-theme') || 'default';
+
+  themes.forEach(function(theme) {
+    var card = document.createElement('div');
+    card.className = 'theme-card' + (theme.id === currentTheme ? ' active' : '');
+    
+    // Создаем превью (3 квадратика: фон, панель, акцент)
+    // Чтобы цвета были правильными, применим data-site-theme к превью
+    card.innerHTML = `
+      <div class="theme-preview" data-site-theme="${theme.id}">
+        <div class="tp-bg"></div>
+        <div class="tp-panel"></div>
+        <div class="tp-accent"></div>
+      </div>
+      <div class="theme-name">${theme.name}</div>
+    `;
+
+    card.addEventListener('click', function() {
+      // Убираем активный класс у всех
+      document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+      // Добавляем текущей карточке
+      card.classList.add('active');
+      
+      // Применяем тему к HTML
+      if (theme.id === 'default') {
+        document.documentElement.removeAttribute('data-site-theme');
+        localStorage.setItem('site-theme', 'default');
+      } else {
+        document.documentElement.setAttribute('data-site-theme', theme.id);
+        localStorage.setItem('site-theme', theme.id);
+      }
+    });
+
+    grid.appendChild(card);
+  });
+});
+</script>
+</body>
+</html>

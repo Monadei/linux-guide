@@ -2864,3 +2864,52 @@ svg.logo-penguin, .logo-penguin {
 
 /* Временный фон (ждем картинку) */
 body { background-color: var(--bg) !important; }
+
+/* ============================================
+   ПАЛИТРА ТЕМ
+   ============================================ */
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+.theme-card {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.theme-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-dim);
+}
+.theme-card.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.theme-preview {
+  display: flex;
+  height: 80px;
+  background: var(--bg);
+}
+.tp-bg { flex: 2; background: var(--bg); }
+.tp-panel { flex: 1; background: var(--panel); }
+.tp-accent { flex: 1; background: var(--accent); }
+.theme-name {
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text);
+  font-family: "JetBrains Mono", monospace;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .themes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+}
