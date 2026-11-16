@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /secret.html
 
-Sitemap: https://example.org/linux-guide/sitemap.xml
+Sitemap: https://monadei.github.io/linux-guide/sitemap.xml

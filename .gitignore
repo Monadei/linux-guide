@@ -156,3 +156,7 @@ lost+found/
 # secret-notes.md
 # private/
 audio/rush-e.mp3
+
+# ---------- Бэкапы страниц (не публикуем на GitHub Pages) ----------
+.backup-header/
+.backup-debian/
